@@ -14,7 +14,7 @@ let Customer = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
-Customer.pre('save', function(next){
+Customer.pre('validate', function(next){
     this.username = this.get('mobile');
     next()
 })

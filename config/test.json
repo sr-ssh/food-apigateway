@@ -15,11 +15,11 @@
         },
         "userScope": "user",
         "customer": {
-            "name": "ریحانه",
-            "family": "شکوهی",
-            "mobile": "09307580142",
+            "name": "عبدالله",
+            "family": "هاشمی",
+            "mobile": "09527841262",
             "birthday": "2021-05-31T05:42:13.845Z",
-            "address": "چهارراه ازادشهر"
+            "address": "معلم 24"
         },
         "order": {
             "products":[
@@ -43,11 +43,11 @@
                 }
             ],
             "customer":{
-                "name": "ریحانه",
-                "family": "شکوهی",
-                "mobile": "09307580142",
+                "name": "عبدالله",
+                "family": "هاشمی",
+                "mobile": "09527841262",
                 "birthday": "2021-05-31T05:42:13.845Z",
-                "address": "چهارراه ازادشهر"
+                "address": "معلم 24"
             },
             "description": "الکل هم بیاورید"
         },
