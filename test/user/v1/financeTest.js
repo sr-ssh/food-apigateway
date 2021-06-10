@@ -54,7 +54,7 @@ describe(`${sectionName}`, () => {
         it('check get bills', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/Bill`)
+                .get(`${baseRoute}/bill`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();
@@ -68,7 +68,7 @@ describe(`${sectionName}`, () => {
         it('check add bill', async () => {
             const res = await chai
                 .request(server)
-                .post(`${baseRoute}/Bill`)
+                .post(`${baseRoute}/bill`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(Bill);

@@ -46,13 +46,13 @@ const FinanceController = require(`${userController}/v1/FinanceController`)
  *     }]
  * }
  */
- router.get('/Bill',FinanceController.getBills.bind(FinanceController)); 
+ router.get('/bill',FinanceController.getBills.bind(FinanceController)); 
 
 
 
 
  /**
- * @api {post} /api/user/v1/finance/Bill add bill
+ * @api {post} /api/user/v1/finance/bill add bill
  * @apiVersion 1.0.0
  * @apiName addBill
  * @apiDescription add bill
@@ -65,7 +65,7 @@ const FinanceController = require(`${userController}/v1/FinanceController`)
  *     message: "هزینه جاری با موفقیت اضافه شد"
  * }
  */
-  router.post('/Bill',FinanceController.addBill.bind(FinanceController)); 
+  router.post('/bill',FinanceController.addBill.bind(FinanceController)); 
  
  
   

@@ -63,7 +63,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/user/v1/finance/Bill",
+    "url": "/api/user/v1/finance/bill",
     "title": "add bill",
     "version": "1.0.0",
     "name": "addBill",
