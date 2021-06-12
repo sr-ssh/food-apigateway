@@ -11,7 +11,7 @@ const FinanceController = require(`${userController}/v1/FinanceController`)
  * @api {get} /api/user/v1/finance/summary get finance summary
  * @apiVersion 1.0.0
  * @apiName getFinanceSummary
- * @apiDescription get finance summary
+ * @apiDescription get finance summary , by summary we meant income and outcome in toman
  * @apiGroup finance
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -29,10 +29,10 @@ const FinanceController = require(`${userController}/v1/FinanceController`)
 
  
  /**
- * @api {get} /api/user/v1/finance/bill get all bills
+ * @api {get} /api/user/v1/finance/bill get bills
  * @apiVersion 1.0.0
  * @apiName getBills
- * @apiDescription get all bills
+ * @apiDescription get bills 
  * @apiGroup finance
  * @apiSuccessExample {json} Success-Response:
  * {

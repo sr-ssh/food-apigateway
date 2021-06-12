@@ -24,7 +24,14 @@ const CustomerController = require(`${userController}/v1/CustomerController`)
  *          username: "m.mostafaie@gmail.com",
  *          mobile: "09625846122",
  *          birthday: "1990-12-18T23:59:00.798Z",
- *          address: "چهارراه احمد اباد"
+ *          address: "چهارراه احمد اباد",
+ *          createdAt: "2010-12-18T23:59:00.798Z",
+ *          order: [...{
+ *              _id: "15fd15rg15tytee",
+ *              products: [...{
+ *                  
+ *              }]
+ *          }]
  *       }]
  * }
  */

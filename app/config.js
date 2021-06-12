@@ -9,7 +9,7 @@ module.exports = {
     accesssTokenExpire: 60 * 60 ,
     idTokenExpire: 60 * 60 * 100,
     userScope: "user",
-    publicRoute: ['/api/user/v1/login'],
+    publicRoute: ['/api/user/v1/login', '/api/user/v1/'],
     path: {
         controllers: {
             root: path.resolve('./app/controllers'),

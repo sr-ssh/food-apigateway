@@ -11,9 +11,54 @@ module.exports = new class CustomerController extends Controller {
 
     async getCustomers(req, res) {
         try {
-            let customers = await this.model.Customer.find({}, { order: 0});
+            let customers = await this.model.Customer.find();
 
-            res.json({ success : true, message : 'اطلاعات مشتریان با موفقیت ارسال شد', data: customers})
+            let params = [];
+            for (let index = 0; index < customers.length; index++) {
+                let param = {
+                    active: true,
+                    name: customers[index].name,
+                    family: customers[index].family,
+                    username: customers[index].username,
+                    mobile: customers[index].mobile,
+                    birthday: customers[index].birthday,
+                    address: customers[index].address,
+                    createdAt: customers[index].createdAt,
+                    lastBuy: '',
+                    total: 0
+                }     
+                params.push(param)           
+            }
+            
+            let orders = []
+            for (let index = 0; index < customers.length; index++) {
+                for (let j = 1; j < customers[index].order.length; j++) {
+                    orders.push(customers[index].order[j])
+                }
+            }
+
+            let filter = { _id: { $in: orders } }
+            orders = await this.model.Order.find(filter, { _id: 1, updatedAt: 1, products: 1 })
+
+            orders = orders.map(order => {
+                order.products = order.products.map(product => product.sellingPrice)
+                order.total = order.products.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+                return order
+                })
+
+            let totalOrders = orders.map(order => order.products.reduce((a, b) => parseInt(a) + parseInt(b), 0))
+            params.push({totalOrders : totalOrders.reduce((a, b) => parseInt(a) + parseInt(b), 0)})
+
+            let orderInfo;
+            for (let index = 0; index < customers.length; index++) {
+                orderInfo = orders.filter(order => customers[index].order.includes(order._id))
+                params[index].lastBuy = orderInfo[orderInfo.length-1].updatedAt
+                orderInfo = orderInfo.map(order => order._id)
+                params[index].order = orderInfo;
+                
+            }
+
+            res.json({ success : true, message : 'اطلاعات مشتریان با موفقیت ارسال شد', data: params})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
