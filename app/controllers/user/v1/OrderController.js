@@ -19,8 +19,6 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('customer.name', 'please enter customer name').notEmpty();
             req.checkBody('customer.family', 'please enter customer family').notEmpty();
             req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty();
-            req.checkBody('customer.birthday', 'please enter customer birthday').notEmpty();
-            req.checkBody('customer.address', 'please enter customer address').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
             // add customer
