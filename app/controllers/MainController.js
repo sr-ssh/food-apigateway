@@ -6,14 +6,14 @@ const Customer = require(`${config.path.models.root}/v1/Customer`);
 const AppInfo = require(`${config.path.models.root}/v1/AppInfo`);
 const User = require(`${config.path.models.root}/v1/User`);
 const Bill = require(`${config.path.models.root}/v1/Bill`);
-
+const Reminder = require(`${config.path.models.root}/v1/Reminder`);
 
 
 
 module.exports = class MainController {
 
     constructor() {
-        this.model = { User, Order, Product, Customer, AppInfo, Bill }
+        this.model = { User, Order, Product, Customer, AppInfo, Bill , Reminder }
         this.transforms = { ErrorTransform };
     }
 

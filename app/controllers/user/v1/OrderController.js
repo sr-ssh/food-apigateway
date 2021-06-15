@@ -13,7 +13,6 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('products', 'please enter products').notEmpty();
             req.checkBody('products.*._id', 'please enter product id').notEmpty();
             req.checkBody('products.*.quantity', 'please enter product quantity').notEmpty();
-            req.checkBody('products.*.buyingPrice', 'please enter product buyingPrice').notEmpty();
             req.checkBody('products.*.sellingPrice', 'please enter product sellingPrice').notEmpty();
             req.checkBody('customer', 'please enter customer').notEmpty();
             req.checkBody('customer.name', 'please enter customer name').notEmpty();
@@ -30,7 +29,6 @@ module.exports = new class HomeController extends Controller {
                 family: req.body.customer.family,
                 mobile: req.body.customer.mobile,
                 birthday: req.body.customer.birthday,
-                address: req.body.customer.address,
                 user: req.decodedData.user_employer
             }
 
@@ -48,9 +46,30 @@ module.exports = new class HomeController extends Controller {
 
             let order = await this.model.Order.create(params)
 
+            
+            // add reminder
+            if(req.body.reminder){
+
+                // calculate date
+                const event = new Date();
+                event.setDate(event.getDate() + req.body.reminder);
+
+                params = {
+                    date: event.toISOString(),
+                    user: req.decodedData.user_employer,
+                    customer: customer._id,
+                    order: order._id
+                }
+                let reminder = await this.model.Reminder.create(params)
+
+                // add reminder to customer
+                await customer.reminder.push(reminder._id)
+            }
+
             // add order to customer
             await customer.order.push(order._id)
             await customer.save()
+
 
             res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
         }

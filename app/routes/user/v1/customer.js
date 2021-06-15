@@ -31,7 +31,8 @@ const CustomerController = require(`${userController}/v1/CustomerController`)
  *              products: [...{
  *                  
  *              }]
- *          }]
+ *          }],
+ *          reminder: "1990-12-18T23:59:00.798Z"
  *       }]
  * }
  */
