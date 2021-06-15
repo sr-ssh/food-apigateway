@@ -15,7 +15,6 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('products.*.quantity', 'please enter product quantity').notEmpty();
             req.checkBody('products.*.sellingPrice', 'please enter product sellingPrice').notEmpty();
             req.checkBody('customer', 'please enter customer').notEmpty();
-            req.checkBody('customer.name', 'please enter customer name').notEmpty();
             req.checkBody('customer.family', 'please enter customer family').notEmpty();
             req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty();
             if (this.showValidationErrors(req, res)) return;
@@ -25,7 +24,6 @@ module.exports = new class HomeController extends Controller {
             let customer = await this.model.Customer.findOne(filter)
 
             let params = {
-                name: req.body.customer.name,
                 family: req.body.customer.family,
                 mobile: req.body.customer.mobile,
                 birthday: req.body.customer.birthday,
@@ -118,7 +116,7 @@ module.exports = new class HomeController extends Controller {
             }
 
             filter = { _id: { $in: customers } }
-            customers = await this.model.Customer.find(filter, { _id: 1, name: 1, family: 1, mobile: 1, createdAt: 1 })
+            customers = await this.model.Customer.find(filter, { _id: 1, family: 1, mobile: 1, createdAt: 1 })
 
             let customerInfo;
             for (let index = 0; index < orders.length; index++) {

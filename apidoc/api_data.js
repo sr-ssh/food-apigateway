@@ -11,7 +11,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"اطلاعات مشتریان با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         name: \"محسن\",\n         family: \"مصطفایی\",\n         username: \"m.mostafaie@gmail.com\",\n         mobile: \"09625846122\",\n         birthday: \"1990-12-18T23:59:00.798Z\",\n         address: \"چهارراه احمد اباد\",\n         createdAt: \"2010-12-18T23:59:00.798Z\",\n         order: [...{\n             _id: \"15fd15rg15tytee\",\n             products: [...{\n                 \n             }]\n         }],\n         reminder: \"1990-12-18T23:59:00.798Z\"\n      }]\n}",
+          "content": "{\n     success: true,\n     message: \"اطلاعات مشتریان با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         family: \"مصطفایی\",\n         username: \"m.mostafaie@gmail.com\",\n         mobile: \"09625846122\",\n         birthday: \"1990-12-18T23:59:00.798Z\",\n         address: \"چهارراه احمد اباد\",\n         createdAt: \"2010-12-18T23:59:00.798Z\",\n         order: [...{\n             _id: \"15fd15rg15tytee\",\n             products: [...{\n                 \n             }]\n         }],\n         reminder: \"1990-12-18T23:59:00.798Z\"\n      }]\n}",
           "type": "json"
         }
       ]
@@ -380,7 +380,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \" 60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }],\n    customer: {\n        name: \"ریحانه\",\n        family: \"شکوهی\",\n        mobile: \"09307580142\",\n        birthday: \"2021-05-31T05:42:13.845Z\"\n    },\n    description: \"الکل هم بیاورید\",\n    reminder: 7\n}",
+          "content": "{\n    products: [...{\n        _id: \" 60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }],\n    customer: {\n        family: \"شکوهی\",\n        mobile: \"09307580142\",\n        birthday: \"2021-05-31T05:42:13.845Z\"\n    },\n    description: \"الکل هم بیاورید\",\n    reminder: 7\n}",
           "type": "json"
         }
       ]
@@ -436,7 +436,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \" 60b72a70e353f0385c2fe5af\",\n             quantity: 2,\n             buyingPrice: \"20000\",\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             name: \"محسن\",\n             family: \"مصطفایی\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \" 60b72a70e353f0385c2fe5af\",\n             quantity: 2,\n             buyingPrice: \"20000\",\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
           "type": "json"
         }
       ]

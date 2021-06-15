@@ -25,7 +25,6 @@ const OrderController = require(`${userController}/v1/OrderController`)
  *          sellingPrice: "30000"
  *      }],
  *      customer: {
- *          name: "ریحانه",
  *          family: "شکوهی",
  *          mobile: "09307580142",
  *          birthday: "2021-05-31T05:42:13.845Z"
@@ -67,7 +66,6 @@ const OrderController = require(`${userController}/v1/OrderController`)
  *          }],
  *          customer: {
  *              _id: "7465148754878",
- *              name: "محسن",
  *              family: "مصطفایی",
  *              createdAt: "2021-06-01T06:54:01.691Z"
  *          },

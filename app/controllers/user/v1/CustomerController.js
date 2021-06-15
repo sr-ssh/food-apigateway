@@ -17,7 +17,6 @@ module.exports = new class CustomerController extends Controller {
             for (let index = 0; index < customers.length; index++) {
                 let param = {
                     active: true,
-                    name: customers[index].name,
                     family: customers[index].family,
                     username: customers[index].username,
                     mobile: customers[index].mobile,

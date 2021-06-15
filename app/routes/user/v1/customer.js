@@ -19,7 +19,6 @@ const CustomerController = require(`${userController}/v1/CustomerController`)
  *      message: "اطلاعات مشتریان با موفقیت ارسال شد",
  *      data: [...{
  *          active: true,
- *          name: "محسن",
  *          family: "مصطفایی",
  *          username: "m.mostafaie@gmail.com",
  *          mobile: "09625846122",
