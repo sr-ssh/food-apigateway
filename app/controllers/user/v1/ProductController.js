@@ -50,7 +50,7 @@ module.exports = new class ProductController extends Controller {
     async getProducts(req, res) {
         try {
             let filter = { user: req.decodedData.user_employer }
-            let products = await this.model.Product.find(filter);
+            let products = await this.model.Product.find(filter, { buyingPrice: 0});
 
             res.json({ success : true, message : 'محصولات با موفقیت ارسال شد', data: products})
         }
