@@ -65,7 +65,7 @@ module.exports = new class ProductController extends Controller {
 
     async editProduct(req, res) {
         try {
-            req.checkBody('id', 'please enter product id').notEmpty();
+            req.checkBody('_id', 'please enter product id').notEmpty();
             req.checkBody('active', 'please enter activity status').notEmpty();
             req.checkBody('name', 'please enter name').notEmpty();
             req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty();
@@ -78,7 +78,7 @@ module.exports = new class ProductController extends Controller {
                 description: req.body.description,
             }
 
-            let filter = { _id: req.body.id }
+            let filter = { _id: req.body._id }
             let product = await this.model.Product.findOneAndUpdate(filter, params)
 
             if(!product)

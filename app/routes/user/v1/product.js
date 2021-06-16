@@ -61,7 +61,7 @@ const ProductController = require(`${userController}/v1/ProductController`)
  * @apiName editProduct
  * @apiDescription edit product: all params must be sent even if they don't have any changes
  * @apiGroup product
- * @apiParam {varchar} id product id
+ * @apiParam {varchar} _id product id
  * @apiParam {varchar} active product activity status
  * @apiParam {varchar} name product name
  * @apiParam {varchar} sellingPrice product selling price

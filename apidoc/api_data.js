@@ -515,7 +515,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "id",
+            "field": "_id",
             "description": "<p>product id</p>"
           },
           {

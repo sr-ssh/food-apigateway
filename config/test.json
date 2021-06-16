@@ -53,7 +53,7 @@
             "sellingPrice": "20000"
         },
         "editedProduct": {
-            "id": "60c98bbbfa4cab1dd8c70d77",
+            "_id": "60c98bbbfa4cab1dd8c70d77",
             "active": true,
             "name": "موهیتو عربی",
             "description": "نعنا تازه",
