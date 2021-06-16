@@ -25,19 +25,16 @@
                 {
                     "_id": " 60b72a70e353f0385c2fe5af",
                     "quantity": 2,
-                    "buyingPrice": "20000",
                     "sellingPrice": "30000"
                 },
                 {
                     "_id": "60b72aa35b63f21150e440c2",
                     "quantity": 1,
-                    "buyingPrice": "10000",
                     "sellingPrice": "20000"
                 },
                 {
                     "_id": "60b72afa1f24b03fe4fc7b51",
                     "quantity": 1,
-                    "buyingPrice": "16000",
                     "sellingPrice": "30000"
                 }
             ],
@@ -51,10 +48,9 @@
             "reminder": 7
         },
         "product": {
-            "name": "آیس لته",
-            "description": "لته با قهوه مراکش نوع اسپیشال",
-            "buyingPrice": "20000",
-            "sellingPrice": "30000"
+            "name": "موهیتو",
+            "description": "نعنا تازه",
+            "sellingPrice": "20000"
         },
         "appInfo": {
             "versionCode": 1,

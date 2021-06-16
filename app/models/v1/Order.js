@@ -7,7 +7,6 @@ let Order = new Schema({
     products: { type: Array, default: [{ 
         _id: { type: Schema.Types.ObjectId, ref: 'Product', required: true }, 
         quantity: { type: Number, default: 1 },
-        buyingPrice: { type: String , required: true },
         sellingPrice: { type: String , required: true }
     }]},
     customer: { type: Schema.Types.ObjectId, ref: 'Customer' },

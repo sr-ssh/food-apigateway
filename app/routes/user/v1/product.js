@@ -14,7 +14,6 @@ const ProductController = require(`${userController}/v1/ProductController`)
  * @apiDescription add product
  * @apiGroup product
  * @apiParam  {varchar} name product name
- * @apiParam  {varchar} buyingPrice product buying price
  * @apiParam  {varchar} sellingPrice product selling price
  * @apiParam  {varachar} description description of product
  * @apiSuccessExample {json} Success-Response:
@@ -47,7 +46,6 @@ const ProductController = require(`${userController}/v1/ProductController`)
  *          active: true,
  *          name: "روغن" ,
  *          sellingPrice: "100000",
- *          buyingPrice: "100000",
  *          description: "خریداری شده از شرکت روغن سازان مشهد"
  *          createdAt: "2021-06-01T06:54:01.691Z"
  *      }]

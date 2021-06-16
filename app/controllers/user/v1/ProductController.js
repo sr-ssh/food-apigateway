@@ -12,20 +12,18 @@ module.exports = new class ProductController extends Controller {
     async addProduct(req, res) {
         try {
             req.checkBody('name', 'please enter name').notEmpty();
-            req.checkBody('buyingPrice', 'please enter buyingPrice').notEmpty();
             req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty();
             req.checkBody('description', 'please enter description').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
             let params = {
                 name: req.body.name,
-                buyingPrice: req.body.buyingPrice,
                 sellingPrice: req.body.sellingPrice,
                 description: req.body.description,
                 user: req.decodedData.user_employer
             }
 
-            let filter = { name: params.name, buyingPrice: params.buyingPrice, sellingPrice: params.sellingPrice, user: params.user}
+            let filter = { name: params.name, sellingPrice: params.sellingPrice, user: params.user}
             let product = await this.model.Product.findOne(filter)
 
             if(product)
@@ -50,7 +48,7 @@ module.exports = new class ProductController extends Controller {
     async getProducts(req, res) {
         try {
             let filter = { user: req.decodedData.user_employer }
-            let products = await this.model.Product.find(filter, { buyingPrice: 0});
+            let products = await this.model.Product.find(filter);
 
             res.json({ success : true, message : 'محصولات با موفقیت ارسال شد', data: products})
         }

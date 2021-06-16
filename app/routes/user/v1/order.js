@@ -61,7 +61,6 @@ const OrderController = require(`${userController}/v1/OrderController`)
  *          products: [...{
  *              _id: " 60b72a70e353f0385c2fe5af",
  *              quantity: 2,
- *              buyingPrice: "20000",
  *              sellingPrice: "30000"
  *          }],
  *          customer: {
