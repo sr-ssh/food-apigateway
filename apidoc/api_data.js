@@ -436,7 +436,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \" 60b72a70e353f0385c2fe5af\",\n             quantity: 2,\n             buyingPrice: \"20000\",\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \" 60b72a70e353f0385c2fe5af\",\n             quantity: 2,\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
           "type": "json"
         }
       ]
@@ -466,20 +466,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "buyingPrice",
-            "description": "<p>product buying price</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
             "field": "sellingPrice",
             "description": "<p>product selling price</p>"
           },
           {
             "group": "Parameter",
             "type": "varachar",
-            "optional": false,
+            "optional": true,
             "field": "description",
             "description": "<p>description of product</p>"
           }
@@ -508,6 +501,76 @@ define({ "api": [
     "groupTitle": "product"
   },
   {
+    "type": "put",
+    "url": "/api/user/v1/product/",
+    "title": "edit product",
+    "version": "1.0.0",
+    "name": "editProduct",
+    "description": "<p>edit product: all params must be sent even if they don't have any changes</p>",
+    "group": "product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id",
+            "description": "<p>product id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "active",
+            "description": "<p>product activity status</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "name",
+            "description": "<p>product name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "sellingPrice",
+            "description": "<p>product selling price</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varachar",
+            "optional": true,
+            "field": "description",
+            "description": "<p>description of product</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"محصول شما با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{ \n     success : false, \n     message : \"محصول وارد شده، موجود نیست\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/product.js",
+    "groupTitle": "product"
+  },
+  {
     "type": "get",
     "url": "/api/user/v1/product/",
     "title": "get products",
@@ -519,7 +582,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"محصولات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         name: \"روغن\" ,\n         sellingPrice: \"100000\",\n         buyingPrice: \"100000\",\n         description: \"خریداری شده از شرکت روغن سازان مشهد\"\n         createdAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "content": "{\n     success: true,\n     message: \"محصولات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         name: \"روغن\" ,\n         sellingPrice: \"100000\",\n         description: \"خریداری شده از شرکت روغن سازان مشهد\"\n         createdAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
           "type": "json"
         }
       ]

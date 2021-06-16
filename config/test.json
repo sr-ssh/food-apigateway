@@ -52,6 +52,13 @@
             "description": "نعنا تازه",
             "sellingPrice": "20000"
         },
+        "editedProduct": {
+            "id": "60c98bbbfa4cab1dd8c70d77",
+            "active": true,
+            "name": "موهیتو عربی",
+            "description": "نعنا تازه",
+            "sellingPrice": "20000"
+        },
         "appInfo": {
             "versionCode": 1,
             "os": "android"

@@ -13,7 +13,6 @@ module.exports = new class ProductController extends Controller {
         try {
             req.checkBody('name', 'please enter name').notEmpty();
             req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty();
-            req.checkBody('description', 'please enter description').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
             let params = {
@@ -57,6 +56,42 @@ module.exports = new class ProductController extends Controller {
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('getProducts')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+    async editProduct(req, res) {
+        try {
+            req.checkBody('id', 'please enter product id').notEmpty();
+            req.checkBody('active', 'please enter activity status').notEmpty();
+            req.checkBody('name', 'please enter name').notEmpty();
+            req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            let params = {
+                active: req.body.active,
+                name: req.body.name,
+                sellingPrice: req.body.sellingPrice,
+                description: req.body.description,
+            }
+
+            let filter = { _id: req.body.id }
+            let product = await this.model.Product.findOneAndUpdate(filter, params)
+
+            if(!product)
+                return res.json({ success : false, message : 'محصول وارد شده، موجود نیست'})
+                
+
+            res.json({ success : true, message : 'محصول شما با موفقیت ویرایش شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editProduct')
                 .inputParams(req.body)
                 .call();
 

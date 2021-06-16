@@ -15,7 +15,7 @@ const ProductController = require(`${userController}/v1/ProductController`)
  * @apiGroup product
  * @apiParam  {varchar} name product name
  * @apiParam  {varchar} sellingPrice product selling price
- * @apiParam  {varachar} description description of product
+ * @apiParam  {varachar} [description] description of product
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
@@ -52,6 +52,33 @@ const ProductController = require(`${userController}/v1/ProductController`)
  * }
  */
   router.get('/',ProductController.getProducts.bind(ProductController));
+
+
+
+  /**
+ * @api {put} /api/user/v1/product/ edit product 
+ * @apiVersion 1.0.0
+ * @apiName editProduct
+ * @apiDescription edit product: all params must be sent even if they don't have any changes
+ * @apiGroup product
+ * @apiParam {varchar} id product id
+ * @apiParam {varchar} active product activity status
+ * @apiParam {varchar} name product name
+ * @apiParam {varchar} sellingPrice product selling price
+ * @apiParam {varachar} [description] description of product
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "محصول شما با موفقیت ویرایش شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * { 
+ *      success : false, 
+ *      message : "محصول وارد شده، موجود نیست"
+ * }
+ */
+ router.put('/',ProductController.editProduct.bind(ProductController));
+
 
 
  module.exports = router;
