@@ -15,7 +15,6 @@ module.exports = new class HomeController extends Controller {
     async register(req, res) {
         try {
             req.checkBody('password', 'please enter password').notEmpty();
-            req.checkBody('name', 'please enter name').notEmpty();
             req.checkBody('family', 'please enter family').notEmpty();
             req.checkBody('email', 'please enter email').notEmpty();
             req.checkBody('mobile', 'please enter mobile').notEmpty();
@@ -24,7 +23,6 @@ module.exports = new class HomeController extends Controller {
             // save in mongodb
             let params = {
                 password: req.body.password,
-                name: req.body.name,
                 family: req.body.family,
                 email: req.body.email,
                 mobile: req.body.mobile,

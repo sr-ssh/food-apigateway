@@ -281,13 +281,6 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "name",
-            "description": "<p>name</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
             "field": "family",
             "description": "<p>family</p>"
           },

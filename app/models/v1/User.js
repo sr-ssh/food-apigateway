@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 
 let User = new Schema({
     active:{ type: Boolean, default: true },
-    name: { type: String, required: true },
+    name: { type: String },
     family: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
