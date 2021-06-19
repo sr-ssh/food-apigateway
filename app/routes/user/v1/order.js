@@ -60,12 +60,14 @@ const OrderController = require(`${userController}/v1/OrderController`)
  *          active: true,
  *          products: [...{
  *              _id: " 60b72a70e353f0385c2fe5af",
+ *              name: "لاته",
  *              quantity: 2,
  *              sellingPrice: "30000"
  *          }],
  *          customer: {
  *              _id: "7465148754878",
  *              family: "مصطفایی",
+ *              mobile: "09152631225",
  *              createdAt: "2021-06-01T06:54:01.691Z"
  *          },
  *         createdAt: "2021-06-01T06:54:01.691Z",

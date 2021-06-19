@@ -130,6 +130,26 @@ module.exports = new class HomeController extends Controller {
                         return param.customer.mobile == req.body.mobile
                     })
 
+            let products = []
+            for (let index = 0; index < params.length; index++) {
+                for (let j = 0; j < params[index].products.length; j++) {
+                    products.push(params[index].products[j]._id)
+                }
+            }
+            filter = { _id: { $in: products } }
+            products = await this.model.Product.find(filter, { _id: 1, name: 1 })
+
+            
+            for (let index = 0; index < params.length; index++) {
+                let productInfo;
+                for (let j = 0; j < params[index].products.length; j++) {
+                    productInfo = products.find(product => product._id.toString() === params[index].products[j]._id.toString())
+                    if (productInfo)
+                        params[index].products[j].name = productInfo.name;
+                }
+            }
+            
+
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data : params })
         }
         catch (err) {
