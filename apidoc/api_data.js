@@ -405,8 +405,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": true,
-            "field": "mobile",
-            "description": "<p>customer mobile</p>"
+            "field": "customerName",
+            "description": "<p>customer family</p>"
           },
           {
             "group": "Parameter",

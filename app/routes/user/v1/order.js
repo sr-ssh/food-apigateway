@@ -49,7 +49,7 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @apiName getOrders
  * @apiDescription get orders 
  * @apiGroup order
- * @apiParam {varchar} [mobile] customer mobile
+ * @apiParam {varchar} [customerName] customer family
  * @apiParam {varchar} [startDate] get orders from this date
  * @apiParam {varchar} [endDate] get orders to this date
  * @apiSuccessExample {json} Success-Response:

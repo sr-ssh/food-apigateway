@@ -124,10 +124,13 @@ module.exports = new class HomeController extends Controller {
                 params[index].customer = customerInfo;
             }
 
-            if(req.body.mobile)
+            if(req.body.customerName)
                 params = params.filter(param => {
-                    if(param.customer)
-                        return param.customer.mobile == req.body.mobile
+                    if(param.customer){
+                        let re = new RegExp(req.body.customerName, "i");
+                        let find = param.customer.family.search(re);
+                        return find !== -1;
+                    }  
                     })
 
             let products = []
