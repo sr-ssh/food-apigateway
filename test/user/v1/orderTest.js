@@ -46,9 +46,10 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/`)
+                .query(getOrderParams)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
-                .send(getOrderParams);
+                .end();
             res.should.have.status(200);
         });
 

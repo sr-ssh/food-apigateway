@@ -86,14 +86,14 @@ module.exports = new class HomeController extends Controller {
     async getOrders(req, res) {
         try {
             let filter ;
-            if(req.body.startDate && !req.body.endDate)
-                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $gt: req.body.startDate}}] }
-            if(!req.body.startDate && req.body.endDate)
-                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.body.endDate }}] }
-            if(!req.body.startDate && !req.body.endDate)
+            if(req.query.startDate && !req.query.endDate)
+                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $gt: req.query.startDate}}] }
+            if(!req.query.startDate && req.query.endDate)
+                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.query.endDate }}] }
+            if(!req.query.startDate && !req.query.endDate)
                 filter = { provider: req.decodedData.user_employer }
-            if(req.body.startDate && req.body.endDate)
-                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.body.endDate }}, {createdAt: { $gt: req.body.startDate}}] }
+            if(req.query.startDate && req.query.endDate)
+                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.query.endDate }}, {createdAt: { $gt: req.query.startDate}}] }
 
             let orders = await this.model.Order.find(filter);
 
@@ -124,16 +124,16 @@ module.exports = new class HomeController extends Controller {
                 params[index].customer = customerInfo;
             }
 
-            if(req.body.customertMobile)
+            if(req.query.customertMobile)
                 params = params.filter(param => {
                     if(param.customer)
-                        return param.customer.mobile == req.body.customertMobile
+                        return param.customer.mobile == req.query.customertMobile
                     })
-
-            if(req.body.customerName)
+            
+            if(req.query.customerName)
                 params = params.filter(param => {
                     if(param.customer){
-                        let re = new RegExp(req.body.customerName, "i");
+                        let re = new RegExp(req.query.customerName, "i");
                         let find = param.customer.family.search(re);
                         return find !== -1;
                     }  
