@@ -124,6 +124,12 @@ module.exports = new class HomeController extends Controller {
                 params[index].customer = customerInfo;
             }
 
+            if(req.body.customertMobile)
+                params = params.filter(param => {
+                    if(param.customer)
+                        return param.customer.mobile == req.body.customertMobile
+                    })
+
             if(req.body.customerName)
                 params = params.filter(param => {
                     if(param.customer){

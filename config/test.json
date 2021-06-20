@@ -23,19 +23,14 @@
         "order": {
             "products":[
                 {
-                    "_id": "60c99eef2b6bba08d46f6faf",
+                    "_id": "60caf16887375f47489340af",
                     "quantity": 2,
                     "sellingPrice": "30000"
                 },
                 {
-                    "_id": "60b72aa35b63f21150e440c2",
+                    "_id": "60c20b8b371e9c800850c582",
                     "quantity": 1,
                     "sellingPrice": "20000"
-                },
-                {
-                    "_id": "60b72afa1f24b03fe4fc7b51",
-                    "quantity": 1,
-                    "sellingPrice": "30000"
                 }
             ],
             "customer":{
@@ -44,7 +39,7 @@
                 "birthday": "2021-05-31T05:42:13.845Z",
                 "address": "معلم 24"
             },
-            "description": "الکل هم بیاورید",
+            "description": "با فنجان اضافه",
             "reminder": 7
         },
         "product": {
@@ -71,7 +66,8 @@
             "usernameOrMobile": "0"
         },
         "getOrderParams": {
-            "customerName": "هاشم",
+            "customerName": "",
+            "customertMobile": "09527841261",
             "startDate": "2021-05-31T05:42:13.845Z",
             "endDate": "2021-07-19T09:24:18.663Z"
         }
