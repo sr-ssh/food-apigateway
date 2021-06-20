@@ -23,23 +23,17 @@
         "order": {
             "products":[
                 {
-                    "_id": "60caf16887375f47489340af",
-                    "quantity": 2,
+                    "_id": "60b72afa1f24b03fe4fc7b51",
+                    "quantity": 3,
                     "sellingPrice": "30000"
-                },
-                {
-                    "_id": "60c20b8b371e9c800850c582",
-                    "quantity": 1,
-                    "sellingPrice": "20000"
                 }
             ],
             "customer":{
-                "family": "هاشمی",
-                "mobile": "09527841262",
-                "birthday": "2021-05-31T05:42:13.845Z",
-                "address": "معلم 24"
+                "family": "شکوهی",
+                "mobile": "09527841268",
+                "birthday": "2021-05-31T05:42:13.845Z"
             },
-            "description": "با فنجان اضافه",
+            "description": "",
             "reminder": 7
         },
         "product": {

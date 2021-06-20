@@ -5,13 +5,13 @@
     "title": "get customers",
     "version": "1.0.0",
     "name": "getCustomers",
-    "description": "<p>get customers</p>",
+    "description": "<p>get customers . respnse description: by &quot;order&quot; field we meant order length, &quot;lastBuy&quot; is the date of the customer last buy,and &quot;total&quot; is the total price of all customer orders</p>",
     "group": "customer",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"اطلاعات مشتریان با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         family: \"مصطفایی\",\n         username: \"m.mostafaie@gmail.com\",\n         mobile: \"09625846122\",\n         birthday: \"1990-12-18T23:59:00.798Z\",\n         address: \"چهارراه احمد اباد\",\n         createdAt: \"2010-12-18T23:59:00.798Z\",\n         order: [...{\n             _id: \"15fd15rg15tytee\",\n             products: [...{\n                 \n             }]\n         }],\n         reminder: \"1990-12-18T23:59:00.798Z\"\n      }]\n}",
+          "content": "{\n     success: true,\n     message: \"اطلاعات مشتریان با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         family: \"مصطفایی\",\n         mobile: \"09625846122\",\n         birthday: \"1990-12-18T23:59:00.798Z\",\n         createdAt: \"2010-12-18T23:59:00.798Z\",\n         order: 4,\n         lastBy: \"2021-12-18T23:59:00.798Z\",\n         total: 270000\n      }]\n}",
           "type": "json"
         }
       ]

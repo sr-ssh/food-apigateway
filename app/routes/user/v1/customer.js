@@ -11,7 +11,7 @@ const CustomerController = require(`${userController}/v1/CustomerController`)
  * @api {get} /api/user/v1/customer/ get customers 
  * @apiVersion 1.0.0
  * @apiName getCustomers
- * @apiDescription get customers 
+ * @apiDescription get customers . respnse description: by "order" field we meant order length, "lastBuy" is the date of the customer last buy,and "total" is the total price of all customer orders
  * @apiGroup customer
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -20,18 +20,12 @@ const CustomerController = require(`${userController}/v1/CustomerController`)
  *      data: [...{
  *          active: true,
  *          family: "مصطفایی",
- *          username: "m.mostafaie@gmail.com",
  *          mobile: "09625846122",
  *          birthday: "1990-12-18T23:59:00.798Z",
- *          address: "چهارراه احمد اباد",
  *          createdAt: "2010-12-18T23:59:00.798Z",
- *          order: [...{
- *              _id: "15fd15rg15tytee",
- *              products: [...{
- *                  
- *              }]
- *          }],
- *          reminder: "1990-12-18T23:59:00.798Z"
+ *          order: 4,
+ *          lastBy: "2021-12-18T23:59:00.798Z",
+ *          total: 270000
  *       }]
  * }
  */
