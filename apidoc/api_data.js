@@ -396,7 +396,7 @@ define({ "api": [
     "title": "get orders",
     "version": "1.0.0",
     "name": "getOrders",
-    "description": "<p>get orders : all the params get as query</p>",
+    "description": "<p>get orders : all the params get as req.params</p>",
     "group": "order",
     "parameter": {
       "fields": {
@@ -404,28 +404,28 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "varchar",
-            "optional": true,
+            "optional": false,
             "field": "customerName",
             "description": "<p>customer family</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
-            "optional": true,
+            "optional": false,
             "field": "customerMobile",
             "description": "<p>customer mobile number</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
-            "optional": true,
+            "optional": false,
             "field": "startDate",
             "description": "<p>get orders from this date</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
-            "optional": true,
+            "optional": false,
             "field": "endDate",
             "description": "<p>get orders to this date</p>"
           }

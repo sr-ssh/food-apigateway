@@ -9,7 +9,6 @@ let appConfig = require('config');
 let order, user, getOrderParams;
 const axios = require('axios').default;
 
-
 chai.use(chaiHttp);
 
 describe(`${sectionName}`, () => {
@@ -45,14 +44,12 @@ describe(`${sectionName}`, () => {
         it('check get orders', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/`)
-                .query(getOrderParams)
+                .get(`${baseRoute}/${encodeURI(getOrderParams.customerName)}/${getOrderParams.customertMobile}/${getOrderParams.startDate}/${getOrderParams.endDate}`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .end();
             res.should.have.status(200);
         });
-
 
     });
 
