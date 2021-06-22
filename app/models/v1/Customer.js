@@ -7,7 +7,7 @@ let Customer = new Schema({
     family: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     mobile: { type: String, required: true, unique: true },
-    birthday: { type: Date , required: true},
+    birthday: { type: Date},
     order: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'Order' }] },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     reminder: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'Reminder' }] }

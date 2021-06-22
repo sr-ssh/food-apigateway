@@ -1,12 +1,12 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
-const sectionName = 'V1 user customer Tests';
-const baseRoute = '/api/user/v1/customer';
+const sectionName = 'V1 user reminder Tests';
+const baseRoute = '/api/user/v1/reminder';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let customer, user;
+let user, accessToken, idToken;
 const axios = require('axios').default;
 
 
@@ -18,7 +18,6 @@ describe(`${sectionName}`, () => {
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
-        customer = appConfig.test.customer;
         axios.post(`http://localhost:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
@@ -41,16 +40,21 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get customers', async () => {
+        it('check get reminders', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/%20/%20/%20/%20/%20/%20/%20/%20/%20/%20`)
+                .get(`${baseRoute}/`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();
             res.should.have.status(200);
         });
 
+    });
+
+    describe('Check Post Apis', () => {
+
+        
 
     });
 

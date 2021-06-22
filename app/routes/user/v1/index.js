@@ -6,7 +6,8 @@ const employee = require('./employee');
 const order = require('./order');
 const product = require('./product')
 const customer = require('./customer');
-const finance = require('./finance')
+const finance = require('./finance');
+const reminder = require('./reminder');
 
 
 
@@ -16,6 +17,7 @@ router.use('/order', order);
 router.use('/product', product);
 router.use('/customer', customer)
 router.use('/finance', finance)
+router.use('/reminder', reminder)
 
 
 module.exports = router;
