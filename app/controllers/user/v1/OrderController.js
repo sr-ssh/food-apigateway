@@ -16,7 +16,7 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('products.*.sellingPrice', 'please enter product sellingPrice').notEmpty();
             req.checkBody('customer', 'please enter customer').notEmpty();
             req.checkBody('customer.family', 'please enter customer family').notEmpty();
-            req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty().isNumeris();
+            req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty().isNumeric();
             req.checkBody('customer.birthday', 'please enter customer birthday').notEmpty().isISO8601();
             req.checkBody('reminder', 'please enter customer birthday').notEmpty().isInt({min: -1});
             if (this.showValidationErrors(req, res)) return;
