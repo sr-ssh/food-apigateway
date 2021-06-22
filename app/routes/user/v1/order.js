@@ -20,7 +20,7 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @apiParamExample {json} Request-Example:
  *  {
  *      products: [...{
- *          _id: " 60b72a70e353f0385c2fe5af",
+ *          _id: "60b72a70e353f0385c2fe5af",
  *          quantity: 2,
  *          sellingPrice: "30000"
  *      }],

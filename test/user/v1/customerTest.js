@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1/customer';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let customer, user;
+let customer, user, getCustomerParams;
 const axios = require('axios').default;
 
 
@@ -19,6 +19,7 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
         customer = appConfig.test.customer;
+        getCustomerParams = appConfig.test.getCustomerParams;
         axios.post(`http://localhost:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
@@ -44,7 +45,7 @@ describe(`${sectionName}`, () => {
         it('check get customers', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/%20/%20/%20/%20/%20/%20/%20/%20/%20/%20`)
+                .get(`${baseRoute}/${encodeURI(getCustomerParams.family)}/${encodeURI(getCustomerParams.mobile)}/${encodeURI(getCustomerParams.createdAtFrom)}/${encodeURI(getCustomerParams.createdAtTo)}/${encodeURI(getCustomerParams.lastBuyFrom)}/${encodeURI(getCustomerParams.lastBuyTo)}/${encodeURI(getCustomerParams.orderFrom)}/${encodeURI(getCustomerParams.orderTo)}/${encodeURI(getCustomerParams.totalFrom)}/${encodeURI(getCustomerParams.totalTo)}`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();

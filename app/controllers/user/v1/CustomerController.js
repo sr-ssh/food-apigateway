@@ -13,37 +13,41 @@ module.exports = new class CustomerController extends Controller {
     async getCustomers(req, res) {
         try {
 
-            param('family', 'please enter family').exists();
-            param('mobile', 'please enter mobile').exists();
-            param('createdAtFrom', 'please enter createdAtFrom').exists();
-            param('createdAtTo', 'please enter createdAtTo').exists();
-            param('totalFrom', 'please enter totalFrom').exists();
-            param('totalTo', 'please enter totalTo').exists();
-            param('lastBuyFrom', 'please enter lastBuyFrom').exists();
-            param('lastBuyTo', 'please enter lastBuyTo').exists();
-            param('orderFrom', 'please enter orderFrom').exists();
-            param('orderTo', 'please enter orderTo').exists();
+            req.checkParams('family', 'please enter family').notEmpty().isString();
+            req.checkParams('mobile', 'please enter mobile').notEmpty().isNumeric();
+            req.checkParams('createdAtFrom', 'please enter createdAtFrom').notEmpty().isISO8601();
+            req.checkParams('createdAtTo', 'please enter createdAtTo').notEmpty().isISO8601();
+            req.checkParams('totalFrom', 'please enter totalFrom').notEmpty().isFloat({min: 0});
+            req.checkParams('totalTo', 'please enter totalTo').notEmpty().isFloat({min:0});
+            req.checkParams('lastBuyFrom', 'please enter lastBuyFrom').notEmpty().isISO8601();
+            req.checkParams('lastBuyTo', 'please enter lastBuyTo').notEmpty().isISO8601();
+            req.checkParams('orderFrom', 'please enter orderFrom').notEmpty().isInt({min:0});
+            req.checkParams('orderTo', 'please enter orderTo').notEmpty().isInt().isInt({min:0});
             if (this.showValidationErrors(req, res)) return;
+
+            const TIME_FLAG = "1900-01-01T05:42:13.845Z";
+            const STRING_FLAG = " ";
+            const NUMBER_FLAG = "0";
 
             let filter = {active: true, user: req.decodedData.user_employer};
             
             //filtering mobile, creadtedAtTo, and creadtedAtFrom
-            if(req.params.mobile !== " ")
+            if(req.params.mobile !== NUMBER_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, mobile: req.params.mobile }
-            if(req.params.createdAtFrom !== " ")
+            if(req.params.createdAtFrom !== TIME_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, createdAt: { $gt: req.params.createdAtFrom} }
-            if(req.params.createdAtTo !== " ")
+            if(req.params.createdAtTo !== TIME_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, createdAt: { $lt: req.params.createdAtFrom} }
             
-            if(req.params.mobile !== " " && req.params.createdAtFrom !== " ")
+            if(req.params.mobile !== NUMBER_FLAG && req.params.createdAtFrom !== TIME_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, mobile: req.params.mobile, createdAt: { $gt: req.params.createdAtFrom} }
-            if(req.params.mobile !== " " && req.params.createdAtTo !== " ")
+            if(req.params.mobile !== NUMBER_FLAG && req.params.createdAtTo !== TIME_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, mobile: req.params.mobile, createdAt: { $lt: req.params.createdAtFrom} }
 
-            if(req.params.createdAtFrom !== " " && req.params.createdAtTo !== " ")
+            if(req.params.createdAtFrom !== TIME_FLAG && req.params.createdAtTo !== TIME_FLAG)
                 filter = { $and: [{active:true}, {user: req.decodedData.user_employer}, {createdAt: { $gt: req.params.createdAtFrom}}, {createdAt: { $lt: req.params.createdAtFrom}}] }
 
-            if(req.params.mobile !== " " && req.params.createdAtFrom !== " " && req.params.createdAtTo !== " ")
+            if(req.params.mobile !== NUMBER_FLAG && req.params.createdAtFrom !== TIME_FLAG && req.params.createdAtTo !== TIME_FLAG)
                 filter = { $and:[{active:true}, {user: req.decodedData.user_employer}, {mobile: req.params.mobile},{ createdAt: { $lt: req.params.createdAtFrom}}, {createdAt: { $lt: req.params.createdAtFrom}}] }
 
             let customers = await this.model.Customer.find(filter);
@@ -80,7 +84,6 @@ module.exports = new class CustomerController extends Controller {
             
             let orderInfo = [];
             for (let index = 0; index < customers.length; index++) {
-                if(params[index].order)
                     orderInfo = orders.filter(order => customers[index].order.includes(order._id))
                 if(orderInfo.length){
                     params[index].lastBuy = orderInfo[orderInfo.length-1].updatedAt
@@ -90,44 +93,40 @@ module.exports = new class CustomerController extends Controller {
                 }
             }
             //filtering family, totalFrom and totalTo
-            if(req.params.family !== " ")
+            if(req.params.family !== STRING_FLAG)
             params = params.filter(param => {
                     let re = new RegExp(req.params.family, "i");
                     let find = param.family.search(re);
                     return find !== -1;
                 })
 
-            if(req.params.totalFrom !== " ")
+            if(req.params.totalFrom !== NUMBER_FLAG)
             params = params.filter(param => {
                 if(param.total)
                     return param.total >= req.params.totalFrom
             })
 
-            if(req.params.totalTo !== " ")
+            if(req.params.totalTo !== NUMBER_FLAG)
             params = params.filter(param => {
                 if(param.total)
                     return param.total <= req.params.totalTo
             })
 
             //filtering lastBuy from, lastBuyTo, orderFrom, and orderTo
-            if(req.params.lastBuyFrom !== " ")
+            if(req.params.lastBuyFrom !== TIME_FLAG)
                 params = params.filter(param => {
-                    if(param.total)
-                        return param.lastBuy >= req.params.lastBuyFrom
+                        return (param.lastBuy.toISOString() >= req.params.lastBuyFrom)
                 })
-            if(req.params.lastBuyTo !== " ")
+            if(req.params.lastBuyTo !== TIME_FLAG)
                 params = params.filter(param => {
-                    if(param.total)
-                        return param.lastBuy <= req.params.lastBuyTo
+                        return param.lastBuy.toISOString() <= req.params.lastBuyTo
                 })
-            if(req.params.orderFrom !== " ")
+            if(req.params.orderFrom !== NUMBER_FLAG)
                 params = params.filter(param => {
-                    if(param.total)
                         return param.order >= req.params.orderFrom
                 })
-            if(req.params.orderTo !== " ")
+            if(req.params.orderTo !== NUMBER_FLAG)
                 params = params.filter(param => {
-                    if(param.total)
                         return param.order <= req.params.orderTo
                 })
 
