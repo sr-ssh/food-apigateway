@@ -11,13 +11,13 @@ const HomeController = require(`${userController}/v1/HomeController`)
  * @api {post} /api/user/v1/ register
  * @apiVersion 1.0.0
  * @apiName register
- * @apiDescription register user
+ * @apiDescription register user.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry
  * @apiGroup home
  * @apiParam  {varchar} password user password
  * @apiParam  {varchar} family  family 
  * @apiParam  {varchar} email email 
  * @apiParam  {varchar} mobile mobile
- * @apiParam  {varchar} company company name
+ * @apiParam  {varchar} company company name (" ")
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success:true,

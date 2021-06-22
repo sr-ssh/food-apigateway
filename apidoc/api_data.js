@@ -341,7 +341,7 @@ define({ "api": [
     "title": "register",
     "version": "1.0.0",
     "name": "register",
-    "description": "<p>register user</p>",
+    "description": "<p>register user.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry</p>",
     "group": "home",
     "parameter": {
       "fields": {
@@ -379,7 +379,7 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "company",
-            "description": "<p>company name</p>"
+            "description": "<p>company name (&quot; &quot;)</p>"
           }
         ]
       }

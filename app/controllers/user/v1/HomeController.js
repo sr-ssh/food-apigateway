@@ -15,19 +15,24 @@ module.exports = new class HomeController extends Controller {
     async register(req, res) {
         try {
             req.checkBody('password', 'please enter password').notEmpty();
-            req.checkBody('family', 'please enter family').notEmpty();
-            req.checkBody('email', 'please enter email').notEmpty();
-            req.checkBody('mobile', 'please enter mobile').notEmpty();
+            req.checkBody('family', 'please enter family').notEmpty().isString();
+            req.checkBody('email', 'please enter email').notEmpty().isEmail();
+            req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
+            req.checkBody('company', 'please enter company name').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
+
+            const STRING_FLAG = " ";
 
             // save in mongodb
             let params = {
                 password: req.body.password,
                 family: req.body.family,
                 email: req.body.email,
-                mobile: req.body.mobile,
-                company: req.body.company
+                mobile: req.body.mobile
             }
+
+            if(req.body.company !== STRING_FLAG)
+                params.company = req.body.company
             
             let filter = { mobile: params.mobile };
             let user = await this.model.User.findOne(filter);
