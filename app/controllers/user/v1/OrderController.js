@@ -85,15 +85,22 @@ module.exports = new class HomeController extends Controller {
 
     async getOrders(req, res) {
         try {
+            req.checkParams('customerName', 'please set customerName').notEmpty();
+            req.checkParams('customerMobile', 'please set customerMobile').notEmpty();
+            req.checkParams('startDate', 'please set startDate').notEmpty().isISO8601();
+            req.checkParams('endDate', 'please set endDate').notEmpty().isISO8601();
+            
+            if (this.showValidationErrors(req, res)) return;
+
             let filter ;
-            if(req.query.startDate && !req.query.endDate)
-                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $gt: req.query.startDate}}] }
-            if(!req.query.startDate && req.query.endDate)
-                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.query.endDate }}] }
-            if(!req.query.startDate && !req.query.endDate)
+            if(req.params.startDate != "0" && req.params.endDate === "0")
+                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $gt: req.params.startDate}}] }
+            if(req.params.startDate === "0" && req.params.endDate != "0")
+                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.params.endDate }}] }
+            if(req.params.startDate === "0" && req.params.endDate === "0")
                 filter = { provider: req.decodedData.user_employer }
-            if(req.query.startDate && req.query.endDate)
-                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.query.endDate }}, {createdAt: { $gt: req.query.startDate}}] }
+            if(req.params.startDate != "0" && req.params.endDate != "0")
+                filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.params.endDate }}, {createdAt: { $gt: req.params.startDate}}] }
 
             let orders = await this.model.Order.find(filter);
 
@@ -123,17 +130,17 @@ module.exports = new class HomeController extends Controller {
                 customerInfo = customers.find(user => user._id.toString() == orders[index].customer)
                 params[index].customer = customerInfo;
             }
-            
-            if(req.query.customertMobile)
+
+            if(req.params.customertMobile)
                 params = params.filter(param => {
                     if(param.customer)
-                        return param.customer.mobile == req.query.customertMobile
+                        return param.customer.mobile == req.params.customertMobile
                     })
             
-            if(req.query.customerName)
+            if(req.params.customerName)
                 params = params.filter(param => {
                     if(param.customer){
-                        let re = new RegExp(req.query.customerName, "i");
+                        let re = new RegExp(req.params.customerName, "i");
                         let find = param.customer.family.search(re);
                         return find !== -1;
                     }  
@@ -166,7 +173,7 @@ module.exports = new class HomeController extends Controller {
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('getOrders')
-                .inputParams(req.body)
+                .inputParams(req.params)
                 .call();
 
             if (!res.headersSent) return res.status(500).json(handelError);

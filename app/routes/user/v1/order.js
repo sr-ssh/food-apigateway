@@ -47,12 +47,12 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @api {get} /api/user/v1/order/ get orders 
  * @apiVersion 1.0.0
  * @apiName getOrders
- * @apiDescription get orders : all the params get as query
+ * @apiDescription get orders : all the params get as req.params
  * @apiGroup order
- * @apiParam {varchar} [customerName] customer family
- * @apiParam {varchar} [customerMobile] customer mobile number
- * @apiParam {varchar} [startDate] get orders from this date
- * @apiParam {varchar} [endDate] get orders to this date
+ * @apiParam {varchar} customerName customer family
+ * @apiParam {varchar} customerMobile customer mobile number
+ * @apiParam {varchar} startDate get orders from this date
+ * @apiParam {varchar} endDate get orders to this date
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
@@ -76,7 +76,7 @@ const OrderController = require(`${userController}/v1/OrderController`)
  *      }]
  * }
  */
-  router.get('/',OrderController.getOrders.bind(OrderController));
+  router.get('/:customerName/:customerMobile/:startDate/:endDate',OrderController.getOrders.bind(OrderController));
 
 
  module.exports = router;

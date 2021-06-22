@@ -4,7 +4,7 @@
         "host": "mongodb://172.16.2.215/crm"
     },
     "test": {
-        "user":{
+        "user": {
             "password": "reihaneh@123",
             "name": "reihaneh",
             "family": "shokouhi",
@@ -21,14 +21,14 @@
             "address": "معلم 24"
         },
         "order": {
-            "products":[
+            "products": [
                 {
                     "_id": "60b72afa1f24b03fe4fc7b51",
                     "quantity": 3,
                     "sellingPrice": "30000"
                 }
             ],
-            "customer":{
+            "customer": {
                 "family": "شکوهی",
                 "mobile": "09527841268",
                 "birthday": "2021-05-31T05:42:13.845Z"
@@ -56,11 +56,11 @@
             "name": "اجاره",
             "cost": "2000000"
         },
-        "employee":{
+        "employee": {
             "usernameOrMobile": "0"
         },
         "getOrderParams": {
-            "customerName": "",
+            "customerName": "اصغری",
             "customertMobile": "09527841261",
             "startDate": "2021-05-31T05:42:13.845Z",
             "endDate": "2021-07-19T09:24:18.663Z"
