@@ -8,6 +8,7 @@ const product = require('./product')
 const customer = require('./customer');
 const finance = require('./finance');
 const reminder = require('./reminder');
+const discount = require('./discount')
 
 
 
@@ -18,6 +19,6 @@ router.use('/product', product);
 router.use('/customer', customer)
 router.use('/finance', finance)
 router.use('/reminder', reminder)
-
+router.use('/discount', discount)
 
 module.exports = router;
