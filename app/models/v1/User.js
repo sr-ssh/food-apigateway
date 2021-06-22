@@ -9,7 +9,7 @@ let User = new Schema({
     family: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, unique: true },
     mobile: { type: String, required: true, unique: true },
     company: String,
     employer: { type: Schema.Types.ObjectId, ref: 'User'},
@@ -19,7 +19,7 @@ let User = new Schema({
 User.pre('validate', function(next){
 
     this.employer = this.get('_id');
-    this.username = this.get('email');
+    this.username = this.get('mobile');
     next();
 })
 

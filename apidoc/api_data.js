@@ -365,7 +365,7 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "email",
-            "description": "<p>email</p>"
+            "description": "<p>email (&quot;a@a.com&quot;)</p>"
           },
           {
             "group": "Parameter",
@@ -411,7 +411,7 @@ define({ "api": [
     "title": "add order",
     "version": "1.0.0",
     "name": "addOrder",
-    "description": "<p>add order: customer birthday is also optional</p>",
+    "description": "<p>add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is &quot;1900-01-01T05:42:13.845Z&quot;.reminder flag is -1.</p>",
     "group": "order",
     "parameter": {
       "fields": {
@@ -432,13 +432,6 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "varchar",
-            "optional": true,
-            "field": "description",
-            "description": "<p>order description</p>"
-          },
-          {
-            "group": "Parameter",
             "type": "int",
             "optional": true,
             "field": "reminder",
@@ -449,7 +442,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }],\n    customer: {\n        family: \"شکوهی\",\n        mobile: \"09307580142\",\n        birthday: \"2021-05-31T05:42:13.845Z\"\n    },\n    description: \"الکل هم بیاورید\",\n    reminder: 7\n}",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }],\n    customer: {\n        family: \"شکوهی\",\n        mobile: \"09307580142\",\n        birthday: \"2021-05-31T05:42:13.845Z\"\n    },\n    reminder: 7\n}",
           "type": "json"
         }
       ]

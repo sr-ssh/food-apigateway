@@ -16,8 +16,13 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('products.*.sellingPrice', 'please enter product sellingPrice').notEmpty();
             req.checkBody('customer', 'please enter customer').notEmpty();
             req.checkBody('customer.family', 'please enter customer family').notEmpty();
-            req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty();
+            req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty().isNumeris();
+            req.checkBody('customer.birthday', 'please enter customer birthday').notEmpty().isISO8601();
+            req.checkBody('reminder', 'please enter customer birthday').notEmpty().isInt({min: -1});
             if (this.showValidationErrors(req, res)) return;
+
+            const TIME_FLAG = "1900-01-01T05:42:13.845Z";
+            const INT_FLAG = "-1";
 
             // add customer
             let filter = { mobile: req.body.customer.mobile }
@@ -26,9 +31,11 @@ module.exports = new class HomeController extends Controller {
             let params = {
                 family: req.body.customer.family,
                 mobile: req.body.customer.mobile,
-                birthday: req.body.customer.birthday,
                 user: req.decodedData.user_employer
             }
+
+            if(req.body.customer.birthday != TIME_FLAG)
+                params.birthday = req.body.customer.birthday
 
             if(!customer)
                 customer = await this.model.Customer.create(params)
@@ -46,7 +53,7 @@ module.exports = new class HomeController extends Controller {
 
             
             // add reminder
-            if(req.body.reminder){
+            if(req.body.reminder !== INT_FLAG){
 
                 // calculate date
                 const event = new Date();

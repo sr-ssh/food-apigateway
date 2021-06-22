@@ -11,11 +11,10 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @api {post} /api/user/v1/order/ add order 
  * @apiVersion 1.0.0
  * @apiName addOrder
- * @apiDescription add order: customer birthday is also optional
+ * @apiDescription add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is "1900-01-01T05:42:13.845Z".reminder flag is -1.
  * @apiGroup order
  * @apiParam {Object[]} products array of product objects
  * @apiParam {Object} customer customer information
- * @apiParam {varchar} [description] order description
  * @apiParam {int} [reminder] number of days for reminding
  * @apiParamExample {json} Request-Example:
  *  {
@@ -29,7 +28,6 @@ const OrderController = require(`${userController}/v1/OrderController`)
  *          mobile: "09307580142",
  *          birthday: "2021-05-31T05:42:13.845Z"
  *      },
- *      description: "الکل هم بیاورید",
  *      reminder: 7
  *  }
  * @apiSuccessExample {json} Success-Response:

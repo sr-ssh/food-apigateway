@@ -15,7 +15,7 @@ const HomeController = require(`${userController}/v1/HomeController`)
  * @apiGroup home
  * @apiParam  {varchar} password user password
  * @apiParam  {varchar} family  family 
- * @apiParam  {varchar} email email 
+ * @apiParam  {varchar} email email ("a@a.com")
  * @apiParam  {varchar} mobile mobile
  * @apiParam  {varchar} company company name (" ")
  * @apiSuccessExample {json} Success-Response:

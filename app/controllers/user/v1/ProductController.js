@@ -17,6 +17,7 @@ module.exports = new class ProductController extends Controller {
             if (this.showValidationErrors(req, res)) return;
 
             const STRING_FLAG = " ";
+            const NUMBER_FLAG = "0";
 
             let params = {
                 name: req.body.name,

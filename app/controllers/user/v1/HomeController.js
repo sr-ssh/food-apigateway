@@ -22,17 +22,19 @@ module.exports = new class HomeController extends Controller {
             if (this.showValidationErrors(req, res)) return;
 
             const STRING_FLAG = " ";
+            const EMAIL_FLAG = "a@a.com";
 
             // save in mongodb
             let params = {
                 password: req.body.password,
                 family: req.body.family,
-                email: req.body.email,
                 mobile: req.body.mobile
             }
 
             if(req.body.company !== STRING_FLAG)
                 params.company = req.body.company
+            if(req.body.email !== EMAIL_FLAG)
+                params.email = req.body.email
             
             let filter = { mobile: params.mobile };
             let user = await this.model.User.findOne(filter);
