@@ -11,16 +11,21 @@ module.exports = new class ProductController extends Controller {
 
     async addProduct(req, res) {
         try {
-            req.checkBody('name', 'please enter name').notEmpty();
-            req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty();
+            req.checkBody('name', 'please enter name').notEmpty().isString();
+            req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty().isFloat({min: 0});
+            req.checkBody('description', 'please enter description').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
+
+            const STRING_FLAG = " ";
 
             let params = {
                 name: req.body.name,
                 sellingPrice: req.body.sellingPrice,
-                description: req.body.description,
                 user: req.decodedData.user_employer
             }
+
+            if(req.body.description !== STRING_FLAG)
+                params.description = req.body.description
 
             let filter = { name: params.name, sellingPrice: params.sellingPrice, user: params.user}
             let product = await this.model.Product.findOne(filter)
@@ -66,17 +71,22 @@ module.exports = new class ProductController extends Controller {
     async editProduct(req, res) {
         try {
             req.checkBody('_id', 'please enter product id').notEmpty();
-            req.checkBody('active', 'please enter activity status').notEmpty();
-            req.checkBody('name', 'please enter name').notEmpty();
-            req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty();
+            req.checkBody('active', 'please enter activity status').notEmpty().isBoolean();
+            req.checkBody('name', 'please enter name').notEmpty().isString();
+            req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty().isFloat({min: 0});
+            req.checkBody('description', 'please enter description').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
+
+            const STRING_FLAG = " ";
 
             let params = {
                 active: req.body.active,
                 name: req.body.name,
-                sellingPrice: req.body.sellingPrice,
-                description: req.body.description,
+                sellingPrice: req.body.sellingPrice
             }
+
+            if(req.body.description !== STRING_FLAG)
+                params.description = req.body.description
 
             let filter = { _id: req.body._id }
             let product = await this.model.Product.findOneAndUpdate(filter, params)

@@ -526,7 +526,7 @@ define({ "api": [
     "title": "add product",
     "version": "1.0.0",
     "name": "addProduct",
-    "description": "<p>add product</p>",
+    "description": "<p>add product.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry</p>",
     "group": "product",
     "parameter": {
       "fields": {
@@ -548,9 +548,9 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "varachar",
-            "optional": true,
+            "optional": false,
             "field": "description",
-            "description": "<p>description of product</p>"
+            "description": "<p>description of product (&quot; &quot;)</p>"
           }
         ]
       }
@@ -582,7 +582,7 @@ define({ "api": [
     "title": "edit product",
     "version": "1.0.0",
     "name": "editProduct",
-    "description": "<p>edit product: all params must be sent even if they don't have any changes</p>",
+    "description": "<p>edit product: all params must be sent even if they don't have any changes.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry</p>",
     "group": "product",
     "parameter": {
       "fields": {
@@ -618,9 +618,9 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "varachar",
-            "optional": true,
+            "optional": false,
             "field": "description",
-            "description": "<p>description of product</p>"
+            "description": "<p>description of product (&quot; &quot;)</p>"
           }
         ]
       }
