@@ -99,14 +99,16 @@ module.exports = new class HomeController extends Controller {
             
             if (this.showValidationErrors(req, res)) return;
 
+            const TIME_FLAG = "1900-01-01T05:42:13.845Z";
+
             let filter ;
-            if(req.params.startDate != "0" && req.params.endDate === "0")
+            if(req.params.startDate != TIME_FLAG && req.params.endDate === TIME_FLAG)
                 filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $gt: req.params.startDate}}] }
-            if(req.params.startDate === "0" && req.params.endDate != "0")
+            if(req.params.startDate === TIME_FLAG && req.params.endDate != TIME_FLAG)
                 filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.params.endDate }}] }
-            if(req.params.startDate === "0" && req.params.endDate === "0")
+            if(req.params.startDate === TIME_FLAG && req.params.endDate === TIME_FLAG)
                 filter = { provider: req.decodedData.user_employer }
-            if(req.params.startDate != "0" && req.params.endDate != "0")
+            if(req.params.startDate != TIME_FLAG && req.params.endDate != TIME_FLAG)
                 filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.params.endDate }}, {createdAt: { $gt: req.params.startDate}}] }
 
             let orders = await this.model.Order.find(filter);
@@ -138,13 +140,13 @@ module.exports = new class HomeController extends Controller {
                 params[index].customer = customerInfo;
             }
 
-            if(req.params.customertMobile)
+            if(req.params.customerMobile !== "0")
                 params = params.filter(param => {
                     if(param.customer)
                         return param.customer.mobile == req.params.customertMobile
                     })
             
-            if(req.params.customerName)
+            if(req.params.customerName !== " ")
                 params = params.filter(param => {
                     if(param.customer){
                         let re = new RegExp(req.params.customerName, "i");

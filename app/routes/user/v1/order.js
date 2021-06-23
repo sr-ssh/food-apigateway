@@ -45,12 +45,12 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @api {get} /api/user/v1/order/ get orders 
  * @apiVersion 1.0.0
  * @apiName getOrders
- * @apiDescription get orders : all the params get as req.params
+ * @apiDescription get orders : all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.
  * @apiGroup order
- * @apiParam {varchar} customerName customer family
- * @apiParam {varchar} customerMobile customer mobile number
- * @apiParam {varchar} startDate get orders from this date
- * @apiParam {varchar} endDate get orders to this date
+ * @apiParam {varchar} customerName customer family (" ")
+ * @apiParam {varchar} customerMobile customer mobile number ("0")
+ * @apiParam {varchar} startDate get orders from this date ("1900-01-01T05:42:13.845Z")
+ * @apiParam {varchar} endDate get orders to this date ("1900-01-01T05:42:13.845Z")
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,

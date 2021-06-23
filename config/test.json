@@ -60,10 +60,10 @@
             "usernameOrMobile": "0"
         },
         "getOrderParams": {
-            "customerName": "اصغری",
-            "customertMobile": "09527841261",
-            "startDate": "2021-05-31T05:42:13.845Z",
-            "endDate": "2021-07-19T09:24:18.663Z"
+            "customerName": " ",
+            "customertMobile": "0",
+            "startDate": "1900-01-01T05:42:13.845Z",
+            "endDate": "1900-01-01T05:42:13.845Z"
         },
         "getCustomerParams": {
             "family": " ",

@@ -465,7 +465,7 @@ define({ "api": [
     "title": "get orders",
     "version": "1.0.0",
     "name": "getOrders",
-    "description": "<p>get orders : all the params get as req.params</p>",
+    "description": "<p>get orders : all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.</p>",
     "group": "order",
     "parameter": {
       "fields": {
@@ -475,28 +475,28 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "customerName",
-            "description": "<p>customer family</p>"
+            "description": "<p>customer family (&quot; &quot;)</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
             "field": "customerMobile",
-            "description": "<p>customer mobile number</p>"
+            "description": "<p>customer mobile number (&quot;0&quot;)</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
             "field": "startDate",
-            "description": "<p>get orders from this date</p>"
+            "description": "<p>get orders from this date (&quot;1900-01-01T05:42:13.845Z&quot;)</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
             "field": "endDate",
-            "description": "<p>get orders to this date</p>"
+            "description": "<p>get orders to this date (&quot;1900-01-01T05:42:13.845Z&quot;)</p>"
           }
         ]
       }
@@ -512,6 +512,62 @@ define({ "api": [
     },
     "filename": "app/routes/user/v1/order.js",
     "groupTitle": "order"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/v1/product/",
+    "title": "add discount",
+    "version": "1.0.0",
+    "name": "addProduct",
+    "description": "<p>add product.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry</p>",
+    "group": "product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "name",
+            "description": "<p>product name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "sellingPrice",
+            "description": "<p>product selling price</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varachar",
+            "optional": false,
+            "field": "description",
+            "description": "<p>description of product (&quot; &quot;)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"محصول شما با موفقیت ثبت شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{ \n     success : false, \n     message : \"محصول وارد شده، موجود است\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/discount.js",
+    "groupTitle": "product"
   },
   {
     "type": "post",
@@ -637,6 +693,26 @@ define({ "api": [
       ]
     },
     "filename": "app/routes/user/v1/product.js",
+    "groupTitle": "product"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/product/",
+    "title": "get products",
+    "version": "1.0.0",
+    "name": "getProducts",
+    "description": "<p>get products</p>",
+    "group": "product",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"محصولات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         name: \"روغن\" ,\n         sellingPrice: \"100000\",\n         description: \"خریداری شده از شرکت روغن سازان مشهد\"\n         createdAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/discount.js",
     "groupTitle": "product"
   },
   {
