@@ -15,7 +15,7 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @apiGroup order
  * @apiParam {Object[]} products array of product objects
  * @apiParam {Object} customer customer information
- * @apiParam {int} [reminder] number of days for reminding
+ * @apiParam {int} reminder number of days for reminding
  * @apiParamExample {json} Request-Example:
  *  {
  *      products: [...{
