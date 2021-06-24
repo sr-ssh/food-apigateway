@@ -97,6 +97,87 @@
   },
   {
     "type": "post",
+    "url": "/api/user/v1/discount/",
+    "title": "add discount",
+    "version": "1.0.0",
+    "name": "addDiscount",
+    "description": "<p>add discount.</p>",
+    "group": "discount",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "name",
+            "description": "<p>product name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "customer",
+            "description": "<p>customer mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "percentage",
+            "description": "<p>discount percent (min=0, max=100)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "type",
+            "description": "<p>discount type (&quot;تولد&quot; or &quot;فرد&quot;)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "sms",
+            "description": "<p>send sms boolean</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"تخفیف با موفقیت ثبت شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/discount.js",
+    "groupTitle": "discount"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/discount/",
+    "title": "get discounts",
+    "version": "1.0.0",
+    "name": "getDiscounts",
+    "description": "<p>get discounts.There is only 2 types: &quot;تولد&quot; and &quot;فرد&quot; ,if the type be &quot;تولد&quot; then we don't have customer field otherwise we have customer.</p>",
+    "group": "discount",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"لیست تخفیف ها با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         name: \"ولنتاین\" ,\n         type: \"فرد\",\n         percentage: 20,\n         sms: true,\n         customer: \"60b72a70e353f0385c2fe5af\"\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/discount.js",
+    "groupTitle": "discount"
+  },
+  {
+    "type": "post",
     "url": "/api/user/v1/employee",
     "title": "add employee",
     "version": "1.0.0",
@@ -505,7 +586,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \" 60b72a70e353f0385c2fe5af\",\n             name: \"لاته\",\n             quantity: 2,\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             mobile: \"09152631225\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \"60b72a70e353f0385c2fe5af\",\n             name: \"لاته\",\n             quantity: 2,\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             mobile: \"09152631225\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
           "type": "json"
         }
       ]
@@ -665,13 +746,13 @@
     "title": "get reminders",
     "version": "1.0.0",
     "name": "getReminder",
-    "description": "<p>get Reminder</p>",
+    "description": "<p>get Reminder: sends reminders of today.birthday of the customer may not be send because it's optional in the first place.</p>",
     "group": "reminder",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"لیست یادآوری با موفقیت ارسال شد\"\n}",
+          "content": "{\n    success: true,\n    message: \"لیست یادآوری با موفقیت ارسال شد\",\n    data: {...[\n         date: '2021-06-22T12:30:36.747Z',\n         customer: {\n             _id: '60d030e8716abd4c9428d373',\n             family: 'شکوهی',\n             mobile: '09307580142',\n             birthday: '2021-05-31T05:42:13.845Z'\n         },\n         order: {\n             _id: '60d3296cc29f9d1898abb62a',\n             active: true,\n             creadtedAt: '2021-06-23T12:30:36.679Z',\n             customer: '60d030e8716abd4c9428d373',\n             products:{...[\n                 _id: '60b72a70e353f0385c2fe5af',\n                 name: 'آیس لته',\n                 quantity: 1,\n                 sellingPrice: '30000'\n             ]}\n         }\n     ]}\n}",
           "type": "json"
         }
       ]

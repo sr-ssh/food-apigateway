@@ -76,6 +76,13 @@
             "orderTo": "0",
             "totalFrom": "0",
             "totalTo": "0"
+        },
+        "discount": {
+            "name": "عیدی",
+            "type": "فرد",
+            "customer": "09307580142",
+            "percentage": 20,
+            "sms": true
         }
     }
 }
