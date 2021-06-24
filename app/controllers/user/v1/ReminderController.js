@@ -13,7 +13,14 @@ module.exports = new class ReminderController extends Controller {
     async getReminders(req, res) {
         try {
             
-            let filter = { active: true, user: req.decodedData.user_employer }
+            let today = new Date().toISOString();
+            today = today.substr(0, 10) + "T00:00:00.000Z";
+            let tomorrow = new Date();
+            tomorrow.setDate(new Date().getDate() + 1)
+            tomorrow = tomorrow.toISOString().substr(0, 10) + "T00:00:00.000Z";
+
+            let filter = { $and: [{active: true}, {user: req.decodedData.user_employer}, {date: { $gt: today}},{date: { $lt: tomorrow}}]}
+
             let reminders = await this.model.Reminder.find(filter)
 
             let params = [];
@@ -34,7 +41,7 @@ module.exports = new class ReminderController extends Controller {
             }
 
             filter = { _id: { $in: customers } }
-            customers = await this.model.Customer.find(filter, { _id: 1, family: 1, mobile: 1 })
+            customers = await this.model.Customer.find(filter, { _id: 1, family: 1, mobile: 1, birthday: 1 })
 
             filter = { _id: { $in: orders } }
             orders = await this.model.Order.find(filter)
