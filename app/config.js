@@ -6,8 +6,8 @@ module.exports = {
     audience: "audience",
     algorithm: "HS256",
     issuer: "issuer",
-    accesssTokenExpire: 60 * 60 ,
-    idTokenExpire: 60 * 60 * 100,
+    accesssTokenExpire: "300 days" ,
+    idTokenExpire: "250 days",
     userScope: "user",
     publicRoute: ['/api/user/v1/login', '/api/user/v1/'],
     path: {
