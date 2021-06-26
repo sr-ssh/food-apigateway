@@ -52,6 +52,16 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
+        it('check get customer by modile', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/${encodeURI(getCustomerParams.mobile)}`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
 
     });
 

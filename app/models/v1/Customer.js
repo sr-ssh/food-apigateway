@@ -6,7 +6,7 @@ let Customer = new Schema({
     active: { type: Boolean, default: true },
     family: { type: String, required: true },
     username: { type: String, required: true, unique: true },
-    mobile: { type: String, required: true, unique: true },
+    mobile: { type: Number, required: true, unique: true },
     birthday: { type: Date},
     order: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'Order' }] },
     user: { type: Schema.Types.ObjectId, ref: 'User' },

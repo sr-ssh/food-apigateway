@@ -42,6 +42,33 @@ const CustomerController = require(`${userController}/v1/CustomerController`)
   router.get('/:family/:mobile/:createdAtFrom/:createdAtTo/:lastBuyFrom/:lastBuyTo/:orderFrom/:orderTo/:totalFrom/:totalTo',CustomerController.getCustomers.bind(CustomerController));
 
 
+/**
+ * @api {get} /api/user/v1/customer/ get customer
+ * @apiVersion 1.0.0
+ * @apiName getCustomer
+ * @apiDescription get customer .It gives you the customer information of the mobile you sent , if there is no customer with that mobile number it sends false
+ * @apiGroup customer
+ * @apiParam {Number} mobile customer mobile 
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "اطلاعات مشتری با موفقیت ارسال شد",
+ *      data: {
+ *          family: "مصطفایی",
+ *          mobile: "09625846122",
+ *          birthday: "1990-12-18T23:59:00.798Z"
+ *       }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: false,
+ *      message: "مشتری موجود نیست",
+ *      data: {}
+ * }
+ */
+ router.get('/:mobile',CustomerController.getCustomer.bind(CustomerController));
+
+
 
   
  module.exports = router;

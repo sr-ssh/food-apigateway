@@ -2,6 +2,48 @@ define({ "api": [
   {
     "type": "get",
     "url": "/api/user/v1/customer/",
+    "title": "get customer",
+    "version": "1.0.0",
+    "name": "getCustomer",
+    "description": "<p>get customer .It gives you the customer information of the mobile you sent , if there is no customer with that mobile number it sends false</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>customer mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"اطلاعات مشتری با موفقیت ارسال شد\",\n     data: {\n         family: \"مصطفایی\",\n         mobile: \"09625846122\",\n         birthday: \"1990-12-18T23:59:00.798Z\"\n      }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: false,\n     message: \"مشتری موجود نیست\",\n     data: {}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/customer.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/customer/",
     "title": "get customers",
     "version": "1.0.0",
     "name": "getCustomers",

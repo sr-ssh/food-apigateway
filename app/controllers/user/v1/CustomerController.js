@@ -144,6 +144,32 @@ module.exports = new class CustomerController extends Controller {
         }
     }
 
+    async getCustomer(req, res) {
+        try {
+
+            req.checkParams('mobile', 'please enter customer mobile').notEmpty().isNumeric();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active: true, user: req.decodedData.user_employer, mobile: req.params.mobile};
+
+            let customer = await this.model.Customer.findOne(filter, { family:1, mobile:1, birthday:1 });
+                if(!customer)
+                    return res.json({ success : false, message : 'مشتری موجود نیست', data: {}})
+
+            return res.json({ success : true, message : 'اطلاعات مشتری با موفقیت ارسال شد', data: customer})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getCustomers')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

@@ -25,7 +25,7 @@ module.exports = new class HomeController extends Controller {
             const INT_FLAG = "-1";
 
             // add customer
-            let filter = { mobile: req.body.customer.mobile }
+            let filter = { mobile: req.body.customer.mobile, user: req.decodedData.user_employer }
             let customer = await this.model.Customer.findOne(filter)
 
             let params = {
@@ -39,6 +39,8 @@ module.exports = new class HomeController extends Controller {
 
             if(!customer)
                 customer = await this.model.Customer.create(params)
+            if(customer && !customer.birthday && req.body.customer.birthday != TIME_FLAG)
+                customer.birthday = req.body.customer.birthday;
             
             // add order
             params = {
