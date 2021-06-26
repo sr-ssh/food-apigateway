@@ -143,10 +143,7 @@ module.exports = new class HomeController extends Controller {
             }
 
             if(req.params.customerMobile !== "0")
-                params = params.filter(param => {
-                    if(param.customer)
-                        return param.customer.mobile == req.params.customertMobile
-                    })
+                params = params.filter(param => param.customer.mobile === req.params.customerMobile)
             
             if(req.params.customerName !== " ")
                 params = params.filter(param => {

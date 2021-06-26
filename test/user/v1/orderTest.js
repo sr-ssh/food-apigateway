@@ -44,7 +44,7 @@ describe(`${sectionName}`, () => {
         it('check get orders', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/${encodeURI(getOrderParams.customerName)}/${getOrderParams.customertMobile}/${getOrderParams.startDate}/${getOrderParams.endDate}`)
+                .get(`${baseRoute}/${encodeURI(getOrderParams.customerName)}/09307580142/${getOrderParams.startDate}/${getOrderParams.endDate}`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();

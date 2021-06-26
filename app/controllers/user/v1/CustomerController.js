@@ -37,18 +37,18 @@ module.exports = new class CustomerController extends Controller {
             if(req.params.createdAtFrom !== TIME_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, createdAt: { $gt: req.params.createdAtFrom} }
             if(req.params.createdAtTo !== TIME_FLAG)
-                filter = { active:true, user: req.decodedData.user_employer, createdAt: { $lt: req.params.createdAtFrom} }
+                filter = { active:true, user: req.decodedData.user_employer, createdAt: { $lt: req.params.createdAtTo} }
             
             if(req.params.mobile !== NUMBER_FLAG && req.params.createdAtFrom !== TIME_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, mobile: req.params.mobile, createdAt: { $gt: req.params.createdAtFrom} }
             if(req.params.mobile !== NUMBER_FLAG && req.params.createdAtTo !== TIME_FLAG)
-                filter = { active:true, user: req.decodedData.user_employer, mobile: req.params.mobile, createdAt: { $lt: req.params.createdAtFrom} }
+                filter = { active:true, user: req.decodedData.user_employer, mobile: req.params.mobile, createdAt: { $lt: req.params.createdAtTo} }
 
             if(req.params.createdAtFrom !== TIME_FLAG && req.params.createdAtTo !== TIME_FLAG)
-                filter = { $and: [{active:true}, {user: req.decodedData.user_employer}, {createdAt: { $gt: req.params.createdAtFrom}}, {createdAt: { $lt: req.params.createdAtFrom}}] }
+                filter = { $and: [{active:true}, {user: req.decodedData.user_employer}, {createdAt: { $gt: req.params.createdAtFrom}}, {createdAt: { $lt: req.params.createdAtTo}}] }
 
             if(req.params.mobile !== NUMBER_FLAG && req.params.createdAtFrom !== TIME_FLAG && req.params.createdAtTo !== TIME_FLAG)
-                filter = { $and:[{active:true}, {user: req.decodedData.user_employer}, {mobile: req.params.mobile},{ createdAt: { $lt: req.params.createdAtFrom}}, {createdAt: { $lt: req.params.createdAtFrom}}] }
+                filter = { $and:[{active:true}, {user: req.decodedData.user_employer}, {mobile: req.params.mobile},{ createdAt: { $lt: req.params.createdAtFrom}}, {createdAt: { $lt: req.params.createdAtTo}}] }
 
             let customers = await this.model.Customer.find(filter);
 

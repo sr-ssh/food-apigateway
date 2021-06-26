@@ -67,9 +67,9 @@
         },
         "getCustomerParams": {
             "family": " ",
-            "mobile": "09000",
-            "createdAtFrom": "1900-01-01T05:42:13.845Z",
-            "createdAtTo": "1900-01-01T05:42:13.845Z",
+            "mobile": "0",
+            "createdAtFrom": "2021-06-21",
+            "createdAtTo": "2021-06-24",
             "lastBuyFrom": "1900-01-01T05:42:13.845Z",
             "lastBuyTo": "1900-01-01T05:42:13.845Z",
             "orderFrom": "0",
