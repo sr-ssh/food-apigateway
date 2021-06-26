@@ -52,7 +52,7 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
-        it('check get customer by modile', async () => {
+        it('check get customer by mobile', async () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/${encodeURI(getCustomerParams.mobile)}`)
