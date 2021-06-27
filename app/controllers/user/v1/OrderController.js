@@ -59,7 +59,7 @@ module.exports = new class HomeController extends Controller {
 
                 // calculate date
                 const event = new Date();
-                event.setDate(event.getDate() + req.body.reminder);
+                event.setDate(event.getDate() + parseInt(req.body.reminder));
 
                 params = {
                     date: event.toISOString(),

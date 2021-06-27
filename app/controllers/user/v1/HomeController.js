@@ -159,7 +159,7 @@ module.exports = new class HomeController extends Controller {
                 user_employer: user.employer
             }
             let idToken = jwt.sign(payload, config.secret, options )
-            console.log("test")
+
             options = {
                 expiresIn: config.accesssTokenExpire,
                 algorithm: config.algorithm,
