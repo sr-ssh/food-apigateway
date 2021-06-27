@@ -113,7 +113,7 @@ module.exports = new class HomeController extends Controller {
             if(req.params.startDate != TIME_FLAG && req.params.endDate != TIME_FLAG)
                 filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.params.endDate }}, {createdAt: { $gt: req.params.startDate}}] }
 
-            let orders = await this.model.Order.find(filter);
+            let orders = await this.model.Order.find(filter).sort({createdAt: -1});
 
             let params = [];
             for (let index = 0; index < orders.length; index++) {

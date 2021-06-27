@@ -53,8 +53,7 @@ module.exports = new class ProductController extends Controller {
     async getProducts(req, res) {
         try {
             let filter = { user: req.decodedData.user_employer }
-            let products = await this.model.Product.find(filter);
-
+            let products = await this.model.Product.find(filter).sort({createdAt: -1});
             res.json({ success : true, message : 'محصولات با موفقیت ارسال شد', data: products})
         }
         catch (err) {
