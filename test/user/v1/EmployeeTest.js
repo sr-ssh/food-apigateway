@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1/employee';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user, accessToken, idToken, shareUser;
+let user;
 const axios = require('axios').default;
 
 
@@ -40,6 +40,17 @@ describe(`${sectionName}`, () => {
 
 
     describe('Check get Apis', () => {
+
+        it('check get employees', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
 
     });
 
