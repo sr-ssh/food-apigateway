@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken;
+let user,appInfo, accessToken, idToken, newUser;
 const axios = require('axios').default;
 
 
@@ -19,7 +19,8 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
-        axios.post(`http://localhost:4000/api/user/v1/login`, user)
+        newUser = appConfig.test.newUser;
+        axios.post(`http://192.168.1.145:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
                 if (response.success) {
@@ -59,7 +60,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/`)
-                .send(user);
+                .send(newUser);
             res.should.have.status(200);
         });
 

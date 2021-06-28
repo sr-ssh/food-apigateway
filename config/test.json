@@ -12,6 +12,13 @@
             "company": "شکوهی",
             "mobileOrEmail": "09307580142"
         },
+        "newUser": {
+            "password": "123",
+            "family": "علی رضایی",
+            "email": "rezali1@gmail.com",
+            "mobile": "093012342",
+            "company": "rezw"
+        },
         "userScope": "user",
         "customer": {
             "family": "هاشمی",
