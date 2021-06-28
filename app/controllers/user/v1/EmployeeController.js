@@ -47,7 +47,7 @@ module.exports = new class EmployeeController extends Controller {
                 let filter = { active: true, employer: req.decodedData.user_id }
                 let employees = await this.model.User.find(filter, { family: 1, mobile: 1, permission: 1 })
 
-                employees.map(emp => emp._id.toString() !== req.decodedData.user_id)
+                employees = employees.filter(emp => emp._id.toString() !== req.decodedData.user_id)
 
                 return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
                 
