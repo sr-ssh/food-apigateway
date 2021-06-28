@@ -27,8 +27,26 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * }
  */
   router.post('/',EmployeeController.addEmployee.bind(EmployeeController)); 
- 
- 
+
+
+
+
+  /**
+ * @api {get} /api/user/v1/employee get employees
+ * @apiVersion 1.0.0
+ * @apiName getEmployees
+ * @apiDescription get employees
+ * @apiGroup employee
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success: true,
+ *     message: "کارمندان با موفقیت فرستاده شدند"
+ * }
+ */
+   router.get('/',EmployeeController.getEmployees.bind(EmployeeController)); 
+
+
+
   
 
  module.exports = router;

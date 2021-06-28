@@ -28,7 +28,8 @@ module.exports = new class HomeController extends Controller {
             let params = {
                 password: req.body.password,
                 family: req.body.family,
-                mobile: req.body.mobile
+                mobile: req.body.mobile,
+                employer : req.decodedData.user_id
             }
 
             if(req.body.company !== STRING_FLAG)
