@@ -261,6 +261,26 @@
     "groupTitle": "employee"
   },
   {
+    "type": "get",
+    "url": "/api/user/v1/employee",
+    "title": "get employees",
+    "version": "1.0.0",
+    "name": "getEmployees",
+    "description": "<p>get employees</p>",
+    "group": "employee",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"کارمندان با موفقیت فرستاده شدند\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
     "type": "post",
     "url": "/api/user/v1/finance/bill",
     "title": "add bill",

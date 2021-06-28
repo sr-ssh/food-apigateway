@@ -19,6 +19,7 @@ let User = new Schema({
 
 User.pre('validate', function(next){
 
+    this.employer = this.get('_id');
     this.username = this.get('mobile');
     next();
 })

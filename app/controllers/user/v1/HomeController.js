@@ -28,8 +28,7 @@ module.exports = new class HomeController extends Controller {
             let params = {
                 password: req.body.password,
                 family: req.body.family,
-                mobile: req.body.mobile,
-                employer : req.decodedData.user_id
+                mobile: req.body.mobile
             }
 
             if(req.body.company !== STRING_FLAG)
@@ -43,7 +42,7 @@ module.exports = new class HomeController extends Controller {
             if (user)
                 return res.json({ success: false, message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است" });
 
-            await this.model.User.create(params);
+            user = await this.model.User.create(params);
 
             return res.json({ success: true, message: "کاربر با موفقیت ثبت شد" });
         }
