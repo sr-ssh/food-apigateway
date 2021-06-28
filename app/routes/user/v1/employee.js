@@ -18,7 +18,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,
- *     message: "کاربر با موفقیت به اشتراک گذاشته شد"
+ *     message: "کاربر با موفقیت اضافه شد"
  * }
  * @apiErrorExample {json} Error-Response:
  * {
