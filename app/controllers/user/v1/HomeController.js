@@ -44,10 +44,10 @@ module.exports = new class HomeController extends Controller {
                 return res.json({ success: false, message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است" });
 
             for(let i = 0; i< 5; i++) {
-                params.permission[i] = { no: i++, status: true }
+                params.permission.push({ no: i + 1, status: true })
             }
-
-            await this.model.User.create(params);
+            
+            user = await this.model.User.create(params);
 
             return res.json({ success: true, message: "کاربر با موفقیت ثبت شد" });
         }
