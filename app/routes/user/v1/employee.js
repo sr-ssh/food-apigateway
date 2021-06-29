@@ -39,7 +39,13 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  *     success: true,
  *     message: "کارمندان با موفقیت فرستاده شدند"و
  *     data: [...{
- *        _id: 
+ *          _id: '60d9ce1bef1e876eb29265cf',
+ *          family: 'علی رضایی',
+ *          mobile: '093012342',
+ *          permission: [...{
+ *              no: 1,
+ *              status: true
+ *          }]
  *      }]
  * }
  */

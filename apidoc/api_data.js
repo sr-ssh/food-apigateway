@@ -243,7 +243,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"کاربر با موفقیت به اشتراک گذاشته شد\"\n}",
+          "content": "{\n    success: true,\n    message: \"کاربر با موفقیت اضافه شد\"\n}",
           "type": "json"
         }
       ]
@@ -253,6 +253,55 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "{\n    success: false,\n    message: \"کاربر موجود نمی باشد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
+    "type": "put",
+    "url": "/api/user/v1/employee",
+    "title": "change employee permission",
+    "version": "1.0.0",
+    "name": "changeEmployeePermission",
+    "description": "<p>change employee permission</p>",
+    "group": "employee",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>employee id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "object[]",
+            "optional": false,
+            "field": "permissions",
+            "description": "<p>array of employee new permissions {no: 1, status: true}</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا کرد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n    success: false,\n    message: \"دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا نکرد\"\n}",
           "type": "json"
         }
       ]
@@ -272,7 +321,27 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"کارمندان با موفقیت فرستاده شدند\"\n}",
+          "content": "{\n    success: true,\n    message: \"کارمندان با موفقیت فرستاده شدند\"و\n    data: [...{\n         _id: '60d9ce1bef1e876eb29265cf',\n         family: 'علی رضایی',\n         mobile: '093012342',\n         permission: [...{\n             no: 1,\n             status: true\n         }]\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/employee/permission",
+    "title": "get employees permissions",
+    "version": "1.0.0",
+    "name": "getEmployeesPermission",
+    "description": "<p>get employees permission</p>",
+    "group": "employee",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\"\n}",
           "type": "json"
         }
       ]
