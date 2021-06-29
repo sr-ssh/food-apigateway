@@ -98,18 +98,30 @@ module.exports = new class EmployeeController extends Controller {
             return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
             
         }
+        
+    }
+
+    async getPermission(req, res) {
+        try {
+
+            let filter = { active: true, _id: req.decodedData.user_id }
+            let permission = await this.model.User.findOne(filter, { permission: 1 })
+
+            return res.json({ success: true, message: "با موفقیت انجام شد", data: permission})
+            
+        }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('getEmployees')
+                .method('getPermission')
                 .inputParams(req.body)
                 .call();
 
             if (!res.headersSent) return res.status(500).json(handelError);
         }
     }
-
+        
 
 }
 

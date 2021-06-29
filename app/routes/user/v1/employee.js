@@ -28,9 +28,6 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  */
   router.post('/',EmployeeController.addEmployee.bind(EmployeeController)); 
 
-
-
-
   /**
  * @api {get} /api/user/v1/employee get employees
  * @apiVersion 1.0.0
@@ -72,6 +69,19 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
   router.put('/',EmployeeController.changeEmployeePermission.bind(EmployeeController)); 
 
 
+/**
+ * @api {get} /api/user/v1/employee/permission get employees permissions
+ * @apiVersion 1.0.0
+ * @apiName getEmployeesPermission
+ * @apiDescription get employees permission
+ * @apiGroup employee
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success: true,
+ *     message: "با موفقیت انجام شد"
+ * }
+ */
+  router.get('/permission',EmployeeController.getPermission.bind(EmployeeController)); 
 
   
 
