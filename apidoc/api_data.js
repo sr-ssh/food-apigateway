@@ -350,6 +350,48 @@ define({ "api": [
     "groupTitle": "employee"
   },
   {
+    "type": "delete",
+    "url": "/api/user/v1/employee",
+    "title": "remove employee",
+    "version": "1.0.0",
+    "name": "removeEmployee",
+    "description": "<p>remove employee by id</p>",
+    "group": "employee",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>employee id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"کارمند خواسته شده با موفقیت حذف شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n    success: false,\n    message: \"کارمند خواسته شده حذف نشد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
     "type": "post",
     "url": "/api/user/v1/finance/bill",
     "title": "add bill",
