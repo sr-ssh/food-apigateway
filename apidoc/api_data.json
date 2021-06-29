@@ -341,7 +341,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\"\n}",
+          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        \"_id\": \"60d9ce1bef1e876eb29265cf\",\n        \"permission\": [...\n        {\n          \"no\": 1,\n          \"status\": true\n        },\n        {\n          \"no\": 2,\n          \"status\": false\n       }]\n}",
           "type": "json"
         }
       ]

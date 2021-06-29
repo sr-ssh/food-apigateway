@@ -84,7 +84,19 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,
- *     message: "با موفقیت انجام شد"
+ *     message: "با موفقیت انجام شد",
+ *     data: 
+ *      {
+ *         "_id": "60d9ce1bef1e876eb29265cf",
+ *         "permission": [...
+ *         {
+ *           "no": 1,
+ *           "status": true
+ *         },
+ *         {
+ *           "no": 2,
+ *           "status": false
+ *        }]
  * }
  */
   router.get('/permission',EmployeeController.getPermission.bind(EmployeeController)); 
