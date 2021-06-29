@@ -41,34 +41,56 @@ module.exports = new class EmployeeController extends Controller {
     }
 
 
-        async getEmployees(req, res) {
-            try {
+    async getEmployees(req, res) {
+        try {
 
-                let filter = { active: true, _id: req.decodedData.user_id }
-                let employer = await this.model.User.findOne(filter, { employee: 1 })
+            let filter = { active: true, _id: req.decodedData.user_id }
+            let employer = await this.model.User.findOne(filter, { employee: 1 })
 
-                let employees = [];
-                for (let j = 1; j < employer.employee.length; j++) {
-                    employees.push(employer.employee[j])
-                }
-
-                filter = { active: true, _id: { $in: employees }}
-                employees = await this.model.User.find(filter, { family: 1, mobile: 1, permission: 1 })
-
-                return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
-                
+            let employees = [];
+            for (let j = 1; j < employer.employee.length; j++) {
+                employees.push(employer.employee[j])
             }
-            catch (err) {
-                let handelError = new this.transforms.ErrorTransform(err)
-                    .parent(this.controllerTag)
-                    .class(TAG)
-                    .method('getEmployees')
-                    .inputParams(req.body)
-                    .call();
-    
-                if (!res.headersSent) return res.status(500).json(handelError);
-            }
+
+            filter = { active: true, _id: { $in: employees }}
+            employees = await this.model.User.find(filter, { family: 1, mobile: 1, permission: 1 })
+
+            return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
+            
         }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getEmployees')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+    async getPermission(req, res) {
+        try {
+
+            let filter = { active: true, _id: req.decodedData.user_id }
+            let permission = await this.model.User.findOne(filter, { permission: 1 })
+
+            return res.json({ success: true, message: "با موفقیت انجام شد", data: permission})
+            
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getPermission')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+        
 
 }
 
