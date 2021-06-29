@@ -91,7 +91,7 @@
             "sms": true
         },
         "editedEmployee": {
-            "_id": "60d9ce1bef1e876eb29265cf",
+            "_id": "60d953d772c6de4484069ecb",
             "permissions": [
                 {
                     "no": 1,
@@ -103,21 +103,24 @@
                 },
                 {
                     "no": 3,
-                    "status": false 
+                    "status": true 
                 },
                 {
                     "no": 4,
-                    "status": false 
+                    "status": true 
                 },
                 {
                     "no": 5,
-                    "status": false 
+                    "status": true 
                 },
                 {
                     "no": 6,
                     "status": false 
                 }
             ]
+        },
+        "deleteEmployee":{
+            "_id": "60d823a1f674e530e09fc6ce"
         }
     }
 }

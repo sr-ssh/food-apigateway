@@ -75,6 +75,28 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
   router.put('/',EmployeeController.changeEmployeePermission.bind(EmployeeController)); 
 
 
+
+   /**
+ * @api {delete} /api/user/v1/employee remove employee
+ * @apiVersion 1.0.0
+ * @apiName removeEmployee
+ * @apiDescription remove employee by id
+ * @apiGroup employee
+ * @apiParam {varchar} _id employee id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success: true,
+ *     message: "کارمند خواسته شده با موفقیت حذف شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *     success: false,
+ *     message: "کارمند خواسته شده حذف نشد"
+ * }
+ */
+  router.delete('/',EmployeeController.removeEmployee.bind(EmployeeController)); 
+
+
 /**
  * @api {get} /api/user/v1/employee/permission get employees permissions
  * @apiVersion 1.0.0

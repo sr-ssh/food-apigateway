@@ -130,6 +130,53 @@ module.exports = new class EmployeeController extends Controller {
             if (!res.headersSent) return res.status(500).json(handelError);
         }
     }
+
+    async removeEmployee(req, res) {
+        try {
+            req.checkBody('_id', 'please enter employee id').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active: true, _id: req.decodedData.user_id}
+            let employer = await this.model.User.findOne(filter)
+
+            if(!employer.employee.includes(req.body._id))
+                return res.json({ success: false, message: "کاربر وارد شده جزو کامندان شما نمی باشد" })
+
+            let newEmplyees = employer.employee.filter(emp => {
+                let a = emp.toString() //"60d822795b250a2550a41ca4"
+                return emp.toString() !==  req.body._id
+            })
+            employer.employee = newEmplyees
+            await employer.save()
+
+
+            filter = { active: true, _id: req.body._id }
+            let employee = await this.model.User.findOne(filter)
+
+            if(!employee)
+                return res.json({ success: false, message: "کاربر وارد شده موجود نمی باشد" })
+
+            employee.active = false
+            employee.employer = employee._id
+            employee.permission = [];
+            for(let i = 0; i< config.permissionCount; i++) {
+                employee.permission.push({ no: i + 1, status: true })
+            }
+            await employee.save()  
+
+            return res.json({ success: true, message: "کارمند خواسته شده با موفقیت حذف شد" })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('addEmployee')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
         
 
 }

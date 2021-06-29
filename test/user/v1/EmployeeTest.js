@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1/employee';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user, editedEmployee;
+let user, editedEmployee, deleteEmployee;
 const axios = require('axios').default;
 
 
@@ -20,6 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         employee = appConfig.test.employee;
         editedEmployee = appConfig.test.editedEmployee;
+        deleteEmployee = appConfig.test.deleteEmployee;
         axios.post(`http://192.168.1.127:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
@@ -93,6 +94,21 @@ describe(`${sectionName}`, () => {
         });
 
     });
+
+    describe('Check Delete Apis', () => {
+
+        it('check delete employee', async () => {
+            const res = await chai
+                .request(server)
+                .delete(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(deleteEmployee);
+            res.should.have.status(200);
+        });
+
+    });
+
 
 
     after(async () => {
