@@ -72,7 +72,7 @@ module.exports = new class EmployeeController extends Controller {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('getEmployees')
+                .method('changeEmployeePermission')
                 .inputParams(req.body)
                 .call();
 
@@ -97,6 +97,15 @@ module.exports = new class EmployeeController extends Controller {
 
             return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
             
+        }catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getEmployees')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
         }
         
     }
