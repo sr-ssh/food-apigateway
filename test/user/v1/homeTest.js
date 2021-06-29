@@ -20,7 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
         newUser = appConfig.test.newUser;
-        axios.post(`http://192.168.1.145:4000/api/user/v1/login`, user)
+        axios.post(`http://192.168.1.127:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
                 if (response.success) {

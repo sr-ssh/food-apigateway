@@ -40,10 +40,36 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,
- *     message: "کارمندان با موفقیت فرستاده شدند"
+ *     message: "کارمندان با موفقیت فرستاده شدند"و
+ *     data: [...{
+ *        _id: 
+ *      }]
  * }
  */
-   router.get('/',EmployeeController.getEmployees.bind(EmployeeController)); 
+  router.get('/',EmployeeController.getEmployees.bind(EmployeeController)); 
+
+
+
+  /**
+ * @api {put} /api/user/v1/employee change employee permission
+ * @apiVersion 1.0.0
+ * @apiName changeEmployeePermission
+ * @apiDescription change employee permission
+ * @apiGroup employee
+ * @apiParam {varchar} _id employee id
+ * @apiParam {object[]} permissions array of employee new permissions {no: 1, status: true}
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success: true,
+ *     message: "دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا کرد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *     success: false,
+ *     message: "دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا نکرد"
+ * }
+ */
+  router.put('/',EmployeeController.changeEmployeePermission.bind(EmployeeController)); 
 
 
 

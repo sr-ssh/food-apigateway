@@ -63,7 +63,7 @@
             "cost": "2000000"
         },
         "employee": {
-            "usernameOrMobile": "09307580"
+            "usernameOrMobile": "093012342"
         },
         "getOrderParams": {
             "customerName": " ",
@@ -89,6 +89,31 @@
             "customer": "09307580142",
             "percentage": 20,
             "sms": true
+        },
+        "editedEmployee": {
+            "_id": "60d9ce1bef1e876eb29265cf",
+            "permissions": [
+                {
+                    "no": 1,
+                    "status": true 
+                },
+                {
+                    "no": 2,
+                    "status": true 
+                },
+                {
+                    "no": 3,
+                    "status": false 
+                },
+                {
+                    "no": 4,
+                    "status": false 
+                },
+                {
+                    "no": 5,
+                    "status": false 
+                }
+            ]
         }
     }
 }
