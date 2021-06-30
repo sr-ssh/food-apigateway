@@ -43,7 +43,7 @@ module.exports = new class HomeController extends Controller {
             if (user)
                 return res.json({ success: false, message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است" });
 
-            for(let i = 0; i< 6; i++) {
+            for(let i = 0; i< 8; i++) {
                 params.permission.push({ no: i + 1, status: true })
             }
             
