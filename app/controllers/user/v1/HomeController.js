@@ -43,6 +43,13 @@ module.exports = new class HomeController extends Controller {
             if (user)
                 return res.json({ success: false, message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است" });
 
+            if(req.body.email !== EMAIL_FLAG){
+                filter = { email: params.email };
+                user = await this.model.User.findOne(filter);
+                if (user)
+                    return res.json({ success: false, message: "این ایمیل قبلا برای حساب دیگری استفاده شده است" });
+            }
+            
             for(let i = 0; i< 8; i++) {
                 params.permission.push({ no: i + 1, status: true })
             }
