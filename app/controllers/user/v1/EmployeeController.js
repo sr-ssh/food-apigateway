@@ -56,7 +56,8 @@ module.exports = new class EmployeeController extends Controller {
             if(!employer.employee.includes(req.body._id))
                 return res.json({ success: false, message: "کاربر وارد شده جزو کامندان شما نمی باشد" })
 
-            filter = { active: true, _id: req.body._id }
+            filter = { _id: req.body._id }
+            console.log(filter)
             let employee = await this.model.User.findOne(filter)
 
             if(!employee)
@@ -86,15 +87,12 @@ module.exports = new class EmployeeController extends Controller {
 
             let filter = { active: true, _id: req.decodedData.user_id }
             let employer = await this.model.User.findOne(filter, { employee: 1 })
-
             let employees = [];
             for (let j = 1; j < employer.employee.length; j++) {
                 employees.push(employer.employee[j])
             }
-
-            filter = { active: true, _id: { $in: employees }}
+            filter = { _id: { $in: employees }}
             employees = await this.model.User.find(filter, { family: 1, mobile: 1, permission: 1 })
-
             return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
             
         }catch (err) {
@@ -113,7 +111,7 @@ module.exports = new class EmployeeController extends Controller {
     async getPermission(req, res) {
         try {
 
-            let filter = { active: true, _id: req.decodedData.user_id }
+            let filter = { _id: req.decodedData.user_id }
             let permission = await this.model.User.findOne(filter, { permission: 1 })
 
             return res.json({ success: true, message: "با موفقیت انجام شد", data: permission})
@@ -136,7 +134,7 @@ module.exports = new class EmployeeController extends Controller {
             req.checkBody('_id', 'please enter employee id').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
 
-            let filter = { active: true, _id: req.decodedData.user_id}
+            let filter = { _id: req.decodedData.user_id}
             let employer = await this.model.User.findOne(filter)
 
             if(!employer.employee.includes(req.body._id))
@@ -150,13 +148,13 @@ module.exports = new class EmployeeController extends Controller {
             await employer.save()
 
 
-            filter = { active: true, _id: req.body._id }
+            filter = { _id: req.body._id }
             let employee = await this.model.User.findOne(filter)
 
             if(!employee)
                 return res.json({ success: false, message: "کاربر وارد شده موجود نمی باشد" })
 
-            employee.active = false
+            //employee.active = false
             employee.employer = employee._id
             employee.permission = [];
             for(let i = 0; i< config.permissionCount; i++) {
@@ -164,7 +162,7 @@ module.exports = new class EmployeeController extends Controller {
             }
             await employee.save()  
 
-            return res.json({ success: true, message: "کارمند خواسته شده با موفقیت حذف شد" })
+            return res.json({ success: true, message: "کارمند مدنظر با موفقیت حذف شد" })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
