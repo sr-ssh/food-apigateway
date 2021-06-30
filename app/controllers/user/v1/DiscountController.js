@@ -13,8 +13,8 @@ module.exports = new class DiscountController extends Controller {
         try {
 
             req.checkBody('name', 'please enter name').notEmpty().isString();
-            req.checkBody('type', 'please enter type').notEmpty().isString().isIn(['تولد', 'فرد']);
-            if(req.body.type === "فرد")
+            req.checkBody('type', 'please enter type').notEmpty().isInt({min:0, max: 1});
+            if(req.body.type === 0)
                 req.checkBody('customer', 'please enter customer').notEmpty().isNumeric();
             req.checkBody('percentage', 'please enter percentage').notEmpty().isInt({min:0, max:100});
             req.checkBody('sms', 'please enter sms').notEmpty().isBoolean();
@@ -28,8 +28,13 @@ module.exports = new class DiscountController extends Controller {
                 provider: req.decodedData.user_employer,
             }    
 
-            let filter = { mobile: req.body.customer }
-            let customer = await this.model.Customer.find(filter)
+            if(req.body.type === 0){
+                let filter = { mobile: req.body.customer, active: true, user: req.decodedData.user_employer }
+                let customer = await this.model.Customer.findOne(filter, { family: 1 })
+                if(!customer)
+                    return res.json({ success: false, message: 'مشتری وارد شده موجود نمی باشد' })
+                params.customer = customer._id
+            }
             
             await this.model.Discount.create(params)
 
@@ -75,7 +80,7 @@ module.exports = new class DiscountController extends Controller {
             }
 
             filter = { _id: { $in: customers } }
-            customers = await this.model.Customer.find(filter, { _id: 1, family: 1, mobile: 1 })
+            customers = await this.model.Customer.find(filter, { _id: 1, family: 1 })
 
             let customerInfo;
             for (let index = 0; index < discounts.length; index++) {

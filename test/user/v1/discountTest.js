@@ -18,7 +18,7 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
         discount = appConfig.test.discount;
-        axios.post(`http://localhost:4000/api/user/v1/login`, user)
+        axios.post(`http://192.168.1.127:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
                 if (response.success) {

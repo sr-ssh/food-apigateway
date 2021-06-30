@@ -84,10 +84,10 @@
             "totalTo": "0"
         },
         "discount": {
-            "name": "عیدی",
-            "type": "فرد",
-            "customer": "09307580142",
-            "percentage": 20,
+            "name": "تولد",
+            "type": 0,
+            "customer": "0935",
+            "percentage": 5,
             "sms": true
         },
         "editedEmployee": {

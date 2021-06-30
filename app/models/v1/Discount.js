@@ -5,7 +5,7 @@ const timestamps = require('mongoose-timestamp');
 let Discount = new Schema({
     active: { type: Boolean, default: true },
     name: { type: String, required: true },
-    type: { type: String, required: true },
+    type: { type: Number, required: true },
     percentage: { type: Number, required: true },
     sms: { type: Boolean, default: false },
     customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
