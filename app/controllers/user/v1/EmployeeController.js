@@ -57,7 +57,6 @@ module.exports = new class EmployeeController extends Controller {
                 return res.json({ success: false, message: "کاربر وارد شده جزو کامندان شما نمی باشد" })
 
             filter = { _id: req.body._id }
-            console.log(filter)
             let employee = await this.model.User.findOne(filter)
 
             if(!employee)
