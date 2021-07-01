@@ -15,7 +15,7 @@ module.exports = new class UserController extends Controller {
             let orders = await this.model.Order.find(filter)
 
             let products = orders.map(order => order.products);
-            let income = products.map(products => products.map(product => product.sellingPrice));
+            let income = products.map(products => products.map(product => product.sellingPrice * product.quantity));
             income = income.map(products => products.reduce((a, b) => parseInt(a) + parseInt(b), 0));
 
             let incomeSum = income.reduce((a, b) => parseInt(a) + parseInt(b), 0)

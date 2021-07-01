@@ -5,12 +5,12 @@
     },
     "test": {
         "user": {
-            "password": "rey",
+            "password": "1",
             "family": "ریحانه شکوهی",
             "email": "r.sh@gmail.com",
             "mobile": "09307580142",
             "company": "شکوهی",
-            "mobileOrEmail": "09307580142"
+            "mobileOrEmail": "r@gmail.com"
         },
         "newUser": {
             "password": "123",
