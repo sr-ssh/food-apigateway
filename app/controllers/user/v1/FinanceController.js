@@ -18,13 +18,15 @@ module.exports = new class UserController extends Controller {
             let income = products.map(products => products.map(product => product.sellingPrice));
             income = income.map(products => products.reduce((a, b) => parseInt(a) + parseInt(b), 0));
 
-            let outcome = products.map(products => products.map(product => product.buyingPrice));
-            outcome = outcome.map(products => products.reduce((a, b) => parseInt(a) + parseInt(b), 0));
-
             let incomeSum = income.reduce((a, b) => parseInt(a) + parseInt(b), 0)
-            let outcomeSum = outcome.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-            let data = { income: incomeSum, outcome: outcomeSum}
+            filter = { active : true, user : req.decodedData.user_employer }
+            let costs = await this.model.Bill.find(filter, { cost : 1 })
+            costs = costs.map(cost => cost.cost);
+
+            let costSum = costs.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            let data = { income: incomeSum, bills: costSum }
 
             return res.json({ success : true, message : "مجموع درامد ها و مخارج با موفقیت ارسال شد", data : data })
         }
