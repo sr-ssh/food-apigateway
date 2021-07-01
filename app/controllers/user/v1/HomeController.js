@@ -143,10 +143,8 @@ module.exports = new class HomeController extends Controller {
             // save in mongodb
             let filter = { $or: [{ mobile: req.body.mobileOrEmail }, { email: req.body.mobileOrEmail }]};
             let user = await this.model.User.findOne(filter);
-
             if (!(user && user.active))
                 return res.json({ success: false, message: "کاربر در دسترس نمی باشد", data: {} });
-
 
             let status = await bcrypt.compare(req.body.password, user.password)
             if (!status)
