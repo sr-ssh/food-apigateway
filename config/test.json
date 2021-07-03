@@ -5,12 +5,12 @@
     },
     "test": {
         "user": {
-            "password": "1",
+            "password": "rey",
             "family": "ریحانه شکوهی",
             "email": "r.sh@gmail.com",
             "mobile": "09307580142",
             "company": "شکوهی",
-            "mobileOrEmail": "r@gmail.com"
+            "mobileOrEmail": "09307580142"
         },
         "newUser": {
             "password": "123",
@@ -63,7 +63,7 @@
             "cost": "2000000"
         },
         "employee": {
-            "usernameOrMobile": "093012342"
+            "usernameOrMobile": "0996"
         },
         "getOrderParams": {
             "customerName": " ",
