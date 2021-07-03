@@ -44,10 +44,10 @@ module.exports = new class HomeController extends Controller {
             
             // add order
             params = {
-                name: req.body.name,
                 products: req.body.products,
                 customer: customer._id,
                 provider: req.decodedData.user_employer,
+                employee: req.decodedData.user_id,
                 description: req.body.description
             }
 
@@ -123,6 +123,7 @@ module.exports = new class HomeController extends Controller {
                     customer: orders[index].customer,
                     createdAt: orders[index].createdAt,
                     updatedAt: orders[index].updatedAt,
+                    employee: orders[index].employee,
                     description: orders[index].description
                 }     
                 params.push(param)           
@@ -141,6 +142,22 @@ module.exports = new class HomeController extends Controller {
                 customerInfo = customers.find(user => user._id.toString() == orders[index].customer)
                 params[index].customer = customerInfo;
             }
+
+            
+            let employees = []
+            for (let index = 0; index < orders.length; index++) {
+                employees.push(orders[index].employee)
+            }
+
+            filter = { _id: { $in: employees } }
+            employees = await this.model.User.find(filter, { _id: 1, family: 1 })
+
+            let employeeInfo;
+            for (let index = 0; index < orders.length; index++) {
+                employeeInfo = employees.find(user => user._id.toString() == orders[index].employee)
+                params[index].employee = employeeInfo;
+            }
+            
 
             if(req.params.customerMobile !== "0")
                 params = params.filter(param => param.customer.mobile === req.params.customerMobile)
@@ -173,6 +190,7 @@ module.exports = new class HomeController extends Controller {
                 }
             }
             
+
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data : params })
         }

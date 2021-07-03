@@ -11,6 +11,7 @@ let Order = new Schema({
     }]},
     customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
     provider: { type: Schema.Types.ObjectId, ref: 'User' },
+    employee: { type: Schema.Types.ObjectId, ref: 'User' },
     description: { type: String }
 });
 
