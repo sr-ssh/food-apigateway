@@ -9,7 +9,7 @@ module.exports = {
     accesssTokenExpire: "300 days" ,
     idTokenExpire: "250 days",
     userScope: "user",
-    permissionCount: "6",
+    permissionCount: "8",
     publicRoute: ['/api/user/v1/login', '/api/user/v1/'],
     path: {
         controllers: {

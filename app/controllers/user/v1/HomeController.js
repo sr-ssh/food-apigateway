@@ -50,12 +50,16 @@ module.exports = new class HomeController extends Controller {
                     return res.json({ success: false, message: "این ایمیل قبلا برای حساب دیگری استفاده شده است" });
             }
             
-            for(let i = 0; i< 8; i++) {
+            for(let i = 0; i< config.permissionCount; i++) {
                 params.permission.push({ no: i + 1, status: true })
             }
             
             user = await this.model.User.create(params);
 
+            user.employer = user._id;
+            await user.save()
+
+            
             return res.json({ success: true, message: "کاربر با موفقیت ثبت شد" });
         }
         catch (err) {
