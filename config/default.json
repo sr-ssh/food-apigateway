@@ -2,5 +2,16 @@
     "appPort": 3000,
     "mongo": {
         "host": "mongodb://172.16.2.215/crm"
+    },
+    "sms": {
+        "negin": {
+            "user": "",
+            "password": "",
+            "host": "http://sms.3300.ir/services/wsSend.ashx"
+        },
+        "KavenegarApi": {
+            "apikey": "36792F47687237546569536A4F56303472794A6F50673D3D",
+            "sender": "100018801880"
+        }
     }
 }

@@ -14,7 +14,8 @@ let User = new Schema({
     company: String,
     employer: { type: Schema.Types.ObjectId, ref: 'User'},
     employee: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'User' }] },
-    permission:{ type: Array, default: [] },//{no: 12, status: true}
+    permission:{ type: Array, default: [] },//{no: 12, status: true},
+    setting: { type: Array, default: [{ order: [{sms: false}] }]}
 });
 
 User.pre('validate', function(next){

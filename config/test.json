@@ -3,6 +3,17 @@
     "mongo": {
         "host": "mongodb://172.16.2.215/crm"
     },
+    "sms": {
+        "negin": {
+            "user": "",
+            "password": "",
+            "host": "http://sms.3300.ir/services/wsSend.ashx"
+        },
+        "KavenegarApi": {
+            "apikey": "36792F47687237546569536A4F56303472794A6F50673D3D",
+            "sender": "100018801880"
+        }
+    },
     "test": {
         "user": {
             "password": "rey",
@@ -95,39 +106,39 @@
             "permissions": [
                 {
                     "no": 1,
-                    "status": true 
+                    "status": true
                 },
                 {
                     "no": 2,
-                    "status": true 
+                    "status": true
                 },
                 {
                     "no": 3,
-                    "status": true 
+                    "status": true
                 },
                 {
                     "no": 4,
-                    "status": true 
+                    "status": true
                 },
                 {
                     "no": 5,
-                    "status": true 
+                    "status": true
                 },
                 {
                     "no": 6,
-                    "status": true 
+                    "status": true
                 },
                 {
                     "no": 7,
-                    "status": true 
+                    "status": true
                 },
                 {
                     "no": 8,
-                    "status": true 
+                    "status": true
                 }
             ]
         },
-        "deleteEmployee":{
+        "deleteEmployee": {
             "_id": "60d823a1f674e530e09fc6ce"
         }
     }
