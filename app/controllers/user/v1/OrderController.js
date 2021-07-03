@@ -77,6 +77,16 @@ module.exports = new class HomeController extends Controller {
             await customer.order.push(order._id)
             await customer.save()
 
+            let user = await this.model.User.findOne({_id: req.decodedData.user_id}, 'setting company')
+            if (user.setting[0].order[0].sms) {
+                let message = ""
+                if(user.company)
+                    message = `سفارش شما در ${req.decodedData.user_company} با موفقیت ثبت شد`
+                else
+                    message = 'سفارش شما با موفقیت ثبت شد'
+
+                this.sendSms(req.body.customer.mobile, message)
+            }
 
             res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
         }
