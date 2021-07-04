@@ -665,7 +665,7 @@ define({ "api": [
     "title": "add order",
     "version": "1.0.0",
     "name": "addOrder",
-    "description": "<p>add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is &quot;1900-01-01T05:42:13.845Z&quot;.reminder flag is -1.</p>",
+    "description": "<p>add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is &quot;1900-01-01T05:42:13.845Z&quot;.reminder flag and duration flag are -1.address flag is &quot; &quot;</p>",
     "group": "order",
     "parameter": {
       "fields": {
@@ -690,13 +690,27 @@ define({ "api": [
             "optional": false,
             "field": "reminder",
             "description": "<p>number of days for reminding</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "duration",
+            "description": "<p>minutes to the order become ready</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "address",
+            "description": "<p>number of days for reminding</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }],\n    customer: {\n        family: \"شکوهی\",\n        mobile: \"09307580142\",\n        birthday: \"2021-05-31T05:42:13.845Z\"\n    },\n    reminder: 7\n}",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }],\n    customer: {\n        family: \"شکوهی\",\n        mobile: \"09307580142\",\n        birthday: \"2021-05-31T05:42:13.845Z\"\n    },\n    reminder: 7,\n    duration: 40,\n    address: \"معلم 24\"\n}",
           "type": "json"
         }
       ]
@@ -715,7 +729,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/api/user/v1/order/",
+    "url": "/api/user/v1/order/status",
     "title": "edit order status",
     "version": "1.0.0",
     "name": "editOrderStatus",
@@ -800,6 +814,46 @@ define({ "api": [
         {
           "title": "Success-Response:",
           "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \"60b72a70e353f0385c2fe5af\",\n             name: \"لاته\",\n             quantity: 2,\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             mobile: \"09152631225\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/v1/order/delivery/sms",
+    "title": "send delivery sms",
+    "version": "1.0.0",
+    "name": "sendDeliverySms",
+    "description": "<p>send delivery sms,</p>",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>delivery mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"وضعیت سفارش با موفقیت ویرایش شد\"",
           "type": "json"
         }
       ]

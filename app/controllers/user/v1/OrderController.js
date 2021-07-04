@@ -141,6 +141,7 @@ module.exports = new class HomeController extends Controller {
                 let param = {
                     id: orders[index]._id,
                     active: orders[index].active,
+                    status: orders[index].status,
                     products: orders[index].products,
                     customer: orders[index].customer,
                     createdAt: orders[index].createdAt,
@@ -232,9 +233,17 @@ module.exports = new class HomeController extends Controller {
         try {
 
             req.checkBody('orderId', 'please set order id').notEmpty();
-            req.checkBody('status', 'please set order status').notEmpty();
-
+            req.checkBody('status', 'please set order status').notEmpty().isInt({min: 0, max: 2});
             if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.body.orderId, provider: req.decodedData.user_employer }
+            let order = await this.model.Order.findOne(filter)
+
+            if(!order)
+                return res.json({ success : false, message : 'سفارش موجود نیست'})
+
+            order.status = req.body.status
+            await order.save()
 
             res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد'})
         }
@@ -273,7 +282,7 @@ module.exports = new class HomeController extends Controller {
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting')
             let deliveryMessage = `نام: ${customer.family}
                                     موبایل: ${customer.mobile}
-                                    آدرس: ${customer.address}`
+                                    آدرس: ${order.address}`
             let customerMessage = user.setting[0].order[1].deliveryAcknowledgeSms
 
             this.sendSms(req.body.mobile, deliveryMessage)
