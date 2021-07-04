@@ -19,8 +19,8 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty().isNumeric();
             req.checkBody('customer.birthday', 'please enter customer birthday').notEmpty().isISO8601();
             req.checkBody('reminder', 'please enter customer birthday').notEmpty().isInt({min: -1});
-            req.checkBody('address', 'please enter address').notEmpty().isString();
-            req.checkBody('duration', 'please enter order duration').notEmpty().isInt({min: -1});
+            req.checkBody('customer.address', 'please enter address').notEmpty().isString();
+            req.checkBody('customer.duration', 'please enter order duration').notEmpty().isInt({min: -1});
             if (this.showValidationErrors(req, res)) return;
 
             const TIME_FLAG = "1900-01-01T05:42:13.845Z";
@@ -55,10 +55,10 @@ module.exports = new class HomeController extends Controller {
             }
 
             if(req.body.address != STRING_FLAG)
-                params.address = req.body.address
+                params.address = req.body.customer.address
             if(req.body.duration != INT_FLAG){
                 const event = new Date();
-                event.setMinutes(event.getMinutes() + parseInt(req.body.duration));
+                event.setMinutes(event.getMinutes() + parseInt(req.body.customer.duration));
                 params.readyTime = event.toISOString()
             }
 
@@ -135,7 +135,6 @@ module.exports = new class HomeController extends Controller {
                 filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.params.endDate }}, {createdAt: { $gt: req.params.startDate}}] }
 
             let orders = await this.model.Order.find(filter).sort({createdAt: -1});
-
             let params = [];
             for (let index = 0; index < orders.length; index++) {
                 let param = {
