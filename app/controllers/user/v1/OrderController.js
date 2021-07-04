@@ -216,6 +216,29 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async editOrderStatus(req, res) {
+        try {
+
+            req.checkBody('orderId', 'please set order id').notEmpty();
+            req.checkBody('status', 'please set order status').notEmpty();
+
+            if (this.showValidationErrors(req, res)) return;
+
+            res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editOrderStatus')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
 }
 
 

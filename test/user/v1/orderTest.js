@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let order, user, getOrderParams;
+let order, user, getOrderParams, editOrderStatus;
 const axios = require('axios').default;
 
 chai.use(chaiHttp);
@@ -19,6 +19,7 @@ describe(`${sectionName}`, () => {
         order = appConfig.test.order;
         user = appConfig.test.user;
         getOrderParams = appConfig.test.getOrderParams;
+        editOrderStatus = appConfig.test.editOrderStatus;
         axios.post(`http://localhost:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
@@ -62,6 +63,21 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(order);
+            res.should.have.status(200);
+        });
+
+    });
+
+
+    describe('Check Put Apis', () => {
+
+        it('check edit order status', async () => {
+            const res = await chai
+                .request(server)
+                .put(`${baseRoute}/status`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(editOrderStatus);
             res.should.have.status(200);
         });
 

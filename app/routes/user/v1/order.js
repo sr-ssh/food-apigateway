@@ -77,4 +77,21 @@ const OrderController = require(`${userController}/v1/OrderController`)
   router.get('/:customerName/:customerMobile/:startDate/:endDate',OrderController.getOrders.bind(OrderController));
 
 
+
+  /**
+ * @api {put} /api/user/v1/order/ edit order status
+ * @apiVersion 1.0.0
+ * @apiName editOrderStatus
+ * @apiDescription edit order status, in status : send 0 for normal order , send 2 to cancele the order
+ * @apiGroup order
+ * @apiParam {int} status order status
+ * @apiParam {varchar} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "وضعیت سفارش با موفقیت ویرایش شد"
+ */
+   router.put('/status',OrderController.editOrderStatus.bind(OrderController));
+
+
  module.exports = router;

@@ -714,6 +714,46 @@ define({ "api": [
     "groupTitle": "order"
   },
   {
+    "type": "put",
+    "url": "/api/user/v1/order/",
+    "title": "edit order status",
+    "version": "1.0.0",
+    "name": "editOrderStatus",
+    "description": "<p>edit order status, in status : send 0 for normal order , send 2 to cancele the order</p>",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>order status</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"وضعیت سفارش با موفقیت ویرایش شد\"",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/order.js",
+    "groupTitle": "order"
+  },
+  {
     "type": "get",
     "url": "/api/user/v1/order/",
     "title": "get orders",

@@ -140,6 +140,10 @@
         },
         "deleteEmployee": {
             "_id": "60d823a1f674e530e09fc6ce"
+        },
+        "editOrderStatus": {
+            "orderId": "0",
+            "status": 2
         }
     }
 }
