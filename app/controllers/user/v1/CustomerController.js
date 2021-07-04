@@ -77,7 +77,7 @@ module.exports = new class CustomerController extends Controller {
             orders = await this.model.Order.find(filter, { _id: 1, updatedAt: 1, products: 1 })
 
             orders = orders.map(order => {
-                order.products = order.products.map(product => product.sellingPrice)
+                order.products = order.products.map(product => product.sellingPrice * product.quantity)
                 return order
                 })
 
