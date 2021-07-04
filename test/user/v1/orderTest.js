@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let order, user, getOrderParams, editOrderStatus;
+let order, user, getOrderParams, editOrderStatus, deliverySms;
 const axios = require('axios').default;
 
 chai.use(chaiHttp);
@@ -20,6 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         getOrderParams = appConfig.test.getOrderParams;
         editOrderStatus = appConfig.test.editOrderStatus;
+        deliverySms = appConfig.test.deliverySms;
         axios.post(`http://localhost:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
@@ -63,6 +64,16 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(order);
+            res.should.have.status(200);
+        });
+
+        it('check send delivery sms', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/delivery/sms`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(deliverySms);
             res.should.have.status(200);
         });
 

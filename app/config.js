@@ -10,6 +10,8 @@ module.exports = {
     idTokenExpire: "250 days",
     userScope: "user",
     permissionCount: "8",
+    "addOrderSms": "سفارش شما با موفقیت ثبت شد. از اینکه مارا انتخاب کرده اید متشکریم",
+    "deliveryAcknowledgeSms": "سفارش شما به راننده تحویل داده شد",
     publicRoute: ['/api/user/v1/login', '/api/user/v1/'],
     path: {
         controllers: {

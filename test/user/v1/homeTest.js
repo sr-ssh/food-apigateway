@@ -60,7 +60,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/`)
-                .send(user);
+                .send(newUser);
             res.should.have.status(200);
         });
 

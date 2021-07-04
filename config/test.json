@@ -16,19 +16,19 @@
     },
     "test": {
         "user": {
-            "password": "1234",
+            "password": "rey",
             "family": "ریحانه شکوهی",
             "email": "r.sh@gmail.com",
             "mobile": "09307580142",
             "company": "شکوهی",
-            "mobileOrEmail": "09154791272"
+            "mobileOrEmail": "09307580142"
         },
         "newUser": {
             "password": "123",
-            "family": "علی رضایی",
-            "email": "rezali1@gmail.com",
-            "mobile": "093012342",
-            "company": "rezw"
+            "family": "حسن رضایی",
+            "email": "h.rezali1@gmail.com",
+            "mobile": "09652352148",
+            "company": "harez"
         },
         "userScope": "user",
         "customer": {
@@ -46,12 +46,14 @@
                 }
             ],
             "customer": {
-                "family": "بنی اسدی",
-                "mobile": "09307278878",
+                "family": "ریحانه شکوهی",
+                "mobile": "09307580142",
                 "birthday": "1900-01-01T05:42:13.845Z"
             },
             "description": "",
-            "reminder": 7
+            "reminder": 7,
+            "address": "معلم 24",
+            "duration": 40
         },
         "product": {
             "name": "لیموناد",
@@ -144,6 +146,10 @@
         "editOrderStatus": {
             "orderId": "0",
             "status": 2
+        },
+        "deliverySms": {
+            "orderId": "60e1a6eea5455c2478adff74",
+            "mobile": "09307580142"
         }
     }
 }

@@ -19,10 +19,13 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty().isNumeric();
             req.checkBody('customer.birthday', 'please enter customer birthday').notEmpty().isISO8601();
             req.checkBody('reminder', 'please enter customer birthday').notEmpty().isInt({min: -1});
+            req.checkBody('address', 'please enter address').notEmpty().isString();
+            req.checkBody('duration', 'please enter order duration').notEmpty().isInt({min: -1});
             if (this.showValidationErrors(req, res)) return;
 
             const TIME_FLAG = "1900-01-01T05:42:13.845Z";
             const INT_FLAG = "-1";
+            const STRING_FLAG = " ";
 
             // add customer
             let filter = { mobile: req.body.customer.mobile, user: req.decodedData.user_employer }
@@ -51,6 +54,14 @@ module.exports = new class HomeController extends Controller {
                 description: req.body.description
             }
 
+            if(req.body.address != STRING_FLAG)
+                params.address = req.body.address
+            if(req.body.duration != INT_FLAG){
+                const event = new Date();
+                event.setMinutes(event.getMinutes() + parseInt(req.body.duration));
+                params.readyTime = event.toISOString()
+            }
+
             let order = await this.model.Order.create(params)
 
             
@@ -77,18 +88,18 @@ module.exports = new class HomeController extends Controller {
             await customer.order.push(order._id)
             await customer.save()
 
-            let user = await this.model.User.findOne({_id: req.decodedData.user_id}, 'setting company')
+            res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
+
+            let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting company')
             if (user.setting[0].order[0].sms) {
                 let message = ""
                 if(user.company)
-                    message = `سفارش شما در ${req.decodedData.user_company} با موفقیت ثبت شد`
+                    message = user.setting[0].order[0].addOrderSms + ` "${req.decodedData.user_company}"`
                 else
-                    message = 'سفارش شما با موفقیت ثبت شد'
+                    message = user.setting[0].order[0].addOrderSms
 
                 this.sendSms(req.body.customer.mobile, message)
             }
-
-            res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
@@ -128,6 +139,7 @@ module.exports = new class HomeController extends Controller {
             let params = [];
             for (let index = 0; index < orders.length; index++) {
                 let param = {
+                    id: orders[index]._id,
                     active: orders[index].active,
                     products: orders[index].products,
                     customer: orders[index].customer,
@@ -231,6 +243,48 @@ module.exports = new class HomeController extends Controller {
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('editOrderStatus')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
+    async sendDeliverySms(req, res) {
+        try {
+
+            req.checkBody('orderId', 'please set order id').notEmpty().isString();
+            req.checkBody('mobile', 'please set mobile').notEmpty().isNumeric();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.body.orderId, provider: req.decodedData.user_employer }
+            let order = await this.model.Order.findOne(filter, { customer: 1, address: 1 })
+
+            if(!order)
+                return res.json({ success : false, message : 'سفارش موجود نیست'})
+
+            let customer = await this.model.Customer.findOne({ _id: order.customer }, { family: 1, mobile: 1, address: 1})
+            if(!customer)
+                return res.json({ success : false, message : 'مشتری موجود نیست'})
+
+            res.json({ success : true, message : 'پیام اطلاعات مشتری ارسال شد'})
+
+            let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting')
+            let deliveryMessage = `نام: ${customer.family}
+                                    موبایل: ${customer.mobile}
+                                    آدرس: ${customer.address}`
+            let customerMessage = user.setting[0].order[1].deliveryAcknowledgeSms
+
+            this.sendSms(req.body.mobile, deliveryMessage)
+            this.sendSms(req.body.mobile, customerMessage)
+
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('sendOrderInfoSms')
                 .inputParams(req.body)
                 .call();
 

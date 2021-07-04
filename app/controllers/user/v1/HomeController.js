@@ -29,7 +29,15 @@ module.exports = new class HomeController extends Controller {
                 password: req.body.password,
                 family: req.body.family,
                 mobile: req.body.mobile,
-                permission: []
+                permission: [],
+                setting: [
+                    {
+                        order: [
+                            { addOrderSms: config.addOrderSms, sms: false },
+                            { deliveryAcknowledgeSms: config.deliveryAcknowledgeSms }
+                        ]
+                    }
+                ],
             }
 
             if(req.body.company !== STRING_FLAG)

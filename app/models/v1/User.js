@@ -15,7 +15,11 @@ let User = new Schema({
     employer: { type: Schema.Types.ObjectId, ref: 'User'},
     employee: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'User' }] },
     permission:{ type: Array, default: [] },//{no: 12, status: true},
-    setting: { type: Array, default: [{ order: [{sms: false}] }]}
+    setting: { type: Array, default: [{ order: [
+                                            { addOrderSms: String, sms: false },
+                                            { deliveryAcknowledgeSms: String }
+                                        ]
+                                      }]}
 });
 
 User.pre('validate', function(next){
