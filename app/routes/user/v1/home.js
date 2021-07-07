@@ -135,7 +135,7 @@ const HomeController = require(`${userController}/v1/HomeController`)
 
   
 /**
- * @api {post} /api/user/v1/login/mobile requset verification Code 
+ * @api {post} /api/user/v1/verificationcode requset verification Code 
  * @apiVersion 1.0.0
  * @apiName verificationCode
  * @apiDescription requset verification Code
@@ -152,7 +152,7 @@ const HomeController = require(`${userController}/v1/HomeController`)
  *      message:"کاربری با این شماره موبایل در دسترس نمی باشد"
  * }
  */
- router.post('/login/mobile',HomeController.verificationCode.bind(HomeController));
+ router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
 
 
 

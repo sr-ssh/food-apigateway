@@ -87,7 +87,7 @@ describe(`${sectionName}`, () => {
         it('check verification code', async () => {
             const res = await chai
                 .request(server)
-                .post(`${baseRoute}/login/mobile`)
+                .post(`${baseRoute}/verificationcode`)
                 .send(newUser);
             res.should.have.status(200);
         });
