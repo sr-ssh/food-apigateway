@@ -16,7 +16,12 @@ module.exports = {
     verificationCodeUnit: "m",
     employee: 2,
     employer: 1,
-    publicRoute: ['/api/user/v1/login', '/api/user/v1/', '/api/user/v1/login/mobile'],
+    publicRoute: [
+        '/api/user/v1/login', 
+        '/api/user/v1/', 
+        '/api/user/v1/verificationcode', 
+        '/api/user/v1/verificationcode/check'
+    ],
     path: {
         controllers: {
             root: path.resolve('./app/controllers'),

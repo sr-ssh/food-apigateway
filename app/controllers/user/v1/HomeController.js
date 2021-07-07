@@ -351,6 +351,42 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async checkVerificationCode(req, res) {
+        try {
+            req.checkBody('mobile', 'please enter mobile').notEmpty();
+            req.checkBody('code', 'please enter code').notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            // save in mongodb
+
+            let filter = { code: req.body.code, mobile: req.body.mobile }
+
+            let lastCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
+            lastCode = lastCode[0]
+            if(!lastCode)
+                return res.json({ success: false, message: "کد تایید صحیح نمی باشد" });
+            // timeDiff on verification code unit
+            let timeDiff = this.getTimeDiff(lastCode.createdAt.toISOString(), new Date().toISOString(), config.verificationCodeUnit)
+            // check verification code valid duration
+            if(timeDiff > config.verificationCodeDuration)
+                return res.json({ success: false, message: "کد تایید منقضی شده است" });
+
+            //remove the code
+            await this.model.VerificationCode.findOneAndRemove({_id:lastCode._id})
+
+            return res.json({ success: true, message: "با موفقیت انحام شد" });
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('checkVerificationCode')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
 
 }
 

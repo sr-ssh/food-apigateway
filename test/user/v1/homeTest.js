@@ -20,7 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
         newUser = appConfig.test.newUser;
-        axios.post(`http://192.168.1.127:4000/api/user/v1/login`, user)
+        axios.post(`http://localhost:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
                 if (response.success) {
@@ -88,6 +88,14 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/verificationcode`)
+                .send(newUser);
+            res.should.have.status(200);
+        });
+
+        it('check the sent verification code', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/verificationcode/check`)
                 .send(newUser);
             res.should.have.status(200);
         });
