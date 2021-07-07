@@ -225,12 +225,11 @@ module.exports = new class EmployeeController extends Controller {
             if (!res.headersSent) return res.status(500).json(handelError);
         }
     }
-     
-    async editApplication(req, res) {
+
+    async addApplication(req, res) {
         try {
 
-            req.checkBody('applicationId', 'please set application id').notEmpty();
-            req.checkBody('status', 'please set application status').notEmpty().isInt({min: 1, max: 3});
+            req.checkBody('mobile', 'please set application id').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
             let filter = { active : true, _id: req.body.applicationId, employer: req.decodedData.user_employer }
@@ -242,6 +241,65 @@ module.exports = new class EmployeeController extends Controller {
             application.status = req.body.status
             await application.save()
 
+            res.json({ success : true, message : 'درخواست با موفقیت ویرایش شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('addApplication')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+     
+    async editApplication(req, res) {
+        try {
+
+            if(req.decodedData.user_type == config.employer){
+                req.checkBody('applicationId', 'please set application id').notEmpty();
+                req.checkBody('status', 'please set application status').notEmpty().isInt({min: 2, max: 3});
+            }
+
+            if(req.decodedData.user_type == config.employee){
+                req.checkBody('employeeId', 'please set employee id').notEmpty();
+                req.checkBody('status', 'please set application status').notEmpty().isInt({min: 3, max: 3});
+            }
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter;
+            if(req.decodedData.user_type == config.employee){
+                filter = { active : true, employee: req.body.employeeId }
+            }
+
+            if(req.decodedData.user_type == config.employer){
+                filter = { active : true, _id: req.body.applicationId, employer: req.decodedData.user_employer }
+            }
+            
+            let application = await this.model.Application.findOne(filter)
+
+            if(!application)
+                return res.json({ success : false, message : 'درخواستی موجود نیست'})
+
+            application.status = req.body.status
+            await application.save()
+
+            //if the employer calles this api and hires the emplyee
+            if(req.decodedData.user_type == config.employer){
+                filter = { active: true, _id: application.employee , type: config.employee }
+                let user = await this.model.User.findOne(filter)
+                if(!user)
+                    return res.json({ success: false, message: 'کاربر موجود نمی باشد'})
+                
+                filter = {_id: user._id}
+                let update = { employer: req.decodedData.user_id }
+                await this.model.User.findOneAndUpdate(filter, update)
+                update = { $addToSet: { employee: user._id}}
+                await this.model.User.findByIdAndUpdate(req.decodedData.user_id, update)
+            }
+            
             res.json({ success : true, message : 'درخواست با موفقیت ویرایش شد'})
         }
         catch (err) {

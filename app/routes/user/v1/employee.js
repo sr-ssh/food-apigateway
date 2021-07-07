@@ -154,6 +154,28 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  router.get('/application',EmployeeController.getApplications.bind(EmployeeController)); 
 
 
+/**
+ * @api {post} /api/user/v1/employee/application add application
+ * @apiVersion 1.0.0
+ * @apiName addApplication
+ * @apiDescription add application
+ * @apiGroup employee
+ * @apiParam {varchar} mobile employer mobile
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "درخواست با موفقیت ویرایش شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: false,
+ *      message: "درخواستی موجود نیست"
+ * }
+ */
+ router.post('/application',EmployeeController.addApplication.bind(EmployeeController));
+
+
+
 
 /**
  * @api {put} /api/user/v1/employee/application edit employee application

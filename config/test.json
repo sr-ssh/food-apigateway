@@ -19,7 +19,7 @@
             "password": "123",
             "family": "ریحانه شکوهی",
             "email": "r.sh@gmail.com",
-            "mobile": "09307580142",
+            "mobile": "09532586598",
             "company": "شکوهی",
             "mobileOrEmail": "09532586598",
             "code": "2201",
@@ -156,9 +156,14 @@
             "orderId": "60e1b387cef3a81c70726ede",
             "mobile": "09307580142"
         },
-        "editApplication":{
-            "applicationId": "60e555fd9637c83760618ac9",
+        "editApplicationByEmployer":{
+            "applicationId": "60e5530ba1487f3054f0a85e",
             "status": 2
+        },
+        "editApplicationByEmployee":{
+            "employeeId": "60e555fd9637c83760618ac8",
+            "status": 3
         }
+
     }
 }

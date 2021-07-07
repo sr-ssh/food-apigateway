@@ -14,6 +14,8 @@ module.exports = {
     deliveryAcknowledgeSms: "سفارش شما به راننده تحویل داده شد",
     verificationCodeDuration: 30,
     verificationCodeUnit: "m",
+    employee: 2,
+    employer: 1,
     publicRoute: ['/api/user/v1/login', '/api/user/v1/', '/api/user/v1/login/mobile'],
     path: {
         controllers: {

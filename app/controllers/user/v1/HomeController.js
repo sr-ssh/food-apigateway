@@ -135,7 +135,8 @@ module.exports = new class HomeController extends Controller {
                 user_id: user._id,
                 user_active: user.active,
                 user_employer: user.employer,
-                user_company: user.company ? user.company : null
+                user_company: user.company ? user.company : null,
+                user_type: req.body.position
             }
             let idToken = jwt.sign(payload, config.secret, options )
 
@@ -263,7 +264,8 @@ module.exports = new class HomeController extends Controller {
                 user_id: user._id,
                 user_active: user.active,
                 user_employer: user.employer,
-                user_company: user.company ? user.company : null
+                user_company: user.company ? user.company : null,
+                user_type: req.body.position
             }
             let idToken = jwt.sign(payload, config.secret, options )
 

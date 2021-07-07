@@ -21,7 +21,8 @@ describe(`${sectionName}`, () => {
         employee = appConfig.test.employee;
         editedEmployee = appConfig.test.editedEmployee;
         deleteEmployee = appConfig.test.deleteEmployee;
-        editApplication = appConfig.test.editApplication;
+        editApplicationByEmployer = appConfig.test.editApplicationByEmployer;
+        editApplicationByEmployee = appConfig.test.editApplicationByEmployee;
         axios.post(`http://192.168.1.127:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
@@ -111,7 +112,7 @@ describe(`${sectionName}`, () => {
                 .put(`${baseRoute}/application`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
-                .send(editApplication);
+                .send(editApplicationByEmployer);
             res.should.have.status(200);
         });
 
