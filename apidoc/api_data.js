@@ -647,21 +647,21 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "companyName",
-            "description": "<p>company name</p>"
+            "description": "<p>company name: required for employer only</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
             "field": "companyAddress",
-            "description": "<p>company address</p>"
+            "description": "<p>company address: required for employer only</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
             "field": "employerMobile",
-            "description": "<p>employer mobile</p>"
+            "description": "<p>employer mobile: required for employee only</p>"
           }
         ]
       }

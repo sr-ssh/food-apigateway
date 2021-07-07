@@ -19,9 +19,9 @@ const HomeController = require(`${userController}/v1/HomeController`)
  * @apiParam  {varchar} mobile mobile
  * @apiParam  {varchar} code verification code 
  * @apiParam  {varchar} position user position: employee(2) or employer(1)
- * @apiParam  {varchar} companyName company name 
- * @apiParam  {varchar} companyAddress company address 
- * @apiParam  {varchar} employerMobile employer mobile
+ * @apiParam  {varchar} companyName company name: required for employer only
+ * @apiParam  {varchar} companyAddress company address: required for employer only
+ * @apiParam  {varchar} employerMobile employer mobile: required for employee only
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success:true,
