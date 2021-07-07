@@ -50,8 +50,9 @@ module.exports = new class HomeController extends Controller {
                 setting: [
                     {
                         order: [
-                            { addOrderSms: config.addOrderSms, sms: false },
-                            { deliveryAcknowledgeSms: config.deliveryAcknowledgeSms }
+                            { addOrderSms: config.addOrderSms, status: false },
+                            { deliverySms: "" , status: false },
+                            { deliveryAcknowledgeSms: config.deliveryAcknowledgeSms , status: false }
                         ]
                     }
                 ],

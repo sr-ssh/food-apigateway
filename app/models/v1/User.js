@@ -16,8 +16,9 @@ let User = new Schema({
     employee: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'User' }] },
     permission:{ type: Array, default: [] },//{no: 12, status: true},
     setting: { type: Array, default: [{ order: [
-                                            { addOrderSms: String, sms: false },
-                                            { deliveryAcknowledgeSms: String }
+                                            { addOrderSms: String, status: false },
+                                            { deliverySms: String , status: false },
+                                            { deliveryAcknowledgeSms: String, status: false }
                                         ]
                                       }]}
 });

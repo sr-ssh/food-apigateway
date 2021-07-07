@@ -91,7 +91,7 @@ module.exports = new class HomeController extends Controller {
             res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
 
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting company')
-            if (user.setting[0].order[0].sms) {
+            if (user.setting[0].order[0].status) {
                 let message = ""
                 if(user.company)
                     message = user.setting[0].order[0].addOrderSms + ` "${req.decodedData.user_company}"`
@@ -280,13 +280,16 @@ module.exports = new class HomeController extends Controller {
             res.json({ success : true, message : 'پیام اطلاعات مشتری ارسال شد'})
 
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting')
-            let deliveryMessage = `نام: ${customer.family}
+            if (user.setting[0].order[1].status) {
+                let deliveryMessage = `نام: ${customer.family}
                                     موبایل: ${customer.mobile}
                                     آدرس: ${order.address}`
-            let customerMessage = user.setting[0].order[1].deliveryAcknowledgeSms
-
-            this.sendSms(req.body.mobile, deliveryMessage)
-            this.sendSms(req.body.mobile, customerMessage)
+                this.sendSms(req.body.mobile, deliveryMessage)
+            }
+            if (user.setting[0].order[2].status) {
+                let customerMessage = user.setting[0].order[1].deliveryAcknowledgeSms
+                this.sendSms(req.body.mobile, customerMessage)
+            }
 
         }
         catch (err) {
