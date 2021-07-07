@@ -19,10 +19,27 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('email', 'please enter email').notEmpty().isEmail();
             req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
             req.checkBody('company', 'please enter company name').notEmpty().isString();
+            req.checkBody('code', 'please enter code').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
             const STRING_FLAG = " ";
             const EMAIL_FLAG = "a@a.com";
+
+            //verification code
+            let filter = { code: req.body.code, mobile: req.body.mobile }
+
+            let veriCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
+            veriCode = veriCode[0]
+            if(!veriCode)
+                return res.json({ success: false, message: "کد تایید صحیح نمی باشد", data: {} });
+            // timeDiff on verification code unit
+            let timeDiff = this.getTimeDiff(veriCode.createdAt.toISOString(), new Date().toISOString(), config.verificationCodeUnit)
+            // check verification code valid duration
+            if(timeDiff > config.verificationCodeDuration)
+                return res.json({ success: false, message: "کد تایید منقضی شده است", data: {} });
+
+            //remove the code
+            await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
 
             // save in mongodb
             let params = {
@@ -45,7 +62,7 @@ module.exports = new class HomeController extends Controller {
             if(req.body.email !== EMAIL_FLAG)
                 params.email = req.body.email
             
-            let filter = { mobile: params.mobile };
+            filter = { mobile: params.mobile };
             let user = await this.model.User.findOne(filter);
 
             if (user)
@@ -209,6 +226,62 @@ module.exports = new class HomeController extends Controller {
             if (!res.headersSent) return res.status(500).json(handelError);
         }
     }
+
+    async verificationCode(req, res) {
+        try {
+            req.checkBody('mobile', 'please enter mobile').notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            // save in mongodb
+            let filter = { mobile: req.body.mobile };
+
+            //code generation
+            let code;
+
+            //check if the last code is steel valid
+            let lastCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
+            lastCode = lastCode[0]
+            if(lastCode){
+                // timeDiff on verification code unit
+                let timeDiff = this.getTimeDiff(lastCode.createdAt, new Date().toISOString(), config.verificationCodeUnit)
+                // check verification code valid duration
+                if(timeDiff < config.verificationCodeDuration){
+                    code = lastCode.code
+                    this.sendSms(req.body.mobile, code)
+                    return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد" });
+                }
+
+            }
+
+            //generate new code
+
+            //generate random number
+            code = this.generateRandomNumber()
+            this.sendSms(req.body.mobile, code)
+
+            //save in mongo
+            let params = {
+                mobile: req.body.mobile,
+                code: code
+            }
+
+            await this.model.VerificationCode.create(params);
+
+
+            return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد" });
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('verificationCode')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 
 }
 

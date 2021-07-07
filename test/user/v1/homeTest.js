@@ -83,6 +83,15 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
+        
+        it('check verification code', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/login/mobile`)
+                .send(newUser);
+            res.should.have.status(200);
+        });
+
     });
 
 

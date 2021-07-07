@@ -21,14 +21,16 @@
             "email": "r.sh@gmail.com",
             "mobile": "09307580142",
             "company": "شکوهی",
-            "mobileOrEmail": "09307580142"
+            "mobileOrEmail": "09307580142",
+            "code": "4994"
         },
         "newUser": {
             "password": "123",
-            "family": "حسن رضایی",
-            "email": "h.rezali1@gmail.com",
-            "mobile": "09652352148",
-            "company": "harez"
+            "family": "دلواری",
+            "email": "del@gmail.com",
+            "mobile": "09203526485",
+            "company": "harez",
+            "code": "4994"
         },
         "userScope": "user",
         "customer": {

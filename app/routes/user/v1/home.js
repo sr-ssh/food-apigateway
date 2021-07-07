@@ -128,6 +128,31 @@ const HomeController = require(`${userController}/v1/HomeController`)
   router.post('/login',HomeController.login.bind(HomeController));
 
 
+
+  
+/**
+ * @api {post} /api/user/v1/login/mobile requset verification Code 
+ * @apiVersion 1.0.0
+ * @apiName verificationCode
+ * @apiDescription requset verification Code
+ * @apiGroup home
+ * @apiParam  {varchar} mobile user mobile
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success:true,
+ *      message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success:false,
+ *      message:"کاربری با این شماره موبایل در دسترس نمی باشد"
+ * }
+ */
+ router.post('/login/mobile',HomeController.verificationCode.bind(HomeController));
+
+
+
+
   
 
  module.exports = router;
