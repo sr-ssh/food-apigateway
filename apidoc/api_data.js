@@ -595,7 +595,7 @@ define({ "api": [
     "title": "register",
     "version": "1.0.0",
     "name": "register",
-    "description": "<p>register user.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry</p>",
+    "description": "<p>register user.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry. position 1 means employer and position 2 means employee.</p>",
     "group": "home",
     "parameter": {
       "fields": {
@@ -632,8 +632,36 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "company",
-            "description": "<p>company name (&quot; &quot;)</p>"
+            "field": "code",
+            "description": "<p>verification code</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "position",
+            "description": "<p>user position: employee(2) or employer(1)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "companyName",
+            "description": "<p>company name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "companyAddress",
+            "description": "<p>company address</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "employerMobile",
+            "description": "<p>employer mobile</p>"
           }
         ]
       }

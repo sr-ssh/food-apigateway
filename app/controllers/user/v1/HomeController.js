@@ -18,15 +18,53 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('family', 'please enter family').notEmpty().isString();
             req.checkBody('email', 'please enter email').notEmpty().isEmail();
             req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
-            req.checkBody('company', 'please enter company name').notEmpty().isString();
             req.checkBody('code', 'please enter code').notEmpty();
+            req.checkBody('position', 'please enter user position').notEmpty().isInt({min: 1, max: 2});
+            
+            //employer
+            if(req.body.position === 1){
+                req.checkBody('companyName', 'please enter company name').notEmpty().isString();
+                req.checkBody('companyAddress', 'please enter company address').notEmpty().isString();
+            }
+
+            //employee
+            if(req.body.position === 2){
+                req.checkBody('employerMobile', 'please enter employer mobile').notEmpty().isString();
+            }
+            
             if (this.showValidationErrors(req, res)) return;
 
             const STRING_FLAG = " ";
             const EMAIL_FLAG = "a@a.com";
 
+            // save in mongodb
+            let params = {
+                type: req.body.position,
+                password: req.body.password,
+                family: req.body.family,
+                mobile: req.body.mobile,
+                permission: []
+            }
+
+
+            if(req.body.email !== EMAIL_FLAG)
+                params.email = req.body.email
+            
+            let filter = { mobile: params.mobile };
+            let user = await this.model.User.findOne(filter);
+
+            if (user)
+                return res.json({ success: false, message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است" });
+
+            if(req.body.email !== EMAIL_FLAG){
+                filter = { email: params.email };
+                user = await this.model.User.findOne(filter);
+                if (user)
+                    return res.json({ success: false, message: "این ایمیل قبلا برای حساب دیگری استفاده شده است" });
+            }
+            
             //verification code
-            let filter = { code: req.body.code, mobile: req.body.mobile }
+            filter = { code: req.body.code, mobile: req.body.mobile }
 
             let veriCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
             veriCode = veriCode[0]
@@ -41,13 +79,11 @@ module.exports = new class HomeController extends Controller {
             //remove the code
             await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
 
-            // save in mongodb
-            let params = {
-                password: req.body.password,
-                family: req.body.family,
-                mobile: req.body.mobile,
-                permission: [],
-                setting: [
+            //employer
+            if(req.body.position === 1){
+                params.company = req.body.companyName
+                params.address = req.body.companyAddress
+                params.setting = [
                     {
                         order: [
                             { addOrderSms: config.addOrderSms, status: false },
@@ -55,38 +91,68 @@ module.exports = new class HomeController extends Controller {
                             { deliveryAcknowledgeSms: config.deliveryAcknowledgeSms , status: false }
                         ]
                     }
-                ],
+                ]
+                for(let i = 0; i< config.permissionCount; i++) {
+                    params.permission.push({ no: i + 1, status: true })
+                }    
             }
 
-            if(req.body.company !== STRING_FLAG)
-                params.company = req.body.company
-            if(req.body.email !== EMAIL_FLAG)
-                params.email = req.body.email
-            
-            filter = { mobile: params.mobile };
-            let user = await this.model.User.findOne(filter);
-
-            if (user)
-                return res.json({ success: false, message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است" });
-
-            if(req.body.email !== EMAIL_FLAG){
-                filter = { email: params.email };
-                user = await this.model.User.findOne(filter);
-                if (user)
-                    return res.json({ success: false, message: "این ایمیل قبلا برای حساب دیگری استفاده شده است" });
-            }
-            
-            for(let i = 0; i< config.permissionCount; i++) {
-                params.permission.push({ no: i + 1, status: true })
+            let employer;
+            if(req.body.position === 2){
+                filter = { active : true, mobile: req.body.employerMobile, type: 1}
+                employer = await this.model.User.findOne(filter, { id: 1 })
+                if(!employer)
+                    return res.json({ success: false, message: " کارفرمایی با این شماره یافت نشد" });
             }
             
             user = await this.model.User.create(params);
 
-            user.employer = user._id;
-            await user.save()
-
+            if(req.body.position === 1){
+                user.employer = user._id;
+                    await user.save()
+            }
             
-            return res.json({ success: true, message: "کاربر با موفقیت ثبت شد" });
+
+            if(req.body.position === 2){
+                
+                //make a job application for employer
+                let params = {
+                    employer: employer._id,
+                    employee: user._id
+                }
+                await this.model.Application.create(params)
+                
+            }
+
+            //token
+            let options = {
+                expiresIn: config.idTokenExpire,
+                algorithm: config.algorithm,
+                issuer: config.issuer,
+                audience: config.audience
+            }
+            let payload = {
+                user_id: user._id,
+                user_active: user.active,
+                user_employer: user.employer,
+                user_company: user.company ? user.company : null
+            }
+            let idToken = jwt.sign(payload, config.secret, options )
+
+            options = {
+                expiresIn: config.accesssTokenExpire,
+                algorithm: config.algorithm,
+                issuer: config.issuer,
+                audience: config.audience
+            }
+
+            payload = { scope : config.userScope};
+
+            let accessToken = jwt.sign(payload, config.secret, options)
+
+            let data = { idToken, accessToken};
+            
+            return res.json({ success: true, message: "کاربر با موفقیت ثبت شد", data: data  });
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

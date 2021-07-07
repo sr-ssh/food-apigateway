@@ -4,7 +4,8 @@ const timestamps = require('mongoose-timestamp');
 const bcrypt = require("bcrypt")
 
 let User = new Schema({
-    active:{ type: Boolean, default: true },
+    active: { type: Boolean, default: true },
+    type: { type: Number, required: true }, // 1 -> employer, 2 -> employee
     name: { type: String },
     family: { type: String, required: true },
     username: { type: String, required: true, unique: true },
@@ -12,15 +13,16 @@ let User = new Schema({
     email: { type: String, unique: true },
     mobile: { type: String, required: true, unique: true },
     company: String,
+    address: String,
     employer: { type: Schema.Types.ObjectId, ref: 'User'},
     employee: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'User' }] },
     permission:{ type: Array, default: [] },//{no: 12, status: true},
-    setting: { type: Array, default: [{ order: [
-                                            { addOrderSms: String, status: false },
-                                            { deliverySms: String , status: false },
-                                            { deliveryAcknowledgeSms: String, status: false }
-                                        ]
-                                      }]}
+    setting: { type: Array} //[{ order: [
+                                //     { addOrderSms: String, status: false },
+                                //     { deliverySms: String , status: false },
+                                //     { deliveryAcknowledgeSms: String, status: false }
+                                // ]
+                                // }]}
 });
 
 User.pre('validate', function(next){

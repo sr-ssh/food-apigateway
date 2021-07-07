@@ -22,15 +22,18 @@
             "mobile": "09307580142",
             "company": "شکوهی",
             "mobileOrEmail": "09307580142",
-            "code": "4994"
+            "code": "2201",
+            "position": 1
+            
         },
         "newUser": {
             "password": "123",
-            "family": "نگار مرادی",
-            "email": "n.moradi@gmail.com",
-            "mobile": "09623585147",
-            "company": "neg",
-            "code": "3743"
+            "family": "مهدی بهلول",
+            "email": "m.boloul@gmail.com",
+            "mobile": "09632585695",
+            "code": "3515",
+            "position": 2,
+            "employerMobile": "09532586598"
         },
         "userScope": "user",
         "customer": {
