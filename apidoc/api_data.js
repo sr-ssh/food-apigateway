@@ -661,6 +661,48 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/api/user/v1/login/mobile",
+    "title": "requset verification Code",
+    "version": "1.0.0",
+    "name": "verificationCode",
+    "description": "<p>requset verification Code</p>",
+    "group": "home",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>user mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:false,\n     message:\"کاربری با این شماره موبایل در دسترس نمی باشد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/home.js",
+    "groupTitle": "home"
+  },
+  {
+    "type": "post",
     "url": "/api/user/v1/order/",
     "title": "add order",
     "version": "1.0.0",
