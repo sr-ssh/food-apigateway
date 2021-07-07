@@ -57,8 +57,19 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/permission`)
-                .set('Authorization', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6InVzZXIiLCJpYXQiOjE2MjQ4ODAwOTQsImV4cCI6MTY1MDgwMDA5NCwiYXVkIjoiYXVkaWVuY2UiLCJpc3MiOiJpc3N1ZXIifQ.UvCgHV8fwy8SIOZ6J4br6sd1ewRr8SafixKnCs7O-oo")
-                .set('idToken', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjBkNzI4NjU1MTliMzExYzkwNWY5NTY2IiwidXNlcl9hY3RpdmUiOnRydWUsInVzZXJfZW1wbG95ZXIiOiI2MGQ3Mjg2NTUxOWIzMTFjOTA1Zjk1NjYiLCJpYXQiOjE2MjQ4ODAwOTQsImV4cCI6MTY0NjQ4MDA5NCwiYXVkIjoiYXVkaWVuY2UiLCJpc3MiOiJpc3N1ZXIifQ.IgWZj5UmYcWi5Fd8FCpS6JcTR18Yj5Wb03lWUwVU1Es")
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
+
+        it('check get applications', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/application`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
                 .send();
             res.should.have.status(200);
         });

@@ -123,6 +123,36 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  */
   router.get('/permission',EmployeeController.getPermission.bind(EmployeeController)); 
 
+
+
+  
+/**
+ * @api {get} /api/user/v1/employee/application get employees applications
+ * @apiVersion 1.0.0
+ * @apiName getApplications
+ * @apiDescription get employees applications
+ * @apiGroup employee
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success: true,
+ *     message: "ارسال درخواست ها با موفقیت انجام شد",
+ *     data: 
+ *      {
+ *          "id": "60d9ce1bef1e876eb29265cf",
+ *          "active": true,
+ *          "status": 1,
+ *          "employer": "60d9ce1bef1e876eb29278c4",
+ *          "employee": {
+ *              "_id": "",
+ *              "family": "شکوهی",
+ *              "mobile": "09307580142"
+ *          },
+ *          "createdAt": "2021-06-01T06:54:01.691Z",
+ *          "updatedAt": "2021-06-01T06:54:01.691Z"
+ * }
+ */
+ router.get('/application',EmployeeController.getApplications.bind(EmployeeController)); 
+
   
 
  module.exports = router;
