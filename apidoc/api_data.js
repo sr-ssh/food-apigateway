@@ -310,6 +310,75 @@ define({ "api": [
     "groupTitle": "employee"
   },
   {
+    "type": "put",
+    "url": "/api/user/v1/employee/application",
+    "title": "edit employee application",
+    "version": "1.0.0",
+    "name": "editApplication",
+    "description": "<p>edit employee application, in status : send 1 for in progress, 2 for hired, 3 for closed application</p>",
+    "group": "employee",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>application status</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "applicationId",
+            "description": "<p>application id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"درخواست با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: false,\n     message: \"درخواستی موجود نیست\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/employee/application",
+    "title": "get employees applications",
+    "version": "1.0.0",
+    "name": "getApplications",
+    "description": "<p>get employees applications</p>",
+    "group": "employee",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"ارسال درخواست ها با موفقیت انجام شد\",\n    data: \n     {\n         \"id\": \"60d9ce1bef1e876eb29265cf\",\n         \"active\": true,\n         \"status\": 1,\n         \"employer\": \"60d9ce1bef1e876eb29278c4\",\n         \"employee\": {\n             \"_id\": \"\",\n             \"family\": \"شکوهی\",\n             \"mobile\": \"09307580142\"\n         },\n         \"createdAt\": \"2021-06-01T06:54:01.691Z\",\n         \"updatedAt\": \"2021-06-01T06:54:01.691Z\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
     "type": "get",
     "url": "/api/user/v1/employee",
     "title": "get employees",

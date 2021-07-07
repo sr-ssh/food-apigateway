@@ -225,7 +225,36 @@ module.exports = new class EmployeeController extends Controller {
             if (!res.headersSent) return res.status(500).json(handelError);
         }
     }
-        
+     
+    async editApplication(req, res) {
+        try {
+
+            req.checkBody('applicationId', 'please set application id').notEmpty();
+            req.checkBody('status', 'please set application status').notEmpty().isInt({min: 1, max: 3});
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.body.applicationId, employer: req.decodedData.user_employer }
+            let application = await this.model.Application.findOne(filter)
+
+            if(!application)
+                return res.json({ success : false, message : 'درخواستی موجود نیست'})
+
+            application.status = req.body.status
+            await application.save()
+
+            res.json({ success : true, message : 'درخواست با موفقیت ویرایش شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editApplication')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
 
 }
 

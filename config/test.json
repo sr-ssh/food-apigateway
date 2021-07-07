@@ -155,6 +155,10 @@
         "deliverySms": {
             "orderId": "60e1b387cef3a81c70726ede",
             "mobile": "09307580142"
+        },
+        "editApplication":{
+            "applicationId": "60e555fd9637c83760618ac9",
+            "status": 2
         }
     }
 }
