@@ -37,7 +37,7 @@ const routes = require('./app/routes');
 app.use('/api', routes);
 
 
-app.listen(appConfig.appPort, () => console.log(`listening on port ${appConfig.appPort}`));
+app.listen(appConfig.appPort,"192.168.1.145", () => console.log(`listening on port ${appConfig.appPort}`));
 
 
 module.exports = app;
