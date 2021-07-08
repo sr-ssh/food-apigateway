@@ -124,6 +124,11 @@ module.exports = new class HomeController extends Controller {
 
             const TIME_FLAG = "1900-01-01T05:42:13.845Z";
 
+            if(req.params.endDate !== TIME_FLAG){
+                let nextDay = new Date(req.params.endDate).setDate(new Date(req.params.endDate).getDate() + 1);
+                req.params.endDate = nextDay
+            }
+
             let filter ;
             if(req.params.startDate != TIME_FLAG && req.params.endDate === TIME_FLAG)
                 filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $gt: req.params.startDate}}] }

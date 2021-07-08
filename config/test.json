@@ -16,12 +16,12 @@
     },
     "test": {
         "user": {
-            "password": "123",
+            "password": "rey",
             "family": "ریحانه شکوهی",
             "email": "r.sh@gmail.com",
             "mobile": "09532586598",
             "company": "شکوهی",
-            "mobileOrEmail": "09532586598",
+            "mobileOrEmail": "09307580142",
             "code": "2201",
             "position": 1
         },
@@ -91,10 +91,10 @@
         "getCustomerParams": {
             "family": " ",
             "mobile": "0",
-            "createdAtFrom": "2021-06-21",
-            "createdAtTo": "2021-06-24",
+            "createdAtFrom": "1900-01-01T05:42:13.845Z",
+            "createdAtTo": "1900-01-01T05:42:13.845Z",
             "lastBuyFrom": "1900-01-01T05:42:13.845Z",
-            "lastBuyTo": "1900-01-01T05:42:13.845Z",
+            "lastBuyTo": "2021-07-06",
             "orderFrom": "0",
             "orderTo": "0",
             "totalFrom": "0",
