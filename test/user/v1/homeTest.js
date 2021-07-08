@@ -92,14 +92,6 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
-        it('check the sent verification code', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/verificationcode/check`)
-                .send(newUser);
-            res.should.have.status(200);
-        });
-
     });
 
 

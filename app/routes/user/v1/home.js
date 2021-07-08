@@ -154,30 +154,4 @@ const HomeController = require(`${userController}/v1/HomeController`)
  */
  router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
 
-/**
- * @api {post} /api/user/v1/verificationcode/check checl verification Code 
- * @apiVersion 1.0.0
- * @apiName check verificationCode 
- * @apiDescription check verification Code
- * @apiGroup home
- * @apiParam  {varchar} mobile user mobile
- * @apiParam  {varchar} code verification code
- * @apiSuccessExample {json} Success-Response:
- * {
- *      success:true,
- *      message: "با موفقیت انجام شد"
- * }
- * @apiErrorExample {json} Error-Response:
- * {
- *      success:false,
- *      message:"کد تایید منقضی شده است"
- * }
- */
- router.post('/verificationcode/check',HomeController.checkVerificationCode.bind(HomeController));
-
-
-
-
-  
-
  module.exports = router;
