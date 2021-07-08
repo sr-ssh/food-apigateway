@@ -154,9 +154,4 @@ const HomeController = require(`${userController}/v1/HomeController`)
  */
  router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
 
-
-
-
-  
-
  module.exports = router;

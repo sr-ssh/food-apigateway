@@ -24,14 +24,13 @@
             "mobileOrEmail": "090240666",
             "code": "2201",
             "position": 1
-            
         },
         "newUser": {
             "password": "123",
             "family": "مهدی بهلول",
             "email": "m.boloul@gmail.com",
             "mobile": "09632585695",
-            "code": "3515",
+            "code": "5453",
             "position": 2,
             "employerMobile": "09532586598"
         },
@@ -156,14 +155,13 @@
             "orderId": "60e1b387cef3a81c70726ede",
             "mobile": "09307580142"
         },
-        "editApplicationByEmployer":{
+        "editApplicationByEmployer": {
             "applicationId": "60e5530ba1487f3054f0a85e",
             "status": 2
         },
-        "editApplicationByEmployee":{
+        "editApplicationByEmployee": {
             "employeeId": "60e555fd9637c83760618ac8",
             "status": 3
         }
-
     }
 }
