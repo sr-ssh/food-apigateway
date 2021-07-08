@@ -34,4 +34,29 @@ const AccountController = require(`${userController}/v1/AccountController`)
 
 
 
+ /**
+ * @api {put} /api/user/v1/account edit user account
+ * @apiVersion 1.0.0
+ * @apiName editUserAccount
+ * @apiDescription edit user account: only send one of the params, company param is for employers
+ * @apiGroup account
+ * @apiParam {varchar} family user family
+ * @apiParam {varchar} address user address
+ * @apiParam {varchar} company user company, available for employers only
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success: true,
+ *     message: "اطلاعات کاربر با موفقیت ویرایش شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *     success: false,
+ *     message: "اطلاعات وارد شده صحیح نمی باشد"
+ * }
+ */
+ router.put('/',AccountController.editUserAccount.bind(AccountController)); 
+
+
+
+
  module.exports = router;

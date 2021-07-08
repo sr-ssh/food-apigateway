@@ -6,6 +6,7 @@ const baseRoute = '/api/user/v1/account';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
+let editAccount;
 const axios = require('axios').default;
 
 
@@ -17,6 +18,7 @@ describe(`${sectionName}`, () => {
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
+        editAccount = appConfig.test.editAccount;
         axios.post(`http://192.168.1.127:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
@@ -46,6 +48,21 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();
+            res.should.have.status(200);
+        });
+
+    });
+
+
+    describe('Check put Apis', () => {
+
+        it('check edit user account', async () => {
+            const res = await chai
+                .request(server)
+                .put(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(editAccount);
             res.should.have.status(200);
         });
 

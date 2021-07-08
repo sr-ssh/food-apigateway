@@ -21,7 +21,7 @@
             "email": "r.sh@gmail.com",
             "mobile": "09532586598",
             "company": "شکوهی",
-            "mobileOrEmail": "090240666",
+            "mobileOrEmail": "09532586598",
             "code": "2201",
             "position": 1
         },
@@ -162,6 +162,9 @@
         "editApplicationByEmployee": {
             "employeeId": "60e555fd9637c83760618ac8",
             "status": 3
+        },
+        "editAccount": {
+            "company": "mohaddes"
         }
     }
 }
