@@ -94,7 +94,7 @@ module.exports = new class HomeController extends Controller {
             if (user.setting[0].order[0].status) {
                 let message = ""
                 if(user.company)
-                    message = user.setting[0].order[0].text + ` "${req.decodedData.user_company}"`
+                    message = user.setting[0].order[0].text + ` \n${req.decodedData.user_company}`
                 else
                     message = user.setting[0].order[0].text
 
@@ -286,9 +286,7 @@ module.exports = new class HomeController extends Controller {
 
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting')
             if (user.setting[0].order[1].status) {
-                let deliveryMessage = `نام: ${customer.family}
-                                    موبایل: ${customer.mobile}
-                                    آدرس: ${order.address}`
+                let deliveryMessage = `نام: ${customer.family}\nموبایل: ${customer.mobile}\nآدرس: ${order.address}`
                 this.sendSms(req.body.mobile, deliveryMessage)
             }
             if (user.setting[0].order[2].status) {

@@ -119,14 +119,15 @@ router.post('/delivery/sms',OrderController.sendDeliverySms.bind(OrderController
  * @api {put} /api/user/v1/order/sms edit sms settings
  * @apiVersion 1.0.0
  * @apiName editSms
- * @apiDescription edit sms settings, 
+ * @apiDescription edit sms settings, type 1 is customer sms after adding order, type 2 is customer info for delivery, type 3 ic acknowledge for customer that your product is sent.
  * @apiGroup order
- * @apiParam {varchar} mobile delivery mobile
+ * @apiParam {int} type sms type , {min:1, max:3}
+ * @apiParam {varchar} text sms text
  * @apiParam {varchar} orderId order id
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
- *      message: "وضعیت سفارش با موفقیت ویرایش شد"
+ *      message: "ویرایش با موفقیت انجام شد"
  */
  router.put('/sms',OrderController.editSms.bind(OrderController));
 

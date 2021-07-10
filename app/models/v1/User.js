@@ -37,7 +37,7 @@ User.pre('validate', function(next){
 })
 
 User.pre('save', function(next){
-
+    
     if (!this.isModified('password')) return next();
 
     bcrypt.hash(this.password, config.salt, (err, hash) => {
