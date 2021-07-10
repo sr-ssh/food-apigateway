@@ -94,9 +94,9 @@ module.exports = new class HomeController extends Controller {
             if (user.setting[0].order[0].status) {
                 let message = ""
                 if(user.company)
-                    message = user.setting[0].order[0].addOrderSms + ` "${req.decodedData.user_company}"`
+                    message = user.setting[0].order[0].text + ` "${req.decodedData.user_company}"`
                 else
-                    message = user.setting[0].order[0].addOrderSms
+                    message = user.setting[0].order[0].text
 
                 this.sendSms(req.body.customer.mobile, message)
             }
@@ -292,7 +292,7 @@ module.exports = new class HomeController extends Controller {
                 this.sendSms(req.body.mobile, deliveryMessage)
             }
             if (user.setting[0].order[2].status) {
-                let customerMessage = user.setting[0].order[1].deliveryAcknowledgeSms
+                let customerMessage = user.setting[0].order[1].text
                 this.sendSms(req.body.mobile, customerMessage)
             }
 
@@ -302,6 +302,36 @@ module.exports = new class HomeController extends Controller {
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('sendOrderInfoSms')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
+    async editSms(req, res) {
+        try {
+
+            req.checkBody('type', 'please set the sms type').notEmpty().isInt({min: 1, max: 3});
+            req.checkBody('status', 'please set the sms status').notEmpty().isBoolean();
+            req.checkBody('text', 'please set the sms text').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.decodedData.user_employer }
+            let user = await this.model.User.findOne(filter)
+            user.setting[0].order[req.body.type-1].text = req.body.text;
+            user.setting[0].order[req.body.type-1].status = req.body.status;
+
+            await user.save();
+
+            return res.json({ success : true, message : 'ویرایش با موفقیت انجام شد', data: user})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editSms')
                 .inputParams(req.body)
                 .call();
 

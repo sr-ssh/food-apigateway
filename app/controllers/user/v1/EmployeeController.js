@@ -111,7 +111,7 @@ module.exports = new class EmployeeController extends Controller {
         try {
 
             let filter = { _id: req.decodedData.user_id }
-            let permission = await this.model.User.findOne(filter, { permission: 1 })
+            let permission = await this.model.User.findOne(filter, { permission: 1, type: 1 })
 
             return res.json({ success: true, message: "با موفقیت انجام شد", data: permission})
             

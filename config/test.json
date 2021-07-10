@@ -18,20 +18,22 @@
         "user": {
             "password": "rey",
             "family": "ریحانه شکوهی",
-            "email": "r.sh@gmail.com",
-            "mobile": "09532586598",
+            "email": "m.min@gmail.com",
+            "mobile": "09625835475",
             "company": "شکوهی",
             "mobileOrEmail": "09307580142",
-            "code": "2201",
+            "code": "7111",
             "position": 1
         },
         "newUser": {
             "password": "123",
-            "family": "مهدی بهلول",
-            "email": "m.boloul@gmail.com",
-            "mobile": "09632585695",
-            "code": "5453",
-            "position": 2,
+            "family": "مینا مینایی",
+            "email": "m.min@gmail.com",
+            "mobile": "09625835475",
+            "code": "7111",
+            "position": 1,
+            "companyName": "مینا",
+            "companyAddress": "راهنمایی 24",
             "employerMobile": "09532586598"
         },
         "userScope": "user",
@@ -165,6 +167,11 @@
         },
         "editAccount": {
             "company": "mohaddes"
+        },
+        "editSms": {
+            "type": 1,
+            "text": "سفارش شما با موفقیت ثبت شد. از اینکه مارا انتخاب کرده اید متشکریم",
+            "status": false
         }
     }
 }

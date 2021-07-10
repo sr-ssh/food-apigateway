@@ -10,7 +10,7 @@ let User = new Schema({
     family: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    email: { type: String, unique: true },
+    email: { type: String, unique: true, sparse: true },
     mobile: { type: String, required: true, unique: true },
     company: String,
     address: String,
@@ -18,9 +18,15 @@ let User = new Schema({
     employee: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'User' }] },
     permission:{ type: Array, default: [] },//{no: 12, status: true},
     setting: { type: Array} //[{ order: [
-                                //     { addOrderSms: String, status: false },
-                                //     { deliverySms: String , status: false },
-                                //     { deliveryAcknowledgeSms: String, status: false }
+                                //     { addOrderSms: String, status: false }, //type 1
+                                //     { deliverySms: String , status: false }, //type 2
+                                //     { deliveryAcknowledgeSms: String, status: false } //type 3
+                                // ]
+                                // }]}
+                            //[{ order: [
+                                //     { type: Number, text: String, status: false }, //type 1
+                                //     { type: Number, text: String , status: false }, //type 2
+                                //     { type: Number, text: String, status: false } //type 3
                                 // ]
                                 // }]}
 });

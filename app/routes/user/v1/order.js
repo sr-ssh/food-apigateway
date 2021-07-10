@@ -113,4 +113,21 @@ const OrderController = require(`${userController}/v1/OrderController`)
  */
 router.post('/delivery/sms',OrderController.sendDeliverySms.bind(OrderController));
 
+
+
+/**
+ * @api {put} /api/user/v1/order/sms edit sms settings
+ * @apiVersion 1.0.0
+ * @apiName editSms
+ * @apiDescription edit sms settings, 
+ * @apiGroup order
+ * @apiParam {varchar} mobile delivery mobile
+ * @apiParam {varchar} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "وضعیت سفارش با موفقیت ویرایش شد"
+ */
+ router.put('/sms',OrderController.editSms.bind(OrderController));
+
  module.exports = router;
