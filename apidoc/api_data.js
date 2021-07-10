@@ -398,10 +398,10 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "object[]",
+            "type": "object",
             "optional": false,
             "field": "permissions",
-            "description": "<p>array of employee new permissions {no: 1, status: true}</p>"
+            "description": "<p>object exactly like it is sent</p>"
           }
         ]
       }
@@ -535,7 +535,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        \"_id\": \"60d9ce1bef1e876eb29265cf\",\n        \"permission\": [...\n        {\n          \"no\": 1,\n          \"status\": true\n        },\n        {\n          \"no\": 2,\n          \"status\": false\n       }]\n}",
+          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        _id: \"60d9ce1bef1e876eb29265cf\",\n        permission: { \n            addOrder: true,\n            getOrders: true,\n            reminder: true,\n            getProducts: true,\n            finance: true,\n            getCustomers: true,\n            getEmployees: true,\n            getDiscounts: true\n          }\n}",
           "type": "json"
         }
       ]

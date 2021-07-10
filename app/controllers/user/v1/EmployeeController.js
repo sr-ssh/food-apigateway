@@ -46,8 +46,14 @@ module.exports = new class EmployeeController extends Controller {
 
             req.checkBody('_id', 'please enter employee id').notEmpty().isString();
             req.checkBody('permissions', 'please enter employee permissions').notEmpty();
-            req.checkBody('permissions.*.no', 'please enter permissions number').notEmpty();
-            req.checkBody('permissions.*.status', 'please enter permissions status').notEmpty();
+            req.checkBody('permissions.addOrder', 'please enter addOrder status').notEmpty().isBoolean();
+            req.checkBody('permissions.getOrders', 'please enter getOrders status').notEmpty().isBoolean();
+            req.checkBody('permissions.reminder', 'please enter reminder status').notEmpty().isBoolean();
+            req.checkBody('permissions.getProducts', 'please enter getProducts status').notEmpty().isBoolean();
+            req.checkBody('permissions.finance', 'please enter finance status').notEmpty().isBoolean();
+            req.checkBody('permissions.getCustomers', 'please enter getCustomers status').notEmpty().isBoolean();
+            req.checkBody('permissions.getEmployees', 'please enter getEmployees status').notEmpty().isBoolean();
+            req.checkBody('permissions.getDiscounts', 'please enter getDiscounts status').notEmpty().isBoolean();
             if (this.showValidationErrors(req, res)) return;
 
             let filter = { active: true, _id: req.decodedData.user_id}

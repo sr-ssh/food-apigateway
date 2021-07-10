@@ -60,7 +60,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiDescription change employee permission
  * @apiGroup employee
  * @apiParam {varchar} _id employee id
- * @apiParam {object[]} permissions array of employee new permissions {no: 1, status: true}
+ * @apiParam {object} permissions object exactly like it is sent
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,
@@ -109,16 +109,17 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  *     message: "با موفقیت انجام شد",
  *     data: 
  *      {
- *         "_id": "60d9ce1bef1e876eb29265cf",
- *         "permission": [...
- *         {
- *           "no": 1,
- *           "status": true
- *         },
- *         {
- *           "no": 2,
- *           "status": false
- *        }]
+ *         _id: "60d9ce1bef1e876eb29265cf",
+ *         permission: { 
+            addOrder: true,
+            getOrders: true,
+            reminder: true,
+            getProducts: true,
+            finance: true,
+            getCustomers: true,
+            getEmployees: true,
+            getDiscounts: true
+          }
  * }
  */
   router.get('/permission',EmployeeController.getPermission.bind(EmployeeController)); 
