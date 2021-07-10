@@ -83,15 +83,13 @@ module.exports = new class HomeController extends Controller {
             if(req.body.position === 1){
                 params.company = req.body.companyName
                 params.address = req.body.companyAddress
-                params.setting = [
-                    {
-                        order: [
-                            { type: 1, text: config.addOrderSms, status: false },
-                            { type: 2, text: "" , status: false },
-                            { type: 3, text: config.deliveryAcknowledgeSms , status: false }
-                        ]
-                    }
-                ]
+                params.setting = {
+                        order: {
+                            preSms: { text: config.addOrderSms, status: false },
+                            postDeliverySms: { text: "" , status: false },
+                            postCustomerSms: { text: config.deliveryAcknowledgeSms , status: false }
+                        }
+                }
                 for(let i = 0; i< config.permissionCount; i++) {
                     params.permission.push({ no: i + 1, status: true })
                 }    

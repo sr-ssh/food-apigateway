@@ -91,12 +91,12 @@ module.exports = new class HomeController extends Controller {
             res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
 
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting company')
-            if (user.setting[0].order[0].status) {
+            if (user.setting.order.preSms.status) {
                 let message = ""
                 if(user.company)
-                    message = user.setting[0].order[0].text + ` \n${req.decodedData.user_company}`
+                    message = user.setting.order.preSms.text + ` \n${req.decodedData.user_company}`
                 else
-                    message = user.setting[0].order[0].text
+                    message = user.setting.order.preSms.text
 
                 this.sendSms(req.body.customer.mobile, message)
             }
@@ -285,12 +285,12 @@ module.exports = new class HomeController extends Controller {
             res.json({ success : true, message : 'پیام اطلاعات مشتری ارسال شد'})
 
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting')
-            if (user.setting[0].order[1].status) {
+            if (user.setting.order.postDeliverySms.status) {
                 let deliveryMessage = `نام: ${customer.family}\nموبایل: ${customer.mobile}\nآدرس: ${order.address}`
                 this.sendSms(req.body.mobile, deliveryMessage)
             }
-            if (user.setting[0].order[2].status) {
-                let customerMessage = user.setting[0].order[1].text
+            if (user.setting.order.postCustomerSms.status) {
+                let customerMessage = user.setting.order.postCustomerSms.text
                 this.sendSms(req.body.mobile, customerMessage)
             }
 
@@ -318,12 +318,29 @@ module.exports = new class HomeController extends Controller {
 
             let filter = { active : true, _id: req.decodedData.user_employer }
             let user = await this.model.User.findOne(filter)
-            user.setting[0].order[req.body.type-1].text = req.body.text;
-            user.setting[0].order[req.body.type-1].status = req.body.status;
+            let type = req.body.type
 
+            switch (type) {
+                case 1:
+                    user.setting.order.preSms.status = req.body.status
+                    user.setting.order.preSms.text = req.body.text
+                    break;
+                case 2:
+                    user.setting.order.postDeliverySms.status = req.body.status
+                    user.setting.order.postDeliverySms.text = req.body.text
+                    break;
+                case 3:
+                    user.setting.order.postCustomerSms.status = req.body.status
+                    user.setting.order.postCustomerSms.text = req.body.text
+                    break;
+            
+                default:
+                    break;
+            }
+        
             await user.save();
 
-            return res.json({ success : true, message : 'ویرایش با موفقیت انجام شد', data: user})
+            return res.json({ success : true, message : 'ویرایش با موفقیت انجام شد'})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

@@ -17,18 +17,12 @@ let User = new Schema({
     employer: { type: Schema.Types.ObjectId, ref: 'User'},
     employee: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'User' }] },
     permission:{ type: Array, default: [] },//{no: 12, status: true},
-    setting: { type: Array} //[{ order: [
-                                //     { addOrderSms: String, status: false }, //type 1
-                                //     { deliverySms: String , status: false }, //type 2
-                                //     { deliveryAcknowledgeSms: String, status: false } //type 3
-                                // ]
-                                // }]}
-                            //[{ order: [
-                                //     { type: Number, text: String, status: false }, //type 1
-                                //     { type: Number, text: String , status: false }, //type 2
-                                //     { type: Number, text: String, status: false } //type 3
-                                // ]
-                                // }]}
+    setting: { type: Object } // {
+                                // order: {
+                                //     preSms: { text: config.addOrderSms, status: false },
+                                //     postDeliverySms: { text: "" , status: false },
+                                //     postCustomerSms: { text: config.deliveryAcknowledgeSms , status: false }
+                                // }
 });
 
 User.pre('validate', function(next){
@@ -37,7 +31,7 @@ User.pre('validate', function(next){
 })
 
 User.pre('save', function(next){
-    
+
     if (!this.isModified('password')) return next();
 
     bcrypt.hash(this.password, config.salt, (err, hash) => {
