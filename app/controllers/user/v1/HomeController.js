@@ -43,7 +43,7 @@ module.exports = new class HomeController extends Controller {
                 password: req.body.password,
                 family: req.body.family,
                 mobile: req.body.mobile,
-                permission: []
+                permission: {}
             }
 
 
@@ -90,9 +90,19 @@ module.exports = new class HomeController extends Controller {
                             postCustomerSms: { text: config.deliveryAcknowledgeSms , status: false }
                         }
                 }
-                for(let i = 0; i< config.permissionCount; i++) {
-                    params.permission.push({ no: i + 1, status: true })
-                }    
+                params.permission = { 
+                    addOrder: true,
+                    getOrders: true,
+                    reminder: true,
+                    getProducts: true,
+                    finance: true,
+                    getCustomers: true,
+                    getEmployees: true,
+                    getDiscounts: true
+                }
+                // for(let i = 0; i< config.permissionCount; i++) {
+                //     params.permission.push({ no: i + 1, status: true })
+                // }    
             }
 
             let employer;

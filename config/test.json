@@ -27,12 +27,12 @@
         },
         "newUser": {
             "password": "123",
-            "family": "مینا مینای",
-            "email": "m.minn@gmail.com",
-            "mobile": "09625835474",
-            "code": "5741",
+            "family": "میترا محمودی",
+            "email": "m.mah@gmail.com",
+            "mobile": "09625856258",
+            "code": "2055",
             "position": 1,
-            "companyName": "مینا",
+            "companyName": "میترا",
             "companyAddress": "راهنمایی 24",
             "employerMobile": "09532586598"
         },
@@ -111,40 +111,16 @@
         },
         "editedEmployee": {
             "_id": "60d953d772c6de4484069ecb",
-            "permissions": [
-                {
-                    "no": 1,
-                    "status": true
-                },
-                {
-                    "no": 2,
-                    "status": true
-                },
-                {
-                    "no": 3,
-                    "status": true
-                },
-                {
-                    "no": 4,
-                    "status": true
-                },
-                {
-                    "no": 5,
-                    "status": true
-                },
-                {
-                    "no": 6,
-                    "status": true
-                },
-                {
-                    "no": 7,
-                    "status": true
-                },
-                {
-                    "no": 8,
-                    "status": true
-                }
-            ]
+            "permissions": { 
+                "addOrder": true,
+                "getOrders": true,
+                "reminder": true,
+                "getProducts": true,
+                "finance": true,
+                "getCustomers": true,
+                "getEmployees": true,
+                "getDiscounts": true
+            }
         },
         "deleteEmployee": {
             "_id": "60d823a1f674e530e09fc6ce"

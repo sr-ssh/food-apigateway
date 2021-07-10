@@ -16,7 +16,7 @@ let User = new Schema({
     address: String,
     employer: { type: Schema.Types.ObjectId, ref: 'User'},
     employee: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'User' }] },
-    permission:{ type: Array, default: [] },//{no: 12, status: true},
+    permission:{ type: Object, default: {} },//{ addOrder: true, getCustomers: true , ... },
     setting: { type: Object } // {
                                 // order: {
                                 //     preSms: { text: config.addOrderSms, status: false },
