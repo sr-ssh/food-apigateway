@@ -22,18 +22,18 @@
             "mobile": "09625835475",
             "company": "شکوهی",
             "mobileOrEmail": "09307580142",
-            "code": "7111",
+            "code": "3823",
             "position": 1
         },
         "newUser": {
             "password": "123",
-            "family": "میترا محمودی",
-            "email": "m.mah@gmail.com",
-            "mobile": "09625856258",
+            "family": "علی محمودی",
+            "email": "a.mhmd@gmail.com",
+            "mobile": "09221122333",
             "code": "2055",
             "position": 1,
-            "companyName": "میترا",
-            "companyAddress": "راهنمایی 24",
+            "companyName": "mhmnejad",
+            "companyAddress": "راهنمایی 24222",
             "employerMobile": "09532586598"
         },
         "userScope": "user",
@@ -111,7 +111,7 @@
         },
         "editedEmployee": {
             "_id": "60d953d772c6de4484069ecb",
-            "permissions": { 
+            "permissions": {
                 "addOrder": true,
                 "getOrders": true,
                 "reminder": true,

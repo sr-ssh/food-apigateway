@@ -299,7 +299,7 @@ module.exports = new class HomeController extends Controller {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('sendOrderInfoSms')
+                .method('sendDeliverySms')
                 .inputParams(req.body)
                 .call();
 
@@ -307,6 +307,25 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async getSms(req, res) {
+        try {
+            
+            let filter = { _id: req.decodedData.user_id }
+            let user = await this.model.User.findOne(filter, 'setting')
+
+            res.json({ success: true, message: "با موفقیت انجام شد", data: user}) 
+
+        } catch (err) {
+                let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getSms')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
 
     async editSms(req, res) {
         try {
@@ -333,7 +352,6 @@ module.exports = new class HomeController extends Controller {
                     user.setting.order.postCustomerSms.status = req.body.status
                     user.setting.order.postCustomerSms.text = req.body.text
                     break;
-            
                 default:
                     break;
             }

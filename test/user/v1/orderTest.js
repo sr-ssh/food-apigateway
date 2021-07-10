@@ -54,6 +54,16 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
+        it('check get sms information', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/sms`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send()
+            res.should.have.status(200)
+        })
+
     });
 
     describe('Check Post Apis', () => {
