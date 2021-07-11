@@ -263,7 +263,6 @@ module.exports = new class EmployeeController extends Controller {
      
     async editApplication(req, res) {
         try {
-
             if(req.decodedData.user_type == config.employer){
                 req.checkBody('applicationId', 'please set application id').notEmpty();
                 req.checkBody('status', 'please set application status').notEmpty().isInt({min: 2, max: 3});
@@ -293,7 +292,7 @@ module.exports = new class EmployeeController extends Controller {
             await application.save()
 
             //if the employer calles this api and hires the emplyee
-            if(req.decodedData.user_type == config.employer){
+            if(req.decodedData.user_type == config.employer && req.body.status === 2){
                 filter = { active: true, _id: application.employee , type: config.employee }
                 let user = await this.model.User.findOne(filter)
                 if(!user)

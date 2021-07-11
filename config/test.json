@@ -16,22 +16,22 @@
     },
     "test": {
         "user": {
-            "password": "rey",
+            "password": "123",
             "family": "ریحانه شکوهی",
             "email": "m.min@gmail.com",
             "mobile": "09625835475",
             "company": "شکوهی",
-            "mobileOrEmail": "09307580142",
+            "mobileOrEmail": "09532586598",
             "code": "3823",
             "position": 1
         },
         "newUser": {
             "password": "123",
             "family": "علی محمودی",
-            "email": "a.mhmd@gmail.com",
-            "mobile": "09221122333",
-            "code": "2055",
-            "position": 1,
+            "email": "a.mhm@gmail.com",
+            "mobile": "09520321475",
+            "code": "1899",
+            "position": 2,
             "companyName": "mhmnejad",
             "companyAddress": "راهنمایی 24222",
             "employerMobile": "09532586598"
@@ -134,8 +134,8 @@
             "mobile": "09307580142"
         },
         "editApplicationByEmployer": {
-            "applicationId": "60e5530ba1487f3054f0a85e",
-            "status": 2
+            "applicationId": "60e555fd9637c83760618ac9",
+            "status": 3
         },
         "editApplicationByEmployee": {
             "employeeId": "60e555fd9637c83760618ac8",

@@ -42,16 +42,6 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get user', async () => {
-            const res = await chai
-                .request(server)
-                .get(`${baseRoute}/`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
-                .send();
-            res.should.have.status(200);
-        });
-
     });
 
     describe('Check Post Apis', () => {

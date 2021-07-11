@@ -42,8 +42,7 @@ module.exports = new class HomeController extends Controller {
                 type: req.body.position,
                 password: req.body.password,
                 family: req.body.family,
-                mobile: req.body.mobile,
-                permission: {}
+                mobile: req.body.mobile
             }
 
 
@@ -99,10 +98,7 @@ module.exports = new class HomeController extends Controller {
                     getCustomers: true,
                     getEmployees: true,
                     getDiscounts: true
-                }
-                // for(let i = 0; i< config.permissionCount; i++) {
-                //     params.permission.push({ no: i + 1, status: true })
-                // }    
+                } 
             }
 
             let employer;
@@ -175,44 +171,6 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
-    async getUser(req, res) {
-        try {
-            let user = await this.model.User.findById(req.decodedData.user_id)
-
-            let params = {
-                active: user.active,
-                name: user.name,
-                family: user.family,
-                username: user.username,
-                password: user.password,
-                email: user.email,
-                mobile: user.mobile,
-                company: user.company
-            }
-
-            if(user._id.toString() != user.employer.toString())
-                params.employer = await this.model.User.findById(user.employer, { name: 1, family: 1, username: 1 })
-            else 
-                params.employer = { name: user.name, family: user.family, username: user.username };
-
-            user.employee.splice(0, 1)
-            let filter = { _id: user.employee  }
-            params.employee = await this.model.User.find(filter, { name: 1, family: 1, username: 1 })
-
-            return res.json({ success : true, message : 'اطلاعات کاربر با موفقیت ارسال شد', data : params})
-        }
-        catch (err) {
-            let handelError = new this.transforms.ErrorTransform(err)
-                .parent(this.controllerTag)
-                .class(TAG)
-                .method('getUser')
-                .inputParams(req.body)
-                .call();
-
-            if (!res.headersSent) return res.status(500).json(handelError);
-        }
-    }
-
     async appInfo(req, res) {
         try {
             req.checkBody('versionCode', 'please enter versionCode').notEmpty();
@@ -273,7 +231,7 @@ module.exports = new class HomeController extends Controller {
                 user_active: user.active,
                 user_employer: user.employer,
                 user_company: user.company ? user.company : null,
-                user_type: req.body.position
+                user_type: user.type
             }
             let idToken = jwt.sign(payload, config.secret, options )
 
