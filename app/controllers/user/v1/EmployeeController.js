@@ -119,7 +119,28 @@ module.exports = new class EmployeeController extends Controller {
             let filter = { _id: req.decodedData.user_id }
             let permission = await this.model.User.findOne(filter, { permission: 1, type: 1 })
 
-            return res.json({ success: true, message: "با موفقیت انجام شد", data: permission})
+            let data;
+            //if the user is employee send the application status of it
+            let application = [];
+            if(req.decodedData.user_type == config.employee){
+                filter = { active: true, employee: req.decodedData.user_id }
+                application = await this.model.Application.find(filter, 'status').sort({createdAt:-1}).limit(1)
+                data = {
+                    permission: permission.permission, 
+                    type: permission.type, 
+                    application: application[0].status
+                }
+            }else {
+                data = {
+                    permission: permission.permission, 
+                    type: permission.type, 
+                }
+            }
+
+            
+            
+            
+            return res.json({ success: true, message: "با موفقیت انجام شد", data: data})
             
         }
         catch (err) {
