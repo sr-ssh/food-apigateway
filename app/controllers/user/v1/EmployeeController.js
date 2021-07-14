@@ -124,12 +124,22 @@ module.exports = new class EmployeeController extends Controller {
             let application = [];
             if(req.decodedData.user_type == config.employee){
                 filter = { active: true, employee: req.decodedData.user_id }
-                application = await this.model.Application.find(filter, 'status').sort({createdAt:-1}).limit(1)
+                application = await this.model.Application.find(filter, 'status employer').sort({createdAt:-1}).limit(1)
+                let employer = await this.model.User.findOne({active: true, _id: application[0].employer}, { family: 1, mobile: 1})
+                if(!employer)
+                    return res.json({ success: false, message: "کارفرما موجود نیست", data: {}})
+
                 data = {
                     permission: permission.permission, 
                     type: permission.type, 
-                    application: application[0].status
+                    application: application[0].status,
+                    applicationId: application[0]._id,
+                    employer: {
+                        family: employer.family,
+                        mobile: employer.mobile
+                    }
                 }
+
             }else {
                 data = {
                     permission: permission.permission, 
@@ -332,20 +342,21 @@ module.exports = new class EmployeeController extends Controller {
      
     async editApplication(req, res) {
         try {
+
+            req.checkBody('applicationId', 'please set application id').notEmpty();
+
             if(req.decodedData.user_type == config.employer){
-                req.checkBody('applicationId', 'please set application id').notEmpty();
                 req.checkBody('status', 'please set application status').notEmpty().isInt({min: 2, max: 3});
             }
 
             if(req.decodedData.user_type == config.employee){
-                req.checkBody('employeeId', 'please set employee id').notEmpty();
                 req.checkBody('status', 'please set application status').notEmpty().isInt({min: 3, max: 3});
             }
             if (this.showValidationErrors(req, res)) return;
 
             let filter;
             if(req.decodedData.user_type == config.employee){
-                filter = { active : true, employee: req.body.employeeId }
+                filter = { active : true, _id: req.body.applicationId }
             }
 
             if(req.decodedData.user_type == config.employer){

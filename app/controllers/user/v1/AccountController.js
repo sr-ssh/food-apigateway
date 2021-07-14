@@ -30,7 +30,7 @@ module.exports = new class AccountController extends Controller {
             if(user.type == config.employer)
                 params.company = user.company
 
-            if(user._id.toString() != user.employer.toString())
+            if(user.employer && user._id.toString() != user.employer.toString())
                 params.employer = await this.model.User.findById(user.employer, { family: 1, company: 1 })
             
 

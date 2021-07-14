@@ -183,11 +183,10 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @api {put} /api/user/v1/employee/application edit employee application
  * @apiVersion 1.0.0
  * @apiName editApplication
- * @apiDescription edit employee application, in status : send 1 for in progress, 2 for hired, 3 for closed application. if an employer wants to change the status applicationId is required not employeeId and if an employee wants ti change the status employeeId is required not applicationId . status is required in both way.
+ * @apiDescription edit employee application, in status : send 1 for in progress, 2 for hired, 3 for closed application.
  * @apiGroup employee
  * @apiParam {int} status application status
  * @apiParam {varchar} applicationId application id 
- * @apiParam {varchar} employeeId application id
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
