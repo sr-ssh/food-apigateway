@@ -101,7 +101,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @api {get} /api/user/v1/employee/permission get employees permissions
  * @apiVersion 1.0.0
  * @apiName getEmployeesPermission
- * @apiDescription get employees permission
+ * @apiDescription get employees permission, employees only get the status part in response
  * @apiGroup employee
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -109,7 +109,6 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  *     message: "با موفقیت انجام شد",
  *     data: 
  *      {
- *         _id: "60d9ce1bef1e876eb29265cf",
  *         permission: { 
             addOrder: true,
             getOrders: true,
@@ -119,7 +118,9 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
             getCustomers: true,
             getEmployees: true,
             getDiscounts: true
-          }
+          },
+        type: 1,
+        status: 3
  * }
  */
   router.get('/permission',EmployeeController.getPermission.bind(EmployeeController)); 

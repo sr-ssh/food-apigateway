@@ -137,9 +137,6 @@ module.exports = new class EmployeeController extends Controller {
                 }
             }
 
-            
-            
-            
             return res.json({ success: true, message: "با موفقیت انجام شد", data: data})
             
         }
@@ -207,6 +204,57 @@ module.exports = new class EmployeeController extends Controller {
         try {
 
             let filter = { active: true, employer: req.decodedData.user_employer, status: 1 }
+            let applications = await this.model.Application.find(filter)
+
+            let params = [];
+            for (let index = 0; index < applications.length; index++) {
+                let param = {
+                    id: applications[index]._id,
+                    active: applications[index].active,
+                    status: applications[index].status,
+                    createdAt: applications[index].createdAt,
+                    updatedAt: applications[index].updatedAt,
+                    employee: applications[index].employee,
+                    employer: applications[index].employer
+                }     
+                params.push(param)           
+            }
+
+            let employees = []
+            for (let index = 0; index < applications.length; index++) {
+                employees.push(applications[index].employee)
+            }
+
+            filter = { _id: { $in: employees } }
+            employees = await this.model.User.find(filter, { _id: 1, family: 1, mobile: 1 })
+
+            let employeeInfo;
+            for (let index = 0; index < applications.length; index++) {
+                employeeInfo = employees.find(user => user._id.toString() == applications[index].employee)
+                params[index].employee = employeeInfo;
+            }
+
+
+            return res.json({ success: true, message: "ارسال درخواست ها با موفقیت انجام شد", data: params})
+            
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getApplications')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
+    async getApplication(req, res) {
+        try {
+
+            let filter = { active: true, employee: req.decodedData.user_employer, status: 1 }
             let applications = await this.model.Application.find(filter)
 
             let params = [];

@@ -529,13 +529,13 @@
     "title": "get employees permissions",
     "version": "1.0.0",
     "name": "getEmployeesPermission",
-    "description": "<p>get employees permission</p>",
+    "description": "<p>get employees permission, employees only get the status part in response</p>",
     "group": "employee",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        _id: \"60d9ce1bef1e876eb29265cf\",\n        permission: { \n            addOrder: true,\n            getOrders: true,\n            reminder: true,\n            getProducts: true,\n            finance: true,\n            getCustomers: true,\n            getEmployees: true,\n            getDiscounts: true\n          }\n}",
+          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        permission: { \n            addOrder: true,\n            getOrders: true,\n            reminder: true,\n            getProducts: true,\n            finance: true,\n            getCustomers: true,\n            getEmployees: true,\n            getDiscounts: true\n          },\n        type: 1,\n        status: 3\n}",
           "type": "json"
         }
       ]
@@ -664,26 +664,6 @@
     },
     "filename": "app/routes/user/v1/finance.js",
     "groupTitle": "finance"
-  },
-  {
-    "type": "get",
-    "url": "/api/user/v1/",
-    "title": "get user info.",
-    "version": "1.0.0",
-    "name": "getUser",
-    "description": "<p>get user info. قسمت کارمندان یا کارفرما بسته به کارمند یا کارفرما بودن کاربر ممکن است خالی باشد</p>",
-    "group": "home",
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n    success:true,\n    message:\"اطلاعات کاربر با موفقیت ارسال شد\",\n    data: {\n         active: true,\n         name: \"ریحانه\",\n         family: \"شکوهی\",\n         username: \"r.shokouhi@gmail.com\",\n         password: \"reihaneh@123\",\n         email: \"r.shokouhi@gmail.com\",\n         mobile: \"09307580142\",\n         company: \"teamx\",\n         employer: {\n             name: \"محسن\",\n             family: \"مصطفایی\",\n             username: \"m.mostafaie@gmail.com\"\n         },\n         employee: [...{\n             _id: \"60b49ed8293793335c4875f8\",\n             name: \"زهرا\",\n             family: \"کریمی\",\n             username: \"z.karimi@gmail.com\"\n         }],\n    }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/user/v1/home.js",
-    "groupTitle": "home"
   },
   {
     "type": "post",
@@ -1060,8 +1040,8 @@
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "orderId",
-            "description": "<p>order id</p>"
+            "field": "status",
+            "description": "<p>sms status</p>"
           }
         ]
       }
@@ -1125,6 +1105,26 @@
         {
           "title": "Success-Response:",
           "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \"60b72a70e353f0385c2fe5af\",\n             name: \"لاته\",\n             quantity: 2,\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             mobile: \"09152631225\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/order/sms",
+    "title": "get sms messages and status",
+    "version": "1.0.0",
+    "name": "getSms",
+    "description": "<p>get sms messages and status</p>",
+    "group": "order",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"با موفقیت انجام شد\",\n     data: {}\n}",
           "type": "json"
         }
       ]
