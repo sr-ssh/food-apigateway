@@ -133,12 +133,15 @@ module.exports = new class EmployeeController extends Controller {
                     permission: permission.permission, 
                     type: permission.type, 
                     application: application[0].status,
-                    applicationId: application[0]._id,
-                    employer: {
+                    applicationId: application[0]._id
+                }
+                if(application[0].status !== 3){
+                    data.employer = {
                         family: employer.family,
                         mobile: employer.mobile
                     }
                 }
+
 
             }else {
                 data = {
