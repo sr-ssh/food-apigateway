@@ -317,19 +317,22 @@ module.exports = new class EmployeeController extends Controller {
     async addApplication(req, res) {
         try {
 
-            req.checkBody('mobile', 'please set application id').notEmpty();
+            req.checkBody('mobile', 'please set employer mobile').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
-            let filter = { active : true, _id: req.body.applicationId, employer: req.decodedData.user_employer }
-            let application = await this.model.Application.findOne(filter)
+            let filter = { active : true, mobile: req.body.mobile, type: 1}
+            let employer = await this.model.User.findOne(filter, { id: 1 })
+            if(!employer)
+                return res.json({ success: false, message: " کارفرمایی با این شماره یافت نشد" });
 
-            if(!application)
-                return res.json({ success : false, message : 'درخواستی موجود نیست'})
+            let params = {
+                employer: employer._id,
+                employee: req.decodedData.user_id
+            }
+            await this.model.Application.create(params)
 
-            application.status = req.body.status
-            await application.save()
 
-            res.json({ success : true, message : 'درخواست با موفقیت ویرایش شد'})
+            res.json({ success : true, message : 'درخواست با موفقیت اضافه شد'})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
