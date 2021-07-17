@@ -20,7 +20,6 @@ module.exports = new class AccountController extends Controller {
                 active: user.active,
                 id: user._id,
                 family: user.family,
-                password: user.password,
                 email: user.email,
                 mobile: user.mobile,
                 address: user.address,

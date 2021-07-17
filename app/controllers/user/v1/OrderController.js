@@ -356,6 +356,7 @@ module.exports = new class HomeController extends Controller {
                     break;
             }
         
+            user.markModified('setting.order')
             await user.save();
 
             return res.json({ success : true, message : 'ویرایش با موفقیت انجام شد'})

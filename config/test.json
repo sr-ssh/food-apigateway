@@ -16,12 +16,12 @@
     },
     "test": {
         "user": {
-            "password": "123",
+            "password": "rey",
             "family": "ریحانه شکوهی",
             "email": "m.min@gmail.com",
             "mobile": "09625835475",
             "company": "شکوهی",
-            "mobileOrEmail": "09625328745",
+            "mobileOrEmail": "09307580142",
             "code": "3823",
             "position": 1
         },
@@ -145,9 +145,9 @@
             "company": "mohaddes"
         },
         "editSms": {
-            "type": 1,
-            "text": "سفارش شما با موفقیت ثبت شد. از اینکه مارا انتخاب کرده اید متشکریم",
-            "status": false
+            "type": 2,
+            "text": " ",
+            "status": true
         }
     }
 }

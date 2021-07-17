@@ -26,6 +26,7 @@ let User = new Schema({
                                         getEmployees: false,
                                         getDiscounts: false
                                     }  },
+                                    
     setting: { type: Object } // {
                                 // order: {
                                 //     preSms: { text: config.addOrderSms, status: false },
@@ -47,6 +48,8 @@ User.pre('save', function(next){
         this.password = hash;
         next();
     })
+    
+
 })
 
 User.plugin(timestamps);
