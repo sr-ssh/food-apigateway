@@ -149,6 +149,8 @@ module.exports = new class HomeController extends Controller {
                     status: orders[index].status,
                     products: orders[index].products,
                     customer: orders[index].customer,
+                    address: orders[index].address,
+                    readyTime: orders[index].readyTime,
                     createdAt: orders[index].createdAt,
                     updatedAt: orders[index].updatedAt,
                     employee: orders[index].employee,
@@ -286,12 +288,12 @@ module.exports = new class HomeController extends Controller {
 
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting')
             if (user.setting.order.postDeliverySms.status) {
-                let deliveryMessage = `نام: ${customer.family}\nموبایل: ${customer.mobile}\nآدرس: ${order.address}`
+                let deliveryMessage = `نام: ${customer.family}\nموبایل: ${customer.mobile}\nآدرس: ${order.address}\n`+ user.setting.order.postDeliverySms.text;
                 this.sendSms(req.body.mobile, deliveryMessage)
             }
             if (user.setting.order.postCustomerSms.status) {
                 let customerMessage = user.setting.order.postCustomerSms.text
-                this.sendSms(req.body.mobile, customerMessage)
+                this.sendSms(customer.mobile, customerMessage)
             }
 
         }
@@ -332,7 +334,7 @@ module.exports = new class HomeController extends Controller {
 
             req.checkBody('type', 'please set the sms type').notEmpty().isInt({min: 1, max: 3});
             req.checkBody('status', 'please set the sms status').notEmpty().isBoolean();
-            req.checkBody('text', 'please set the sms text').notEmpty().isString();
+            req.checkBody('text', 'please set the sms text').exists().isString();
             if (this.showValidationErrors(req, res)) return;
 
             let filter = { active : true, _id: req.decodedData.user_employer }
