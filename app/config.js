@@ -14,6 +14,7 @@ module.exports = {
     deliveryAcknowledgeSms: "سفارش شما به راننده تحویل داده شد",
     verificationCodeDuration: 30,
     verificationCodeUnit: "m",
+    verificationCodeText: "کد فعال سازی شما : ",
     employee: 2,
     employer: 1,
     publicRoute: [

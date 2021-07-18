@@ -282,7 +282,7 @@ module.exports = new class HomeController extends Controller {
                 // check verification code valid duration
                 if(timeDiff < config.verificationCodeDuration){
                     code = lastCode.code
-                    this.sendSms(req.body.mobile, code)
+                    this.sendSms(req.body.mobile, config.verificationCodeText + code)
                     return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد" });
                 }
 
@@ -291,8 +291,8 @@ module.exports = new class HomeController extends Controller {
             //generate new code
 
             //generate random number
-            code = this.generateRandomNumber()
-            this.sendSms(req.body.mobile, code)
+            code = this.generateRandomNumber();
+            this.sendSms(req.body.mobile, config.verificationCodeText + code)
 
             //save in mongo
             let params = {
