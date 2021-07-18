@@ -4,10 +4,11 @@ const router = express.Router();
 
 
 const user = require('./user');
+const customer = require('./customer');
 
 
 router.use('/user', user);
-
+router.use('/customer', customer);
 
 
 router.get('/' , (req , res) => {

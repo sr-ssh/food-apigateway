@@ -1,12 +1,12 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
-const sectionName = 'V1 user customer Tests';
-const baseRoute = '/api/user/v1/customer';
+const sectionName = 'V1 customer home Tests';
+const baseRoute = '/api/customer/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let customer, user, getCustomerParams;
+let user,appInfo, accessToken, idToken ;
 const axios = require('axios').default;
 
 
@@ -18,10 +18,12 @@ describe(`${sectionName}`, () => {
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
-        getCustomerParams = appConfig.test.getCustomerParams;
-        axios.post(`http://localhost:4000/api/user/v1/login`, user)
+        appInfo = appConfig.test.appInfo;
+        customer = appConfig.test.customer;
+        axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
             .then(function (response) {
                 response = response.data;
+                console.log(response.message)
                 if (response.success) {
                     idToken = response.data.idToken
                     accessToken = response.data.accessToken
@@ -41,26 +43,36 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get customers', async () => {
+
+    });
+
+    describe('Check Post Apis', () => {
+
+        it('check app info', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/${encodeURI(getCustomerParams.family)}/${encodeURI(getCustomerParams.mobile)}/${encodeURI(getCustomerParams.createdAtFrom)}/${encodeURI(getCustomerParams.createdAtTo)}/${encodeURI(getCustomerParams.lastBuyFrom)}/${encodeURI(getCustomerParams.lastBuyTo)}/${encodeURI(getCustomerParams.orderFrom)}/${encodeURI(getCustomerParams.orderTo)}/${encodeURI(getCustomerParams.totalFrom)}/${encodeURI(getCustomerParams.totalTo)}`)
+                .post(`${baseRoute}/app/info`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
-                .send();
+                .send(appInfo);
             res.should.have.status(200);
         });
 
-        it('check get customer by mobile', async () => {
+        it('check verification code', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/${encodeURI(getCustomerParams.mobile)}`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
-                .send();
+                .post(`${baseRoute}/verificationcode`)
+                .send(customer);
             res.should.have.status(200);
         });
 
+        it('check login', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/login`)
+                .send(customer);
+            res.should.have.status(200);
+        });
 
     });
 

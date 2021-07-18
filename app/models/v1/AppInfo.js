@@ -3,6 +3,7 @@ let Schema = mongoose.Schema;
 const timestamps = require('mongoose-timestamp');
 
 let AppInfo = new Schema({
+    name: { type: String, required: true },
     os: { type: String, required: true },
     latestVersion: { type: String, required: true },
     update: { type: Boolean, required: true },
