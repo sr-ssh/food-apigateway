@@ -10,6 +10,7 @@ module.exports = {
     idTokenExpire: "250 days",
     userScope: "user",
     customerScope: "customer",
+    cookScope: "cook",
     permissionCount: "8",
     addOrderSms: "سفارش شما با موفقیت ثبت شد. از اینکه مارا انتخاب کرده اید متشکریم",
     deliveryAcknowledgeSms: "سفارش شما به راننده تحویل داده شد",
@@ -27,13 +28,16 @@ module.exports = {
         '/api/user/v1/', 
         '/api/user/v1/verificationcode',
         '/api/customer/v1/login', 
-        '/api/customer/v1/verificationcode'
+        '/api/customer/v1/verificationcode',
+        '/api/cook/v1/login', 
+        '/api/cook/v1/verificationcode'
         ],
     path: {
         controllers: {
             root: path.resolve('./app/controllers'),
             user: path.resolve('./app/controllers/user'),
             customer: path.resolve('./app/controllers/customer'),
+            cook: path.resolve('./app/controllers/cook')
         },
         models: {
             root: path.resolve('./app/models/'),

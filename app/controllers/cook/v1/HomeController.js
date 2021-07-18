@@ -70,7 +70,6 @@ module.exports = new class HomeController extends Controller {
     async login(req, res) {
         try {
             req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
-            req.checkBody('family', 'please enter family').notEmpty().isString();
             req.checkBody('code', 'please enter code').notEmpty().isNumeric();
             if (this.showValidationErrors(req, res)) return;
 
@@ -116,7 +115,7 @@ module.exports = new class HomeController extends Controller {
                 audience: config.audience
             }
 
-            payload = { scope : config.userScope};
+            payload = { scope : config.cookScope};
 
             let accessToken = jwt.sign(payload, config.secret, options)
 
@@ -148,7 +147,7 @@ module.exports = new class HomeController extends Controller {
                 return res.json({ success: false, message: "کاربر بلاک می باشد", data: {}})
 
             // save in mongodb
-            let filter = { name: config.customerApp, os: req.body.os, version: req.body.versionCode}
+            let filter = { name: config.cookApp, os: req.body.os, version: req.body.versionCode}
             let updateInfo = await this.model.AppInfo.find(filter).sort({createdAt:-1}).limit(1)
             updateInfo = updateInfo[0]
             if(!updateInfo)

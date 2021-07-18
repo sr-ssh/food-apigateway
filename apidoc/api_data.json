@@ -1,6 +1,146 @@
 [
   {
     "type": "post",
+    "url": "/api/cook/v1/app/info",
+    "title": "app info",
+    "version": "1.0.0",
+    "name": "info",
+    "description": "<p>app info</p>",
+    "group": "cook",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "versionCode",
+            "description": "<p>versionCode</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "os",
+            "description": "<p>os</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n      update:false,\n      updateUrl:\"http://cafebazar.com/ir.team-x.ir/mohsenapp,\n      force:false\n }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n   status: false,\n   message:\"کاربر بلاک می باشد\",\n   data:{}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/cook/v1/home.js",
+    "groupTitle": "cook"
+  },
+  {
+    "type": "post",
+    "url": "/api/cook/v1/login",
+    "title": "login",
+    "version": "1.0.0",
+    "name": "login",
+    "description": "<p>login cook</p>",
+    "group": "cook",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>customer mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": "<p>verification code</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success:true,\n    message:\"کاربر با موفقیت وارد شد\",\n    data:{\n         idToken: idToken, \n         accessToken: accessToken\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:false,\n     message:\"کاربر وارد نشد\",\n     data:{}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/cook/v1/home.js",
+    "groupTitle": "cook"
+  },
+  {
+    "type": "post",
+    "url": "/api/cook/v1/verificationcode",
+    "title": "requset verification Code",
+    "version": "1.0.0",
+    "name": "verificationCode",
+    "description": "<p>requset verification Code</p>",
+    "group": "cook",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>user mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:false,\n     message:\"کاربری با این شماره موبایل در دسترس نمی باشد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/cook/v1/home.js",
+    "groupTitle": "cook"
+  },
+  {
+    "type": "post",
     "url": "/api/customer/v1/app/info",
     "title": "app info",
     "version": "1.0.0",
