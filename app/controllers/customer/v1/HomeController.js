@@ -69,8 +69,9 @@ module.exports = new class HomeController extends Controller {
 
     async login(req, res) {
         try {
-            req.checkBody('mobile', 'please enter mobile or email').notEmpty();
-            req.checkBody('code', 'please enter code').notEmpty();
+            req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
+            req.checkBody('family', 'please enter family').notEmpty().isString();
+            req.checkBody('code', 'please enter code').notEmpty().isNumeric();
             if (this.showValidationErrors(req, res)) return;
 
             //verification code
@@ -96,7 +97,8 @@ module.exports = new class HomeController extends Controller {
             //create the customer
             if (!customer){
                 let params = {
-                    mobile: req.body.mobile
+                    mobile: req.body.mobile,
+                    family: req.body.family
                 }
                 customer = await this.model.Customer.create(params)
             }

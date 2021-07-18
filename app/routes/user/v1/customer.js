@@ -12,7 +12,7 @@ const CustomerController = require(`${userController}/v1/CustomerController`)
  * @apiVersion 1.0.0
  * @apiName getCustomers
  * @apiDescription get customers . respnse description: by "order" field we meant order length, "lastBuy" is the date of the customer last buy,and "total" is the total price of all customer orders. all params are necessary and in case of no entry , there is a flag in parantheses for each param.if that flag entered it asumed as no entry
- * @apiGroup customer
+ * @apiGroup user
  * @apiParam {varchar} family customer family (" ")
  * @apiParam {varchar} mobile customer mobile ("0")
  * @apiParam {varchar} createdAtFrom customer membership from this date ("1900-01-01T05:42:13.845Z")
@@ -47,7 +47,7 @@ const CustomerController = require(`${userController}/v1/CustomerController`)
  * @apiVersion 1.0.0
  * @apiName getCustomer
  * @apiDescription get customer .It gives you the customer information of the mobile you sent , if there is no customer with that mobile number it sends false
- * @apiGroup customer
+ * @apiGroup user
  * @apiParam {Number} mobile customer mobile 
  * @apiSuccessExample {json} Success-Response:
  * {

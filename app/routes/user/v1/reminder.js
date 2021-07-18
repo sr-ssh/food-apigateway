@@ -13,7 +13,7 @@ const ReminderController = require(`${userController}/v1/ReminderController`)
  * @apiVersion 1.0.0
  * @apiName getReminder
  * @apiDescription get Reminder: sends reminders of today.birthday of the customer may not be send because it's optional in the first place.
- * @apiGroup reminder
+ * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,

@@ -12,7 +12,7 @@ const ProductController = require(`${userController}/v1/ProductController`)
  * @apiVersion 1.0.0
  * @apiName addProduct
  * @apiDescription add product.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry
- * @apiGroup product
+ * @apiGroup user
  * @apiParam  {varchar} name product name
  * @apiParam  {varchar} sellingPrice product selling price
  * @apiParam  {varachar} description description of product (" ")
@@ -37,7 +37,7 @@ const ProductController = require(`${userController}/v1/ProductController`)
  * @apiVersion 1.0.0
  * @apiName getProducts
  * @apiDescription get products 
- * @apiGroup product
+ * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
@@ -60,7 +60,7 @@ const ProductController = require(`${userController}/v1/ProductController`)
  * @apiVersion 1.0.0
  * @apiName editProduct
  * @apiDescription edit product: all params must be sent even if they don't have any changes.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry
- * @apiGroup product
+ * @apiGroup user
  * @apiParam {varchar} _id product id
  * @apiParam {varchar} active product activity status
  * @apiParam {varchar} name product name

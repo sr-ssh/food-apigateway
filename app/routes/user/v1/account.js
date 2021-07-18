@@ -11,7 +11,7 @@ const AccountController = require(`${userController}/v1/AccountController`)
  * @apiVersion 1.0.0
  * @apiName getUserAccount
  * @apiDescription get user account. قسمت کارفرما بسته به کارمند یا کارفرما بودن کاربر ممکن است خالی باشد
- * @apiGroup account
+ * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success:true,
@@ -39,7 +39,7 @@ const AccountController = require(`${userController}/v1/AccountController`)
  * @apiVersion 1.0.0
  * @apiName editUserAccount
  * @apiDescription edit user account: only send one of the params, company param is for employers
- * @apiGroup account
+ * @apiGroup user
  * @apiParam {varchar} family user family
  * @apiParam {varchar} address user address
  * @apiParam {varchar} company user company, available for employers only

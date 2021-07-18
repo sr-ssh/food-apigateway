@@ -12,7 +12,7 @@ const HomeController = require(`${userController}/v1/HomeController`)
  * @apiVersion 1.0.0
  * @apiName register
  * @apiDescription register user.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry. position 1 means employer and position 2 means employee.
- * @apiGroup home
+ * @apiGroup user
  * @apiParam  {varchar} password user password
  * @apiParam  {varchar} family  family 
  * @apiParam  {varchar} email email ("a@a.com")
@@ -43,7 +43,7 @@ const HomeController = require(`${userController}/v1/HomeController`)
   * @apiVersion 1.0.0
   * @apiName info
   * @apiDescription app info 
-  * @apiGroup home
+  * @apiGroup user
   * @apiParam  {int} versionCode versionCode
   * @apiParam  {varchar} os os
   * @apiSuccessExample {json} Success-Response:
@@ -73,7 +73,7 @@ const HomeController = require(`${userController}/v1/HomeController`)
   * @apiVersion 1.0.0
   * @apiName login
   * @apiDescription login user
-  * @apiGroup home
+  * @apiGroup user
   * @apiParam  {varchar} mobileOrEmail user mobile or email
   * @apiParam  {varchar} password user password
   * @apiSuccessExample {json} Success-Response:
@@ -102,7 +102,7 @@ const HomeController = require(`${userController}/v1/HomeController`)
  * @apiVersion 1.0.0
  * @apiName verificationCode
  * @apiDescription requset verification Code
- * @apiGroup home
+ * @apiGroup user
  * @apiParam  {varchar} mobile user mobile
  * @apiSuccessExample {json} Success-Response:
  * {

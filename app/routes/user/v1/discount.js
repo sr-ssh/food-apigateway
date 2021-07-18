@@ -12,7 +12,7 @@ const DiscountController = require(`${userController}/v1/DiscountController`)
  * @apiVersion 1.0.0
  * @apiName addDiscount
  * @apiDescription add discount.
- * @apiGroup discount
+ * @apiGroup user
  * @apiParam  {varchar} name product name
  * @apiParam  {Number} customer customer mobile
  * @apiParam  {Number} percentage discount percent (min=0, max=100)
@@ -33,7 +33,7 @@ const DiscountController = require(`${userController}/v1/DiscountController`)
  * @apiVersion 1.0.0
  * @apiName getDiscounts
  * @apiDescription get discounts.There is only 2 types: "تولد" and "فرد" ,if the type be "تولد" then we don't have customer field otherwise we have customer.
- * @apiGroup discount
+ * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,

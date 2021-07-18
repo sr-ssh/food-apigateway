@@ -14,7 +14,7 @@ router.get('/home',HomeController.index.bind(HomeController));
  * @apiVersion 1.0.0
  * @apiName verificationCode
  * @apiDescription requset verification Code
- * @apiGroup home
+ * @apiGroup customer
  * @apiParam  {Number} mobile user mobile
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -34,7 +34,8 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @apiVersion 1.0.0
   * @apiName login
   * @apiDescription login customer
-  * @apiGroup home
+  * @apiGroup customer
+  * @apiParam {String} family customer family
   * @apiParam {Number} mobile customer mobile
   * @apiParam {Number} code verification code
   * @apiSuccessExample {json} Success-Response:
@@ -61,7 +62,7 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @apiVersion 1.0.0
   * @apiName info
   * @apiDescription app info 
-  * @apiGroup home
+  * @apiGroup customer
   * @apiParam  {int} versionCode versionCode
   * @apiParam  {varchar} os os
   * @apiSuccessExample {json} Success-Response:

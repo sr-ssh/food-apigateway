@@ -12,7 +12,7 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @apiVersion 1.0.0
  * @apiName addOrder
  * @apiDescription add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is "1900-01-01T05:42:13.845Z".reminder flag and duration flag are -1.address flag is " "
- * @apiGroup order
+ * @apiGroup user
  * @apiParam {Object[]} products array of product objects
  * @apiParam {Object} customer customer information
  * @apiParam {int} reminder number of days for reminding
@@ -50,7 +50,7 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @apiVersion 1.0.0
  * @apiName getOrders
  * @apiDescription get orders : all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.
- * @apiGroup order
+ * @apiGroup user
  * @apiParam {varchar} customerName customer family (" ")
  * @apiParam {varchar} customerMobile customer mobile number ("0")
  * @apiParam {varchar} startDate get orders from this date ("1900-01-01T05:42:13.845Z")
@@ -88,7 +88,7 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @apiVersion 1.0.0
  * @apiName editOrderStatus
  * @apiDescription edit order status, in status : send 0 for normal order , send 2 to cancele the order
- * @apiGroup order
+ * @apiGroup user
  * @apiParam {int} status order status
  * @apiParam {varchar} orderId order id
  * @apiSuccessExample {json} Success-Response:
@@ -104,7 +104,7 @@ const OrderController = require(`${userController}/v1/OrderController`)
  * @apiVersion 1.0.0
  * @apiName sendDeliverySms
  * @apiDescription send delivery sms, 
- * @apiGroup order
+ * @apiGroup user
  * @apiParam {varchar} mobile delivery mobile
  * @apiParam {varchar} orderId order id
  * @apiSuccessExample {json} Success-Response:
@@ -121,7 +121,7 @@ router.post('/delivery/sms',OrderController.sendDeliverySms.bind(OrderController
  * @apiVersion 1.0.0
  * @apiName editSms
  * @apiDescription edit sms settings, type 1 is customer sms after adding order, type 2 is customer info for delivery, type 3 ic acknowledge for customer that your product is sent.
- * @apiGroup order
+ * @apiGroup user
  * @apiParam {int} type sms type , {min:1, max:3}
  * @apiParam {varchar} text sms text
  * @apiParam {varchar} status sms status
@@ -139,7 +139,7 @@ router.post('/delivery/sms',OrderController.sendDeliverySms.bind(OrderController
  * @apiVersion 1.0.0
  * @apiName getSms
  * @apiDescription get sms messages and status 
- * @apiGroup order
+ * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,

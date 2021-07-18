@@ -13,7 +13,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiVersion 1.0.0
  * @apiName addEmployee
  * @apiDescription add employee
- * @apiGroup employee
+ * @apiGroup user
  * @apiParam {varchar} usernameOrMobile employee username or mobile
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -33,7 +33,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiVersion 1.0.0
  * @apiName getEmployees
  * @apiDescription get employees
- * @apiGroup employee
+ * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,
@@ -58,7 +58,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiVersion 1.0.0
  * @apiName changeEmployeePermission
  * @apiDescription change employee permission
- * @apiGroup employee
+ * @apiGroup user
  * @apiParam {varchar} _id employee id
  * @apiParam {object} permissions object exactly like it is sent
  * @apiSuccessExample {json} Success-Response:
@@ -81,7 +81,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiVersion 1.0.0
  * @apiName removeEmployee
  * @apiDescription remove employee by id
- * @apiGroup employee
+ * @apiGroup user
  * @apiParam {varchar} _id employee id
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -102,7 +102,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiVersion 1.0.0
  * @apiName getEmployeesPermission
  * @apiDescription get employees permission, employees only get the status part in response
- * @apiGroup employee
+ * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,
@@ -133,7 +133,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiVersion 1.0.0
  * @apiName getApplications
  * @apiDescription get employees applications
- * @apiGroup employee
+ * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,
@@ -161,7 +161,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiVersion 1.0.0
  * @apiName addApplication
  * @apiDescription add application
- * @apiGroup employee
+ * @apiGroup user
  * @apiParam {varchar} mobile employer mobile
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -184,7 +184,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiVersion 1.0.0
  * @apiName editApplication
  * @apiDescription edit employee application, in status : send 1 for in progress, 2 for hired, 3 for closed application.
- * @apiGroup employee
+ * @apiGroup user
  * @apiParam {int} status application status
  * @apiParam {varchar} applicationId application id 
  * @apiSuccessExample {json} Success-Response:

@@ -4,7 +4,7 @@ const timestamps = require('mongoose-timestamp');
 
 let Customer = new Schema({
     active: { type: Boolean, default: true },
-    family: { type: String },
+    family: { type: String, required: true },
     username: { type: String, required: true, sparse: true  },
     mobile: { type: String, required: true, sparse: true  },
     birthday: { type: Date},
