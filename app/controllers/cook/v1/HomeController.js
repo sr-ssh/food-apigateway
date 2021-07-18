@@ -90,17 +90,11 @@ module.exports = new class HomeController extends Controller {
             //remove the code
             await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
 
-            // check customer
+            // check user
             filter = { active: true, mobile: req.body.mobile }
-            let customer = await this.model.Customer.findOne(filter);
-
-            //create the customer
-            if (!customer){
-                let params = {
-                    mobile: req.body.mobile,
-                    family: req.body.family
-                }
-                customer = await this.model.Customer.create(params)
+            let user = await this.model.User.findOne(filter);
+            if (!user){
+                return res.json({ success: false, message: "کاربر در دسترس نمی باشد", data: {} });
             }
 
             let options = {
@@ -110,8 +104,8 @@ module.exports = new class HomeController extends Controller {
                 audience: config.audience
             }
             let payload = {
-                user_id: customer._id,
-                user_active: customer.active
+                user_id: user._id,
+                user_active: user.active
             }
             let idToken = jwt.sign(payload, config.secret, options )
 
@@ -122,7 +116,7 @@ module.exports = new class HomeController extends Controller {
                 audience: config.audience
             }
 
-            payload = { scope : config.customerScope};
+            payload = { scope : config.userScope};
 
             let accessToken = jwt.sign(payload, config.secret, options)
 

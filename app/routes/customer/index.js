@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 //middlewares
-const authMiddleware = require("./../middleware/auth")
+const authMiddleware = require("./../middleware/customerAuth")
 const authError = require('./../middleware/authError');
 
 const v1 = require('./v1');
