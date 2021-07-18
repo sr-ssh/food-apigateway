@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
 
 
 
-http.listen(port,"192.168.1.127" , () => {
+http.listen(port, () => {
     console.log('server running on  ' + port);
 });
 
