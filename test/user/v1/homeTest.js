@@ -20,7 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
         newUser = appConfig.test.newUser;
-        axios.post(`http://192.168.1.127:4000/api/user/v1/login`, user)
+        axios.post(`http://localhost:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
                 if (response.success) {
@@ -41,16 +41,6 @@ describe(`${sectionName}`, () => {
 
 
     describe('Check get Apis', () => {
-
-        it('check get user', async () => {
-            const res = await chai
-                .request(server)
-                .get(`${baseRoute}/`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
-                .send();
-            res.should.have.status(200);
-        });
 
     });
 
@@ -80,6 +70,15 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(appInfo);
+            res.should.have.status(200);
+        });
+
+        
+        it('check verification code', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/verificationcode`)
+                .send(newUser);
             res.should.have.status(200);
         });
 

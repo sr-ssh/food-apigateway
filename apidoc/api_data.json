@@ -1,5 +1,81 @@
 [
   {
+    "type": "put",
+    "url": "/api/user/v1/account",
+    "title": "edit user account",
+    "version": "1.0.0",
+    "name": "editUserAccount",
+    "description": "<p>edit user account: only send one of the params, company param is for employers</p>",
+    "group": "account",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "family",
+            "description": "<p>user family</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "address",
+            "description": "<p>user address</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "company",
+            "description": "<p>user company, available for employers only</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"اطلاعات کاربر با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n    success: false,\n    message: \"اطلاعات وارد شده صحیح نمی باشد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/account.js",
+    "groupTitle": "account"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/account",
+    "title": "get user account",
+    "version": "1.0.0",
+    "name": "getUserAccount",
+    "description": "<p>get user account. قسمت کارفرما بسته به کارمند یا کارفرما بودن کاربر ممکن است خالی باشد</p>",
+    "group": "account",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success:true,\n    message:\"اطلاعات کاربر با موفقیت ارسال شد\",\n    data: {\n         active: true,\n         _id: \"60d72865519b311c905f9566\",\n         family: \"شکوهی\",\n         password: \"reihaneh@123\",\n         email: \"r.shokouhi@gmail.com\",\n         mobile: \"09307580142\",\n         employer: {\n             _id: \"60d72865519b311c905f9566\",\n             family: \"مصطفایی\",\n             company: \"teamx\"\n         }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/account.js",
+    "groupTitle": "account"
+  },
+  {
     "type": "get",
     "url": "/api/user/v1/customer/",
     "title": "get customer",
@@ -220,6 +296,48 @@
   },
   {
     "type": "post",
+    "url": "/api/user/v1/employee/application",
+    "title": "add application",
+    "version": "1.0.0",
+    "name": "addApplication",
+    "description": "<p>add application</p>",
+    "group": "employee",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>employer mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"درخواست با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: false,\n     message: \"درخواستی موجود نیست\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
+    "type": "post",
     "url": "/api/user/v1/employee",
     "title": "add employee",
     "version": "1.0.0",
@@ -280,10 +398,10 @@
           },
           {
             "group": "Parameter",
-            "type": "object[]",
+            "type": "object",
             "optional": false,
             "field": "permissions",
-            "description": "<p>array of employee new permissions {no: 1, status: true}</p>"
+            "description": "<p>object exactly like it is sent</p>"
           }
         ]
       }
@@ -302,6 +420,82 @@
         {
           "title": "Error-Response:",
           "content": "{\n    success: false,\n    message: \"دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا نکرد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
+    "type": "put",
+    "url": "/api/user/v1/employee/application",
+    "title": "edit employee application",
+    "version": "1.0.0",
+    "name": "editApplication",
+    "description": "<p>edit employee application, in status : send 1 for in progress, 2 for hired, 3 for closed application. if an employer wants to change the status applicationId is required not employeeId and if an employee wants ti change the status employeeId is required not applicationId . status is required in both way.</p>",
+    "group": "employee",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>application status</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "applicationId",
+            "description": "<p>application id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "employeeId",
+            "description": "<p>application id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"درخواست با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: false,\n     message: \"درخواستی موجود نیست\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "employee"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/employee/application",
+    "title": "get employees applications",
+    "version": "1.0.0",
+    "name": "getApplications",
+    "description": "<p>get employees applications</p>",
+    "group": "employee",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"ارسال درخواست ها با موفقیت انجام شد\",\n    data: \n     {\n         \"id\": \"60d9ce1bef1e876eb29265cf\",\n         \"active\": true,\n         \"status\": 1,\n         \"employer\": \"60d9ce1bef1e876eb29278c4\",\n         \"employee\": {\n             \"_id\": \"\",\n             \"family\": \"شکوهی\",\n             \"mobile\": \"09307580142\"\n         },\n         \"createdAt\": \"2021-06-01T06:54:01.691Z\",\n         \"updatedAt\": \"2021-06-01T06:54:01.691Z\"\n}",
           "type": "json"
         }
       ]
@@ -335,13 +529,13 @@
     "title": "get employees permissions",
     "version": "1.0.0",
     "name": "getEmployeesPermission",
-    "description": "<p>get employees permission</p>",
+    "description": "<p>get employees permission, employees only get the status part in response</p>",
     "group": "employee",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        \"_id\": \"60d9ce1bef1e876eb29265cf\",\n        \"permission\": [...\n        {\n          \"no\": 1,\n          \"status\": true\n        },\n        {\n          \"no\": 2,\n          \"status\": false\n       }]\n}",
+          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        permission: { \n            addOrder: true,\n            getOrders: true,\n            reminder: true,\n            getProducts: true,\n            finance: true,\n            getCustomers: true,\n            getEmployees: true,\n            getDiscounts: true\n          },\n        type: 1,\n        status: 3\n}",
           "type": "json"
         }
       ]
@@ -472,26 +666,6 @@
     "groupTitle": "finance"
   },
   {
-    "type": "get",
-    "url": "/api/user/v1/",
-    "title": "get user info.",
-    "version": "1.0.0",
-    "name": "getUser",
-    "description": "<p>get user info. قسمت کارمندان یا کارفرما بسته به کارمند یا کارفرما بودن کاربر ممکن است خالی باشد</p>",
-    "group": "home",
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n    success:true,\n    message:\"اطلاعات کاربر با موفقیت ارسال شد\",\n    data: {\n         active: true,\n         name: \"ریحانه\",\n         family: \"شکوهی\",\n         username: \"r.shokouhi@gmail.com\",\n         password: \"reihaneh@123\",\n         email: \"r.shokouhi@gmail.com\",\n         mobile: \"09307580142\",\n         company: \"teamx\",\n         employer: {\n             name: \"محسن\",\n             family: \"مصطفایی\",\n             username: \"m.mostafaie@gmail.com\"\n         },\n         employee: [...{\n             _id: \"60b49ed8293793335c4875f8\",\n             name: \"زهرا\",\n             family: \"کریمی\",\n             username: \"z.karimi@gmail.com\"\n         }],\n    }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/user/v1/home.js",
-    "groupTitle": "home"
-  },
-  {
     "type": "post",
     "url": "/api/user/v1/app/info",
     "title": "app info",
@@ -595,7 +769,7 @@
     "title": "register",
     "version": "1.0.0",
     "name": "register",
-    "description": "<p>register user.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry</p>",
+    "description": "<p>register user.all params are necessary and in case of no entry , there is a flag in parantheses for each optional param.if that flag entered it asumed as no entry. position 1 means employer and position 2 means employee.</p>",
     "group": "home",
     "parameter": {
       "fields": {
@@ -632,8 +806,36 @@
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "company",
-            "description": "<p>company name (&quot; &quot;)</p>"
+            "field": "code",
+            "description": "<p>verification code</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "position",
+            "description": "<p>user position: employee(2) or employer(1)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "companyName",
+            "description": "<p>company name: required for employer only</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "companyAddress",
+            "description": "<p>company address: required for employer only</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "employerMobile",
+            "description": "<p>employer mobile: required for employee only</p>"
           }
         ]
       }
@@ -652,6 +854,48 @@
         {
           "title": "Error-Response:",
           "content": "{\n    success:false,\n    message:\"کاربری با این مشخصات موجود است\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/home.js",
+    "groupTitle": "home"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/v1/verificationcode",
+    "title": "requset verification Code",
+    "version": "1.0.0",
+    "name": "verificationCode",
+    "description": "<p>requset verification Code</p>",
+    "group": "home",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>user mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:false,\n     message:\"کاربری با این شماره موبایل در دسترس نمی باشد\"\n}",
           "type": "json"
         }
       ]
@@ -768,6 +1012,53 @@
     "groupTitle": "order"
   },
   {
+    "type": "put",
+    "url": "/api/user/v1/order/sms",
+    "title": "edit sms settings",
+    "version": "1.0.0",
+    "name": "editSms",
+    "description": "<p>edit sms settings, type 1 is customer sms after adding order, type 2 is customer info for delivery, type 3 ic acknowledge for customer that your product is sent.</p>",
+    "group": "order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "type",
+            "description": "<p>sms type , {min:1, max:3}</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "text",
+            "description": "<p>sms text</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "status",
+            "description": "<p>sms status</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"ویرایش با موفقیت انجام شد\"",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/order.js",
+    "groupTitle": "order"
+  },
+  {
     "type": "get",
     "url": "/api/user/v1/order/",
     "title": "get orders",
@@ -814,6 +1105,26 @@
         {
           "title": "Success-Response:",
           "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         products: [...{\n             _id: \"60b72a70e353f0385c2fe5af\",\n             name: \"لاته\",\n             quantity: 2,\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             mobile: \"09152631225\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/order.js",
+    "groupTitle": "order"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/order/sms",
+    "title": "get sms messages and status",
+    "version": "1.0.0",
+    "name": "getSms",
+    "description": "<p>get sms messages and status</p>",
+    "group": "order",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"با موفقیت انجام شد\",\n     data: {}\n}",
           "type": "json"
         }
       ]

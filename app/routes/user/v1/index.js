@@ -8,7 +8,9 @@ const product = require('./product')
 const customer = require('./customer');
 const finance = require('./finance');
 const reminder = require('./reminder');
-const discount = require('./discount')
+const discount = require('./discount');
+const account = require('./account');
+
 
 
 
@@ -20,5 +22,7 @@ router.use('/customer', customer)
 router.use('/finance', finance)
 router.use('/reminder', reminder)
 router.use('/discount', discount)
+router.use('/account', account)
+
 
 module.exports = router;

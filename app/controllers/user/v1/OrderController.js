@@ -19,8 +19,8 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty().isNumeric();
             req.checkBody('customer.birthday', 'please enter customer birthday').notEmpty().isISO8601();
             req.checkBody('reminder', 'please enter customer birthday').notEmpty().isInt({min: -1});
-            req.checkBody('customer.address', 'please enter address').notEmpty().isString();
-            req.checkBody('customer.duration', 'please enter order duration').notEmpty().isInt({min: -1});
+            req.checkBody('address', 'please enter address').notEmpty().isString();
+            req.checkBody('duration', 'please enter order duration').notEmpty().isInt({min: -1});
             if (this.showValidationErrors(req, res)) return;
 
             const TIME_FLAG = "1900-01-01T05:42:13.845Z";
@@ -55,10 +55,10 @@ module.exports = new class HomeController extends Controller {
             }
 
             if(req.body.address != STRING_FLAG)
-                params.address = req.body.customer.address
+                params.address = req.body.address
             if(req.body.duration != INT_FLAG){
                 const event = new Date();
-                event.setMinutes(event.getMinutes() + parseInt(req.body.customer.duration));
+                event.setMinutes(event.getMinutes() + parseInt(req.body.duration));
                 params.readyTime = event.toISOString()
             }
 
@@ -91,12 +91,12 @@ module.exports = new class HomeController extends Controller {
             res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
 
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting company')
-            if (user.setting[0].order[0].sms) {
+            if (user.setting.order.preSms.status) {
                 let message = ""
                 if(user.company)
-                    message = user.setting[0].order[0].addOrderSms + ` "${req.decodedData.user_company}"`
+                    message = user.setting.order.preSms.text + ` \n${req.decodedData.user_company}`
                 else
-                    message = user.setting[0].order[0].addOrderSms
+                    message = user.setting.order.preSms.text
 
                 this.sendSms(req.body.customer.mobile, message)
             }
@@ -124,6 +124,11 @@ module.exports = new class HomeController extends Controller {
 
             const TIME_FLAG = "1900-01-01T05:42:13.845Z";
 
+            if(req.params.endDate !== TIME_FLAG){
+                let nextDay = new Date(req.params.endDate).setDate(new Date(req.params.endDate).getDate() + 1);
+                req.params.endDate = nextDay
+            }
+
             let filter ;
             if(req.params.startDate != TIME_FLAG && req.params.endDate === TIME_FLAG)
                 filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $gt: req.params.startDate}}] }
@@ -135,6 +140,7 @@ module.exports = new class HomeController extends Controller {
                 filter = { $and:[{provider: req.decodedData.user_employer}, {createdAt: { $lt: req.params.endDate }}, {createdAt: { $gt: req.params.startDate}}] }
 
             let orders = await this.model.Order.find(filter).sort({createdAt: -1});
+
             let params = [];
             for (let index = 0; index < orders.length; index++) {
                 let param = {
@@ -143,6 +149,8 @@ module.exports = new class HomeController extends Controller {
                     status: orders[index].status,
                     products: orders[index].products,
                     customer: orders[index].customer,
+                    address: orders[index].address,
+                    readyTime: orders[index].readyTime,
                     createdAt: orders[index].createdAt,
                     updatedAt: orders[index].updatedAt,
                     employee: orders[index].employee,
@@ -279,20 +287,87 @@ module.exports = new class HomeController extends Controller {
             res.json({ success : true, message : 'پیام اطلاعات مشتری ارسال شد'})
 
             let user = await this.model.User.findOne({_id: req.decodedData.user_employer}, 'setting')
-            let deliveryMessage = `نام: ${customer.family}
-                                    موبایل: ${customer.mobile}
-                                    آدرس: ${order.address}`
-            let customerMessage = user.setting[0].order[1].deliveryAcknowledgeSms
-
-            this.sendSms(req.body.mobile, deliveryMessage)
-            this.sendSms(req.body.mobile, customerMessage)
+            if (user.setting.order.postDeliverySms.status) {
+                let deliveryMessage = `نام: ${customer.family}\nموبایل: ${customer.mobile}\nآدرس: ${order.address}\n`+ user.setting.order.postDeliverySms.text;
+                this.sendSms(req.body.mobile, deliveryMessage)
+            }
+            if (user.setting.order.postCustomerSms.status) {
+                let customerMessage = user.setting.order.postCustomerSms.text
+                this.sendSms(customer.mobile, customerMessage)
+            }
 
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('sendOrderInfoSms')
+                .method('sendDeliverySms')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+    async getSms(req, res) {
+        try {
+            
+            let filter = { _id: req.decodedData.user_id }
+            let user = await this.model.User.findOne(filter, 'setting')
+
+            res.json({ success: true, message: "با موفقیت انجام شد", data: user}) 
+
+        } catch (err) {
+                let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getSms')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+    async editSms(req, res) {
+        try {
+
+            req.checkBody('type', 'please set the sms type').notEmpty().isInt({min: 1, max: 3});
+            req.checkBody('status', 'please set the sms status').notEmpty().isBoolean();
+            req.checkBody('text', 'please set the sms text').exists().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.decodedData.user_employer }
+            let user = await this.model.User.findOne(filter)
+            let type = req.body.type
+
+            switch (type) {
+                case 1:
+                    user.setting.order.preSms.status = req.body.status
+                    user.setting.order.preSms.text = req.body.text
+                    break;
+                case 2:
+                    user.setting.order.postDeliverySms.status = req.body.status
+                    user.setting.order.postDeliverySms.text = req.body.text
+                    break;
+                case 3:
+                    user.setting.order.postCustomerSms.status = req.body.status
+                    user.setting.order.postCustomerSms.text = req.body.text
+                    break;
+                default:
+                    break;
+            }
+        
+            user.markModified('setting.order')
+            await user.save();
+
+            return res.json({ success : true, message : 'ویرایش با موفقیت انجام شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editSms')
                 .inputParams(req.body)
                 .call();
 

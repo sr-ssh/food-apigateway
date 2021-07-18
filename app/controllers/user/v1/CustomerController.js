@@ -30,14 +30,26 @@ module.exports = new class CustomerController extends Controller {
             const NUMBER_FLAG = "0";
 
             let filter = {active: true, user: req.decodedData.user_employer};
+
+            if(req.params.createdAtTo !== TIME_FLAG){
+                let nextDay = new Date(req.params.createdAtTo).setDate(new Date(req.params.createdAtTo).getDate() + 1);
+                req.params.createdAtTo = nextDay
+            }
+            if(req.params.lastBuyTo !== TIME_FLAG){
+                let nextDay = new Date(req.params.lastBuyTo).setDate(new Date(req.params.lastBuyTo).getDate() + 1);
+                req.params.lastBuyTo = new Date(nextDay)
+            }
             
             //filtering mobile, creadtedAtTo, and creadtedAtFrom
             if(req.params.mobile !== NUMBER_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, mobile: req.params.mobile }
             if(req.params.createdAtFrom !== TIME_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, createdAt: { $gt: req.params.createdAtFrom} }
-            if(req.params.createdAtTo !== TIME_FLAG)
+            if(req.params.createdAtTo !== TIME_FLAG){
                 filter = { active:true, user: req.decodedData.user_employer, createdAt: { $lt: req.params.createdAtTo} }
+
+            }
+                
             
             if(req.params.mobile !== NUMBER_FLAG && req.params.createdAtFrom !== TIME_FLAG)
                 filter = { active:true, user: req.decodedData.user_employer, mobile: req.params.mobile, createdAt: { $gt: req.params.createdAtFrom} }
@@ -119,7 +131,7 @@ module.exports = new class CustomerController extends Controller {
                 })
             if(req.params.lastBuyTo !== TIME_FLAG)
                 params = params.filter(param => {
-                        return param.lastBuy.toISOString() <= req.params.lastBuyTo
+                        return param.lastBuy.toISOString() <= req.params.lastBuyTo.toISOString()
                 })
             if(req.params.orderFrom !== NUMBER_FLAG)
                 params = params.filter(param => {

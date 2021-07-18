@@ -60,7 +60,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @apiDescription change employee permission
  * @apiGroup employee
  * @apiParam {varchar} _id employee id
- * @apiParam {object[]} permissions array of employee new permissions {no: 1, status: true}
+ * @apiParam {object} permissions object exactly like it is sent
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success: true,
@@ -101,7 +101,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  * @api {get} /api/user/v1/employee/permission get employees permissions
  * @apiVersion 1.0.0
  * @apiName getEmployeesPermission
- * @apiDescription get employees permission
+ * @apiDescription get employees permission, employees only get the status part in response
  * @apiGroup employee
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -109,19 +109,96 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  *     message: "با موفقیت انجام شد",
  *     data: 
  *      {
- *         "_id": "60d9ce1bef1e876eb29265cf",
- *         "permission": [...
- *         {
- *           "no": 1,
- *           "status": true
- *         },
- *         {
- *           "no": 2,
- *           "status": false
- *        }]
+ *         permission: { 
+            addOrder: true,
+            getOrders: true,
+            reminder: true,
+            getProducts: true,
+            finance: true,
+            getCustomers: true,
+            getEmployees: true,
+            getDiscounts: true
+          },
+        type: 1,
+        status: 3
  * }
  */
   router.get('/permission',EmployeeController.getPermission.bind(EmployeeController)); 
+
+
+
+  
+/**
+ * @api {get} /api/user/v1/employee/application get employees applications
+ * @apiVersion 1.0.0
+ * @apiName getApplications
+ * @apiDescription get employees applications
+ * @apiGroup employee
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success: true,
+ *     message: "ارسال درخواست ها با موفقیت انجام شد",
+ *     data: 
+ *      {
+ *          "id": "60d9ce1bef1e876eb29265cf",
+ *          "active": true,
+ *          "status": 1,
+ *          "employer": "60d9ce1bef1e876eb29278c4",
+ *          "employee": {
+ *              "_id": "",
+ *              "family": "شکوهی",
+ *              "mobile": "09307580142"
+ *          },
+ *          "createdAt": "2021-06-01T06:54:01.691Z",
+ *          "updatedAt": "2021-06-01T06:54:01.691Z"
+ * }
+ */
+ router.get('/application',EmployeeController.getApplications.bind(EmployeeController)); 
+
+
+/**
+ * @api {post} /api/user/v1/employee/application add application
+ * @apiVersion 1.0.0
+ * @apiName addApplication
+ * @apiDescription add application
+ * @apiGroup employee
+ * @apiParam {varchar} mobile employer mobile
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "درخواست با موفقیت ویرایش شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: false,
+ *      message: "درخواستی موجود نیست"
+ * }
+ */
+ router.post('/application',EmployeeController.addApplication.bind(EmployeeController));
+
+
+
+
+/**
+ * @api {put} /api/user/v1/employee/application edit employee application
+ * @apiVersion 1.0.0
+ * @apiName editApplication
+ * @apiDescription edit employee application, in status : send 1 for in progress, 2 for hired, 3 for closed application.
+ * @apiGroup employee
+ * @apiParam {int} status application status
+ * @apiParam {varchar} applicationId application id 
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "درخواست با موفقیت ویرایش شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: false,
+ *      message: "درخواستی موجود نیست"
+ * }
+ */
+router.put('/application',EmployeeController.editApplication.bind(EmployeeController));
 
   
 

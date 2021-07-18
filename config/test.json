@@ -18,17 +18,23 @@
         "user": {
             "password": "rey",
             "family": "ریحانه شکوهی",
-            "email": "r.sh@gmail.com",
-            "mobile": "09307580142",
+            "email": "m.min@gmail.com",
+            "mobile": "09625835475",
             "company": "شکوهی",
-            "mobileOrEmail": "09307580142"
+            "mobileOrEmail": "09307580142",
+            "code": "3823",
+            "position": 1
         },
         "newUser": {
             "password": "123",
-            "family": "حسن رضایی",
-            "email": "h.rezali1@gmail.com",
-            "mobile": "09652352148",
-            "company": "harez"
+            "family": "علی محمودی",
+            "email": "a.mhm@gmail.com",
+            "mobile": "09520321475",
+            "code": "1899",
+            "position": 2,
+            "companyName": "mhmnejad",
+            "companyAddress": "راهنمایی 24222",
+            "employerMobile": "09532586598"
         },
         "userScope": "user",
         "customer": {
@@ -87,10 +93,10 @@
         "getCustomerParams": {
             "family": " ",
             "mobile": "0",
-            "createdAtFrom": "2021-06-21",
-            "createdAtTo": "2021-06-24",
+            "createdAtFrom": "1900-01-01T05:42:13.845Z",
+            "createdAtTo": "1900-01-01T05:42:13.845Z",
             "lastBuyFrom": "1900-01-01T05:42:13.845Z",
-            "lastBuyTo": "1900-01-01T05:42:13.845Z",
+            "lastBuyTo": "2021-07-06",
             "orderFrom": "0",
             "orderTo": "0",
             "totalFrom": "0",
@@ -105,40 +111,16 @@
         },
         "editedEmployee": {
             "_id": "60d953d772c6de4484069ecb",
-            "permissions": [
-                {
-                    "no": 1,
-                    "status": true
-                },
-                {
-                    "no": 2,
-                    "status": true
-                },
-                {
-                    "no": 3,
-                    "status": true
-                },
-                {
-                    "no": 4,
-                    "status": true
-                },
-                {
-                    "no": 5,
-                    "status": true
-                },
-                {
-                    "no": 6,
-                    "status": true
-                },
-                {
-                    "no": 7,
-                    "status": true
-                },
-                {
-                    "no": 8,
-                    "status": true
-                }
-            ]
+            "permissions": {
+                "addOrder": true,
+                "getOrders": true,
+                "reminder": true,
+                "getProducts": true,
+                "finance": true,
+                "getCustomers": true,
+                "getEmployees": true,
+                "getDiscounts": true
+            }
         },
         "deleteEmployee": {
             "_id": "60d823a1f674e530e09fc6ce"
@@ -150,6 +132,22 @@
         "deliverySms": {
             "orderId": "60e1b387cef3a81c70726ede",
             "mobile": "09307580142"
+        },
+        "editApplicationByEmployer": {
+            "applicationId": "60e555fd9637c83760618ac9",
+            "status": 3
+        },
+        "editApplicationByEmployee": {
+            "employeeId": "60e555fd9637c83760618ac8",
+            "status": 3
+        },
+        "editAccount": {
+            "company": "mohaddes"
+        },
+        "editSms": {
+            "type": 2,
+            "text": " ",
+            "status": true
         }
     }
 }
