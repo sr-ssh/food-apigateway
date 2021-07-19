@@ -5,12 +5,12 @@ const router = express.Router();
 
 const user = require('./user');
 const customer = require('./customer');
-const cook = require('./cook');
+const kitchen = require('./kitchen');
 
 
 router.use('/user', user);
 router.use('/customer', customer);
-router.use('/cook', cook);
+router.use('/kitchen', kitchen);
 
 
 router.get('/' , (req , res) => {

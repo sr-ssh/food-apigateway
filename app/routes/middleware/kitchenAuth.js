@@ -43,7 +43,7 @@ module.exports = (req, res, next) => {
                 massage: "accessToken is not valid"
             };
     
-        let has_scopes = decoded.scope === config.cookScope;
+        let has_scopes = decoded.scope === config.kitchenScope;
         if (!has_scopes) 
             throw {
                 name: 'UnauthorizedError', 

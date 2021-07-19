@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 // controllers 
-const { cook: cookController } = config.path.controllers;
+const { kitchen: kitchenController } = config.path.controllers;
 
-const HomeController = require(`${cookController}/v1/HomeController`)
+const HomeController = require(`${kitchenController}/v1/HomeController`)
 
 router.get('/home',HomeController.index.bind(HomeController));
 
   
 /**
- * @api {post} /api/cook/v1/verificationcode requset verification Code 
+ * @api {post} /api/kitchen/v1/verificationcode requset verification Code 
  * @apiVersion 1.0.0
  * @apiName verificationCode
  * @apiDescription requset verification Code
- * @apiGroup cook
+ * @apiGroup kitchen
  * @apiParam  {Number} mobile user mobile
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -30,11 +30,11 @@ router.get('/home',HomeController.index.bind(HomeController));
  router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
 
   /**
-  * @api {post} /api/cook/v1/login login
+  * @api {post} /api/kitchen/v1/login login
   * @apiVersion 1.0.0
   * @apiName login
-  * @apiDescription login cook
-  * @apiGroup cook
+  * @apiDescription login kitchen
+  * @apiGroup kitchen
   * @apiParam {Number} mobile customer mobile
   * @apiParam {Number} code verification code
   * @apiSuccessExample {json} Success-Response:
@@ -57,11 +57,11 @@ router.get('/home',HomeController.index.bind(HomeController));
 
 
     /**
-  * @api {post} /api/cook/v1/app/info app info 
+  * @api {post} /api/kitchen/v1/app/info app info 
   * @apiVersion 1.0.0
   * @apiName info
   * @apiDescription app info 
-  * @apiGroup cook
+  * @apiGroup kitchen
   * @apiParam  {int} versionCode versionCode
   * @apiParam  {varchar} os os
   * @apiSuccessExample {json} Success-Response:

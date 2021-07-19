@@ -115,7 +115,7 @@ module.exports = new class HomeController extends Controller {
                 audience: config.audience
             }
 
-            payload = { scope : config.cookScope};
+            payload = { scope : config.kitchenScope};
 
             let accessToken = jwt.sign(payload, config.secret, options)
 
@@ -147,7 +147,7 @@ module.exports = new class HomeController extends Controller {
                 return res.json({ success: false, message: "کاربر بلاک می باشد", data: {}})
 
             // save in mongodb
-            let filter = { name: config.cookApp, os: req.body.os, version: req.body.versionCode}
+            let filter = { name: config.kitchenApp, os: req.body.os, version: req.body.versionCode}
             let updateInfo = await this.model.AppInfo.find(filter).sort({createdAt:-1}).limit(1)
             updateInfo = updateInfo[0]
             if(!updateInfo)

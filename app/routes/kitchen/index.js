@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 //middlewares
-const authMiddleware = require("../middleware/cookAuth")
+const authMiddleware = require("../middleware/kitchenAuth")
 const authError = require('../middleware/authError');
 
 const v1 = require('./v1');

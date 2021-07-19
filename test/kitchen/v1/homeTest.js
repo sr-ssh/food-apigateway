@@ -1,12 +1,12 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
-const sectionName = 'V1 cook home Tests';
-const baseRoute = '/api/cook/v1';
+const sectionName = 'V1 kitchen home Tests';
+const baseRoute = '/api/kitchen/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, cook;
+let user,appInfo, accessToken, idToken, kitchen;
 const axios = require('axios').default;
 
 
@@ -19,8 +19,8 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
-        cook = appConfig.test.cook;
-        axios.post(`http://localhost:4000/api/cook/v1/login`, cook)
+        kitchen = appConfig.test.kitchen;
+        axios.post(`http://localhost:4000/api/kitchen/v1/login`, kitchen)
             .then(function (response) {
                 response = response.data;
                 console.log(response.message)
@@ -62,7 +62,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/verificationcode`)
-                .send(cook);
+                .send(kitchen);
             res.should.have.status(200);
         });
 
@@ -70,7 +70,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/login`)
-                .send(cook);
+                .send(kitchen);
             res.should.have.status(200);
         });
 
