@@ -1,4 +1,3 @@
-const { param } = require("express-validator/check");
 
 const Controller = require(`${config.path.controllers.user}/Controller`);
 const TAG = 'v1_Customer';

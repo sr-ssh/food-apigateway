@@ -1,14 +1,13 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
-const sectionName = 'V1 kitchen home Tests';
-const baseRoute = '/api/kitchen/v1';
+const sectionName = 'V1 kitchen order Tests';
+const baseRoute = '/api/kitchen/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, cook;
+let cook, accessToken, idToken;
 const axios = require('axios').default;
-
 
 chai.use(chaiHttp);
 
@@ -17,8 +16,6 @@ describe(`${sectionName}`, () => {
 
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
-        user = appConfig.test.user;
-        appInfo = appConfig.test.appInfo;
         cook = appConfig.test.cook;
         axios.post(`http://localhost:4000/api/kitchen/v1/login`, cook)
             .then(function (response) {
@@ -43,37 +40,20 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-
-    });
-
-    describe('Check Post Apis', () => {
-
-        it('check app info', async () => {
+        it('check get orders', async () => {
             const res = await chai
                 .request(server)
-                .post(`${baseRoute}/app/info`)
+                .get(`${baseRoute}/`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
-                .send(appInfo);
+                .send();
             res.should.have.status(200);
         });
+    });
 
-        it('check verification code', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/verificationcode`)
-                .send(cook);
-            res.should.have.status(200);
-        });
+    describe('Check Put Apis', () => {
 
-        it('check login', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/login`)
-                .send(cook);
-            res.should.have.status(200);
-        });
-
+    
     });
 
 

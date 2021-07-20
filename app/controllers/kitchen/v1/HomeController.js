@@ -87,7 +87,7 @@ module.exports = new class HomeController extends Controller {
                 return res.json({ success: false, message: "کد تایید منقضی شده است", data: {} });
 
             //remove the code
-            await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
+            // await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
 
             // check user
             filter = { active: true, mobile: req.body.mobile }

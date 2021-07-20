@@ -147,6 +147,26 @@
     "groupTitle": "customer"
   },
   {
+    "type": "get",
+    "url": "/api/kitchen/v1/order/",
+    "title": "get orders",
+    "version": "1.0.0",
+    "name": "getOrders",
+    "description": "<p>get orders</p>",
+    "group": "kitchen",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         id: \"60b72a70e353f0385c2fe5af\",\n         products: [...{\n             _id: \"60b72a70e353f0385c2fe5af\",\n             name: \"لاته\",\n             quantity: 2,\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             mobile: \"09152631225\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\",\n        readyTime: \"2021-06-01T06:54:01.691Z\",\n        description: \"با سس اضافه\"\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/order.js",
+    "groupTitle": "kitchen"
+  },
+  {
     "type": "post",
     "url": "/api/kitchen/v1/app/info",
     "title": "app info",
