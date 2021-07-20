@@ -61,6 +61,36 @@ module.exports = new class OrderController extends Controller {
             if (!res.headersSent) return res.status(500).json(handelError);
         }
     }
+
+    async editOrderStatus(req, res) {
+        try {
+
+            req.checkBody('orderId', 'please set order id').notEmpty();
+            req.checkBody('status', 'please set order status').notEmpty().isInt({min: 1, max: 1});
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.body.orderId }
+            let order = await this.model.Order.findOne(filter)
+
+            if(!order)
+                return res.json({ success : false, message : 'سفارش موجود نیست'})
+
+            order.status = req.body.status
+            await order.save()
+
+            res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editOrderStatus')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
 }
 
 

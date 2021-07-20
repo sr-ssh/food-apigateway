@@ -6,7 +6,7 @@ const baseRoute = '/api/kitchen/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let cook, accessToken, idToken;
+let cook, accessToken, idToken, editOrderStatus;
 const axios = require('axios').default;
 
 chai.use(chaiHttp);
@@ -17,6 +17,7 @@ describe(`${sectionName}`, () => {
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
         cook = appConfig.test.cook;
+        editOrderStatus = appConfig.test.editOrderStatus;
         axios.post(`http://localhost:4000/api/kitchen/v1/login`, cook)
             .then(function (response) {
                 response = response.data;
@@ -53,6 +54,15 @@ describe(`${sectionName}`, () => {
 
     describe('Check Put Apis', () => {
 
+        it('check edit order status', async () => {
+            const res = await chai
+                .request(server)
+                .put(`${baseRoute}/status`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(editOrderStatus);
+            res.should.have.status(200);
+        });
     
     });
 

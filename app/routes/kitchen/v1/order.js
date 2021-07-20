@@ -42,4 +42,27 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
   router.get('/',OrderController.getOrders.bind(OrderController));
 
 
+
+/**
+ * @api {put} /api/kitchen/v1/order/status edit order status
+ * @apiVersion 1.0.0
+ * @apiName editOrderStatus
+ * @apiDescription edit order status, in status : only send 1 when order is ready
+ * @apiGroup kitchen
+ * @apiParam {int} status order status
+ * @apiParam {varchar} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "وضعیت سفارش با موفقیت ویرایش شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: false,
+ *      message: "سفارش موجود نیست"
+ * }
+ */
+router.put('/status',OrderController.editOrderStatus.bind(OrderController));
+
+
  module.exports = router;

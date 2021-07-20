@@ -121,8 +121,8 @@
             "_id": "60d823a1f674e530e09fc6ce"
         },
         "editOrderStatus": {
-            "orderId": "60e1b387cef3a81c70726ede",
-            "status": 2
+            "orderId": "60f6742de9f5711adccdbc4c",
+            "status": 1
         },
         "deliverySms": {
             "orderId": "60e1b387cef3a81c70726ede",
@@ -151,7 +151,7 @@
         },
         "cook": {
             "mobile": "09202223366",
-            "code": "3794"
+            "code": "8826"
         }
     }
 }

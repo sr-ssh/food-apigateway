@@ -147,6 +147,55 @@
     "groupTitle": "customer"
   },
   {
+    "type": "put",
+    "url": "/api/kitchen/v1/order/status",
+    "title": "edit order status",
+    "version": "1.0.0",
+    "name": "editOrderStatus",
+    "description": "<p>edit order status, in status : only send 1 when order is ready</p>",
+    "group": "kitchen",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>order status</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"وضعیت سفارش با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: false,\n     message: \"سفارش موجود نیست\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/order.js",
+    "groupTitle": "kitchen"
+  },
+  {
     "type": "get",
     "url": "/api/kitchen/v1/order/",
     "title": "get orders",
