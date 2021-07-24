@@ -147,6 +147,153 @@ define({ "api": [
     "groupTitle": "customer"
   },
   {
+    "type": "post",
+    "url": "/api/delivery/v1/app/info",
+    "title": "app info",
+    "version": "1.0.0",
+    "name": "info",
+    "description": "<p>app info</p>",
+    "group": "delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "versionCode",
+            "description": "<p>versionCode</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "os",
+            "description": "<p>os</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n      update:false,\n      updateUrl:\"http://cafebazar.com/ir.team-x.ir/mohsenapp,\n      force:false\n }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n   status: false,\n   message:\"کاربر بلاک می باشد\",\n   data:{}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/home.js",
+    "groupTitle": "delivery"
+  },
+  {
+    "type": "post",
+    "url": "/api/delivery/v1/login",
+    "title": "login",
+    "version": "1.0.0",
+    "name": "login",
+    "description": "<p>login kitchen</p>",
+    "group": "delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Sting",
+            "optional": false,
+            "field": "family",
+            "description": "<p>delivery family</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>delivery mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": "<p>verification code</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success:true,\n    message:\"کاربر با موفقیت وارد شد\",\n    data:{\n         idToken: idToken, \n         accessToken: accessToken\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:false,\n     message:\"کاربر وارد نشد\",\n     data:{}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/home.js",
+    "groupTitle": "delivery"
+  },
+  {
+    "type": "post",
+    "url": "/api/delivery/v1/verificationcode",
+    "title": "requset verification Code",
+    "version": "1.0.0",
+    "name": "verificationCode",
+    "description": "<p>requset verification Code</p>",
+    "group": "delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>user mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:false,\n     message:\"کاربری با این شماره موبایل در دسترس نمی باشد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/home.js",
+    "groupTitle": "delivery"
+  },
+  {
     "type": "put",
     "url": "/api/kitchen/v1/order/status",
     "title": "edit order status",
@@ -201,13 +348,13 @@ define({ "api": [
     "title": "get orders",
     "version": "1.0.0",
     "name": "getOrders",
-    "description": "<p>get orders</p>",
+    "description": "<p>get orders : it gives 3 arrays: &quot;active&quot;, &quot;ready&quot;, and &quot;delivery&quot; orders. &quot;active&quot; orders are not ready yet, &quot;ready&quot; orders are done by cook, and &quot;delivdery&quot; orders have delivered to delivery man.</p>",
     "group": "kitchen",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n         id: \"60b72a70e353f0385c2fe5af\",\n         products: [...{\n             _id: \"60b72a70e353f0385c2fe5af\",\n             name: \"لاته\",\n             quantity: 2,\n             sellingPrice: \"30000\"\n         }],\n         customer: {\n             _id: \"7465148754878\",\n             family: \"مصطفایی\",\n             mobile: \"09152631225\",\n             createdAt: \"2021-06-01T06:54:01.691Z\"\n         },\n        createdAt: \"2021-06-01T06:54:01.691Z\",\n        updatedAt: \"2021-06-01T06:54:01.691Z\",\n        readyTime: \"2021-06-01T06:54:01.691Z\",\n        description: \"با سس اضافه\"\n     }]\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n         active: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                name: \"لاته\",\n                quantity: 2,\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\"\n         }],\n         ready: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                name: \"لاته\",\n                quantity: 2,\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            address: \"معلم 43\"\n         }],\n         delivery: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                name: \"لاته\",\n                quantity: 2,\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            address: \"معلم 43\"\n         }]\n     }\n}",
           "type": "json"
         }
       ]

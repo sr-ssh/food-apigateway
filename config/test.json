@@ -17,14 +17,15 @@
     "test": {
         "user": {
             "password": "1234",
-            "family": "ریحانه شکوهی",
-            "email": "r.sh@gmail.com",
-            "mobile": "09307580142",
+            "family": "رضا برزگر",
+            "email": "r.bar@gmail.com",
+            "mobile": "09202223377",
             "companyName": "shokouh",
             "companyAddress": "راهنمایی 24",
-            "mobileOrEmail": "09307580142",
-            "code": "5035",
-            "position": 1
+            "mobileOrEmail": "09202223377",
+            "code": "3134",
+            "position": 2,
+            "employerMobile": "09307580142"
         },
         "newUser": {
             "password": "1234",
@@ -151,7 +152,12 @@
         },
         "cook": {
             "mobile": "09202223366",
-            "code": "8826"
+            "code": "3202"
+        },
+        "deliveryMan": {
+            "mobile": "09202223377",
+            "family": "رضا برزگر",
+            "code": "8562"
         }
     }
 }

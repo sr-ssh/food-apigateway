@@ -1,12 +1,12 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
-const sectionName = 'V1 user home Tests';
-const baseRoute = '/api/user/v1';
+const sectionName = 'V1 delivery home Tests';
+const baseRoute = '/api/delivery/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, newUser;
+let user,appInfo, accessToken, idToken, deliveryMan;
 const axios = require('axios').default;
 
 
@@ -19,10 +19,11 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
-        newUser = appConfig.test.newUser;
-        axios.post(`http://localhost:4000/api/user/v1/login`, user)
+        deliveryMan = appConfig.test.deliveryMan;
+        axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryMan)
             .then(function (response) {
                 response = response.data;
+                console.log(response.message)
                 if (response.success) {
                     idToken = response.data.idToken
                     accessToken = response.data.accessToken
@@ -42,26 +43,10 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
+
     });
 
     describe('Check Post Apis', () => {
-
-        it('check register', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/`)
-                .send(user);
-            res.should.have.status(200);
-        });
-
-        it('check login', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/login`)
-                .send(user);
-            res.should.have.status(200);
-        });
-
 
         it('check app info', async () => {
             const res = await chai
@@ -73,12 +58,19 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
-        
         it('check verification code', async () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/verificationcode`)
-                .send(newUser);
+                .send(deliveryMan);
+            res.should.have.status(200);
+        });
+
+        it('check login', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/login`)
+                .send(deliveryMan);
             res.should.have.status(200);
         });
 

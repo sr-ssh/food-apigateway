@@ -11,6 +11,7 @@ module.exports = {
     userScope: "user",
     customerScope: "customer",
     kitchenScope: "kitchen",
+    deliveryScope: "delivery",
     permissionCount: "8",
     addOrderSms: "سفارش شما با موفقیت ثبت شد. از اینکه مارا انتخاب کرده اید متشکریم",
     deliveryAcknowledgeSms: "سفارش شما به راننده تحویل داده شد",
@@ -30,14 +31,17 @@ module.exports = {
         '/api/customer/v1/login', 
         '/api/customer/v1/verificationcode',
         '/api/kitchen/v1/login', 
-        '/api/kitchen/v1/verificationcode'
+        '/api/kitchen/v1/verificationcode',
+        '/api/delivery/v1/login', 
+        '/api/delivery/v1/verificationcode'
         ],
     path: {
         controllers: {
             root: path.resolve('./app/controllers'),
             user: path.resolve('./app/controllers/user'),
             customer: path.resolve('./app/controllers/customer'),
-            kitchen: path.resolve('./app/controllers/kitchen')
+            kitchen: path.resolve('./app/controllers/kitchen'),
+            delivery: path.resolve('./app/controllers/delivery')
         },
         models: {
             root: path.resolve('./app/models/'),

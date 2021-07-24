@@ -11,21 +11,34 @@ module.exports = new class OrderController extends Controller {
     async getOrders(req, res) {
         try {
 
-            let filter = { active: true, paid: true, status: 0 }
+            let filter = { active: true, paid: true, status: { $in: [0, 1, 3] } }
 
-            let orders = await this.model.Order.find(filter);
+            let orders = await this.model.Order.find(filter, { 'products.sellingPrice' : 0});
 
             let params = [];
             for (let index = 0; index < orders.length; index++) {
                 let param = {
                     id: orders[index]._id,
                     products: orders[index].products,
-                    readyTime: orders[index].readyTime,
-                    createdAt: orders[index].createdAt,
-                    updatedAt: orders[index].updatedAt,
-                    description: orders[index].description
+                    address: orders[index].address,
+                    status: orders[index].status,
+                    createdAt: orders[index].createdAt
                 }     
                 params.push(param)           
+            }
+
+            let customers = []
+            for (let index = 0; index < orders.length; index++) {
+                customers.push(orders[index].customer)
+            }
+
+            filter = { _id: { $in: customers } }
+            customers = await this.model.Customer.find(filter, { _id: 1, family: 1, mobile: 1 })
+
+            let customerInfo;
+            for (let index = 0; index < orders.length; index++) {
+                customerInfo = customers.find(user => user._id.toString() == orders[index].customer)
+                params[index].customer = customerInfo;
             }
             
             let products = []
@@ -42,13 +55,38 @@ module.exports = new class OrderController extends Controller {
                 let productInfo;
                 for (let j = 0; j < params[index].products.length; j++) {
                     productInfo = products.find(product => product._id.toString() === params[index].products[j]._id.toString())
-                    if (productInfo)
+                    if (productInfo){
                         params[index].products[j].name = productInfo.name;
+                        delete params[index].products[j]._id
+                    }
                 }
             }
 
+            let active = [];
+            let ready = [];
+            let delivery = [];
 
-            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data : params })
+            for (let index = 0; index < params.length; index++) {
+                switch (params[index].status) {
+                    case 0:
+                        delete params[index].status
+                        active.push(params[index])
+                        break;
+                    case 1:
+                        delete params[index].status
+                        ready.push(params[index])
+                        break;
+                    case 3:
+                        delete params[index].status
+                        delivery.push(params[index])
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            let data = { active, ready, delivery}
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data : data })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
