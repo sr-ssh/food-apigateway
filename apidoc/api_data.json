@@ -1,6 +1,26 @@
 [
   {
     "type": "post",
+    "url": "/api/customer/v1/order/product",
+    "title": "get order products",
+    "version": "1.0.0",
+    "name": "getOrderProducts",
+    "description": "<p>get order products</p>",
+    "group": "customer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: {\n       appetizer: [...{\n         name: \"نان سیر\",\n         price: \"25\",\n         description: \"سیر . خمیر تازه . اویشن\"\n       }],\n       pizza: [...{\n         name: \"رست بیف\",\n         price: \"75\",\n         description: \"گوشت گوساله . پنیر . قارچ . فلفل دلمه ای . پیازجه\"\n       }],\n       drinks: [...{\n         name: \"کوکا\",\n         price: \"5\",\n         description: \"\"\n       }],\n       salad: [...{\n         name: \"سالاد فصل\",\n         price: \"3\",\n         description: \"\"\n       }],\n       sauce: [...{\n         name: \"سس کچاپ\",\n         price: \"1\",\n         description: \"\"\n       }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/order.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "post",
     "url": "/api/customer/v1/app/info",
     "title": "app info",
     "version": "1.0.0",
@@ -1432,6 +1452,26 @@
       ]
     },
     "filename": "app/routes/user/v1/order.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/product/",
+    "title": "get products",
+    "version": "1.0.0",
+    "name": "getProducts",
+    "description": "<p>get products</p>",
+    "group": "user",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"محصولات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         name: \"روغن\" ,\n         sellingPrice: \"100000\",\n         description: \"خریداری شده از شرکت روغن سازان مشهد\"\n         createdAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/product.js",
     "groupTitle": "user"
   },
   {
