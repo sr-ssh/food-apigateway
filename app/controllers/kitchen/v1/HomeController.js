@@ -147,13 +147,23 @@ module.exports = new class HomeController extends Controller {
                 return res.json({ success: false, message: "کاربر بلاک می باشد", data: {}})
 
             // save in mongodb
-            let filter = { name: config.kitchenApp, os: req.body.os, version: req.body.versionCode}
-            let updateInfo = await this.model.AppInfo.find(filter).sort({createdAt:-1}).limit(1)
-            updateInfo = updateInfo[0]
+            let filter = { active: true, name: config.kitchenApp, os: req.body.os, latestVersion: req.body.versionCode}
+            let updateInfo = await this.model.AppInfo.findOne(filter).sort({createdAt:-1}).limit(1)
             if(!updateInfo)
                 return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
 
-            let data = { active: true, update: updateInfo.update, isForce: updateInfo.isForce, updateUrl: updateInfo.updateUrl }
+            let data = { 
+                status: true, 
+                update: updateInfo.update, 
+                isForce: updateInfo.isForce, 
+                updateUrl: updateInfo.updateUrl,
+                pushId: config.kitchenPushId,
+                pushToken: config.kitchenPushToken,
+                family: req.decodedData.family,
+                sipNumber: 0,
+                sipServer: 0,
+                sipPassword: 0
+            }
             return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
         }
         catch (err) {

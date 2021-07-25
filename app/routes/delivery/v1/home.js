@@ -35,8 +35,8 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @apiName login
   * @apiDescription login kitchen
   * @apiGroup delivery
-  * @apiParam {Sting} family delivery family
   * @apiParam {Number} mobile delivery mobile
+  * @apiParam {String} scope delivery scope
   * @apiParam {Number} code verification code
   * @apiSuccessExample {json} Success-Response:
   * {
@@ -61,7 +61,7 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @api {post} /api/delivery/v1/app/info app info 
   * @apiVersion 1.0.0
   * @apiName info
-  * @apiDescription app info 
+  * @apiDescription app info . send 'Android' as os if you are on android
   * @apiGroup delivery
   * @apiParam  {int} versionCode versionCode
   * @apiParam  {varchar} os os
@@ -70,14 +70,21 @@ router.get('/home',HomeController.index.bind(HomeController));
   *   status: true,
   *   message:"اطلاعات نرم افزار فرستاده شد",
   *   data:{
-  *       update:false,
-  *       updateUrl:"http://cafebazar.com/ir.team-x.ir/mohsenapp,
-  *       force:false
-  *  }
+  *        status: true, 
+  *        update: true, 
+  *        isForce: false, 
+  *        updateUrl: "http://cafebazar.com/happypizza",
+  *        pushId: 0,
+  *        pushToken: 0,
+  *        family: "شکوهی",
+  *        sipNumber: 0,
+  *        sipServer: 0,
+  *        sipPassword: 0
+  *   }
   *}
   * @apiErrorExample {json} Error-Response:
   *{
-  *    status: false,
+  *    status: true,
   *    message:"کاربر بلاک می باشد",
   *    data:{}
   *}

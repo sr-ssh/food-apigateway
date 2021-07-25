@@ -172,7 +172,7 @@
     "title": "app info",
     "version": "1.0.0",
     "name": "info",
-    "description": "<p>app info</p>",
+    "description": "<p>app info . send 'Android' as os if you are on android</p>",
     "group": "delivery",
     "parameter": {
       "fields": {
@@ -198,7 +198,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n      update:false,\n      updateUrl:\"http://cafebazar.com/ir.team-x.ir/mohsenapp,\n      force:false\n }\n}",
+          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0\n  }\n}",
           "type": "json"
         }
       ]
@@ -207,7 +207,7 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "{\n   status: false,\n   message:\"کاربر بلاک می باشد\",\n   data:{}\n}",
+          "content": "{\n   status: true,\n   message:\"کاربر بلاک می باشد\",\n   data:{}\n}",
           "type": "json"
         }
       ]
@@ -228,17 +228,17 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Sting",
-            "optional": false,
-            "field": "family",
-            "description": "<p>delivery family</p>"
-          },
-          {
-            "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "mobile",
             "description": "<p>delivery mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "scope",
+            "description": "<p>delivery scope</p>"
           },
           {
             "group": "Parameter",
@@ -388,7 +388,7 @@
     "title": "app info",
     "version": "1.0.0",
     "name": "info",
-    "description": "<p>app info</p>",
+    "description": "<p>app info . send 'Android' as os if you are on android</p>",
     "group": "kitchen",
     "parameter": {
       "fields": {
@@ -414,7 +414,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n      update:false,\n      updateUrl:\"http://cafebazar.com/ir.team-x.ir/mohsenapp,\n      force:false\n }\n}",
+          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0\n  }\n}",
           "type": "json"
         }
       ]
@@ -447,7 +447,14 @@
             "type": "Number",
             "optional": false,
             "field": "mobile",
-            "description": "<p>customer mobile</p>"
+            "description": "<p>user mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "scope",
+            "description": "<p>kitchen scope</p>"
           },
           {
             "group": "Parameter",

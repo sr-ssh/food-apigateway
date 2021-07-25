@@ -17,13 +17,13 @@
     "test": {
         "user": {
             "password": "1234",
-            "family": "زهرا رضوی",
-            "email": "z.rz@gmail.com",
-            "mobile": "09307580143",
+            "family": "شکوه",
+            "email": "m.sh@gmail.com",
+            "mobile": "09354400369",
             "companyName": "shokouh",
-            "companyAddress": "راهنمایی 25",
-            "mobileOrEmail": "09307580143",
-            "code": "1463",
+            "companyAddress": "کلاهدوز 4",
+            "mobileOrEmail": "09354400369",
+            "code": "5154",
             "position": 2,
             "employerMobile": "09307580142"
         },
@@ -44,7 +44,7 @@
                 {
                     "_id": "60b72afa1f24b03fe4fc7b51",
                     "quantity": 3,
-                    "sellingPrice": "30000"
+                    "sellingPrice": "75000"
                 }
             ],
             "customer": {
@@ -71,7 +71,7 @@
         },
         "appInfo": {
             "versionCode": 1,
-            "os": "android"
+            "os": "Android"
         },
         "Bill": {
             "name": "اجاره",
@@ -151,13 +151,12 @@
             "code": "5510"
         },
         "cook": {
-            "mobile": "09202223366",
-            "code": "3202"
+            "mobile": "09307580143",
+            "code": "8393"
         },
         "deliveryMan": {
-            "mobile": "09202223377",
-            "family": "رضا برزگر",
-            "code": "8562"
+            "mobile": "09307580143",
+            "code": "8393"
         }
     }
 }

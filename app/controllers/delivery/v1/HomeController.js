@@ -1,7 +1,7 @@
 
 const Controller = require(`${config.path.controllers.user}/Controller`);
 const TAG = 'v1_Home';
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 
 module.exports = new class HomeController extends Controller {
@@ -104,7 +104,8 @@ module.exports = new class HomeController extends Controller {
             }
             let payload = {
                 user_id: user._id,
-                user_active: user.active
+                user_active: user.active,
+                family: user.family
             }
             let idToken = jwt.sign(payload, config.secret, options )
 
@@ -144,16 +145,26 @@ module.exports = new class HomeController extends Controller {
             if (this.showValidationErrors(req, res)) return;
 
             if(!req.decodedData.user_active)
-                return res.json({ success: false, message: "کاربر بلاک می باشد", data: {}})
+                return res.json({ success: true, message: "کاربر بلاک می باشد", data: { isBlock: true }})
 
             // save in mongodb
-            let filter = { name: config.deliveryApp, os: req.body.os, version: req.body.versionCode}
-            let updateInfo = await this.model.AppInfo.find(filter).sort({createdAt:-1}).limit(1)
-            updateInfo = updateInfo[0]
+            let filter = { active: true, name: config.deliveryApp, os: req.body.os, latestVersion: req.body.versionCode}
+            let updateInfo = await this.model.AppInfo.findOne(filter).sort({createdAt:-1}).limit(1)
             if(!updateInfo)
                 return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
 
-            let data = { active: true, update: updateInfo.update, isForce: updateInfo.isForce, updateUrl: updateInfo.updateUrl }
+            let data = { 
+                status: true, 
+                update: updateInfo.update, 
+                isForce: updateInfo.isForce, 
+                updateUrl: updateInfo.updateUrl,
+                pushId: config.deliveryPushId,
+                pushToken: config.deliveryPushToken,
+                family: req.decodedData.family,
+                sipNumber: 0,
+                sipServer: 0,
+                sipPassword: 0
+            }
             return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
         }
         catch (err) {

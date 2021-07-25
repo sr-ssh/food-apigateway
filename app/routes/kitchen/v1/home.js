@@ -35,7 +35,8 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @apiName login
   * @apiDescription login kitchen
   * @apiGroup kitchen
-  * @apiParam {Number} mobile customer mobile
+  * @apiParam {Number} mobile user mobile
+  * @apiParam {String} scope kitchen scope
   * @apiParam {Number} code verification code
   * @apiSuccessExample {json} Success-Response:
   * {
@@ -60,7 +61,7 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @api {post} /api/kitchen/v1/app/info app info 
   * @apiVersion 1.0.0
   * @apiName info
-  * @apiDescription app info 
+  * @apiDescription app info . send 'Android' as os if you are on android
   * @apiGroup kitchen
   * @apiParam  {int} versionCode versionCode
   * @apiParam  {varchar} os os
@@ -69,10 +70,17 @@ router.get('/home',HomeController.index.bind(HomeController));
   *   status: true,
   *   message:"اطلاعات نرم افزار فرستاده شد",
   *   data:{
-  *       update:false,
-  *       updateUrl:"http://cafebazar.com/ir.team-x.ir/mohsenapp,
-  *       force:false
-  *  }
+  *        status: true, 
+  *        update: true, 
+  *        isForce: false, 
+  *        updateUrl: "http://cafebazar.com/happypizza",
+  *        pushId: 0,
+  *        pushToken: 0,
+  *        family: "شکوهی",
+  *        sipNumber: 0,
+  *        sipServer: 0,
+  *        sipPassword: 0
+  *   }
   *}
   * @apiErrorExample {json} Error-Response:
   *{
