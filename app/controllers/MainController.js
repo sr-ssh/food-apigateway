@@ -10,6 +10,7 @@ const Reminder = require(`${config.path.models.root}/v1/Reminder`);
 const Discount = require(`${config.path.models.root}/v1/Discount`);
 const VerificationCode = require(`${config.path.models.root}/v1/VerificationCode`);
 const Application = require(`${config.path.models.root}/v1/Application`);
+const ProductTypes = require(`${config.path.models.root}/v1/ProductTypes`);
 const Kavenegar = require('kavenegar');
 
 
@@ -17,7 +18,7 @@ const Kavenegar = require('kavenegar');
 module.exports = class MainController {
 
     constructor() {
-        this.model = { User, Order, Product, Customer, AppInfo, Bill , Reminder , Discount, VerificationCode , Application }
+        this.model = { User, Order, Product, Customer, AppInfo, Bill , Reminder , Discount, VerificationCode , Application, ProductTypes }
         this.transforms = { ErrorTransform };
     }
 

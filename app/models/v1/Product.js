@@ -5,9 +5,9 @@ const timestamps = require('mongoose-timestamp');
 let Product = new Schema({
     active: { type: Boolean, default: true },
     name: { type: String, required: true },
+    type: { type: Schema.Types.ObjectId, ref: 'ProductTypes' },
     sellingPrice: { type: String , required: true},
     description: { type: String },
-    user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 Product.plugin(timestamps);

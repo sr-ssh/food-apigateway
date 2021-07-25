@@ -1,12 +1,12 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
-const sectionName = 'V1 user home Tests';
-const baseRoute = '/api/user/v1';
+const sectionName = 'V1 customer order Tests';
+const baseRoute = '/api/customer/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, newUser;
+let user,appInfo, accessToken, idToken ;
 const axios = require('axios').default;
 
 
@@ -18,11 +18,11 @@ describe(`${sectionName}`, () => {
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
-        appInfo = appConfig.test.appInfo;
-        newUser = appConfig.test.newUser;
-        axios.post(`http://localhost:4000/api/user/v1/login`, user)
+        customer = appConfig.test.customer;
+        axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
             .then(function (response) {
                 response = response.data;
+                console.log(response.message)
                 if (response.success) {
                     idToken = response.data.idToken
                     accessToken = response.data.accessToken
@@ -42,46 +42,21 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
+        it('check get order products', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/product`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
     });
 
     describe('Check Post Apis', () => {
 
-        it('check register', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/`)
-                .send(user);
-            res.should.have.status(200);
-        });
-
-        it('check login', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/login`)
-                .send(user);
-            res.should.have.status(200);
-        });
-
-
-        it('check app info', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/app/info`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
-                .send(appInfo);
-            res.should.have.status(200);
-        });
-
         
-        it('check verification code', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/verificationcode`)
-                .send(user);
-            res.should.have.status(200);
-        });
-
     });
 
 

@@ -1,14 +1,14 @@
 define({
-  "name": "crmserver",
+  "name": "foodserver",
   "version": "1.0.0",
   "description": "User Restfull Service created 2021",
-  "title": "crmserver",
+  "title": "foodserver",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2021-07-24T07:49:01.938Z",
+    "time": "2021-07-24T09:39:31.903Z",
     "url": "https://apidocjs.com",
     "version": "0.27.1"
   }

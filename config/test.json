@@ -1,7 +1,7 @@
 {
     "appPort": 4000,
     "mongo": {
-        "host": "mongodb://172.16.2.215/happypizza"
+        "host": "mongodb://172.16.2.215/food"
     },
     "sms": {
         "negin": {
@@ -17,13 +17,13 @@
     "test": {
         "user": {
             "password": "1234",
-            "family": "رضا برزگر",
-            "email": "r.bar@gmail.com",
-            "mobile": "09202223377",
+            "family": "زهرا رضوی",
+            "email": "z.rz@gmail.com",
+            "mobile": "09307580143",
             "companyName": "shokouh",
-            "companyAddress": "راهنمایی 24",
-            "mobileOrEmail": "09202223377",
-            "code": "3134",
+            "companyAddress": "راهنمایی 25",
+            "mobileOrEmail": "09307580143",
+            "code": "1463",
             "position": 2,
             "employerMobile": "09307580142"
         },
@@ -146,9 +146,9 @@
             "status": true
         },
         "customer": {
-            "mobile": "09307580142",
-            "family":"ریحانه شکوهی",
-            "code": "1211"
+            "mobile": "09307580143",
+            "family":"زهرا رضوی",
+            "code": "8519"
         },
         "cook": {
             "mobile": "09202223366",

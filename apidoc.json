@@ -1,6 +1,6 @@
 {
-    "name": "crmserver",
+    "name": "foodserver",
     "version": "1.0.0",
     "description": "User Restfull Service created 2021",
-    "title": "crmserver"
+    "title": "foodserver"
 }

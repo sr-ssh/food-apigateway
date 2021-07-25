@@ -109,6 +109,26 @@ module.exports = new class ProductController extends Controller {
         }
     }
 
+    async getProductTypes(req, res) {
+        try {
+            let filter = { active: true }
+            let productTypes = await this.model.ProductTypes.find(filter, { name: 1, status: 1 });
+
+
+            res.json({ success : true, message : 'محصولات با موفقیت ارسال شد', data: productTypes })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getProductTypes')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

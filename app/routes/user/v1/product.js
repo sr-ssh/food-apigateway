@@ -81,4 +81,25 @@ const ProductController = require(`${userController}/v1/ProductController`)
 
 
 
+ /**
+ * @api {get} /api/user/v1/product/ get products 
+ * @apiVersion 1.0.0
+ * @apiName getProducts
+ * @apiDescription get products 
+ * @apiGroup user
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "محصولات با موفقیت ارسال شد",
+ *      data: [...{
+ *          active: true,
+ *          name: "روغن" ,
+ *          sellingPrice: "100000",
+ *          description: "خریداری شده از شرکت روغن سازان مشهد"
+ *          createdAt: "2021-06-01T06:54:01.691Z"
+ *      }]
+ * }
+ */
+  router.get('/types',ProductController.getProductTypes.bind(ProductController));
+
  module.exports = router;
