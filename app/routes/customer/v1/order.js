@@ -15,35 +15,15 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * @apiGroup customer
  * @apiSuccessExample {json} Success-Response:
  * {
- *      success:true,
+ *      success: true,
  *      message: "محصولات سفارش با موفقیت ارسال شد",
- *      data: {
- *        appetizer: [...{
+ *      data: [...{
+ *          _id: '60fd0aacca33dd0374b55650',
  *          name: "نان سیر",
- *          price: "25",
- *          description: "سیر . خمیر تازه . اویشن"
- *        }],
- *        pizza: [...{
- *          name: "رست بیف",
- *          price: "75",
- *          description: "گوشت گوساله . پنیر . قارچ . فلفل دلمه ای . پیازجه"
- *        }],
- *        drinks: [...{
- *          name: "کوکا",
- *          price: "5",
- *          description: ""
- *        }],
- *        salad: [...{
- *          name: "سالاد فصل",
- *          price: "3",
- *          description: ""
- *        }],
- *        sauce: [...{
- *          name: "سس کچاپ",
- *          price: "1",
- *          description: ""
+ *          sellingPrice: "25",
+ *          description: "سیر . خمیر تازه . اویشن",
+ *          type: {name: 'pizza'}
  *        }]
- *      }
  * }
  */
  router.get('/product',OrderController.getOrderProducts.bind(OrderController));

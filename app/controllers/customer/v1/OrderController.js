@@ -15,30 +15,9 @@ module.exports = new class OrderController extends Controller {
         try {
             let filter = { active: true }
 
-            let products = await this.model.Product.find(filter)
-            let types = await this.model.ProductTypes.find(filter)
+            let products = await this.model.Product.find(filter, { createdAt: 0, active : 0, updatedAt: 0 }).populate('type', { name: 1, _id: 0}) 
 
-            let params = [];
-            for (let index = 0; index < products.length; index++) {
-                let param = {
-                    name: products[index].name,
-                    price: parseInt(products[index].sellingPrice) / 1000,
-                    description: products[index].description
-                }     
-                params.push(param)           
-            }
-
-            let data = {}
-            
-            for (let j = 0; j < types.length; j++) {
-                data[types[j].name] = []
-                for (let index = 0; index < products.length; index++) {
-                    if(products[index].type.toString() === types[j]._id.toString()){
-                        data[types[j].name].push(params[index])  
-                        break;
-                    }  
-                }
-            }
+            let data = products.map(product => {product.sellingPrice = parseInt(product.sellingPrice) / 1000; return product})
 
             return res.json({ success: true, message: "محصولات سفارش با موفقیت ارسال شد", data: data });
         }
