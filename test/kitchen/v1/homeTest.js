@@ -6,7 +6,7 @@ const baseRoute = '/api/kitchen/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, cook;
+let user,appInfo, accessToken, idToken, cook, cookRegister;
 const axios = require('axios').default;
 
 
@@ -20,6 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
         cook = appConfig.test.cook;
+        cookRegister = appConfig.test.cookRegister;
         axios.post(`http://localhost:4000/api/kitchen/v1/login`, cook)
             .then(function (response) {
                 response = response.data;
@@ -48,6 +49,14 @@ describe(`${sectionName}`, () => {
 
     describe('Check Post Apis', () => {
 
+        it('check register', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/register`)
+                .send(cookRegister);
+            res.should.have.status(200);
+        });
+
         it('check app info', async () => {
             const res = await chai
                 .request(server)
@@ -62,7 +71,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/verificationcode`)
-                .send(cook);
+                .send(cookRegister);
             res.should.have.status(200);
         });
 

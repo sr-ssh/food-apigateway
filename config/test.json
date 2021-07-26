@@ -150,9 +150,16 @@
             "family":"زهرا رضوی",
             "code": "9710"
         },
+        "cookRegister": {
+            "password": "1234",
+            "family": "مینا محمودی",
+            "mobile": "09152226565",
+            "code": "8949",
+            "scope": "cook"
+        },
         "cook": {
-            "mobile": "09307580143",
-            "code": "9710"
+            "mobile": "09152226565",
+            "code": "8949"
         },
         "deliveryMan": {
             "mobile": "09307580143",

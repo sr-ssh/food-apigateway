@@ -13,7 +13,7 @@ module.exports = new class HomeController extends Controller {
     }
 
     async register(req, res) {
-        try {
+        
             req.checkBody('password', 'please enter password').notEmpty();
             req.checkBody('family', 'please enter family').notEmpty().isString();
             req.checkBody('email', 'please enter email').notEmpty().isEmail();
@@ -158,17 +158,6 @@ module.exports = new class HomeController extends Controller {
             let data = { idToken, accessToken};
             
             return res.json({ success: true, message: "کاربر با موفقیت ثبت شد", data: data  });
-        }
-        catch (err) {
-            let handelError = new this.transforms.ErrorTransform(err)
-                .parent(this.controllerTag)
-                .class(TAG)
-                .method('register')
-                .inputParams(req.body)
-                .call();
-
-            if (!res.headersSent) return res.status(500).json(handelError);
-        }
     }
 
     async appInfo(req, res) {
