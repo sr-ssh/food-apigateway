@@ -180,6 +180,13 @@
                     "sellingPrice": "60000"
                 }
             ]
+        },
+        "operatorRegister": {
+            "password": "1234",
+            "family": "سیما نظری",
+            "mobile": "09152226262",
+            "code": "5027",
+            "scope": "operator"
         }
     }
 }

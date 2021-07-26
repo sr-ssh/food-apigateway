@@ -12,6 +12,7 @@ module.exports = {
     customerScope: "customer",
     kitchenScope: "kitchen",
     deliveryScope: "delivery",
+    operatorScope: "operator",
     permissionCount: "8",
     deliveryPushId: 0,
     deliveryPushToken: 0,
@@ -47,7 +48,8 @@ module.exports = {
             user: path.resolve('./app/controllers/user'),
             customer: path.resolve('./app/controllers/customer'),
             kitchen: path.resolve('./app/controllers/kitchen'),
-            delivery: path.resolve('./app/controllers/delivery')
+            delivery: path.resolve('./app/controllers/delivery'),
+            operator: path.resolve('./app/controllers/operator')
         },
         models: {
             root: path.resolve('./app/models/'),
