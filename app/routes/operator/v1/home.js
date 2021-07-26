@@ -39,5 +39,30 @@ router.get('/home',HomeController.index.bind(HomeController));
   router.post('/register',HomeController.register.bind(HomeController));
    
    
+/**
+ * @api {post} /api/delivery/v1/login/verificationcode requset verification Code 
+ * @apiVersion 1.0.0
+ * @apiName verificationCode
+ * @apiDescription requset verification Code
+ * @apiGroup delivery
+ * @apiParam {Number} mobile user mobile
+ * @apiParam  {varchar} scope delivery scope
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success:true,
+ *      message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد",
+ *      data: { status: true }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success:false,
+ *      message:"کاربری با این شماره موبایل در دسترس نمی باشد",
+ *      data: { status: false }
+ * }
+ */
+ router.post('/login/verificationcode',HomeController.verificationCode.bind(HomeController));
+
+
+
 
 module.exports = router;

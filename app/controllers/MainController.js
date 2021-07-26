@@ -204,4 +204,74 @@ module.exports = class MainController {
         }
     }
 
+    async mainVerificationCode(req, res) {
+        try {
+            req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
+            req.checkBody('scope', 'please enter user scope').notEmpty().isNumeric();
+            if (this.showValidationErrors(req, res)) return;
+
+            //check scope
+            let filter = { active: true, name: req.body.scope }
+            let type = await this.model.UserTypes.findOne(filter, 'id')
+
+            if(!type)
+                return res.json({ success: true, message: "اسکوپ وارد شده موجود نیست", data: { status: false }  });
+
+            filter = { active: true, type: type._id, mobile: req.body.mobile }
+            let user = await this.model.User.findOne(filter)
+
+            if(!user)
+                return res.json({ success: true, message: "کاربری با این دسترسی موجود نیست", data: { status: false }  });
+
+            // save in mongodb
+            filter = { mobile: req.body.mobile };
+
+            //code generation
+            let code;
+
+            //check if the last code is still valid
+            let lastCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
+            lastCode = lastCode[0]
+            if(lastCode){
+                // timeDiff on verification code unit
+                let timeDiff = this.getTimeDiff(lastCode.createdAt, new Date().toISOString(), config.verificationCodeUnit)
+                // check verification code valid duration
+                if(timeDiff < config.verificationCodeDuration){
+                    code = lastCode.code
+                    this.sendSms(req.body.mobile, config.verificationCodeText + code)
+                    return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد", data: { status: true }});
+                }
+
+            }
+
+            //generate new code
+
+            //generate random number
+            code = this.generateRandomNumber();
+            this.sendSms(req.body.mobile, config.verificationCodeText + code)
+
+            //save in mongo
+            let params = {
+                mobile: req.body.mobile,
+                code: code
+            }
+
+            await this.model.VerificationCode.create(params);
+
+
+            return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد", data: { status: true } });
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('verificationCode')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
 }

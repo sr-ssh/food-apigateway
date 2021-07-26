@@ -21,21 +21,21 @@ seeder.connect('mongodb://172.16.2.215/food', function() {
  
 // Data array containing seed data - documents organized by Model
 var data = [
-    {
-        'model': 'UserTypes',
-        'documents': [
-            { 
-              name: 'manager'
-            },
-            { 
-              name: 'operator'
-            },
-            { 
-              name: 'cook'
-            },
-            { 
-              name: 'deliveryMan'
-            }
-        ]
+  {
+    'model': 'UserTypes',
+    'documents': [
+      { 
+        name: 'manager'
+      },
+      { 
+        name: 'operator'
+      },
+      { 
+        name: 'cook'
+      },
+      { 
+        name: 'deliveryMan'
+      }
+    ]
     }
 ];
