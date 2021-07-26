@@ -90,14 +90,10 @@ module.exports = new class EmployeeController extends Controller {
     async getEmployees(req, res) {
         try {
 
-            let filter = { active: true, _id: req.decodedData.user_id }
-            let employer = await this.model.User.findOne(filter, { employee: 1 })
-            let employees = [];
-            for (let j = 1; j < employer.employee.length; j++) {
-                employees.push(employer.employee[j])
-            }
-            filter = { _id: { $in: employees }}
-            employees = await this.model.User.find(filter, { family: 1, mobile: 1, permission: 1 })
+
+            let filter = { active: true , _id: { $ne: req.decodedData.user_id }}
+            let employees = await this.model.User.find(filter, { family: 1, mobile: 1, permission: 1 })
+            
             return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
             
         }catch (err) {
