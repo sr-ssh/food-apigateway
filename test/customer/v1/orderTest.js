@@ -6,7 +6,7 @@ const baseRoute = '/api/customer/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken ;
+let user,appInfo, accessToken, idToken, customerOrder ;
 const axios = require('axios').default;
 
 
@@ -19,6 +19,7 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
         customer = appConfig.test.customer;
+        customerOrder = appConfig.test.customerOrder;
         axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
             .then(function (response) {
                 response = response.data;
@@ -56,6 +57,15 @@ describe(`${sectionName}`, () => {
 
     describe('Check Post Apis', () => {
 
+        it('check add order', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(customerOrder);
+            res.should.have.status(200);
+        });
         
     });
 

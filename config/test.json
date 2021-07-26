@@ -148,15 +148,24 @@
         "customer": {
             "mobile": "09307580143",
             "family":"زهرا رضوی",
-            "code": "5510"
+            "code": "9710"
         },
         "cook": {
             "mobile": "09307580143",
-            "code": "8393"
+            "code": "9710"
         },
         "deliveryMan": {
             "mobile": "09307580143",
             "code": "8393"
+        },
+        "customerOrder": {
+            "products": [
+                {
+                    "_id": "60fd0aacca33dd0374b55651",
+                    "quantity": 1,
+                    "sellingPrice": "60000"
+                }
+            ]
         }
     }
 }

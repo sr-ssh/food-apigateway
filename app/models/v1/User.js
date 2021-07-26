@@ -14,7 +14,7 @@ let User = new Schema({
     mobile: { type: String, required: true, unique: true },
     company: String,
     address: String,
-    employer: { type: Schema.Types.ObjectId, ref: 'User'},
+    employer: { type: Schema.Types.ObjectId, ref: 'User'},// Todo delete
     employee: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'User' }] },
     permission:{ type: Object, default: { 
                                         addOrder: false,

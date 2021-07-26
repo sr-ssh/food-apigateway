@@ -33,6 +33,47 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+    async addOrder(req, res) {
+        try {
+            req.checkBody('products', 'please enter products').notEmpty();
+            req.checkBody('products.*._id', 'please enter product id').notEmpty().isString();
+            req.checkBody('products.*.quantity', 'please enter product quantity').notEmpty().isInt({min:1});
+            req.checkBody('products.*.sellingPrice', 'please enter product sellingPrice').notEmpty().isNumeric();
+            if (this.showValidationErrors(req, res)) return;
+
+            // add customer
+            let filter = { active: true, _id: req.decodedData.user_id }
+            let customer = await this.model.Customer.findOne(filter)
+
+            if(!customer)
+                return res.json({ success : true, message : 'کاربر یافت نشد'})
+
+            // add order
+            let params = {
+                products: req.body.products,
+                customer: customer._id
+            }
+
+            let order = await this.model.Order.create(params)
+        
+            // add order to customer
+            await customer.order.push(order._id)
+            await customer.save()
+
+            return res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('addOrder')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

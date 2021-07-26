@@ -25,24 +25,19 @@
 //         'model': 'ProductTypes',
 //         'documents': [
 //             {
-//                 'name': 'appetizer',
-//                 'status': 1
+//                 'name': 'appetizer'
 //             },
 //             {
-//                 'name': 'pizza',
-//                 'status': 2
+//                 'name': 'pizza'
 //             },
 //             {
-//                 'name': 'drinks',
-//                 'status': 3
+//                 'name': 'drinks'
 //             },
 //             {
-//                 'name': 'salad',
-//                 'status': 4
+//                 'name': 'salad'
 //             },
 //             {
-//                 'name': 'sauce',
-//                 'status': 5
+//                 'name': 'sauce'
 //             }
 //         ]
 //     }
