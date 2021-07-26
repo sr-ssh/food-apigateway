@@ -6,7 +6,7 @@ const baseRoute = '/api/delivery/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, deliveryMan;
+let user,appInfo, accessToken, idToken, deliveryMan, deliveryRegister;
 const axios = require('axios').default;
 
 
@@ -20,6 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
         deliveryMan = appConfig.test.deliveryMan;
+        deliveryRegister = appConfig.test.deliveryRegister;
         axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryMan)
             .then(function (response) {
                 response = response.data;
@@ -47,6 +48,15 @@ describe(`${sectionName}`, () => {
     });
 
     describe('Check Post Apis', () => {
+
+
+        it('check register', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/register`)
+                .send(deliveryRegister);
+            res.should.have.status(200);
+        });
 
         it('check app info', async () => {
             const res = await chai
