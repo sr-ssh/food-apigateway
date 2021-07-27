@@ -5,7 +5,7 @@ const timestamps = require('mongoose-timestamp');
 let UserTypes = new Schema({
     active: { type: Boolean, default: true },
     name: { type: String, required: true},
-    description: { tyep: String }
+    description: { type: String }
 });
 
 
