@@ -45,7 +45,7 @@ router.get('/home',HomeController.index.bind(HomeController));
  * @api {post} /api/delivery/v1/verificationcode requset verification Code 
  * @apiVersion 1.0.0
  * @apiName verificationCode
- * @apiDescription requset verification Code
+ * @apiDescription requset verification Code without scope for register
  * @apiGroup delivery
  * @apiParam {Number} mobile user mobile
  * @apiSuccessExample {json} Success-Response:
@@ -60,6 +60,33 @@ router.get('/home',HomeController.index.bind(HomeController));
  * }
  */
  router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
+
+
+
+  /**
+ * @api {post} /api/delivery/v1/login/verificationcode requset login verification Code 
+ * @apiVersion 1.0.0
+ * @apiName loginVerificationCode
+ * @apiDescription requset verification Code for login with scope. for scope send 'deliveryMan'
+ * @apiGroup delivery
+ * @apiParam {Number} mobile user mobile
+ * @apiParam  {varchar} scope delivery scope
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success:true,
+ *      message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد",
+ *      data: { status: true }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success:true,
+ *      message:"کاربری با این شماره موبایل در دسترس نمی باشد",
+ *      data: { status: false }
+ * }
+ */
+   router.post('/login/verificationcode',HomeController.loginVerificationCode.bind(HomeController));
+
+
 
   /**
   * @api {post} /api/delivery/v1/login login

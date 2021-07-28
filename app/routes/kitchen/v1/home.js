@@ -46,7 +46,7 @@ router.get('/home',HomeController.index.bind(HomeController));
  * @api {post} /api/kitchen/v1/verificationcode requset verification Code 
  * @apiVersion 1.0.0
  * @apiName verificationCode
- * @apiDescription requset verification Code
+ * @apiDescription requset verification Code without scope for register
  * @apiGroup kitchen
  * @apiParam  {Number} mobile user mobile
  * @apiSuccessExample {json} Success-Response:
@@ -63,10 +63,10 @@ router.get('/home',HomeController.index.bind(HomeController));
  * @api {post} /api/kitchen/v1/login/verificationcode requset login verification Code 
  * @apiVersion 1.0.0
  * @apiName loginVerificationCode
- * @apiDescription requset login verification Code. for scope send 'cook'
+ * @apiDescription requset verification Code for login with scope. for scope send 'cook'
  * @apiGroup kitchen
  * @apiParam {Number} mobile user mobile
- * @apiParam  {varchar} scope operator scope
+ * @apiParam  {varchar} scope kitchen scope
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success:true,

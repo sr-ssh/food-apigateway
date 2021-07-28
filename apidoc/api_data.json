@@ -273,6 +273,55 @@
   },
   {
     "type": "post",
+    "url": "/api/delivery/v1/login/verificationcode",
+    "title": "requset login verification Code",
+    "version": "1.0.0",
+    "name": "loginVerificationCode",
+    "description": "<p>requset verification Code for login with scope. for scope send 'deliveryMan'</p>",
+    "group": "delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>user mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "scope",
+            "description": "<p>delivery scope</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد\",\n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:true,\n     message:\"کاربری با این شماره موبایل در دسترس نمی باشد\",\n     data: { status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/home.js",
+    "groupTitle": "delivery"
+  },
+  {
+    "type": "post",
     "url": "/api/delivery/v1/register",
     "title": "register",
     "version": "1.0.0",
@@ -347,7 +396,7 @@
     "title": "requset verification Code",
     "version": "1.0.0",
     "name": "verificationCode",
-    "description": "<p>requset verification Code</p>",
+    "description": "<p>requset verification Code without scope for register</p>",
     "group": "delivery",
     "parameter": {
       "fields": {
@@ -563,7 +612,7 @@
     "title": "requset login verification Code",
     "version": "1.0.0",
     "name": "loginVerificationCode",
-    "description": "<p>requset login verification Code. for scope send 'cook'</p>",
+    "description": "<p>requset verification Code for login with scope. for scope send 'cook'</p>",
     "group": "kitchen",
     "parameter": {
       "fields": {
@@ -580,7 +629,7 @@
             "type": "varchar",
             "optional": false,
             "field": "scope",
-            "description": "<p>operator scope</p>"
+            "description": "<p>kitchen scope</p>"
           }
         ]
       }
@@ -682,7 +731,7 @@
     "title": "requset verification Code",
     "version": "1.0.0",
     "name": "verificationCode",
-    "description": "<p>requset verification Code</p>",
+    "description": "<p>requset verification Code without scope for register</p>",
     "group": "kitchen",
     "parameter": {
       "fields": {
