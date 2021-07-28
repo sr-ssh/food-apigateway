@@ -105,7 +105,7 @@ module.exports = new class OrderController extends Controller {
 
             let filter = { active: true }
 
-            let orders = await this.model.Order.find(filter, { createdAt: 0, active : 0, updatedAt: 0 }).populate('customer').populate('status') 
+            let orders = await this.model.Order.find(filter, { createdAt: 0, active : 0, updatedAt: 0 }).populate('customer').populate({ path: 'status', name: 1, _id: 0}) 
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد' })
         }
