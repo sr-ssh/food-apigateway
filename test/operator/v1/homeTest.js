@@ -6,7 +6,7 @@ const baseRoute = '/api/operator/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, operatorRegister, operatorVerification, operatorLogin;
+let appInfo, accessToken, idToken, operatorRegister, operatorVerification, operatorLogin;
 const axios = require('axios').default;
 
 
@@ -21,25 +21,24 @@ describe(`${sectionName}`, () => {
         operatorVerification = appConfig.test.operatorVerification;
         operatorRegister = appConfig.test.operatorRegister;
         operatorLogin = appConfig.test.operatorLogin;
-        // axios.post(`http://localhost:4000/api/operator/v1/login`, deliveryMan)
-        //     .then(function (response) {
-        //         response = response.data;
-        //         console.log(response.message)
-        //         if (response.success) {
-        //             idToken = response.data.idToken
-        //             accessToken = response.data.accessToken
-        //         } else {
-        //             console.log("errorrrrrrrrrr: no token provided ");
-        //         }
-        //         setTimeout(() => {
-        //             console.log('Okay, lets begin!');
-        //             done();
-        //         }, 1000);
-        //     })
-        //     .catch((error) => {
-        //         console.log("error", error);
-        //     });
-        done()
+        axios.post(`http://localhost:4000/api/operator/v1/login`, operatorLogin)
+            .then(function (response) {
+                response = response.data;
+                console.log(response.message)
+                if (response.success) {
+                    idToken = response.data.idToken
+                    accessToken = response.data.accessToken
+                } else {
+                    console.log("errorrrrrrrrrr: no token provided ");
+                }
+                setTimeout(() => {
+                    console.log('Okay, lets begin!');
+                    done();
+                }, 1000);
+            })
+            .catch((error) => {
+                console.log("error", error);
+            });
     })
 
 
