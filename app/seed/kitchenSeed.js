@@ -95,7 +95,7 @@ var data = [
           'customer': '60fcfe176ea36757d055ffe7',
           'address': 'هاشمیه 21. پلاک 12',
           'GPS': {'type' : 'Point', 'coordinates' : [-122.5,37.7]},
-          'status': '610138e7084e5936e00f4b82',
+          'status': '61013e73788fd41a201c5dd4',
           'paid': true,
           'deliveryCost': 5000
         },
@@ -117,7 +117,7 @@ var data = [
           'customer': '60fcfe176ea36757d055ffe7',
           'address': 'هاشمیه 21. پلاک 12',
           'GPS': {'type' : 'Point', 'coordinates' : [-122.5,37.7]},
-          'status': '610138e7084e5936e00f4b82',
+          'status': '61013e73788fd41a201c5dd4',
           'paid': true,
           'deliveryCost': 5000
         },

@@ -64,7 +64,7 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *      }
  * }
  */
-  router.get('/',OrderController.getOrders.bind(OrderController));
+  router.get('/',OrderController.getActiveOrders.bind(OrderController));
 
 
 

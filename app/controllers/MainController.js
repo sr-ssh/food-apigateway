@@ -186,7 +186,7 @@ module.exports = class MainController {
                 audience: config.audience
             }
 
-            payload = { scope : config.userScope};
+            payload = { scope : req.body.scope};
 
             let accessToken = jwt.sign(payload, config.secret, options)
 
@@ -351,7 +351,7 @@ module.exports = class MainController {
             audience: config.audience
         }
 
-        payload = { scope : config.deliveryScope};
+        payload = { scope : req.body.scope};
 
         let accessToken = jwt.sign(payload, config.secret, options)
 

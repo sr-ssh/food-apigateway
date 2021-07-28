@@ -100,6 +100,28 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+    async getActiveOrders(req, res) {
+        try {
+
+            let filter = { active: true }
+
+            let orders = await this.model.Order.find(filter, { createdAt: 0, active : 0, updatedAt: 0 }).populate('customer').populate('status') 
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد' })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getOrders')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
     async editOrderStatus(req, res) {
         try {
 

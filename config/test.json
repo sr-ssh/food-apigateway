@@ -154,12 +154,12 @@
             "password": "1234",
             "family": "مینا محمودی",
             "mobile": "09152226565",
-            "code": "8949",
+            "code": "8845",
             "scope": "cook"
         },
         "cook": {
             "mobile": "09152226565",
-            "code": "8903",
+            "code": "8845",
             "scope": "cook"
         },
         "deliveryRegister": {
