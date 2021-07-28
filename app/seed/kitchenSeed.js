@@ -7,11 +7,10 @@ seeder.connect('mongodb://172.16.2.215/food', function() {
   seeder.loadModels([
     './../models/v1/AppInfo.js',
     './../models/v1/Order.js',
-    './../models/v1/OrderStatusBar.js'
   ]);
  
   // Clear specified collections
-  seeder.clearModels(['AppInfo', 'Order', 'OrderStatusBar'], function() {
+  seeder.clearModels(['AppInfo', 'Order'], function() {
  
     // Callback to populate DB once collections have been cleared
     seeder.populateModels(data, function() {
@@ -44,35 +43,35 @@ var data = [
             }
         ]
     },
-    {
-      'model': 'OrderStatusBar',
-      'documents': [
-        {
-          'name': 'active',
-          'description': 'orders ordered by customer'
-        },
-        {
-          'name': 'customerCanceled',
-          'description': 'orders caceled by customer'
-        },
-        {
-          'name': 'ready',
-          'description': 'cooked orders'
-        },
-        {
-          'name': 'deliveryAccepted',
-          'description': 'orders that have been accepted by delivary man'
-        },
-        {
-          'name': 'deliveryCanceled',
-          'description': 'orders canceled by delivery'
-        },
-        {
-          'name': 'finished',
-          'description': 'orders that have delivered to customer'
-        }
-      ]
-    },
+    // {
+    //   'model': 'OrderStatusBar',
+    //   'documents': [
+    //     {
+    //       'name': 'active',
+    //       'description': 'orders ordered by customer'
+    //     },
+    //     {
+    //       'name': 'customerCanceled',
+    //       'description': 'orders caceled by customer'
+    //     },
+    //     {
+    //       'name': 'ready',
+    //       'description': 'cooked orders'
+    //     },
+    //     {
+    //       'name': 'deliveryAccepted',
+    //       'description': 'orders that have been accepted by delivary man'
+    //     },
+    //     {
+    //       'name': 'deliveryCanceled',
+    //       'description': 'orders canceled by delivery'
+    //     },
+    //     {
+    //       'name': 'finished',
+    //       'description': 'orders that have delivered to customer'
+    //     }
+    //   ]
+    // },
     {
       'model': 'Order',
       'documents': [
@@ -95,7 +94,7 @@ var data = [
           'customer': '60fcfe176ea36757d055ffe7',
           'address': 'هاشمیه 21. پلاک 12',
           'GPS': {'type' : 'Point', 'coordinates' : [-122.5,37.7]},
-          'status': '61013e73788fd41a201c5dd4',
+          'status': '61014c9177cf4d2bac625982',
           'paid': true,
           'deliveryCost': 5000
         },
@@ -117,7 +116,7 @@ var data = [
           'customer': '60fcfe176ea36757d055ffe7',
           'address': 'هاشمیه 21. پلاک 12',
           'GPS': {'type' : 'Point', 'coordinates' : [-122.5,37.7]},
-          'status': '61013e73788fd41a201c5dd4',
+          'status': '61014c9177cf4d2bac625982',
           'paid': true,
           'deliveryCost': 5000
         },
@@ -140,7 +139,7 @@ var data = [
           'customer': '60fcfe176ea36757d055ffe7',
           'address': 'هاشمیه 21. پلاک 12',
           'GPS': {'type' : 'Point', 'coordinates' : [-122.5,37.7]},
-          'status': '610138e7084e5936e00f4b84',
+          'status': '61014c9177cf4d2bac625984',
           'paid': true,
           'deliveryCost': 5000
         },
@@ -162,7 +161,7 @@ var data = [
           'customer': '60fcfe176ea36757d055ffe7',
           'address': 'هاشمیه 21. پلاک 12',
           'GPS': {'type' : 'Point', 'coordinates' : [-122.5,37.7]},
-          'status': '610138e7084e5936e00f4b84',
+          'status': '61014c9177cf4d2bac625984',
           'paid': true,
           'deliveryCost': 5000
         },
@@ -185,7 +184,7 @@ var data = [
           'customer': '60fcfe176ea36757d055ffe7',
           'address': 'هاشمیه 21. پلاک 12',
           'GPS': {'type' : 'Point', 'coordinates' : [-122.5,37.7]},
-          'status': '610138e7084e5936e00f4b86',
+          'status': '61014c9177cf4d2bac625985',
           'paid': true,
           'deliveryCost': 5000
         },
@@ -207,7 +206,7 @@ var data = [
           'customer': '60fcfe176ea36757d055ffe7',
           'address': 'هاشمیه 21. پلاک 12',
           'GPS': {'type' : 'Point', 'coordinates' : [-122.5,37.7]},
-          'status': '610138e7084e5936e00f4b86',
+          'status': '61014c9177cf4d2bac625985',
           'paid': true,
           'deliveryCost': 5000
         },
