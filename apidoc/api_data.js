@@ -507,7 +507,7 @@ define({ "api": [
     "title": "login",
     "version": "1.0.0",
     "name": "login",
-    "description": "<p>login kitchen</p>",
+    "description": "<p>login kitchen. for scope send 'cook'</p>",
     "group": "kitchen",
     "parameter": {
       "fields": {
@@ -540,7 +540,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success:true,\n    message:\"کاربر با موفقیت وارد شد\",\n    data:{\n         idToken: idToken, \n         accessToken: accessToken\n    }\n}",
+          "content": "{\n    success:true,\n    message:\"کاربر با موفقیت وارد شد\",\n    data:{\n         idToken: idToken, \n         accessToken: accessToken,\n         status: true\n    }\n}",
           "type": "json"
         }
       ]
@@ -549,7 +549,56 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "{\n     success:false,\n     message:\"کاربر وارد نشد\",\n     data:{}\n}",
+          "content": "{\n     success:false,\n     message:\"کاربر وارد نشد\",\n     data:{ status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/home.js",
+    "groupTitle": "kitchen"
+  },
+  {
+    "type": "post",
+    "url": "/api/kitchen/v1/login/verificationcode",
+    "title": "requset login verification Code",
+    "version": "1.0.0",
+    "name": "loginVerificationCode",
+    "description": "<p>requset login verification Code. for scope send 'cook'</p>",
+    "group": "kitchen",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>user mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "scope",
+            "description": "<p>operator scope</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد\",\n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:true,\n     message:\"کاربری با این شماره موبایل در دسترس نمی باشد\",\n     data: { status: false }\n}",
           "type": "json"
         }
       ]

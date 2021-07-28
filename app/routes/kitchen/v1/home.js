@@ -88,7 +88,7 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @api {post} /api/kitchen/v1/login login
   * @apiVersion 1.0.0
   * @apiName login
-  * @apiDescription login kitchen
+  * @apiDescription login kitchen. for scope send 'cook'
   * @apiGroup kitchen
   * @apiParam {Number} mobile user mobile
   * @apiParam {String} scope kitchen scope
