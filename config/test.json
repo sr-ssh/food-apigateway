@@ -185,11 +185,16 @@
             "password": "1234",
             "family": "سیما نظری",
             "mobile": "09152226262",
-            "code": "5027",
+            "code": "5141",
             "scope": "operator"
         },
         "operatorVerification":{
             "mobile": "09152226262",
+            "scope": "operator"
+        },
+        "operatorLogin": {
+            "mobile": "09152226262",
+            "code": "5141",
             "scope": "operator"
         }
     }

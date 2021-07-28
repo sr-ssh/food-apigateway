@@ -671,6 +671,214 @@
   },
   {
     "type": "post",
+    "url": "/api/operator/v1/login",
+    "title": "login",
+    "version": "1.0.0",
+    "name": "login",
+    "description": "<p>login kitchen. for scope send 'operator'</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>operator mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "scope",
+            "description": "<p>operator scope</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": "<p>verification code</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success:true,\n    message:\"کاربر با موفقیت وارد شد\",\n    data:{\n         idToken: idToken, \n         accessToken: accessToken,\n         status: true\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:true,\n     message:\"کاربر وارد نشد\",\n     data:{ status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "post",
+    "url": "/api/operator/v1/login/verificationcode",
+    "title": "requset login verification Code",
+    "version": "1.0.0",
+    "name": "loginVerificationCode",
+    "description": "<p>requset login verification Code. for scope send 'operator'</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>user mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "scope",
+            "description": "<p>operator scope</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد\",\n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success:true,\n     message:\"کاربری با این شماره موبایل در دسترس نمی باشد\",\n     data: { status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "post",
+    "url": "/api/delivery/v1/register",
+    "title": "register",
+    "version": "1.0.0",
+    "name": "register",
+    "description": "<p>register operator. for scope send 'operator'</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "password",
+            "description": "<p>user password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "family",
+            "description": "<p>family</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>mobile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "code",
+            "description": "<p>verification code</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "scope",
+            "description": "<p>operator scope</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success:true,\n    message:\"کاربر با موفقیت ثبت شد\",\n    data: {\n      status: true,\n      idToken: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6ImtpdGNoZW4iLCJpYXQiOjE2MjcyOTczMjYsImV4cCI6MTY1MzIxNzMyNiwiYXVkIjoiYXVkaWVuY2UiLCJpc3MiOiJpc3N1ZXIifQ.GauQ4Ls0Hz6aPkpaPyh7eXQGfRK9UAqxkrhW3GDu6I\",\n      accessToken: \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjBmZTk0MTIwYmU1ZTUzNmM4MWNiNzEzIiwidXNlcl9hY3RpdmUiOnRydWUsImlhdCI6MTYyNzI5NzMyNiwiZXhwIjoxNjQ4ODk3MzI2LCJhdWQiOiJhdWRpZW5jZSIsImlzcyI6Imlzc3VlciJ9.eO6JvCHPcoSFMPQ0wClsh7gsdZmGANs55x6x9hNc7u\"\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n    success:true,\n    message:\"کاربری با این مشخصات موجود است\",\n    data:{ status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "post",
+    "url": "/api/operator/v1/verificationcode",
+    "title": "requset verification Code",
+    "version": "1.0.0",
+    "name": "verificationCode",
+    "description": "<p>requset verification Code without scope for register</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>user mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message: \"کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "post",
     "url": "/api/user/v1/employee/application",
     "title": "add application",
     "version": "1.0.0",

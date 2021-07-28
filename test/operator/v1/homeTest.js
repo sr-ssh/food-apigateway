@@ -6,7 +6,7 @@ const baseRoute = '/api/operator/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, deliveryMan, deliveryRegister, operatorVerification;
+let user,appInfo, accessToken, idToken, operatorRegister, operatorVerification, operatorLogin;
 const axios = require('axios').default;
 
 
@@ -19,7 +19,9 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         appInfo = appConfig.test.appInfo;
         operatorVerification = appConfig.test.operatorVerification;
-        // axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryMan)
+        operatorRegister = appConfig.test.operatorRegister;
+        operatorLogin = appConfig.test.operatorLogin;
+        // axios.post(`http://localhost:4000/api/operator/v1/login`, deliveryMan)
         //     .then(function (response) {
         //         response = response.data;
         //         console.log(response.message)
@@ -48,12 +50,11 @@ describe(`${sectionName}`, () => {
 
     describe('Check Post Apis', () => {
 
-
         it('check register', async () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/register`)
-                .send(deliveryRegister);
+                .send(operatorRegister);
             res.should.have.status(200);
         });
 
@@ -62,6 +63,23 @@ describe(`${sectionName}`, () => {
                 .request(server)
                 .post(`${baseRoute}/login/verificationcode`)
                 .send(operatorVerification);
+            res.should.have.status(200);
+        });
+
+
+        it('check verification code', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/verificationcode`)
+                .send(operatorVerification);
+            res.should.have.status(200);
+        });
+
+        it('check login', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/login`)
+                .send(operatorLogin);
             res.should.have.status(200);
         });
 

@@ -12,13 +12,13 @@ router.get('/home',HomeController.index.bind(HomeController));
  * @api {post} /api/delivery/v1/register register
  * @apiVersion 1.0.0
  * @apiName register
- * @apiDescription register delivery man. for scope send 'deliveryMan'
- * @apiGroup delivery
+ * @apiDescription register operator. for scope send 'operator'
+ * @apiGroup operator
  * @apiParam  {varchar} password user password
  * @apiParam  {varchar} family  family 
  * @apiParam  {varchar} mobile mobile
  * @apiParam  {varchar} code verification code 
- * @apiParam  {varchar} scope delivery scope
+ * @apiParam  {varchar} scope operator scope
  * @apiSuccessExample {json} Success-Response:
  * {
  *     success:true,
@@ -40,13 +40,13 @@ router.get('/home',HomeController.index.bind(HomeController));
    
    
 /**
- * @api {post} /api/operator/v1/login/verificationcode requset verification Code 
+ * @api {post} /api/operator/v1/login/verificationcode requset login verification Code 
  * @apiVersion 1.0.0
- * @apiName verificationCode
- * @apiDescription requset verification Code
- * @apiGroup delivery
+ * @apiName loginVerificationCode
+ * @apiDescription requset login verification Code. for scope send 'operator'
+ * @apiGroup operator
  * @apiParam {Number} mobile user mobile
- * @apiParam  {varchar} scope delivery scope
+ * @apiParam  {varchar} scope operator scope
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success:true,
@@ -55,12 +55,57 @@ router.get('/home',HomeController.index.bind(HomeController));
  * }
  * @apiErrorExample {json} Error-Response:
  * {
- *      success:false,
+ *      success:true,
  *      message:"کاربری با این شماره موبایل در دسترس نمی باشد",
  *      data: { status: false }
  * }
  */
  router.post('/login/verificationcode',HomeController.loginVerificationCode.bind(HomeController));
+
+
+ /**
+ * @api {post} /api/operator/v1/verificationcode requset verification Code 
+ * @apiVersion 1.0.0
+ * @apiName verificationCode
+ * @apiDescription requset verification Code without scope for register
+ * @apiGroup operator
+ * @apiParam {Number} mobile user mobile
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success:true,
+ *      message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد"
+ * }
+ */
+  router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
+
+
+   /**
+  * @api {post} /api/operator/v1/login login
+  * @apiVersion 1.0.0
+  * @apiName login
+  * @apiDescription login kitchen. for scope send 'operator'
+  * @apiGroup operator
+  * @apiParam {Number} mobile operator mobile
+  * @apiParam {String} scope operator scope
+  * @apiParam {Number} code verification code
+  * @apiSuccessExample {json} Success-Response:
+  * {
+  *     success:true,
+  *     message:"کاربر با موفقیت وارد شد",
+  *     data:{
+  *          idToken: idToken, 
+  *          accessToken: accessToken,
+  *          status: true
+  *     }
+  * }
+  * @apiErrorExample {json} Error-Response:
+  * {
+  *      success:true,
+  *      message:"کاربر وارد نشد",
+  *      data:{ status: false }
+  * }
+  */
+    router.post('/login',HomeController.login.bind(HomeController));
 
 
 
