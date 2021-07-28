@@ -20,9 +20,10 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *      data: [...{
  *          _id: '60fd0aacca33dd0374b55650',
  *          name: "نان سیر",
- *          sellingPrice: "25",
  *          description: "سیر . خمیر تازه . اویشن",
- *          type: {name: 'pizza'}
+ *          type: {name: 'pizza'},
+ *          img: 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+ *          size: [...{ name: "medium", price: 50 }]
  *        }]
  * }
  */

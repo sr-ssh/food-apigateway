@@ -17,7 +17,10 @@ module.exports = new class OrderController extends Controller {
 
             let products = await this.model.Product.find(filter, { createdAt: 0, active : 0, updatedAt: 0 }).populate('type', { name: 1, _id: 0}) 
 
-            let data = products.map(product => {product.sellingPrice = parseInt(product.sellingPrice) / 1000; return product})
+            let data = products.map(product => {
+                {product.size.map(size => {size.price = size.price/1000; return size});
+                 return product}
+                })
 
             return res.json({ success: true, message: "محصولات سفارش با موفقیت ارسال شد", data: data });
         }

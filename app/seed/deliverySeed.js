@@ -5,7 +5,9 @@ seeder.connect('mongodb://172.16.2.215/food', function() {
  
   // Load Mongoose models
   seeder.loadModels([
-    './../models/v1/AppInfo.js'
+    './../models/v1/AppInfo.js',
+    './../models/v1/Order.js',
+    './../models/v1/OrderStatusBar.js'
   ]);
  
   // Clear specified collections
@@ -41,5 +43,38 @@ var data = [
                 updateUrl: ''
             }
         ]
+    },
+    {
+      'model': 'OrderStatusBar',
+      'documents': [
+        {
+          'name': 'active',
+          'description': 'orders ordered by customer'
+        },
+        {
+          'name': 'customerCanceled',
+          'description': 'orders caceled by customer'
+        },
+        {
+          'name': 'ready',
+          'description': 'cooked orders'
+        },
+        {
+          'name': 'pending',
+          'description': 'ready orders waiting to deliver'
+        },
+        {
+          'name': 'deliveryAccepted',
+          'description': 'orders that have been accepted by delivary man'
+        },
+        {
+          'name': 'deliveryCanceled',
+          'description': 'orders canceled by delivery'
+        },
+        {
+          'name': 'finished',
+          'description': 'orders that have delivered to customer'
+        }
+      ]
     }
 ];

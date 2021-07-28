@@ -71,57 +71,66 @@ var data = [
         'documents': [
             {
               'name': "نان سیر",
-              'sellingPrice': "25000",
               'description': "سیر . خمیر تازه . اویشن",
-              'type': '60fbdf84755eac0b744f1dab'
+              'type': '60fbdf84755eac0b744f1dab',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '25000'}]
             },
             {
               'name': "رست بیف",
-              'sellingPrice': "75000",
               'description': "گوشت گوساله . پنیر . قارچ . فلفل دلمه ای . پیازجه",
-              'type': '60fbdf84755eac0b744f1dac'
+              'type': '60fbdf84755eac0b744f1dac',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '75000'}, {'name': 'large', 'price': '100000'}]
             },
             {
               'name': "پپرونی",
-              'sellingPrice': "60000",
               'description': "کالباس پپرونی . پنیر . قارچ . فلفل دلمه ای",
-              'type': '60fbdf84755eac0b744f1dac'
+              'type': '60fbdf84755eac0b744f1dac',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '60'}, {'name': 'large', 'price': '80000'}]
             },
             {
               'name': "مرغ و قارچ",
-              'sellingPrice': "70000",
               'description': "مرغ . پنیر . قارچ . فلفل دلمه ای . پیازجه",
-              'type': '60fbdf84755eac0b744f1dac'
+              'type': '60fbdf84755eac0b744f1dac',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '70000'}, {'name': 'large', 'price': '90000'}]
             },
             {
               'name': "مخصوص",
-              'sellingPrice': "70000",
               'description': "گوشت گوساله . ژامبون . پنیر . قارچ . فلفل دلمه ای . پیازجه",
-              'type': '60fbdf84755eac0b744f1dac'
+              'type': '60fbdf84755eac0b744f1dac',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '70000'}, {'name': 'large', 'price': '90000'}]
             },
             {
               'name': "مارگاریتا",
-              'sellingPrice': "45000",
               'description': "پنیر . قارچ . فلفل دلمه ای . پیازجه",
-              'type': '60fbdf84755eac0b744f1dac'
+              'type': '60fbdf84755eac0b744f1dac',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '45000'}]
             },
             {
               'name': "کوکا",
-              'sellingPrice': "5000",
               'description': "",
-              'type': '60fbdf84755eac0b744f1dad'
+              'type': '60fbdf84755eac0b744f1dad',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '9000'}]
             },
             {
               'name': "سالاد فصل",
-              'sellingPrice': "3000",
               'description': "",
-              'type': '60fbdf84755eac0b744f1dae'
+              'type': '60fbdf84755eac0b744f1dae',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '5000'}]
             },
             {
               'name': "سس کچاپ",
-              'sellingPrice': "1000",
               'description': "",
-              'type': '60fbdf84755eac0b744f1daf'
+              'type': '60fbdf84755eac0b744f1daf',
+              'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
+              'size': [{'name': 'medium', 'price': '1000'}]
             }
         ]
     }
