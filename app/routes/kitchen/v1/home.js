@@ -57,6 +57,33 @@ router.get('/home',HomeController.index.bind(HomeController));
  */
  router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
 
+
+
+ /**
+ * @api {post} /api/kitchen/v1/login/verificationcode requset login verification Code 
+ * @apiVersion 1.0.0
+ * @apiName loginVerificationCode
+ * @apiDescription requset login verification Code. for scope send 'cook'
+ * @apiGroup kitchen
+ * @apiParam {Number} mobile user mobile
+ * @apiParam  {varchar} scope operator scope
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success:true,
+ *      message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد",
+ *      data: { status: true }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success:true,
+ *      message:"کاربری با این شماره موبایل در دسترس نمی باشد",
+ *      data: { status: false }
+ * }
+ */
+  router.post('/login/verificationcode',HomeController.loginVerificationCode.bind(HomeController));
+
+
+
   /**
   * @api {post} /api/kitchen/v1/login login
   * @apiVersion 1.0.0

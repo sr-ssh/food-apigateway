@@ -44,6 +44,22 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async loginVerificationCode(req, res) {
+        try {
+            this.mainVerificationCode(req, res)
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('loginVerificationCode')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 
     async login(req, res) {
         try {

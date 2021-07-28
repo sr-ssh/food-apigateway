@@ -38,6 +38,7 @@ module.exports = {
         '/api/kitchen/v1/register', 
         '/api/kitchen/v1/login', 
         '/api/kitchen/v1/verificationcode',
+        '/api/kitchen/v1/login/verificationcode',
         '/api/delivery/v1/register', 
         '/api/delivery/v1/login', 
         '/api/delivery/v1/verificationcode',

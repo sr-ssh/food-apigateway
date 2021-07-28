@@ -75,6 +75,14 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
+        it('check login verification code', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/login/verificationcode`)
+                .send(cook);
+            res.should.have.status(200);
+        });
+
         it('check login', async () => {
             const res = await chai
                 .request(server)
