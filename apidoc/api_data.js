@@ -221,7 +221,7 @@ define({ "api": [
     "title": "login",
     "version": "1.0.0",
     "name": "login",
-    "description": "<p>login kitchen</p>",
+    "description": "<p>login kitchen. for scope send 'deliveryMan'</p>",
     "group": "delivery",
     "parameter": {
       "fields": {
@@ -254,7 +254,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success:true,\n    message:\"کاربر با موفقیت وارد شد\",\n    data:{\n         idToken: idToken, \n         accessToken: accessToken\n    }\n}",
+          "content": "{\n    success:true,\n    message:\"کاربر با موفقیت وارد شد\",\n    data:{\n         idToken: idToken, \n         accessToken: accessToken\n         status: true\n    }\n}",
           "type": "json"
         }
       ]
@@ -263,7 +263,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "{\n     success:false,\n     message:\"کاربر وارد نشد\",\n     data:{}\n}",
+          "content": "{\n     success:false,\n     message:\"کاربر وارد نشد\",\n     data:{ status: false }\n}",
           "type": "json"
         }
       ]

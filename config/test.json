@@ -166,12 +166,13 @@
             "password": "1234",
             "family": "تینا برایی",
             "mobile": "09152226363",
-            "code": "5027",
+            "code": "8658",
             "scope": "deliveryMan"
         },
         "deliveryMan": {
             "mobile": "09152226363",
-            "code": "5027"
+            "code": "8658",
+            "scope": "deliveryMan"
         },
         "customerOrder": {
             "products": [

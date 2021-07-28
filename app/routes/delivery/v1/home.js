@@ -65,7 +65,7 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @api {post} /api/delivery/v1/login login
   * @apiVersion 1.0.0
   * @apiName login
-  * @apiDescription login kitchen
+  * @apiDescription login kitchen. for scope send 'deliveryMan'
   * @apiGroup delivery
   * @apiParam {Number} mobile delivery mobile
   * @apiParam {String} scope delivery scope
@@ -77,13 +77,14 @@ router.get('/home',HomeController.index.bind(HomeController));
   *     data:{
   *          idToken: idToken, 
   *          accessToken: accessToken
+  *          status: true
   *     }
   * }
   * @apiErrorExample {json} Error-Response:
   * {
   *      success:false,
   *      message:"کاربر وارد نشد",
-  *      data:{}
+  *      data:{ status: false }
   * }
   */
    router.post('/login',HomeController.login.bind(HomeController));
