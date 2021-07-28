@@ -40,7 +40,7 @@ router.get('/home',HomeController.index.bind(HomeController));
    
    
 /**
- * @api {post} /api/delivery/v1/login/verificationcode requset verification Code 
+ * @api {post} /api/operator/v1/login/verificationcode requset verification Code 
  * @apiVersion 1.0.0
  * @apiName verificationCode
  * @apiDescription requset verification Code
@@ -60,8 +60,7 @@ router.get('/home',HomeController.index.bind(HomeController));
  *      data: { status: false }
  * }
  */
- router.post('/login/verificationcode',HomeController.verificationCode.bind(HomeController));
-
+ router.post('/login/verificationcode',HomeController.loginVerificationCode.bind(HomeController));
 
 
 

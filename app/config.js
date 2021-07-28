@@ -40,8 +40,10 @@ module.exports = {
         '/api/kitchen/v1/verificationcode',
         '/api/delivery/v1/register', 
         '/api/delivery/v1/login', 
-        '/api/delivery/v1/verificationcode'
-        ],
+        '/api/delivery/v1/verificationcode',
+        '/api/operator/v1/login/verificationcode',
+        '/api/operator/v1/register'
+    ],
     path: {
         controllers: {
             root: path.resolve('./app/controllers'),

@@ -6,7 +6,7 @@ const baseRoute = '/api/operator/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, deliveryMan, deliveryRegister;
+let user,appInfo, accessToken, idToken, deliveryMan, deliveryRegister, operatorVerification;
 const axios = require('axios').default;
 
 
@@ -18,6 +18,7 @@ describe(`${sectionName}`, () => {
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
         appInfo = appConfig.test.appInfo;
+        operatorVerification = appConfig.test.operatorVerification;
         // axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryMan)
         //     .then(function (response) {
         //         response = response.data;
@@ -55,6 +56,15 @@ describe(`${sectionName}`, () => {
                 .send(deliveryRegister);
             res.should.have.status(200);
         });
+
+        it('check login verification code', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/login/verificationcode`)
+                .send(operatorVerification);
+            res.should.have.status(200);
+        });
+
 
     });
 
