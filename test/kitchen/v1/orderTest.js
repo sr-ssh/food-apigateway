@@ -41,10 +41,10 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get orders', async () => {
+        it('check get active orders', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/`)
+                .get(`${baseRoute}/active`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();

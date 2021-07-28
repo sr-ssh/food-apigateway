@@ -9,21 +9,21 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
 
 
  /**
- * @api {get} /api/kitchen/v1/order/ get orders 
+ * @api {get} /api/kitchen/v1/order/active get active orders 
  * @apiVersion 1.0.0
- * @apiName getOrders
- * @apiDescription get orders : it gives 3 arrays: "active", "ready", and "delivery" orders. "active" orders are not ready yet, "ready" orders are done by cook, and "delivdery" orders have delivered to delivery man.
+ * @apiName getActiveOrders
+ * @apiDescription get active orders : "active" orders are not ready yet.
  * @apiGroup kitchen
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
  *      message: "سفارشات با موفقیت ارسال شد",
- *      data: {
- *          active: [...{
+ *      data: [...{
  *             id: "60b72a70e353f0385c2fe5af",
  *             products: [...{
  *                 name: "لاته",
  *                 quantity: 2,
+ *                 size: 'medium'
  *             }],
  *             customer: {
  *                 _id: "7465148754878",
@@ -31,40 +31,14 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *                 mobile: "09152631225",
  *             },
  *            createdAt: "2021-06-01T06:54:01.691Z",
- *            address: "معلم 43"
- *          }],
- *          ready: [...{
- *             id: "60b72a70e353f0385c2fe5af",
- *             products: [...{
- *                 name: "لاته",
- *                 quantity: 2,
- *             }],
- *             customer: {
- *                 _id: "7465148754878",
- *                 family: "مصطفایی",
- *                 mobile: "09152631225",
- *             },
- *             createdAt: "2021-06-01T06:54:01.691Z",
- *             address: "معلم 43"
- *          }],
- *          delivery: [...{
- *             id: "60b72a70e353f0385c2fe5af",
- *             products: [...{
- *                 name: "لاته",
- *                 quantity: 2,
- *             }],
- *             customer: {
- *                 _id: "7465148754878",
- *                 family: "مصطفایی",
- *                 mobile: "09152631225",
- *             },
- *             createdAt: "2021-06-01T06:54:01.691Z",
- *             address: "معلم 43"
+ *            address: "معلم 43",
+ *            GPS: { type: "point", coordinates: [-122.5, 37.7]},
+ *            status: { name: "active"}
  *          }]
  *      }
  * }
  */
-  router.get('/',OrderController.getActiveOrders.bind(OrderController));
+  router.get('/active',OrderController.getActiveOrders.bind(OrderController));
 
 
 

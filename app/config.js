@@ -29,6 +29,7 @@ module.exports = {
     customerApp: "customerApp",
     kitchenApp: "kitchenApp",
     deliveryApp: "deliveryApp",
+    activeOrders: "active",
     publicRoute: [
         '/api/user/v1/login', 
         '/api/user/v1/', 

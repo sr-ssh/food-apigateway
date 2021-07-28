@@ -483,17 +483,17 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/kitchen/v1/order/",
-    "title": "get orders",
+    "url": "/api/kitchen/v1/order/active",
+    "title": "get active orders",
     "version": "1.0.0",
-    "name": "getOrders",
-    "description": "<p>get orders : it gives 3 arrays: &quot;active&quot;, &quot;ready&quot;, and &quot;delivery&quot; orders. &quot;active&quot; orders are not ready yet, &quot;ready&quot; orders are done by cook, and &quot;delivdery&quot; orders have delivered to delivery man.</p>",
+    "name": "getActiveOrders",
+    "description": "<p>get active orders :  &quot;active&quot; orders are not ready yet.</p>",
     "group": "kitchen",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n         active: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                name: \"لاته\",\n                quantity: 2,\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\"\n         }],\n         ready: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                name: \"لاته\",\n                quantity: 2,\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            address: \"معلم 43\"\n         }],\n         delivery: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                name: \"لاته\",\n                quantity: 2,\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            address: \"معلم 43\"\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                name: \"لاته\",\n                quantity: 2,\n                size: 'medium'\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"}\n         }]\n     }\n}",
           "type": "json"
         }
       ]
