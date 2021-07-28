@@ -6,7 +6,7 @@ let Kitchen = new Schema({
     active: { type: Boolean, default: true },
     name: { type: String, required: true },
     address: { type: String, required: true },
-    GPS: { type: Object, required: true,
+    GPS: { type: Object, required: true,default: {
         type: {
           type: String, 
           enum: ['Point'],
@@ -16,6 +16,7 @@ let Kitchen = new Schema({
           type: [Number],
           required: true
         }
+      }
     },
     area: { type: String, required: true },
     distance: { type: Number }

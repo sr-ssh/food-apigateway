@@ -8,7 +8,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
 
   
 /**
- * @api {post} /api/customer/v1/order/product get order products
+ * @api {get} /api/customer/v1/order/product get order products
  * @apiVersion 1.0.0
  * @apiName getOrderProducts
  * @apiDescription get order products
