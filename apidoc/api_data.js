@@ -11,7 +11,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n         _id: '60fd0aacca33dd0374b55650',\n         name: \"نان سیر\",\n         sellingPrice: \"25\",\n         description: \"سیر . خمیر تازه . اویشن\",\n         type: {name: 'pizza'}\n       }]\n}",
+          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n         _id: '60fd0aacca33dd0374b55650',\n         name: \"نان سیر\",\n         description: \"سیر . خمیر تازه . اویشن\",\n         type: {name: 'pizza'},\n         img: 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',\n         size: [...{ name: \"medium\", price: 50 }]\n       }]\n}",
           "type": "json"
         }
       ]
