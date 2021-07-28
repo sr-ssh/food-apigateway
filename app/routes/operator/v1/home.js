@@ -105,7 +105,7 @@ router.get('/home',HomeController.index.bind(HomeController));
   *      data:{ status: false }
   * }
   */
-    router.post('/login',HomeController.login.bind(HomeController));
+  router.post('/login',HomeController.login.bind(HomeController));
 
 
 

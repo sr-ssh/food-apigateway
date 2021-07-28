@@ -657,15 +657,6 @@
         }
       ]
     },
-    "error": {
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\n     success:false,\n     message:\"کاربری با این شماره موبایل در دسترس نمی باشد\"\n}",
-          "type": "json"
-        }
-      ]
-    },
     "filename": "app/routes/kitchen/v1/home.js",
     "groupTitle": "kitchen"
   },

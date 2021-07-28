@@ -356,7 +356,7 @@ module.exports = class MainController {
 
         let data = { idToken, accessToken, status: true};
 
-        return res.json({ success: true, message: "مشتری با موفقیت وارد شد", data: data });
+        return res.json({ success: true, message: "کاربر با موفقیت وارد شد", data: data });
     
     }
 

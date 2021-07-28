@@ -159,7 +159,8 @@
         },
         "cook": {
             "mobile": "09152226565",
-            "code": "8949"
+            "code": "8903",
+            "scope": "cook"
         },
         "deliveryRegister": {
             "password": "1234",

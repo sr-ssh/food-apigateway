@@ -47,59 +47,7 @@ module.exports = new class HomeController extends Controller {
 
     async login(req, res) {
         try {
-            req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
-            req.checkBody('code', 'please enter code').notEmpty().isNumeric();
-            if (this.showValidationErrors(req, res)) return;
-
-            //verification code
-            let filter = { code: req.body.code, mobile: req.body.mobile }
-
-            let veriCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
-            veriCode = veriCode[0]
-            if(!veriCode)
-                return res.json({ success: false, message: "کد تایید صحیح نمی باشد", data: {} });
-            // timeDiff on verification code unit
-            let timeDiff = this.getTimeDiff(veriCode.createdAt.toISOString(), new Date().toISOString(), config.verificationCodeUnit)
-            // check verification code valid duration
-            if(timeDiff > config.verificationCodeDuration)
-                return res.json({ success: false, message: "کد تایید منقضی شده است", data: {} });
-
-            //remove the code
-            // await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
-
-            // check user
-            filter = { active: true, mobile: req.body.mobile }
-            let user = await this.model.User.findOne(filter);
-            if (!user){
-                return res.json({ success: false, message: "کاربر در دسترس نمی باشد", data: {} });
-            }
-
-            let options = {
-                expiresIn: config.idTokenExpire,
-                algorithm: config.algorithm,
-                issuer: config.issuer,
-                audience: config.audience
-            }
-            let payload = {
-                user_id: user._id,
-                user_active: user.active
-            }
-            let idToken = jwt.sign(payload, config.secret, options )
-
-            options = {
-                expiresIn: config.accesssTokenExpire,
-                algorithm: config.algorithm,
-                issuer: config.issuer,
-                audience: config.audience
-            }
-
-            payload = { scope : config.kitchenScope};
-
-            let accessToken = jwt.sign(payload, config.secret, options)
-
-            let data = { idToken, accessToken};
-
-            return res.json({ success: true, message: "مشتری با موفقیت وارد شد", data: data });
+            this.mainLogin(req, res)
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
@@ -112,7 +60,6 @@ module.exports = new class HomeController extends Controller {
             if (!res.headersSent) return res.status(500).json(handelError);
         }
     }
-
 
     async appInfo(req, res) {
         try {

@@ -54,11 +54,6 @@ router.get('/home',HomeController.index.bind(HomeController));
  *      success:true,
  *      message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد"
  * }
- * @apiErrorExample {json} Error-Response:
- * {
- *      success:false,
- *      message:"کاربری با این شماره موبایل در دسترس نمی باشد"
- * }
  */
  router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
 
@@ -77,14 +72,15 @@ router.get('/home',HomeController.index.bind(HomeController));
   *     message:"کاربر با موفقیت وارد شد",
   *     data:{
   *          idToken: idToken, 
-  *          accessToken: accessToken
+  *          accessToken: accessToken,
+  *          status: true
   *     }
   * }
   * @apiErrorExample {json} Error-Response:
   * {
   *      success:false,
   *      message:"کاربر وارد نشد",
-  *      data:{}
+  *      data:{ status: false }
   * }
   */
    router.post('/login',HomeController.login.bind(HomeController));
