@@ -6,7 +6,7 @@ const baseRoute = '/api/customer/v1/location';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user, accessToken, idToken ;
+let user, accessToken, idToken, addLocation ;
 const axios = require('axios').default;
 
 
@@ -19,6 +19,7 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         user = appConfig.test.user;
         customer = appConfig.test.customer;
+        addLocation = appConfig.test.addLocation;
         axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
             .then(function (response) {
                 response = response.data;
@@ -45,7 +46,7 @@ describe(`${sectionName}`, () => {
         it('check get location', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}`)
+                .get(`${baseRoute}/`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();
@@ -56,6 +57,15 @@ describe(`${sectionName}`, () => {
 
     describe('Check Post Apis', () => {
 
+        it('check add location', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(addLocation);
+            res.should.have.status(200);
+        });
         
     });
 

@@ -30,11 +30,11 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  router.get('/product',OrderController.getOrderProducts.bind(OrderController));
 
  /**
- * @api {post} /api/user/v1/order/ add order 
+ * @api {post} /api/customer/v1/order/ add order 
  * @apiVersion 1.0.0
  * @apiName addOrder
  * @apiDescription add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is "1900-01-01T05:42:13.845Z".reminder flag and duration flag are -1.address flag is " "
- * @apiGroup user
+ * @apiGroup customer
  * @apiParam {Object[]} products array of product objects
  * @apiParamExample {json} Request-Example:
  *  {

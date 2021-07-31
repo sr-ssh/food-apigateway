@@ -148,18 +148,18 @@
         "customer": {
             "mobile": "09307580143",
             "family":"زهرا رضوی",
-            "code": "8512"
+            "code": "3004"
         },
         "cookRegister": {
             "password": "1234",
             "family": "مینا محمودی",
             "mobile": "09152226565",
-            "code": "7848",
+            "code": "5181",
             "scope": "cook"
         },
         "cook": {
             "mobile": "09152226565",
-            "code": "7848",
+            "code": "5181",
             "scope": "cook"
         },
         "deliveryRegister": {
@@ -198,6 +198,11 @@
             "mobile": "09152226262",
             "code": "5141",
             "scope": "operator"
+        },
+        "addLocation": {
+            "lat": 20, 
+            "long": 100,
+            "address": "معلم 24"
         }
     }
 }

@@ -1,6 +1,73 @@
 [
   {
     "type": "post",
+    "url": "/api/customer/v1/location",
+    "title": "check location",
+    "version": "1.0.0",
+    "name": "checkLocation",
+    "description": "<p>check location</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "lat",
+            "description": "<p>gerographical latitude</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "long",
+            "description": "<p>gerographical longitude</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>location address</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد\",\n     data: {\n         deliveryCost: 5,\n            provider: {\n                status:true,\n                kitchenArea: 'هنرستان'\n            }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/location.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
+    "url": "/api/customer/v1/location",
+    "title": "get customer locations",
+    "version": "1.0.0",
+    "name": "getLocations",
+    "description": "<p>get customer locations</p>",
+    "group": "customer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"ادرس های مشتری با موفقیت ارسال شد\",\n     data: [...{\n         _id: '60fd0aacca33dd0374b55650',\n         address: \"کلاهدوز 4\"\n       }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/location.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
     "url": "/api/customer/v1/order/product",
     "title": "get order products",
     "version": "1.0.0",
@@ -487,7 +554,7 @@
     "title": "get active orders",
     "version": "1.0.0",
     "name": "getActiveOrders",
-    "description": "<p>get active orders :  &quot;active&quot; orders are not ready yet.</p>",
+    "description": "<p>get active orders : &quot;active&quot; orders are not ready yet.</p>",
     "group": "kitchen",
     "success": {
       "examples": [
@@ -1149,55 +1216,6 @@
       ]
     },
     "filename": "app/routes/user/v1/employee.js",
-    "groupTitle": "user"
-  },
-  {
-    "type": "post",
-    "url": "/api/user/v1/order/",
-    "title": "add order",
-    "version": "1.0.0",
-    "name": "addOrder",
-    "description": "<p>add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is &quot;1900-01-01T05:42:13.845Z&quot;.reminder flag and duration flag are -1.address flag is &quot; &quot;</p>",
-    "group": "user",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Object[]",
-            "optional": false,
-            "field": "products",
-            "description": "<p>array of product objects</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }]\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارش شما با موفقیت ثبت شد\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\n     success: true,\n     message: \"کاربر یافت نشد\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/customer/v1/order.js",
     "groupTitle": "user"
   },
   {

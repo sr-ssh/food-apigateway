@@ -8,26 +8,48 @@ const LocationController = require(`${customerController}/v1/LocationController`
 
   
 /**
- * @api {get} /api/customer/v1/location get order products
+ * @api {get} /api/customer/v1/location get customer locations
  * @apiVersion 1.0.0
- * @apiName getOrderProducts
- * @apiDescription get order products
+ * @apiName getLocations
+ * @apiDescription get customer locations
  * @apiGroup customer
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
- *      message: "محصولات سفارش با موفقیت ارسال شد",
+ *      message: "ادرس های مشتری با موفقیت ارسال شد",
  *      data: [...{
  *          _id: '60fd0aacca33dd0374b55650',
- *          name: "نان سیر",
- *          description: "سیر . خمیر تازه . اویشن",
- *          type: {name: 'pizza'},
- *          img: 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
- *          size: [...{ name: "medium", price: 50 }]
+ *          address: "کلاهدوز 4"
  *        }]
  * }
  */
- router.get('/',LocationController.getLocations.bind(LocationController));
+ router.get('/order',LocationController.getLocations.bind(LocationController));
+
+
+
+ /**
+ * @api {post} /api/customer/v1/location check location 
+ * @apiVersion 1.0.0
+ * @apiName checkLocation
+ * @apiDescription check location
+ * @apiGroup customer
+ * @apiParam {Number} lat gerographical latitude
+ * @apiParam {Number} long gerographical longitude
+ * @apiParam {String} address location address
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد",
+ *      data: {
+ *          deliveryCost: 5,
+            provider: {
+                status:true,
+                kitchenArea: 'هنرستان'
+            }
+ *      }
+ * }
+ */
+  router.post('/',LocationController.checkLocation.bind(LocationController));
 
 
 

@@ -30,6 +30,45 @@ module.exports = new class LocationController extends Controller {
         }
     }
 
+    async checkLocation(req, res) {
+        try {
+            req.checkBody('lat', 'please enter lat').notEmpty().isInt({ min: -90, max: 90});
+            req.checkBody('long', 'please enter long').notEmpty().isInt({ min: -180, max: 180});
+            req.checkBody('address', 'please enter address').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true }
+            let kitchens = await this.model.Kitchen.find()
+            // find distance between input address and all kitchens , select the nearest kitchen
+
+
+            //delivery cost
+            let deliveryCost = await this.model.Settings.findOne({}, 'delivery')
+
+
+            let data = { 
+                deliveryCost: deliveryCost.delivery.deliveryCost / 1000,
+                provider: {
+                    status:true,
+                    kitchenArea: kitchens[0].area
+                }
+            }
+            
+
+            return res.json({ success : true, message : 'موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد', data: data})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('checkLocation')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
     
 }
 
