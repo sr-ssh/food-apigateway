@@ -195,12 +195,12 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "1788",
+            "code": "1778",
             "scope": "operator"
         },
         "getOrdersOperator":{
-            "family": "زهرا",
-            "mobile": "09307580143"
+            "type": "address",
+            "value": "هاشمیه"
         },
         "addLocation": {
             "lat": 20, 

@@ -43,20 +43,10 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get orders by family', async () => {
+        it('check get orders with filter', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/family/${encodeURI(getOrdersOperator.family)}`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
-                .send();
-            res.should.have.status(200);
-        });
-
-        it('check get orders by mobile', async () => {
-            const res = await chai
-                .request(server)
-                .get(`${baseRoute}/mobile/${encodeURI(getOrdersOperator.mobile)}`)
+                .get(`${baseRoute}/${encodeURI(getOrdersOperator.type)}/${encodeURI(getOrdersOperator.value)}`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();

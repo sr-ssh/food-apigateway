@@ -910,10 +910,10 @@
   {
     "type": "get",
     "url": "/api/operator/v1/order/",
-    "title": "get orders by family",
+    "title": "get orders by filter",
     "version": "1.0.0",
-    "name": "getOrdersByFamily",
-    "description": "<p>get orders</p>",
+    "name": "getOrdersByFilter",
+    "description": "<p>get orders by filter. send each of types you want</p>",
     "group": "operator",
     "parameter": {
       "fields": {
@@ -922,8 +922,15 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "family",
-            "description": "<p>customer family</p>"
+            "field": "type",
+            "description": "<p>filter type (&quot;family&quot;, &quot;mobile&quot;, &quot;address&quot;)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "value",
+            "description": "<p>filter value</p>"
           }
         ]
       }
