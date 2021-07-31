@@ -15,13 +15,39 @@ module.exports = new class HomeController extends Controller {
 
             let filter = { active: true }
 
-            let orders = await this.model.Order.find(filter, { status: 1, createdAt: 1, address: 1}).populate('customer', { family: 1, mobile: 1 }).populate('status', {name: 1, _id: 0}) 
+            let orders = await this.model.Order.find(filter, { status: 1, createdAt: 1, address: 1}).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, _id: 0}) 
 
             orders = orders.filter(param => {
                 let re = new RegExp(req.params.family, "i");
                 let find = param.customer.family.search(re);
                 return find !== -1;
             })
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getOrders')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
+    async getOrdersByMobile(req, res) {
+        try {
+            req.checkParams('mobile', 'please enter customer mobile').notEmpty().isNumeric();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active: true }
+
+            let orders = await this.model.Order.find(filter, { status: 1, createdAt: 1, address: 1}).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, _id: 0}) 
+
+            orders = orders.filter(order => order.customer.mobile === req.params.mobile)
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }

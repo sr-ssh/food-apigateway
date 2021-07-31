@@ -46,7 +46,17 @@ describe(`${sectionName}`, () => {
         it('check get orders by family', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/${encodeURI(getOrdersOperator.family)}`)
+                .get(`${baseRoute}/family/${encodeURI(getOrdersOperator.family)}`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
+        it('check get orders by mobile', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/mobile/${encodeURI(getOrdersOperator.mobile)}`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();

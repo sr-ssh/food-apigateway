@@ -43,10 +43,10 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
 
 
 /**
- * @api {get} /api/operator/v1/order/ get orders by family
+ * @api {get} /api/operator/v1/order/family get orders by family
  * @apiVersion 1.0.0
  * @apiName getOrdersByFamily
- * @apiDescription get orders
+ * @apiDescription get orders by customer family
  * @apiGroup operator
  * @apiParam {String} family customer family 
  * @apiSuccessExample {json} Success-Response:
@@ -55,25 +55,47 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  *      message: "سفارشات با موفقیت ارسال شد",
  *      data: [...{
  *             id: "60b72a70e353f0385c2fe5af",
- *             products: [...{
- *                 name: "لاته",
- *                 quantity: 2,
- *                 size: 'medium'
- *             }],
  *             customer: {
- *                 _id: "7465148754878",
  *                 family: "مصطفایی",
  *                 mobile: "09152631225",
  *             },
  *            createdAt: "2021-06-01T06:54:01.691Z",
  *            address: "معلم 43",
- *            GPS: { type: "point", coordinates: [-122.5, 37.7]},
  *            status: { name: "active"}
  *          }]
  *      }
  * }
  */
-  router.get('/:family',OrderController.getOrdersByFamily.bind(OrderController));
+  router.get('/family/:family',OrderController.getOrdersByFamily.bind(OrderController));
+
+
+
+
+  /**
+ * @api {get} /api/operator/v1/order/mobile get orders by mobile
+ * @apiVersion 1.0.0
+ * @apiName getOrdersByMobile
+ * @apiDescription get orders by customer mobile
+ * @apiGroup operator
+ * @apiParam {Number} mobile customer mobile 
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: [...{
+ *             id: "60b72a70e353f0385c2fe5af",
+ *             customer: {
+ *                 family: "مصطفایی",
+ *                 mobile: "09152631225",
+ *             },
+ *            createdAt: "2021-06-01T06:54:01.691Z",
+ *            address: "معلم 43",
+ *            status: { name: "active"}
+ *          }]
+ *      }
+ * }
+ */
+   router.get('/mobile/:mobile',OrderController.getOrdersByMobile.bind(OrderController));
 
 
 

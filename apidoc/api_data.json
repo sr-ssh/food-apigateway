@@ -908,6 +908,39 @@
     "groupTitle": "operator"
   },
   {
+    "type": "get",
+    "url": "/api/operator/v1/order/",
+    "title": "get orders by family",
+    "version": "1.0.0",
+    "name": "getOrdersByFamily",
+    "description": "<p>get orders</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "family",
+            "description": "<p>customer family</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           status: { name: \"active\"}\n         }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
+  },
+  {
     "type": "post",
     "url": "/api/operator/v1/login",
     "title": "login",
