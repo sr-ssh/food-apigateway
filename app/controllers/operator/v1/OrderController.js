@@ -8,6 +8,36 @@ module.exports = new class HomeController extends Controller {
         return res.json({ success: true, message: "Order v1" });
     }
 
+    async getOrdersByFamily(req, res) {
+        try {
+            req.checkParams('family', 'please enter customer family').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active: true }
+
+            let orders = await this.model.Order.find(filter, { status: 1, createdAt: 1, address: 1}).populate('customer', { family: 1, mobile: 1 }).populate('status', {name: 1, _id: 0}) 
+
+            orders = orders.filter(param => {
+                let re = new RegExp(req.params.family, "i");
+                let find = param.customer.family.search(re);
+                return find !== -1;
+            })
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getOrders')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
     async addOrder(req, res) {
         try {
             req.checkBody('products', 'please enter products').notEmpty();

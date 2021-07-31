@@ -5,7 +5,7 @@ const home = require('./home');
 const order = require('./order');
 
 router.use('/', home);
-router.use('/', order);
+router.use('/order', order);
 
 
 module.exports = router;

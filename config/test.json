@@ -195,8 +195,11 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "1257",
+            "code": "1788",
             "scope": "operator"
+        },
+        "getOrdersOperator":{
+            "family": "زهرا"
         },
         "addLocation": {
             "lat": 20, 
