@@ -5,7 +5,7 @@ define({ "api": [
     "title": "add order",
     "version": "1.0.0",
     "name": "addOrder",
-    "description": "<p>add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is &quot;1900-01-01T05:42:13.845Z&quot;.reminder flag and duration flag are -1.address flag is &quot; &quot;</p>",
+    "description": "<p>add order: send products like request example</p>",
     "group": "customer",
     "parameter": {
       "fields": {
@@ -16,13 +16,48 @@ define({ "api": [
             "optional": false,
             "field": "products",
             "description": "<p>array of product objects</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>order address</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "lat",
+            "description": "<p>gerographical latitude</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "long",
+            "description": "<p>gerographical longitude</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "delivaryCost",
+            "description": "<p>delivery cost</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>order dexcription</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }]\n}",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\"\n    }],\n    address: \"\",\n    lat: 36.297920,\n    long: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
           "type": "json"
         }
       ]
@@ -107,7 +142,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"ادرس های مشتری با موفقیت ارسال شد\",\n     data: [...{\n         _id: '60fd0aacca33dd0374b55650',\n         address: \"کلاهدوز 4\"\n       }]\n}",
+          "content": "{\n     success: true,\n     message: \"ادرس های مشتری با موفقیت ارسال شد\",\n     data: [...{\n         address: \"کلاهدوز 4\",\n         GPS: { type: \"Point\", coordinates: [ 36.345, -130.54]}\n       }]\n}",
           "type": "json"
         }
       ]

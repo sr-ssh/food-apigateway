@@ -18,8 +18,8 @@ const LocationController = require(`${customerController}/v1/LocationController`
  *      success: true,
  *      message: "ادرس های مشتری با موفقیت ارسال شد",
  *      data: [...{
- *          _id: '60fd0aacca33dd0374b55650',
- *          address: "کلاهدوز 4"
+ *          address: "کلاهدوز 4",
+ *          GPS: { type: "Point", coordinates: [ 36.345, -130.54]}
  *        }]
  * }
  */
