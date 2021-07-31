@@ -196,12 +196,28 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "5141",
+            "code": "1257",
             "scope": "operator"
         },
         "addLocation": {
             "lat": 20, 
             "long": 100,
+            "address": "معلم 24"
+        },
+        "addOrderOperator": {
+            "products": [
+                {
+                    "_id": "61014026a1701735e409000b",
+                    "quantity": 3,
+                    "price": 75000,
+                    "size": "medium"
+                }
+            ],
+            "customer": {
+                "family": "ریحانه شکوهی",
+                "mobile": "09307580142"
+            },
+            "description": "",
             "address": "معلم 24"
         }
     }
