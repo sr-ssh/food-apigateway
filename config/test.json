@@ -147,7 +147,7 @@
         "customer": {
             "mobile": "09307580143",
             "family":"زهرا رضوی",
-            "code": "3004"
+            "code": "4114"
         },
         "cookRegister": {
             "password": "1234",
@@ -176,11 +176,17 @@
         "customerOrder": {
             "products": [
                 {
-                    "_id": "60fd0aacca33dd0374b55651",
+                    "_id": "61014026a1701735e409000b",
                     "quantity": 1,
-                    "sellingPrice": "60000"
+                    "price": "60000",
+                    "size": "medium"
                 }
-            ]
+            ],
+            "address": "راهنمایی 24",
+            "lat": 33.297920,
+            "long": 59.605933 ,
+            "deliveryCost": 5000,
+            "description": ""
         },
         "operatorRegister": {
             "password": "1234",
@@ -195,12 +201,15 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "1778",
+            "code": "7285",
             "scope": "operator"
         },
         "getOrdersOperator":{
             "type": "address",
             "value": "هاشمیه"
+        },
+        "getOrderOperator":{
+            "orderId": "61014d516e709b05b47fc484"
         },
         "addLocation": {
             "lat": 20, 

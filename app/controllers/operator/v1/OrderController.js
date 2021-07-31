@@ -53,6 +53,31 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async getOrder(req, res) {
+        try {
+            req.checkParams('orderId', 'please enter order Id').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active: true, _id: req.params.orderId }
+
+            let order = await this.model.Order.findOne(filter, { status: 1, createdAt: 1, address: 1, description: 1, deliveryCost: 1, products: 1 }).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, _id: 0}) 
+
+            order.deliveryCost = order.deliveryCost / 1000;
+            
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: order })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getOrder')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
     async addOrder(req, res) {
         try {
             req.checkBody('products', 'please enter products').notEmpty();

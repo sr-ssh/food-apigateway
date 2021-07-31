@@ -33,16 +33,27 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * @api {post} /api/customer/v1/order/ add order 
  * @apiVersion 1.0.0
  * @apiName addOrder
- * @apiDescription add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is "1900-01-01T05:42:13.845Z".reminder flag and duration flag are -1.address flag is " "
+ * @apiDescription add order: send products like request example
  * @apiGroup customer
  * @apiParam {Object[]} products array of product objects
+ * @apiParam {String} address order address
+ * @apiParam {Number} lat gerographical latitude
+ * @apiParam {Number} long gerographical longitude
+ * @apiParam {Number} delivaryCost delivery cost
+ * @apiParam {String} description order dexcription
  * @apiParamExample {json} Request-Example:
  *  {
  *      products: [...{
  *          _id: "60b72a70e353f0385c2fe5af",
  *          quantity: 2,
- *          sellingPrice: "30000"
- *      }]
+ *          price: "30000",
+ *          size: "meduim"
+ *      }],
+ *      address: "",
+ *      lat: 36.297920,
+ *      long: 59.605933 ,
+ *      deliveryCost: 5000,
+ *      description: "تحویل در اسانسور"
  *  }
  * @apiSuccessExample {json} Success-Response:
  * {

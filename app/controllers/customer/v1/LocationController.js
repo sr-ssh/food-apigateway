@@ -14,9 +14,9 @@ module.exports = new class LocationController extends Controller {
         try {
 
             let filter = { active: true, _id: req.decodedData.user_id }
-            let locations = await this.model.Customer.find(filter, { loaction: 1, _id: 0 })
+            let location = await this.model.Customer.findOne(filter, { locations: 1, _id: 0 })
             
-            return res.json({ success: true, message: "محصولات سفارش با موفقیت ارسال شد", data: locations });
+            return res.json({ success: true, message: "ادرس های مشتری با موفقیت ارسال شد", data: location.locations });
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
@@ -32,8 +32,8 @@ module.exports = new class LocationController extends Controller {
 
     async checkLocation(req, res) {
         try {
-            req.checkBody('lat', 'please enter lat').notEmpty().isInt({ min: -90, max: 90});
-            req.checkBody('long', 'please enter long').notEmpty().isInt({ min: -180, max: 180});
+            req.checkBody('lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
+            req.checkBody('long', 'please enter long').notEmpty().isFloat({ min: -180, max: 180});
             req.checkBody('address', 'please enter address').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
 

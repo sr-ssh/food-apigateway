@@ -43,7 +43,7 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
 
 
 /**
- * @api {get} /api/operator/v1/order/ get orders by filter
+ * @api {get} /api/operator/v1/order/ get orders
  * @apiVersion 1.0.0
  * @apiName getOrdersByFilter
  * @apiDescription get orders by filter. send each of types you want
@@ -62,12 +62,47 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  *             },
  *            createdAt: "2021-06-01T06:54:01.691Z",
  *            address: "معلم 43",
- *            status: { name: "active"}
+ *            status: { name: "فعال"}
  *          }]
  *      }
  * }
  */
   router.get('/:type/:value',OrderController.getOrdersByFilter.bind(OrderController));
+
+
+
+  /**
+ * @api {get} /api/operator/v1/order/ get order
+ * @apiVersion 1.0.0
+ * @apiName getOrder
+ * @apiDescription get orders by id
+ * @apiGroup operator
+ * @apiParam {String} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: [...{
+ *             id: "60b72a70e353f0385c2fe5af",
+ *             customer: {
+ *                 family: "مصطفایی",
+ *                 mobile: "09152631225",
+ *             },
+ *            products: [...{
+ *              _id: "60b72a70e353f0385c2fe5af",
+ *              quantity: 2,
+ *              price: "30000",
+ *              size: "medium"
+ *            }],
+ *            createdAt: "2021-06-01T06:54:01.691Z",
+ *            address: "معلم 43",
+ *            status: { name: "فعال"},
+ *            deliveryCost: 5
+ *          }]
+ *      }
+ * }
+ */
+   router.get('/:orderId',OrderController.getOrder.bind(OrderController));
 
 
 

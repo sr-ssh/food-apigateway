@@ -47,27 +47,27 @@ var data = [
     //   'model': 'OrderStatusBar',
     //   'documents': [
     //     {
-    //       'name': 'active',
+    //       'name': 'فعال',
     //       'description': 'orders ordered by customer'
     //     },
     //     {
-    //       'name': 'customerCanceled',
+    //       'name': 'لغو شده توسط مشتری',
     //       'description': 'orders caceled by customer'
     //     },
     //     {
-    //       'name': 'ready',
+    //       'name': 'آماده',
     //       'description': 'cooked orders'
     //     },
     //     {
-    //       'name': 'deliveryAccepted',
+    //       'name': 'قبول سرویس',
     //       'description': 'orders that have been accepted by delivary man'
     //     },
     //     {
-    //       'name': 'deliveryCanceled',
+    //       'name': 'لغو شده توسط پیک',
     //       'description': 'orders canceled by delivery'
     //     },
     //     {
-    //       'name': 'finished',
+    //       'name': 'تمام شده',
     //       'description': 'orders that have delivered to customer'
     //     }
     //   ]

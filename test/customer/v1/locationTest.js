@@ -43,7 +43,7 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get location', async () => {
+        it('check get locations', async () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/`)

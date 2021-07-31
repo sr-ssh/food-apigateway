@@ -23,7 +23,7 @@ const LocationController = require(`${customerController}/v1/LocationController`
  *        }]
  * }
  */
- router.get('/order',LocationController.getLocations.bind(LocationController));
+ router.get('/',LocationController.getLocations.bind(LocationController));
 
 
 
