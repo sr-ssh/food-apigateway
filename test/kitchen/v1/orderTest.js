@@ -54,10 +54,10 @@ describe(`${sectionName}`, () => {
 
     describe('Check Put Apis', () => {
 
-        it('check edit order status', async () => {
+        it('check ready order', async () => {
             const res = await chai
                 .request(server)
-                .put(`${baseRoute}/status`)
+                .put(`${baseRoute}/ready`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(editOrderStatus);

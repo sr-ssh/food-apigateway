@@ -32,11 +32,10 @@ module.exports = new class OrderController extends Controller {
     }
 
 
-    async editOrderStatus(req, res) {
+    async readyOrder(req, res) {
         try {
 
             req.checkBody('orderId', 'please set order id').notEmpty();
-            req.checkBody('status', 'please set order status').notEmpty().isInt({min: 1, max: 1});
             if (this.showValidationErrors(req, res)) return;
 
             let filter = { active : true, _id: req.body.orderId }
@@ -45,7 +44,11 @@ module.exports = new class OrderController extends Controller {
             if(!order)
                 return res.json({ success : false, message : 'سفارش موجود نیست'})
 
-            order.status = req.body.status
+            //get status id
+            filter = {active: true, name: config.readyOrders}
+            let status = await this.model.OrderStatusBar.findOne(filter, '_id')
+
+            order.status = status
             await order.save()
 
             res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد'})
@@ -54,7 +57,7 @@ module.exports = new class OrderController extends Controller {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('editOrderStatus')
+                .method('readyOrder')
                 .inputParams(req.body)
                 .call();
 

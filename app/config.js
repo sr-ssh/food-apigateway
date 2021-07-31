@@ -30,6 +30,7 @@ module.exports = {
     kitchenApp: "kitchenApp",
     deliveryApp: "deliveryApp",
     activeOrders: "active",
+    readyOrders: "ready",
     publicRoute: [
         '/api/user/v1/login', 
         '/api/user/v1/', 

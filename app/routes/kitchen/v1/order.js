@@ -43,12 +43,11 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
 
 
 /**
- * @api {put} /api/kitchen/v1/order/status edit order status
+ * @api {put} /api/kitchen/v1/order/ready ready order
  * @apiVersion 1.0.0
- * @apiName editOrderStatus
- * @apiDescription edit order status, in status : only send 1 when order is ready
+ * @apiName readyOrder
+ * @apiDescription ready order
  * @apiGroup kitchen
- * @apiParam {int} status order status
  * @apiParam {varchar} orderId order id
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -61,7 +60,7 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *      message: "سفارش موجود نیست"
  * }
  */
-router.put('/status',OrderController.editOrderStatus.bind(OrderController));
+router.put('/ready',OrderController.readyOrder.bind(OrderController));
 
 
  module.exports = router;

@@ -1,6 +1,55 @@
 [
   {
     "type": "post",
+    "url": "/api/customer/v1/order/",
+    "title": "add order",
+    "version": "1.0.0",
+    "name": "addOrder",
+    "description": "<p>add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is &quot;1900-01-01T05:42:13.845Z&quot;.reminder flag and duration flag are -1.address flag is &quot; &quot;</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "products",
+            "description": "<p>array of product objects</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        sellingPrice: \"30000\"\n    }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش شما با موفقیت ثبت شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"کاربر یافت نشد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/order.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "post",
     "url": "/api/customer/v1/location",
     "title": "check location",
     "version": "1.0.0",
@@ -500,55 +549,6 @@
     "groupTitle": "delivery"
   },
   {
-    "type": "put",
-    "url": "/api/kitchen/v1/order/status",
-    "title": "edit order status",
-    "version": "1.0.0",
-    "name": "editOrderStatus",
-    "description": "<p>edit order status, in status : only send 1 when order is ready</p>",
-    "group": "kitchen",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "status",
-            "description": "<p>order status</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "orderId",
-            "description": "<p>order id</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"وضعیت سفارش با موفقیت ویرایش شد\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\n     success: false,\n     message: \"سفارش موجود نیست\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/kitchen/v1/order.js",
-    "groupTitle": "kitchen"
-  },
-  {
     "type": "get",
     "url": "/api/kitchen/v1/order/active",
     "title": "get active orders",
@@ -723,6 +723,48 @@
     "groupTitle": "kitchen"
   },
   {
+    "type": "put",
+    "url": "/api/kitchen/v1/order/ready",
+    "title": "ready order",
+    "version": "1.0.0",
+    "name": "readyOrder",
+    "description": "<p>ready order</p>",
+    "group": "kitchen",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"وضعیت سفارش با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: false,\n     message: \"سفارش موجود نیست\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/order.js",
+    "groupTitle": "kitchen"
+  },
+  {
     "type": "post",
     "url": "/api/kitchen/v1/register",
     "title": "register",
@@ -824,6 +866,46 @@
     },
     "filename": "app/routes/kitchen/v1/home.js",
     "groupTitle": "kitchen"
+  },
+  {
+    "type": "post",
+    "url": "/api/operator/v1/order/",
+    "title": "add order",
+    "version": "1.0.0",
+    "name": "addOrder",
+    "description": "<p>add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is &quot;1900-01-01T05:42:13.845Z&quot;.reminder flag and duration flag are -1.address flag is &quot; &quot;</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "products",
+            "description": "<p>array of product objects</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        price: \"30000\",\n        size: \"medium\"\n    }],\n    customer: {\n        family: \"شکوهی\",\n        mobile: \"09307580142\",\n    },\n    address: \"معلم 24\",\n    description: \"ساعت 21:00 تحویل داده شود\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش شما با موفقیت ثبت شد\",\n     data: {\n       status: true\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
   },
   {
     "type": "post",
