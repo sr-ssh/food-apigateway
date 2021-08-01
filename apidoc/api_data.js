@@ -311,6 +311,48 @@ define({ "api": [
     "groupTitle": "customer"
   },
   {
+    "type": "post",
+    "url": "/api/delivery/v1/order",
+    "title": "accept order",
+    "version": "1.0.0",
+    "name": "acceptOrder",
+    "description": "<p>accept order for delivery</p>",
+    "group": "delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش موجود نیست\",\n     data: { status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/order.js",
+    "groupTitle": "delivery"
+  },
+  {
     "type": "get",
     "url": "/api/delivery/v1/order/pending",
     "title": "get pending orders",

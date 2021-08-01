@@ -6,7 +6,7 @@ const baseRoute = '/api/delivery/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let accessToken, idToken, deliveryMan;
+let accessToken, idToken, deliveryMan, deliveryAcceptOrder;
 const axios = require('axios').default;
 
 chai.use(chaiHttp);
@@ -17,6 +17,7 @@ describe(`${sectionName}`, () => {
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
         deliveryMan = appConfig.test.deliveryMan;
+        deliveryAcceptOrder = appConfig.test.deliveryAcceptOrder;
         axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryMan)
             .then(function (response) {
                 response = response.data;
@@ -49,6 +50,21 @@ describe(`${sectionName}`, () => {
                 .send();
             res.should.have.status(200);
         });
+
+    });
+
+    describe('Check Post Apis', () => {
+
+        it('check accept order', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(deliveryAcceptOrder);
+            res.should.have.status(200);
+        });
+    
     });
 
     describe('Check Put Apis', () => {

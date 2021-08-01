@@ -30,4 +30,28 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
 
 
 
+  /**
+ * @api {post} /api/delivery/v1/order accept order
+ * @apiVersion 1.0.0
+ * @apiName acceptOrder
+ * @apiDescription accept order for delivery
+ * @apiGroup delivery
+ * @apiParam {String} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: { status: true }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: true,
+ *      message: "سفارش موجود نیست",
+ *      data: { status: false }
+ * }
+ */
+  router.post('/',OrderController.acceptOrder.bind(OrderController));
+
+
+
  module.exports = router;

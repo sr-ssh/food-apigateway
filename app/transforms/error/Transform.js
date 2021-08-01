@@ -10,7 +10,7 @@ module.exports = class Transform {
         this.parentTag = '';
         this.classTag = '';
         this.methodTag = '';
-        this.projectName = 'userserver';
+        this.projectName = 'apigateway';
     }
 
     parent(value) {
