@@ -118,7 +118,7 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  *                 mobile: "09152631225",
  *              },
  *              products: [...{
- *                _id: "60b72a70e353f0385c2fe5af",
+ *                _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                quantity: 2,
  *                price: "30000",
  *                size: "medium"

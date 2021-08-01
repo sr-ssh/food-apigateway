@@ -14,7 +14,7 @@ module.exports = new class OrderController extends Controller {
 
             let filter = { active: true }
 
-            let orders = await this.model.Order.find(filter, { createdAt: 1 }).populate('status', {name: 1, _id: 0}) 
+            let orders = await this.model.Order.find(filter, { createdAt: 1 }).populate('status', {name: 1, _id: 0}).sort({createdAt:-1})
 
             filter = { active: true }
             let cooktime = await this.model.Settings.findOne(filter, 'order.cookTime')
@@ -65,6 +65,35 @@ module.exports = new class OrderController extends Controller {
                 .class(TAG)
                 .method('acceptOrder')
                 .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
+    async getacceptedOrders(req, res) {
+        try {
+
+            let filter = { active: true }
+
+            let orders = await this.model.Order
+                .find(filter, { createdAt: 1, customer: 1, address: 1, 'GPS.coordinates': 1, products: 1, description: 1 })
+                .populate({ path: 'products._id', model: 'Product', select: 'name'})
+                .populate('customer', { _id: 0, family: 1, mobile: 1})
+                .populate('status', {status: 1, _id: 0})
+                .sort({createdAt:-1})
+
+            orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder )
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getOrders')
+                .inputParams(req.params)
                 .call();
 
             if (!res.headersSent) return res.status(500).json(handelError);

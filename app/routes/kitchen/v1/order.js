@@ -21,7 +21,7 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *      data: [...{
  *             id: "60b72a70e353f0385c2fe5af",
  *             products: [...{
- *                 name: "لاته",
+ *                 _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                 quantity: 2,
  *                 size: 'medium'
  *             }],

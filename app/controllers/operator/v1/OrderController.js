@@ -60,7 +60,11 @@ module.exports = new class HomeController extends Controller {
 
             let filter = { active: true, _id: req.params.orderId }
 
-            let order = await this.model.Order.findOne(filter, { status: 1, createdAt: 1, address: 1, description: 1, deliveryCost: 1, products: 1, deliveryId: 1 }).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, _id: 0}) 
+            let order = await this.model.Order
+                .findOne(filter, { status: 1, createdAt: 1, address: 1, description: 1, deliveryCost: 1, products: 1, deliveryId: 1 })
+                .populate({ path: 'products._id', model: 'Product', select: 'name'})
+                .populate('customer', { family: 1, mobile: 1, _id: 0 })
+                .populate('status', {name: 1, _id: 0}) 
 
             order.deliveryCost = order.deliveryCost / 1000;
 

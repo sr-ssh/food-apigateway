@@ -427,6 +427,26 @@
     "groupTitle": "delivery"
   },
   {
+    "type": "get",
+    "url": "/api/delivery/v1/order/accepted",
+    "title": "get accepted orders",
+    "version": "1.0.0",
+    "name": "getacceptedOrders",
+    "description": "<p>get accepted orders : &quot;accepted&quot; orders are accepted by delivery</p>",
+    "group": "delivery",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium'\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\"\n         }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/order.js",
+    "groupTitle": "delivery"
+  },
+  {
     "type": "post",
     "url": "/api/delivery/v1/app/info",
     "title": "app info",
@@ -704,7 +724,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                name: \"لاته\",\n                quantity: 2,\n                size: 'medium'\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"}\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                quantity: 2,\n                size: 'medium'\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"}\n         }]\n     }\n}",
           "type": "json"
         }
       ]
@@ -1118,7 +1138,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n             },\n             products: [...{\n               _id: \"60b72a70e353f0385c2fe5af\",\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"فعال\"},\n             deliveryCost: 5,\n             deliveryId: \"610545a7a5365707ccd6a308\"\n           },\n           deliveryLocation: {\n             _id: \"60b72a70e353f0385c2fe5af\",\n             city: \"Mashhad\",\n             geo : [ -49.555555, 39.555555],\n             speed : 80,\n             bearing: 32,\n             saveDate: \"2021-08-01T09:26:22.320Z\"\n            },\n           tax: 12750\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n             },\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"فعال\"},\n             deliveryCost: 5,\n             deliveryId: \"610545a7a5365707ccd6a308\"\n           },\n           deliveryLocation: {\n             _id: \"60b72a70e353f0385c2fe5af\",\n             city: \"Mashhad\",\n             geo : [ -49.555555, 39.555555],\n             speed : 80,\n             bearing: 32,\n             saveDate: \"2021-08-01T09:26:22.320Z\"\n            },\n           tax: 12750\n     }\n}",
           "type": "json"
         }
       ]
