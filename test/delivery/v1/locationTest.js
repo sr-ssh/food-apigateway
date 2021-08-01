@@ -1,12 +1,12 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
-const sectionName = 'V1 customer location Tests';
-const baseRoute = '/api/customer/v1/location';
+const sectionName = 'V1 delivery location Tests';
+const baseRoute = '/api/delivery/v1/location';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user, accessToken, idToken, addLocation ;
+let accessToken, idToken, addLocation, deliveryMan ;
 const axios = require('axios').default;
 
 
@@ -17,10 +17,9 @@ describe(`${sectionName}`, () => {
 
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
-        user = appConfig.test.user;
-        customer = appConfig.test.customer;
         addLocation = appConfig.test.addLocation;
-        axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
+        deliveryMan = appConfig.test.deliveryMan;
+        axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryMan)
             .then(function (response) {
                 response = response.data;
                 console.log(response.message)
@@ -43,15 +42,6 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get locations', async () => {
-            const res = await chai
-                .request(server)
-                .get(`${baseRoute}/`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
-                .send();
-            res.should.have.status(200);
-        });
 
     });
 

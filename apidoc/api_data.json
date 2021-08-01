@@ -353,6 +353,60 @@
     "groupTitle": "delivery"
   },
   {
+    "type": "post",
+    "url": "/api/delivery/v1/location",
+    "title": "add location",
+    "version": "1.0.0",
+    "name": "addLocation",
+    "description": "<p>add location</p>",
+    "group": "delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "lat",
+            "description": "<p>delivery latitude</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "lng",
+            "description": "<p>delivery longitude</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "speed",
+            "description": "<p>delivery speed</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "bearing",
+            "description": "<p>delivdery bearing</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد\",\n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/location.js",
+    "groupTitle": "delivery"
+  },
+  {
     "type": "get",
     "url": "/api/delivery/v1/order/pending",
     "title": "get pending orders",

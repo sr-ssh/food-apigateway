@@ -170,7 +170,7 @@
         },
         "deliveryMan": {
             "mobile": "09152226363",
-            "code": "7974",
+            "code": "5776",
             "scope": "deliveryMan"
         },
         "deliveryAcceptOrder": {
@@ -215,8 +215,10 @@
             "orderId": "61014d516e709b05b47fc484"
         },
         "addLocation": {
-            "lat": 20, 
-            "lng": 100
+            "lat": 38.066666, 
+            "lng": 46.299999,
+            "speed": 80,
+            "bearing": 32 
         },
         "addOrderOperator": {
             "products": [
