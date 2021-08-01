@@ -125,6 +125,26 @@
   },
   {
     "type": "get",
+    "url": "/api/customer/v1/order",
+    "title": "get orders",
+    "version": "1.0.0",
+    "name": "getInLineOrders",
+    "description": "<p>get order products</p>",
+    "group": "customer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n           id: \"60b72a70e353f0385c2fe5af\",\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           paid: true,\n           status: { name: \"آماده\", status: 2}\n         }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/order.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
     "url": "/api/customer/v1/location",
     "title": "get customer locations",
     "version": "1.0.0",

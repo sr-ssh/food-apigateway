@@ -85,6 +85,31 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+    async getInLineOrders(req, res) {
+        try {
+            
+            let filter = { active: true, customer: req.decodedData.user_id }
+
+            let orders = await this.model.Order
+                .find(filter, { status: 1, createdAt: 1, paid: 1 })
+                .populate('status', { status: 1, name: 1, _id: 0}) 
+
+            orders = orders.filter(order => order.status.status !== config.finishedOrder )
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getInLineOrders')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

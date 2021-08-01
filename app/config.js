@@ -30,6 +30,7 @@ module.exports = {
     kitchenApp: "kitchenApp",
     deliveryApp: "deliveryApp",
     activeOrders: "فعال",
+    activeOrdersStatus: 0,
     readyOrders: "آماده",
     canceledOrder: 1,
     acceptDeliveryOrder: 3,
