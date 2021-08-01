@@ -1167,6 +1167,39 @@
     "groupTitle": "operator"
   },
   {
+    "type": "get",
+    "url": "/api/operator/v1/order/delivery",
+    "title": "get delivery location",
+    "version": "1.0.0",
+    "name": "getdeliveryLocation",
+    "description": "<p>get order delivery location</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"موقعیت پیک با موفقیت ارسال شد\",\n     data: {\n           status: true,\n           deliveryLocation: {\n             _id: \"60b72a70e353f0385c2fe5af\",\n             city: \"Mashhad\",\n             geo : [ -49.555555, 39.555555],\n             speed : 80,\n             bearing: 32,\n             saveDate: \"2021-08-01T09:26:22.320Z\"\n            }\n         }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
+  },
+  {
     "type": "post",
     "url": "/api/operator/v1/login",
     "title": "login",

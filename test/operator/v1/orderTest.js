@@ -6,7 +6,8 @@ const baseRoute = '/api/operator/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let accessToken, idToken, addOrderOperator, operatorLogin, getOrdersOperator, getOrderOperator, cancelOrderOperator;
+let accessToken, idToken, addOrderOperator, operatorLogin, getOrdersOperator, getOrderOperator, cancelOrderOperator
+, operatorGetOrderDeliveryLocation;
 const axios = require('axios').default;
 
 
@@ -22,6 +23,7 @@ describe(`${sectionName}`, () => {
         getOrdersOperator = appConfig.test.getOrdersOperator;
         getOrderOperator = appConfig.test.getOrderOperator;
         cancelOrderOperator = appConfig.test.cancelOrderOperator;
+        operatorGetOrderDeliveryLocation = appConfig.test.operatorGetOrderDeliveryLocation;
         axios.post(`http://localhost:4000/api/operator/v1/login`, operatorLogin)
             .then(function (response) {
                 response = response.data;
@@ -64,6 +66,17 @@ describe(`${sectionName}`, () => {
                 .send();
             res.should.have.status(200);
         });
+
+        it('check get order delivery location', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/delivery/${encodeURI(operatorGetOrderDeliveryLocation.orderId)}`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
 
     });
 

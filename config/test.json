@@ -204,7 +204,7 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "9192",
+            "code": "1923",
             "scope": "operator"
         },
         "getOrdersOperator":{
@@ -238,6 +238,9 @@
         },
         "cancelOrderOperator": {
             "orderId": "61054618a0d2eb48289abac9"
+        },
+        "operatorGetOrderDeliveryLocation":{
+            "orderId": "610545a7a5365707ccd6a308"
         }
     }
 }

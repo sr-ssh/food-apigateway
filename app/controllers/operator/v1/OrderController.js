@@ -112,23 +112,19 @@ module.exports = new class HomeController extends Controller {
 
     async getdeliveryLocation(req, res) {
         try {
-            req.checkBody('orderId', 'please set order id').notEmpty();
+            req.checkParams('orderId', 'please set order id').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
-            let filter = { active : true, _id: req.body.orderId }
-            let order = await this.model.Order.findOne(filter).populate('')
+            let filter = { active : true, _id: req.params.orderId }
+            let order = await this.model.Order.findOne(filter, 'deliveryId').populate('status')
 
-            if(!order)
-                return res.json({ success : false, message : 'سفارش موجود نیست', data: { status: false }})
+            if(!order.deliveryId)
+                return res.json({ success : true, message : `است ${order.status.name} سفارش شما در مرحله `, data: { status: false }})
 
-            //get status id
-            filter = {active: true, status: config.canceledOrder}
-            let status = await this.model.OrderStatusBar.findOne(filter, '_id')
-
-            order.status = status
-            await order.save()
-
-            res.json({ success : true, message : 'سفارش با موفقیت لغو شد', data: { status: true }})
+            filter = { userId: order.deliveryId}
+            let deliveryLocation = await this.model.Location.findOne(filter, { userId: 0 }).sort({createdAt:-1}).limit(1)
+            
+            res.json({ success : true, message : 'موقعیت پیک با موفقیت ارسال شد', data: { status: true, deliveryLocation }})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
