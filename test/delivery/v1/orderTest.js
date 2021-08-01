@@ -74,6 +74,16 @@ describe(`${sectionName}`, () => {
                 .send(deliveryAcceptOrder);
             res.should.have.status(200);
         });
+
+        it('check finish order', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/finish`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(deliveryAcceptOrder);
+            res.should.have.status(200);
+        });
     
     });
 

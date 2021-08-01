@@ -33,6 +33,7 @@ module.exports = {
     readyOrders: "آماده",
     canceledOrder: 1,
     acceptDeliveryOrder: 3,
+    finishedOrder: 4,
     cookTimeUnit: "m",
     tax: 0.09,
     publicRoute: [

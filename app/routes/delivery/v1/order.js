@@ -86,5 +86,28 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
   router.get('/accepted',OrderController.getacceptedOrders.bind(OrderController));
 
 
+/**
+ * @api {post} /api/delivery/v1/order/finish finish order
+ * @apiVersion 1.0.0
+ * @apiName finishOrder
+ * @apiDescription finish order for delivery
+ * @apiGroup delivery
+ * @apiParam {String} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "وضعیت سفارش با موفقیت ثبت شد",
+ *      data: { status: true }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: true,
+ *      message: "سفارش موجود نیست",
+ *      data: { status: false }
+ * }
+ */
+  router.post('/finish',OrderController.finishOrder.bind(OrderController));
+
+
 
  module.exports = router;
