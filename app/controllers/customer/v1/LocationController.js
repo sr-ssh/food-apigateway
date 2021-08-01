@@ -38,7 +38,6 @@ module.exports = new class LocationController extends Controller {
         try {
             req.checkBody('lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
             req.checkBody('lng', 'please enter lng').notEmpty().isFloat({ min: -180, max: 180});
-            req.checkBody('address', 'please enter address').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
 
             let filter = { active : true }

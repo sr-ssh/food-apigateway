@@ -35,7 +35,6 @@ const LocationController = require(`${customerController}/v1/LocationController`
  * @apiGroup customer
  * @apiParam {Number} lat gerographical latitude
  * @apiParam {Number} lng gerographical longitude
- * @apiParam {String} address location address
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,

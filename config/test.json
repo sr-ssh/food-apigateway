@@ -213,8 +213,7 @@
         },
         "addLocation": {
             "lat": 20, 
-            "lng": 100,
-            "address": "معلم 24"
+            "lng": 100
         },
         "addOrderOperator": {
             "products": [
