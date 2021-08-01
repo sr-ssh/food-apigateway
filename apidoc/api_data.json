@@ -35,7 +35,7 @@
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "long",
+            "field": "lng",
             "description": "<p>gerographical longitude</p>"
           },
           {
@@ -57,7 +57,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\"\n    }],\n    address: \"\",\n    lat: 36.297920,\n    long: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\"\n    }],\n    address: \"\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
           "type": "json"
         }
       ]
@@ -105,15 +105,8 @@
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "long",
+            "field": "lng",
             "description": "<p>gerographical longitude</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "address",
-            "description": "<p>location address</p>"
           }
         ]
       }
@@ -316,6 +309,26 @@
     },
     "filename": "app/routes/customer/v1/home.js",
     "groupTitle": "customer"
+  },
+  {
+    "type": "get",
+    "url": "/api/delivery/v1/order/pending",
+    "title": "get pending orders",
+    "version": "1.0.0",
+    "name": "getPendingOrders",
+    "description": "<p>get pending orders : &quot;pending&quot; orders are ready and cooked and ready for delivery</p>",
+    "group": "delivery",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           status: { name: \"آماده\"}\n         }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/order.js",
+    "groupTitle": "delivery"
   },
   {
     "type": "post",
@@ -935,6 +948,48 @@
         {
           "title": "Success-Response:",
           "content": "{\n     success: true,\n     message: \"سفارش شما با موفقیت ثبت شد\",\n     data: {\n       status: true\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "delete",
+    "url": "/api/operator/v1/order/",
+    "title": "cancel order",
+    "version": "1.0.0",
+    "name": "cancelOrder",
+    "description": "<p>cancel order by id</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش با موفقیت لغو شد\",\n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش موجود نیست\",\n     data: { status: false }\n}",
           "type": "json"
         }
       ]

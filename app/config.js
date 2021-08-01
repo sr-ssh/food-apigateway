@@ -32,6 +32,7 @@ module.exports = {
     activeOrders: "فعال",
     readyOrders: "آماده",
     canceledOrder: 1,
+    cookTimeUnit: "m",
     publicRoute: [
         '/api/user/v1/login', 
         '/api/user/v1/', 

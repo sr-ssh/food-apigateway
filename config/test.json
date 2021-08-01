@@ -147,7 +147,7 @@
         "customer": {
             "mobile": "09307580143",
             "family":"زهرا رضوی",
-            "code": "8173"
+            "code": "6623"
         },
         "cookRegister": {
             "password": "1234",
@@ -170,7 +170,7 @@
         },
         "deliveryMan": {
             "mobile": "09152226363",
-            "code": "8658",
+            "code": "6005",
             "scope": "deliveryMan"
         },
         "customerOrder": {
