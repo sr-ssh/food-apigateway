@@ -34,6 +34,7 @@ module.exports = {
     canceledOrder: 1,
     acceptDeliveryOrder: 3,
     cookTimeUnit: "m",
+    tax: 9,
     publicRoute: [
         '/api/user/v1/login', 
         '/api/user/v1/', 

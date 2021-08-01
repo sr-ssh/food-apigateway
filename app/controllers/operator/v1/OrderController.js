@@ -63,8 +63,11 @@ module.exports = new class HomeController extends Controller {
             let order = await this.model.Order.findOne(filter, { status: 1, createdAt: 1, address: 1, description: 1, deliveryCost: 1, products: 1 }).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, _id: 0}) 
 
             order.deliveryCost = order.deliveryCost / 1000;
+
+            filter = { userId: order.deliveryId}
+            let deliveryLocation = await this.model.Location.findOne(filter, { userId: 0 }).sort({createdAt:-1}).limit(1)
             
-            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: order })
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, deliveryLocation}})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
