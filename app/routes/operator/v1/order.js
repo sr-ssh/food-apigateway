@@ -110,23 +110,34 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  * {
  *      success: true,
  *      message: "سفارشات با موفقیت ارسال شد",
- *      data: [...{
- *             id: "60b72a70e353f0385c2fe5af",
- *             customer: {
+ *      data: {
+ *            order: {
+ *               id: "60b72a70e353f0385c2fe5af",
+ *              customer: {
  *                 family: "مصطفایی",
  *                 mobile: "09152631225",
- *             },
- *            products: [...{
+ *              },
+ *              products: [...{
+ *                _id: "60b72a70e353f0385c2fe5af",
+ *                quantity: 2,
+ *                price: "30000",
+ *                size: "medium"
+ *              }],
+ *              createdAt: "2021-06-01T06:54:01.691Z",
+ *              address: "معلم 43",
+ *              status: { name: "فعال"},
+ *              deliveryCost: 5,
+ *              deliveryId: "610545a7a5365707ccd6a308"
+ *            },
+ *            deliveryLocation: {
  *              _id: "60b72a70e353f0385c2fe5af",
- *              quantity: 2,
- *              price: "30000",
- *              size: "medium"
- *            }],
- *            createdAt: "2021-06-01T06:54:01.691Z",
- *            address: "معلم 43",
- *            status: { name: "فعال"},
- *            deliveryCost: 5
- *          }]
+ *              city: "Mashhad",
+ *              geo : [ -49.555555, 39.555555],
+ *              speed : 80,
+ *              bearing: 32,
+ *              saveDate: "2021-08-01T09:26:22.320Z"
+ *             },
+ *            tax: 12750
  *      }
  * }
  */
