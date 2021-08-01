@@ -54,6 +54,7 @@ module.exports = new class OrderController extends Controller {
             let status = await this.model.OrderStatusBar.findOne(filter, '_id')
 
             order.status = status
+            order.deliveryId = req.decodedData.user_id
             await order.save()
 
             res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد', data: { status: true }})

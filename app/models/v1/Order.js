@@ -26,6 +26,7 @@ let Order = new Schema({
     status: { type: Schema.Types.ObjectId, ref: 'OrderStatusBar' },
     paid: { type: Boolean, default: false },
     deliveryCost: { type: Number },
+    deliveryId: { type: Schema.Types.ObjectId, ref: 'User' },
     description: { type: String }
 });
 

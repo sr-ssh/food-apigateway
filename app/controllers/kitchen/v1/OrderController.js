@@ -11,7 +11,7 @@ module.exports = new class OrderController extends Controller {
     async getActiveOrders(req, res) {
         try {
 
-            let filter = { active: true }
+            let filter = { active: true, paid: true }
 
             let orders = await this.model.Order.find(filter, { active : 0, updatedAt: 0, 'products.price': 0, paid: 0, deliveryCost: 0 }).populate('customer', { family: 1, mobile: 1 }).populate('status', {name: 1, _id: 0}) 
 
