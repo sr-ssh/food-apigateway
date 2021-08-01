@@ -105,5 +105,29 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
    router.get('/:orderId',OrderController.getOrder.bind(OrderController));
 
 
+   
+/**
+ * @api {delete} /api/operator/v1/order/ cancel order
+ * @apiVersion 1.0.0
+ * @apiName cancelOrder
+ * @apiDescription cancel order by id
+ * @apiGroup operator
+ * @apiParam {String} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارش با موفقیت لغو شد",
+ *      data: { status: true }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: true,
+ *      message: "سفارش موجود نیست",
+ *      data: { status: false }
+ * }
+ */
+  router.delete('/',OrderController.cancelOrder.bind(OrderController));
+
+
 
 module.exports = router;

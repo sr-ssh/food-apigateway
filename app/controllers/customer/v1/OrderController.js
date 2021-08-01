@@ -44,7 +44,7 @@ module.exports = new class OrderController extends Controller {
             req.checkBody('products.*.size', 'please enter product size').notEmpty().isString();
             req.checkBody('address', 'please enter address').notEmpty().isString();
             req.checkBody('lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
-            req.checkBody('long', 'please enter long').notEmpty().isFloat({ min: -180, max: 180});
+            req.checkBody('lng', 'please enter lng').notEmpty().isFloat({ min: -180, max: 180});
             req.checkBody('deliveryCost', 'please enter description').notEmpty().isInt({min: 0});
             req.checkBody('description', 'please enter description').exists().isString();
             
@@ -62,7 +62,7 @@ module.exports = new class OrderController extends Controller {
                 deliveryCost: req.body.deliveryCost,
                 status: status._id,
                 description: req.body.description,
-                GPS: { type: "Point", coordinates: [ req.body.long, req.body.lat]}
+                GPS: { type: "Point", coordinates: [ req.body.lng, req.body.lat]}
             }
 
             let order = await this.model.Order.create(params)

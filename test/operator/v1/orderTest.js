@@ -6,7 +6,7 @@ const baseRoute = '/api/operator/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let accessToken, idToken, addOrderOperator, operatorLogin, getOrdersOperator, getOrderOperator;
+let accessToken, idToken, addOrderOperator, operatorLogin, getOrdersOperator, getOrderOperator, cancelOrderOperator;
 const axios = require('axios').default;
 
 
@@ -21,6 +21,7 @@ describe(`${sectionName}`, () => {
         addOrderOperator = appConfig.test.addOrderOperator;
         getOrdersOperator = appConfig.test.getOrdersOperator;
         getOrderOperator = appConfig.test.getOrderOperator;
+        cancelOrderOperator = appConfig.test.cancelOrderOperator;
         axios.post(`http://localhost:4000/api/operator/v1/login`, operatorLogin)
             .then(function (response) {
                 response = response.data;
@@ -75,6 +76,20 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(addOrderOperator);
+            res.should.have.status(200);
+        });
+        
+    });
+
+    describe('Check Put Apis', () => {
+
+        it('check cancel order', async () => {
+            const res = await chai
+                .request(server)
+                .delete(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(cancelOrderOperator);
             res.should.have.status(200);
         });
         

@@ -38,7 +38,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * @apiParam {Object[]} products array of product objects
  * @apiParam {String} address order address
  * @apiParam {Number} lat gerographical latitude
- * @apiParam {Number} long gerographical longitude
+ * @apiParam {Number} lng gerographical longitude
  * @apiParam {Number} delivaryCost delivery cost
  * @apiParam {String} description order dexcription
  * @apiParamExample {json} Request-Example:
@@ -51,7 +51,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *      }],
  *      address: "",
  *      lat: 36.297920,
- *      long: 59.605933 ,
+ *      lng: 59.605933 ,
  *      deliveryCost: 5000,
  *      description: "تحویل در اسانسور"
  *  }

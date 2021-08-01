@@ -78,6 +78,38 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async cancelOrder(req, res) {
+        try {
+            req.checkBody('orderId', 'please set order id').notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.body.orderId }
+            let order = await this.model.Order.findOne(filter)
+
+            if(!order)
+                return res.json({ success : false, message : 'سفارش موجود نیست', data: { status: false }})
+
+            //get status id
+            filter = {active: true, status: config.canceledOrder}
+            let status = await this.model.OrderStatusBar.findOne(filter, '_id')
+
+            order.status = status
+            await order.save()
+
+            res.json({ success : true, message : 'سفارش با موفقیت لغو شد', data: { status: true }})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('cancelOrder')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
     async addOrder(req, res) {
         try {
             req.checkBody('products', 'please enter products').notEmpty();

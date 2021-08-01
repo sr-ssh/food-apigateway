@@ -31,7 +31,7 @@ module.exports = {
     deliveryApp: "deliveryApp",
     activeOrders: "فعال",
     readyOrders: "آماده",
-    
+    canceledOrder: 1,
     publicRoute: [
         '/api/user/v1/login', 
         '/api/user/v1/', 

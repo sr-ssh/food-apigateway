@@ -184,7 +184,7 @@
             ],
             "address": "راهنمایی 24",
             "lat": 33.297920,
-            "long": 59.605933 ,
+            "lng": 59.605933 ,
             "deliveryCost": 5000,
             "description": ""
         },
@@ -201,7 +201,7 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "7285",
+            "code": "9192",
             "scope": "operator"
         },
         "getOrdersOperator":{
@@ -213,7 +213,7 @@
         },
         "addLocation": {
             "lat": 20, 
-            "long": 100,
+            "lng": 100,
             "address": "معلم 24"
         },
         "addOrderOperator": {
@@ -231,6 +231,9 @@
             },
             "description": "",
             "address": "معلم 24"
+        },
+        "cancelOrderOperator": {
+            "orderId": "61054618a0d2eb48289abac9"
         }
     }
 }
