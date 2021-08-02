@@ -90,7 +90,7 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  *             },
  *            createdAt: "2021-06-01T06:54:01.691Z",
  *            address: "معلم 43",
- *            status: { name: "فعال"}
+ *            status: { name: "در صف انتظار"}
  *          }]
  *      }
  * }
@@ -125,7 +125,7 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  *              }],
  *              createdAt: "2021-06-01T06:54:01.691Z",
  *              address: "معلم 43",
- *              status: { name: "فعال"},
+ *              status: { name: "در صف انتظار"},
  *              deliveryCost: 5,
  *              deliveryId: "610545a7a5365707ccd6a308"
  *            },

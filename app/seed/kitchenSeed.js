@@ -47,7 +47,7 @@ var data = [
     //   'model': 'OrderStatusBar',
     //   'documents': [
     //     {
-    //       'name': 'فعال',
+    //       'name': 'در صف انتظار',
     //       'description': 'orders ordered by customer'
     //     },
     //     {

@@ -122,7 +122,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *              }],
  *              createdAt: "2021-06-01T06:54:01.691Z",
  *              address: "معلم 43",
- *              status: { name: "فعال"},
+ *              status: { name: "در صف انتظار"},
  *              deliveryCost: 5,
  *            },
  *            tax: 12750
