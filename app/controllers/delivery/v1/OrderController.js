@@ -14,13 +14,13 @@ module.exports = new class OrderController extends Controller {
 
             let filter = { active: true }
 
-            let orders = await this.model.Order.find(filter, { createdAt: 1 }).populate('status', {name: 1, _id: 0}).sort({createdAt:-1})
+            let orders = await this.model.Order.find(filter, { createdAt: 1 }).populate('status', {status: 1, name: 1, _id: 0}).sort({createdAt:-1})
 
             filter = { active: true }
             let cooktime = await this.model.Settings.findOne(filter, 'order.cookTime')
 
             orders = orders.filter(order => 
-                order.status.name === config.readyOrders && 
+                order.status.status === config.inCookingOrder && 
                 (this.getTimeDiff(order.createdAt.toISOString(), new Date().toISOString(), config.cookTimeUnit) > cooktime.order.cookTime))
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
@@ -43,11 +43,27 @@ module.exports = new class OrderController extends Controller {
             req.checkBody('orderId', 'please set order id').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
-            let filter = { active : true, _id: req.body.orderId }
+            let filter = { active: true, deliveryId: req.decodedData.user_id }
+            let acceptedOrders = await this.model.Order.find(filter).populate('status', {_id: 0, status: 1, name: 1})
+
+            acceptedOrders = acceptedOrders.map(order => 
+                order.status.status !== config.finishedOrder || 
+                order.status.status !== config.canceledOrder
+                )
+
+            //get accepted count from settings
+            let settings = await this.model.Settings.findOne({active: true}, 'delivery.acceptCount')
+
+            if(acceptedOrders.length >= settings.delivery.acceptCount)
+                return res.json({ success : true, message : 'تعداد سفارش های شما به حد نصاب رسیده است', data: { status: false }})
+
+
+            filter = { active : true, _id: req.body.orderId }
             let order = await this.model.Order.findOne(filter)
 
             if(!order)
-                return res.json({ success : false, message : 'سفارش موجود نیست', data: { status: false }})
+                return res.json({ success : true, message : 'سفارش موجود نیست', data: { status: false }})
+
 
             //get status id
             filter = {active: true, status: config.acceptDeliveryOrder}
