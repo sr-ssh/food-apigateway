@@ -147,7 +147,7 @@
         "customer": {
             "mobile": "09307580143",
             "family":"زهرا رضوی",
-            "code": "8322"
+            "code": "8668"
         },
         "customerGetOrder": {
             "orderId": "610549791b4758463c7ac2b1"
@@ -207,7 +207,7 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "3877",
+            "code": "8668",
             "scope": "operator"
         },
         "getOrdersOperator":{
@@ -216,6 +216,9 @@
         },
         "getOrderOperator":{
             "orderId": "610545a7a5365707ccd6a308"
+        },
+        "operatorGetCustomer": {
+            "mobile": "09307580143"
         },
         "addLocation": {
             "lat": 38.066666, 

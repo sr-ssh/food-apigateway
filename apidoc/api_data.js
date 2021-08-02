@@ -1210,6 +1210,48 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/operator/v1/customer/",
+    "title": "get customer",
+    "version": "1.0.0",
+    "name": "getCustomer",
+    "description": "<p>get customer .It gives you the customer information of the mobile you sent , if there is no customer with that mobile number it sends false</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>customer mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"اطلاعات مشتری با موفقیت ارسال شد\",\n     data: {\n         status: true,\n         cuatomer: {\n           family: \"مصطفایی\",\n           mobile: \"09625846122\",\n           locations: [...{\n             address: \"کلاهدوز 4\", \n             GPS: { type: \"Point\", coordinates: [-43.837452, 33.987689] }\n           }]\n         }\n      }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"مشتری موجود نیست\",\n     data: { status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/customer.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "get",
     "url": "/api/operator/v1/order/",
     "title": "get order",
     "version": "1.0.0",
