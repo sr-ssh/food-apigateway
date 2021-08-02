@@ -165,6 +165,39 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/customer/v1/order",
+    "title": "get order",
+    "version": "1.0.0",
+    "name": "getOrder",
+    "description": "<p>get order</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"فعال\"},\n             deliveryCost: 5,\n           },\n           tax: 12750\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/order.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
     "url": "/api/customer/v1/order/product",
     "title": "get order products",
     "version": "1.0.0",

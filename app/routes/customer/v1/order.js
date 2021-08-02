@@ -92,4 +92,37 @@ const OrderController = require(`${customerController}/v1/OrderController`)
 
 
 
+/**
+ * @api {get} /api/customer/v1/order get order
+ * @apiVersion 1.0.0
+ * @apiName getOrder
+ * @apiDescription get order
+ * @apiGroup customer
+ * @apiParam {String} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: {
+ *            order: {
+ *               id: "60b72a70e353f0385c2fe5af",
+ *              products: [...{
+ *                _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
+ *                quantity: 2,
+ *                price: "30000",
+ *                size: "medium"
+ *              }],
+ *              createdAt: "2021-06-01T06:54:01.691Z",
+ *              address: "معلم 43",
+ *              status: { name: "فعال"},
+ *              deliveryCost: 5,
+ *            },
+ *            tax: 12750
+ *      }
+ * }
+ */
+ router.get('/:orderId',OrderController.getOrder.bind(OrderController));
+
+
+
 module.exports = router;

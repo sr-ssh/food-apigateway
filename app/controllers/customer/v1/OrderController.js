@@ -110,6 +110,40 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+    async getOrder(req, res) {
+        try {
+            req.checkParams('orderId', 'please enter order Id').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active: true, _id: req.params.orderId, customer: req.decodedData.user_id }
+
+            let order = await this.model.Order
+                .findOne(filter, { status: 1, createdAt: 1, address: 1, description: 1, deliveryCost: 1, products: 1})
+                .populate({ path: 'products._id', model: 'Product', select: 'name'})
+                .populate('status', {name: 1, _id: 0}) 
+
+            order.deliveryCost = order.deliveryCost / 1000;
+
+            // caculate tax 
+            let tax = order.products.map(product => product.price * product.quantity * config.tax)
+            tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            order.products = order.products.map(product => {product.price = product.price / 1000; return product})
+            
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, tax}})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getOrder')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

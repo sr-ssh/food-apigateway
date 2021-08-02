@@ -6,7 +6,7 @@ const baseRoute = '/api/customer/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, customerOrder ;
+let user, accessToken, idToken, customerOrder, customerGetOrder ;
 const axios = require('axios').default;
 
 
@@ -20,6 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         customer = appConfig.test.customer;
         customerOrder = appConfig.test.customerOrder;
+        customerGetOrder = appConfig.test.customerGetOrder;
         axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
             .then(function (response) {
                 response = response.data;
@@ -57,6 +58,16 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
+        it('check get order', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/${encodeURI(customerGetOrder.orderId)}`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();
