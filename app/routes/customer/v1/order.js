@@ -60,18 +60,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * {
  *      success: true,
  *      message: "سفارش شما با موفقیت ثبت شد",
- *      data: {
- *          orderId: "6107aacd9f70e5108415fe90"
- *          products: [...{
- *              _id: "60b72a70e353f0385c2fe5af",
- *              name: "نان سیر"
- *              quantity: 2,
- *              price: "30000",
- *              size: "meduim"
- *          }],
- *          deliveryCost: 5,
- *          tax: 2,
- *      }
+ *      data: {}
  * }
  */
   router.post('/',OrderController.addOrder.bind(OrderController));

@@ -41,7 +41,7 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get active orders', async () => {
+        it('check get active order', async () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/active`)

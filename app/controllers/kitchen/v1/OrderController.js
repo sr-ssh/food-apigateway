@@ -14,14 +14,32 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, paid: true }
 
             let orders = await this.model.Order
-                .find(filter, { active : 0, updatedAt: 0, 'products.price': 0, paid: 0, deliveryCost: 0 })
+                .find(filter, { active : 0, updatedAt: 0, 'products.price': 0, paid: 0, deliveryCost: 0})
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
                 .populate('customer', { family: 1, mobile: 1 })
-                .populate('status', {name: 1, _id: 0}) 
+                .populate('status', {status: 1, name: 1, _id: 0})
 
-            orders = orders.filter(order => order.status.name === config.activeOrders)
+            let cookOrder = orders.filter(order => 
+                order.status.status === config.beforeCookOrder && 
+                order.cookId.toString() === req.decodedData.user_id
+                )
 
-            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
+            if(!cookOrder.length)
+                cookOrder = orders.filter(order => order.status.status === config.activeOrdersStatus)
+            else 
+                return res.json({ success : true, message : 'سفارش با موفقیت ارسال شد', data: cookOrder[0] })
+            
+            if(!cookOrder.length)
+                return res.json({ success : true, message : 'سفارشی برای پخت وجود ندارد', data: {} })
+
+            //get status id
+            filter = {active: true, status: config.beforeCookOrder}
+            let status = await this.model.OrderStatusBar.findOne(filter, '_id')
+
+            let update = { status: status, cookId: req.decodedData.user_id}
+            await this.model.Order.findByIdAndUpdate(cookOrder[0]._id, update)
+
+            return res.json({ success : true, message : 'سفارش با موفقیت ارسال شد', data: cookOrder[0] })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

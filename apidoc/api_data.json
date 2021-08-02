@@ -57,7 +57,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        name: \"نان سیر\"\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\"\n    }],\n    address: \"کلاهدوز 4\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        name: \"نان سیر\"\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\"\n    }],\n    address: \"کلاهدوز 4\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000\n}",
           "type": "json"
         }
       ]
