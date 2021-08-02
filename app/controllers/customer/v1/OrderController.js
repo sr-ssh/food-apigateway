@@ -39,6 +39,7 @@ module.exports = new class OrderController extends Controller {
         try {
             req.checkBody('products', 'please enter products').notEmpty();
             req.checkBody('products.*._id', 'please enter product id').notEmpty().isString();
+            req.checkBody('products.*.name', 'please enter product id').notEmpty().isString();
             req.checkBody('products.*.quantity', 'please enter product quantity').notEmpty().isInt({min:1});
             req.checkBody('products.*.price', 'please enter product price').notEmpty().isInt({min: 0});
             req.checkBody('products.*.size', 'please enter product size').notEmpty().isString();
@@ -46,7 +47,7 @@ module.exports = new class OrderController extends Controller {
             req.checkBody('lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
             req.checkBody('lng', 'please enter lng').notEmpty().isFloat({ min: -180, max: 180});
             req.checkBody('deliveryCost', 'please enter description').notEmpty().isInt({min: 0});
-            req.checkBody('description', 'please enter description').exists().isString();
+            // req.checkBody('description', 'please enter description').exists().isString();
             
             if (this.showValidationErrors(req, res)) return;
 
@@ -54,9 +55,16 @@ module.exports = new class OrderController extends Controller {
             let filter = {active: true, name: config.activeOrders}
             let status = await this.model.OrderStatusBar.findOne(filter, '_id')
 
+            let products = req.body.products.map(product =>{ return {
+                _id: product._id,
+                quantity: product.quantity,
+                price: product.price,
+                size:product.size
+            }})
+
             // add order
             let params = {
-                products: req.body.products,
+                products: products,
                 customer: req.decodedData.user_id,
                 address: req.body.address,
                 deliveryCost: req.body.deliveryCost,
@@ -66,12 +74,23 @@ module.exports = new class OrderController extends Controller {
             }
 
             let order = await this.model.Order.create(params)
-        
+
             // add order to customer
             let update = { $addToSet: {order: order._id, locations: { address: params.address, GPS: params.GPS }}}
             await this.model.Customer.findByIdAndUpdate(req.decodedData.user_id, update)
 
-            return res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
+            // caculate tax 
+            let tax = order.products.map(product => product.price * product.quantity * config.tax)
+            tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            let data = { 
+                orderId: order._id,
+                products: req.body.products,
+                deliveryCost: params.deliveryCost / 1000,
+                tax: tax
+            }
+
+            return res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد', data: data})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

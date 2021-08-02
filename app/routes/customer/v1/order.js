@@ -45,11 +45,12 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *  {
  *      products: [...{
  *          _id: "60b72a70e353f0385c2fe5af",
+ *          name: "نان سیر"
  *          quantity: 2,
  *          price: "30000",
  *          size: "meduim"
  *      }],
- *      address: "",
+ *      address: "کلاهدوز 4",
  *      lat: 36.297920,
  *      lng: 59.605933 ,
  *      deliveryCost: 5000,
@@ -58,12 +59,19 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
- *      message: "سفارش شما با موفقیت ثبت شد"
- * }
- * @apiErrorExample {json} Error-Response:
- * {
- *      success: true,
- *      message: "کاربر یافت نشد"
+ *      message: "سفارش شما با موفقیت ثبت شد",
+ *      data: {
+ *          orderId: "6107aacd9f70e5108415fe90"
+ *          products: [...{
+ *              _id: "60b72a70e353f0385c2fe5af",
+ *              name: "نان سیر"
+ *              quantity: 2,
+ *              price: "30000",
+ *              size: "meduim"
+ *          }],
+ *          deliveryCost: 5,
+ *          tax: 2,
+ *      }
  * }
  */
   router.post('/',OrderController.addOrder.bind(OrderController));

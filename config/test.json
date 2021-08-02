@@ -147,7 +147,7 @@
         "customer": {
             "mobile": "09307580143",
             "family":"زهرا رضوی",
-            "code": "8668"
+            "code": "5187"
         },
         "customerGetOrder": {
             "orderId": "610549791b4758463c7ac2b1"
@@ -183,6 +183,7 @@
             "products": [
                 {
                     "_id": "61014026a1701735e409000b",
+                    "name": "پپرونی",
                     "quantity": 1,
                     "price": "60000",
                     "size": "medium"
