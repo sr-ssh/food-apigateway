@@ -93,6 +93,45 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, cookId: req.decodedData.user_id }
 
             let orders = await this.model.Order
+                .find(filter, { finishDate: 1, customer: 1, address: 1, description: 1, products: 1})
+                .populate({ path: 'products._id', model: 'Product', select: 'name'})
+                .populate('customer', { _id: 0, family: 1})
+                .populate('status', {status: 1, name: 1, _id: 0})
+                .sort({createdAt:-1})
+            
+            orders = orders.map(order => order.products.map(product => {
+                return{
+                    name: product._id.name,
+                    quantity: product.quantity
+                }
+            }))
+
+            orders = orders.filter(order => 
+                order.status.status === config.finishedOrder ||
+                order.status.status === config.canceledOrder 
+                )
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getfinishedOrders')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
+    async getInServiceOrders(req, res) {
+        try {
+
+            let filter = { active: true, cookId: req.decodedData.user_id }
+
+            let orders = await this.model.Order
                 .find(filter, { finishDate: 1, customer: 1, address: 1, products: 1 })
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
                 .populate('customer', { _id: 0, family: 1})
@@ -100,8 +139,8 @@ module.exports = new class OrderController extends Controller {
                 .sort({createdAt:-1})
 
             orders = orders.filter(order => 
-                order.status.status === config.finishedOrder ||
-                order.status.status === config.canceledOrder 
+                order.status.status === config.acceptDeliveryOrder ||
+                order.status.status === config.readyOrders 
                 )
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })

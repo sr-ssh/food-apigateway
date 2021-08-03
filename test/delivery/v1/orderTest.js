@@ -71,7 +71,7 @@ describe(`${sectionName}`, () => {
             resshould.have.status(200);
         });
 
-    });
+    })
 
     describe('Check Post Apis', () => {
 

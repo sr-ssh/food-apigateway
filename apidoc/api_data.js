@@ -524,7 +524,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium'\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\"\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium'\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\"\n         }]\n     }\n}",
           "type": "json"
         }
       ]
@@ -831,6 +831,26 @@ define({ "api": [
         {
           "title": "Success-Response:",
           "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                quantity: 2,\n                size: 'medium'\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"}\n         }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/order.js",
+    "groupTitle": "kitchen"
+  },
+  {
+    "type": "get",
+    "url": "/api/delivery/v1/order/finished",
+    "title": "get in service orders",
+    "version": "1.0.0",
+    "name": "getInServiceOrders",
+    "description": "<p>get in service orders : &quot;in service&quot; orders are in cooking or in delivery</p>",
+    "group": "kitchen",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            finishDate: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: لغو شده},\n            customer: {\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium'\n             }]\n         }]\n     }\n}",
           "type": "json"
         }
       ]

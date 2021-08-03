@@ -67,7 +67,7 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *             address: "کلاهدوز 4",
  *             GPS: { coordinates: [59.605933, 36.29792]},
  *             createdAt: "2021-06-01T06:54:01.691Z",
- *             status: { name: 3},
+ *             status: { name: "در حال ارسال", status: 3},
  *             customer: {
  *                  mobile: "09307580143",
  *                  family: "زهرا رضوی"

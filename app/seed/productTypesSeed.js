@@ -5,11 +5,11 @@ seeder.connect('mongodb://crm-x.ir:2714/food', function() {
  
   // Load Mongoose models
   seeder.loadModels([
-    './../models/v1/UserTypes.js'
+    './../models/v1/ProductTypes.js'
   ]);
  
   // Clear specified collections
-  seeder.clearModels(['UserTypes'], function() {
+  seeder.clearModels(['ProductTypes'], function() {
  
     // Callback to populate DB once collections have been cleared
     seeder.populateModels(data, function() {
@@ -21,21 +21,24 @@ seeder.connect('mongodb://crm-x.ir:2714/food', function() {
  
 // Data array containing seed data - documents organized by Model
 var data = [
-  {
-    'model': 'UserTypes',
-    'documents': [
-      { 
-        name: 'manager'
-      },
-      { 
-        name: 'operator'
-      },
-      { 
-        name: 'cook'
-      },
-      { 
-        name: 'deliveryMan'
-      }
-    ]
+    {
+        'model': 'ProductTypes',
+        'documents': [
+            {
+                'name': 'appetizer'
+            },
+            {
+                'name': 'pizza'
+            },
+            {
+                'name': 'drinks'
+            },
+            {
+                'name': 'salad'
+            },
+            {
+                'name': 'sauce'
+            }
+        ]
     }
 ];

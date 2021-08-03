@@ -84,6 +84,35 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  *              },
  *             products: [...{
  *                  _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
+ *                  quantity: 1,
+ *              }]
+ *          }]
+ *      }
+ * }
+ */
+ router.get('/finished',OrderController.getfinishedOrders.bind(OrderController));
+
+
+ /**
+ * @api {get} /api/delivery/v1/order/finished get in service orders 
+ * @apiVersion 1.0.0
+ * @apiName getInServiceOrders
+ * @apiDescription get in service orders : "in service" orders are in cooking or in delivery
+ * @apiGroup kitchen
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: [...{
+ *             id: "60b72a70e353f0385c2fe5af",
+ *             address: "کلاهدوز 4",
+ *             finishDate: "2021-06-01T06:54:01.691Z",
+ *             status: { status: 1, name: لغو شده},
+ *             customer: {
+ *                  family: "زهرا رضوی"
+ *              },
+ *             products: [...{
+ *                  _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                  price: "60000",
  *                  quantity: 1,
  *                  size: 'medium'
@@ -92,7 +121,7 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  *      }
  * }
  */
- router.get('/finished',OrderController.getfinishedOrders.bind(OrderController));
+  router.get('/inservice',OrderController.getInServiceOrders.bind(OrderController));
 
 
  module.exports = router;
