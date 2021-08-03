@@ -50,6 +50,17 @@ describe(`${sectionName}`, () => {
                 .send();
             res.should.have.status(200);
         });
+
+        it('check get finished orders', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/finished`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
     });
 
     describe('Check Put Apis', () => {

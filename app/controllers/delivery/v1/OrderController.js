@@ -91,13 +91,13 @@ module.exports = new class OrderController extends Controller {
     async getacceptedOrders(req, res) {
         try {
 
-            let filter = { active: true }
+            let filter = { active: true, deliveryId: req.decodedData.user_id }
 
             let orders = await this.model.Order
                 .find(filter, { createdAt: 1, customer: 1, address: 1, 'GPS.coordinates': 1, products: 1, description: 1 })
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
                 .populate('customer', { _id: 0, family: 1, mobile: 1})
-                .populate('status', {status: 1, _id: 0})
+                .populate('status', {status: 1, name: 1, _id: 0})
                 .sort({createdAt:-1})
 
             orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder )
@@ -122,7 +122,7 @@ module.exports = new class OrderController extends Controller {
             req.checkBody('orderId', 'please set order id').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
-            let filter = { active : true, _id: req.body.orderId }
+            let filter = { active : true, _id: req.body.orderId, deliveryId: req.decodedData.user_id }
             let order = await this.model.Order.findOne(filter)
 
             if(!order)
@@ -133,6 +133,7 @@ module.exports = new class OrderController extends Controller {
             let status = await this.model.OrderStatusBar.findOne(filter, '_id')
 
             order.status = status
+            order.finishDate = new Date()
             await order.save()
 
             res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد', data: { status: true }})
@@ -143,6 +144,38 @@ module.exports = new class OrderController extends Controller {
                 .class(TAG)
                 .method('finishOrder')
                 .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
+    async getfinishedOrders(req, res) {
+        try {
+
+            let filter = { active: true, deliveryId: req.decodedData.user_id }
+
+            let orders = await this.model.Order
+                .find(filter, { finishDate: 1, customer: 1, address: 1, products: 1 })
+                .populate({ path: 'products._id', model: 'Product', select: 'name'})
+                .populate('customer', { _id: 0, family: 1})
+                .populate('status', {status: 1, name: 1, _id: 0})
+                .sort({createdAt:-1})
+
+            orders = orders.filter(order => 
+                order.status.status === config.finishedOrder ||
+                order.status.status === config.canceledOrder 
+                )
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getfinishedOrders')
+                .inputParams(req.params)
                 .call();
 
             if (!res.headersSent) return res.status(500).json(handelError);

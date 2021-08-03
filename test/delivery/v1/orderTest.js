@@ -61,6 +61,16 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
+        it('check get finished orders', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/finished`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            resshould.have.status(200);
+        });
+
     });
 
     describe('Check Post Apis', () => {

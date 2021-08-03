@@ -57,7 +57,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        name: \"نان سیر\"\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\"\n    }],\n    address: \"کلاهدوز 4\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000\n}",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        name: \"نان سیر\"\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\"\n    }],\n    address: \"کلاهدوز 4\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
           "type": "json"
         }
       ]
@@ -66,7 +66,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارش شما با موفقیت ثبت شد\",\n     data: {\n         orderId: \"6107aacd9f70e5108415fe90\"\n         products: [...{\n             _id: \"60b72a70e353f0385c2fe5af\",\n             name: \"نان سیر\"\n             quantity: 2,\n             price: \"30000\",\n             size: \"meduim\"\n         }],\n         deliveryCost: 5,\n         tax: 2,\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارش شما با موفقیت ثبت شد\",\n     data: {}\n}",
           "type": "json"
         }
       ]
@@ -533,6 +533,26 @@ define({ "api": [
     "groupTitle": "delivery"
   },
   {
+    "type": "get",
+    "url": "/api/delivery/v1/order/finished",
+    "title": "get finished orders",
+    "version": "1.0.0",
+    "name": "getfinishedOrders",
+    "description": "<p>get finished orders : &quot;finished&quot; orders are have delivered to the customer or canceled</p>",
+    "group": "delivery",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            finishDate: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: لغو شده},\n            customer: {\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium'\n             }]\n         }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/order.js",
+    "groupTitle": "delivery"
+  },
+  {
     "type": "post",
     "url": "/api/delivery/v1/app/info",
     "title": "app info",
@@ -801,16 +821,36 @@ define({ "api": [
   {
     "type": "get",
     "url": "/api/kitchen/v1/order/active",
-    "title": "get active orders",
+    "title": "get active order",
     "version": "1.0.0",
-    "name": "getActiveOrders",
-    "description": "<p>get active orders : &quot;active&quot; orders are not ready yet.</p>",
+    "name": "getActiveOrder",
+    "description": "<p>get active order : &quot;active&quot; orders are not ready yet.</p>",
     "group": "kitchen",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
           "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            products: [...{\n                _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                quantity: 2,\n                size: 'medium'\n            }],\n            customer: {\n                _id: \"7465148754878\",\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"}\n         }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/order.js",
+    "groupTitle": "kitchen"
+  },
+  {
+    "type": "get",
+    "url": "/api/delivery/v1/order/finished",
+    "title": "get finished orders",
+    "version": "1.0.0",
+    "name": "getfinishedOrders",
+    "description": "<p>get finished orders : &quot;finished&quot; orders are have delivered to the customer or canceled</p>",
+    "group": "kitchen",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            finishDate: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: لغو شده},\n            customer: {\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium'\n             }]\n         }]\n     }\n}",
           "type": "json"
         }
       ]

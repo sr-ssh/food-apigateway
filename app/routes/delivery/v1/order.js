@@ -110,4 +110,36 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
 
 
 
+/**
+ * @api {get} /api/delivery/v1/order/finished get finished orders 
+ * @apiVersion 1.0.0
+ * @apiName getfinishedOrders
+ * @apiDescription get finished orders : "finished" orders are have delivered to the customer or canceled
+ * @apiGroup delivery
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: [...{
+ *             id: "60b72a70e353f0385c2fe5af",
+ *             address: "کلاهدوز 4",
+ *             finishDate: "2021-06-01T06:54:01.691Z",
+ *             status: { status: 1, name: لغو شده},
+ *             customer: {
+ *                  family: "زهرا رضوی"
+ *              },
+ *             products: [...{
+ *                  _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
+ *                  price: "60000",
+ *                  quantity: 1,
+ *                  size: 'medium'
+ *              }]
+ *          }]
+ *      }
+ * }
+ */
+   router.get('/finished',OrderController.getfinishedOrders.bind(OrderController));
+
+
+
  module.exports = router;

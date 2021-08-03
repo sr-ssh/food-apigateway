@@ -28,7 +28,8 @@ let Order = new Schema({
     deliveryCost: { type: Number },
     deliveryId: { type: Schema.Types.ObjectId, ref: 'User' },
     cookId: { type: Schema.Types.ObjectId, ref: 'User' },
-    description: { type: String }
+    description: { type: String },
+    finishDate: { type: Date }
 });
 
 Order.plugin(timestamps);
