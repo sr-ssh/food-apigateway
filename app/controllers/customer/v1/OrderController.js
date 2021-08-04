@@ -113,7 +113,10 @@ module.exports = new class OrderController extends Controller {
                 .find(filter, { status: 1, createdAt: 1, paid: 1 })
                 .populate('status', { status: 1, name: 1, _id: 0}) 
 
-            orders = orders.filter(order => order.status.status !== config.finishedOrder )
+            orders = orders.filter(order => 
+                order.status.status !== config.finishedOrder &&
+                order.status.status !== config.canceledOrder
+                )
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }
@@ -170,8 +173,16 @@ module.exports = new class OrderController extends Controller {
             let order = await this.model.Order.findOne(filter)
 
             if(!order)
-                return res.json({ success : false, message : 'سفارش موجود نیست'})
+                return res.json({ success : true, message : 'سفارش موجود نیست', data:{ status: false}})
 
+
+            //confirm time 
+            filter = { active: true }
+            let confirmTime = await this.model.Settings.findOne(filter, 'order.confirmTime')
+
+            if(this.getTimeDiff(order.createdAt.toISOString(), new Date().toISOString(), config.confirmTimeUnit) > confirmTime.order.confirmTime)
+                return res.json({ success : true, message : 'امکان کنسل سفارش نیست', data:{ status: false}})
+            
             //get status id
             filter = {active: true, status: config.canceledOrder}
             let status = await this.model.OrderStatusBar.findOne(filter, '_id')
@@ -192,7 +203,7 @@ module.exports = new class OrderController extends Controller {
             }
             await this.model.CustomerFinance.create(params)
 
-            res.json({ success : true, message : 'سفارش با موفقیت لغو شد'})
+            res.json({ success : true, message : 'سفارش با موفقیت لغو شد', data:{ status: true} })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

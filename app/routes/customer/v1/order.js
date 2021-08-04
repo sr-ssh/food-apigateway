@@ -135,14 +135,12 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *      success: true,
  *      message: "سفارش با موفقیت لغو شد",
  *      data: { status: true }
- *      }
  * }
  * @apiErrorExample {json} Error-Response:
  * {
  *      success: true,
  *      message: "سفارش موجود نیست",
  *      data: { status: false }
- *      }
  * }
  */
 router.delete('/',OrderController.cancelOrder.bind(OrderController));

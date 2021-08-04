@@ -38,6 +38,7 @@ module.exports = {
     inCookingOrder: 2,
     beforeCookOrder: 5,
     cookTimeUnit: "m",
+    confirmTimeUnit: "m",
     tax: 0.09,
     debit: "debit",
     credit: "credit",
