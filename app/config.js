@@ -39,6 +39,8 @@ module.exports = {
     beforeCookOrder: 5,
     cookTimeUnit: "m",
     tax: 0.09,
+    debit: "debit",
+    credit: "credit",
     publicRoute: [
         '/api/user/v1/login', 
         '/api/user/v1/', 

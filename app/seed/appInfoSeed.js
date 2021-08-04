@@ -25,7 +25,7 @@ var data = [
         'model': 'AppInfo',
         'documents': [
             { 
-                name: 'delivery',
+                name: 'deliveryApp',
                 os: 'Android',
                 latestVersion: '1',
                 update: false,
@@ -33,7 +33,7 @@ var data = [
                 updateUrl: ''
             },
             {
-                name: 'kitchen',
+                name: 'kitchenApp',
                 os: 'Android',
                 latestVersion: '1',
                 update: false,

@@ -16,6 +16,8 @@ const OrderStatusBar = require(`${config.path.models.root}/v1/OrderStatusBar`);
 const Kitchen = require(`${config.path.models.root}/v1/Kitchen`);
 const Settings = require(`${config.path.models.root}/v1/Settings`);
 const Location = require(`${config.path.models.root}/v1/Location`);
+const DeliveryFinance = require(`${config.path.models.root}/v1/DeliveryFinance`);
+const CustomerFinance = require(`${config.path.models.root}/v1/CustomerFinance`);
 const Kavenegar = require('kavenegar');
 const jwt = require("jsonwebtoken");
 
@@ -24,7 +26,7 @@ const jwt = require("jsonwebtoken");
 module.exports = class MainController {
 
     constructor() {
-        this.model = { User, Order, Product, Customer, AppInfo, Bill , Reminder , Discount, VerificationCode , Application, ProductTypes, UserTypes, OrderStatusBar, Kitchen, Settings, Location }
+        this.model = { User, Order, Product, Customer, AppInfo, Bill , Reminder , Discount, VerificationCode , Application, ProductTypes, UserTypes, OrderStatusBar, Kitchen, Settings, Location, DeliveryFinance, CustomerFinance }
         this.transforms = { ErrorTransform };
     }
 

@@ -75,6 +75,48 @@
     "groupTitle": "customer"
   },
   {
+    "type": "delete",
+    "url": "/api/customer/v1/order",
+    "title": "cancel order",
+    "version": "1.0.0",
+    "name": "cancelOrder",
+    "description": "<p>cancel order</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش با موفقیت لغو شد\",\n     data: { status: true }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش موجود نیست\",\n     data: { status: false }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/order.js",
+    "groupTitle": "customer"
+  },
+  {
     "type": "post",
     "url": "/api/customer/v1/location",
     "title": "check location",
@@ -112,6 +154,26 @@
       ]
     },
     "filename": "app/routes/customer/v1/location.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
+    "url": "/api/customer/v1/charge",
+    "title": "get customer charge",
+    "version": "1.0.0",
+    "name": "getCharge",
+    "description": "<p>get customer charge</p>",
+    "group": "customer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"شارژ مشتری با موفقیت ارسال شد\",\n     data: 60000\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/charge.js",
     "groupTitle": "customer"
   },
   {
@@ -870,7 +932,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            finishDate: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: لغو شده},\n            customer: {\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium'\n             }]\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            finishDate: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: لغو شده},\n            customer: {\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 quantity: 1,\n             }]\n         }]\n     }\n}",
           "type": "json"
         }
       ]

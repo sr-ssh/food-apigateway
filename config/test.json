@@ -147,10 +147,13 @@
         "customer": {
             "mobile": "09307580143",
             "family":"زهرا رضوی",
-            "code": "1175"
+            "code": "5400"
         },
         "customerGetOrder": {
             "orderId": "610549791b4758463c7ac2b1"
+        },
+        "customerCancelOrder": {
+            "orderId": "6107d01ac53ecf307cf92e70"
         },
         "cookRegister": {
             "password": "1234",

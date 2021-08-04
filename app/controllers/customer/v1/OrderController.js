@@ -159,6 +159,53 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+
+    async cancelOrder(req, res) {
+        try {
+
+            req.checkBody('orderId', 'please set order id').notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.body.orderId }
+            let order = await this.model.Order.findOne(filter)
+
+            if(!order)
+                return res.json({ success : false, message : 'سفارش موجود نیست'})
+
+            //get status id
+            filter = {active: true, status: config.canceledOrder}
+            let status = await this.model.OrderStatusBar.findOne(filter, '_id')
+
+            order.status = status
+            await order.save()
+
+            // caculate total 
+            let total = order.products.map(product => product.price * product.quantity)
+            total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            //make customerFinane collection
+            let params = {
+                orderId: req.body.orderId,
+                customerId: req.decodedData.user_id,
+                type: config.debit,
+                cost: total
+            }
+            await this.model.CustomerFinance.create(params)
+
+            res.json({ success : true, message : 'سفارش با موفقیت لغو شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('readyOrder')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

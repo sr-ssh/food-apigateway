@@ -6,7 +6,7 @@ const baseRoute = '/api/customer/v1/order';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user, accessToken, idToken, customerOrder, customerGetOrder ;
+let user, accessToken, idToken, customerOrder, customerGetOrder, customerCancelOrder ;
 const axios = require('axios').default;
 
 
@@ -21,6 +21,7 @@ describe(`${sectionName}`, () => {
         customer = appConfig.test.customer;
         customerOrder = appConfig.test.customerOrder;
         customerGetOrder = appConfig.test.customerGetOrder;
+        customerCancelOrder = appConfig.test.customerCancelOrder;
         axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
             .then(function (response) {
                 response = response.data;
@@ -85,6 +86,20 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(customerOrder);
+            res.should.have.status(200);
+        });
+        
+    });
+
+    describe('Check Delete Apis', () => {
+
+        it('check cancel order', async () => {
+            const res = await chai
+                .request(server)
+                .delete(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(customerCancelOrder);
             res.should.have.status(200);
         });
         
