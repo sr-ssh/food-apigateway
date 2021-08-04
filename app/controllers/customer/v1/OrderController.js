@@ -141,14 +141,10 @@ module.exports = new class OrderController extends Controller {
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
                 .populate('status', {name: 1, _id: 0}) 
 
-            order.deliveryCost = order.deliveryCost / 1000;
-
             // caculate tax 
             let tax = order.products.map(product => product.price * product.quantity * config.tax)
             tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-            order.products = order.products.map(product => {product.price = product.price / 1000; return product})
-            
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, tax}})
         }
         catch (err) {
