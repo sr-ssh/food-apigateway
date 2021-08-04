@@ -14,9 +14,9 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, paid: true }
 
             let orders = await this.model.Order
-                .find(filter, { active : 0, updatedAt: 0, 'products.price': 0, paid: 0, deliveryCost: 0})
+                .find(filter, { active : 0, updatedAt: 0, 'products.price': 0, paid: 0, deliveryCost: 0, _id: 0})
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
-                .populate('customer', { family: 1, mobile: 1 })
+                .populate('customer', { family: 1, mobile: 1, _id: 0 })
                 .populate('status', {status: 1, name: 1, _id: 0})
 
             let cookOrder = orders.filter(order => 

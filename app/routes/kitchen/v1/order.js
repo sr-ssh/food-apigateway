@@ -19,14 +19,12 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *      success: true,
  *      message: "سفارشات با موفقیت ارسال شد",
  *      data: [...{
- *             id: "60b72a70e353f0385c2fe5af",
  *             products: [...{
  *                 _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                 quantity: 2,
  *                 size: 'medium'
  *             }],
  *             customer: {
- *                 _id: "7465148754878",
  *                 family: "مصطفایی",
  *                 mobile: "09152631225",
  *             },
