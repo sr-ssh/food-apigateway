@@ -66,7 +66,7 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  * @api {get} /api/delivery/v1/order/finished get finished orders 
  * @apiVersion 1.0.0
  * @apiName getfinishedOrders
- * @apiDescription get finished orders : "finished" orders are have delivered to the customer or canceled
+ * @apiDescription get finished orders : "finished" orders have delivered to the customer or canceled
  * @apiGroup kitchen
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -76,14 +76,15 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  *             id: "60b72a70e353f0385c2fe5af",
  *             address: "کلاهدوز 4",
  *             finishDate: "2021-06-01T06:54:01.691Z",
- *             status: { status: 1, name: لغو شده},
+ *             status: { status: 1, name: "لغو شده"},
  *             customer: {
  *                  family: "زهرا رضوی"
  *              },
  *             products: [...{
- *                  _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
+ *                  name: "پپرونی",
  *                  quantity: 1,
- *              }]
+ *              }],
+ *            description: "بدون قارچ"
  *          }]
  *      }
  * }
@@ -119,7 +120,7 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  *      }
  * }
  */
-  router.get('/inservice',OrderController.getInServiceOrders.bind(OrderController));
+  router.get('/inservice',OrderController.getreadyOrders.bind(OrderController));
 
 
  module.exports = router;

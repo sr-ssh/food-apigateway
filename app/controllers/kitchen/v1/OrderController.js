@@ -93,18 +93,21 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, cookId: req.decodedData.user_id }
 
             let orders = await this.model.Order
-                .find(filter, { finishDate: 1, customer: 1, address: 1, description: 1, products: 1})
+                .find(filter, { finishDate: 1, address: 1, description: 1, products: 1, customer: 1})
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
                 .populate('customer', { _id: 0, family: 1})
                 .populate('status', {status: 1, name: 1, _id: 0})
                 .sort({createdAt:-1})
             
-            orders = orders.map(order => order.products.map(product => {
-                return{
-                    name: product._id.name,
-                    quantity: product.quantity
-                }
-            }))
+            orders = orders.map(order => {
+                order.products = order.products.map(product => {
+                    return{
+                        name: product._id.name,
+                        quantity: product.quantity
+                    }
+                });
+                return order;
+            })
 
             orders = orders.filter(order => 
                 order.status.status === config.finishedOrder ||
@@ -126,7 +129,7 @@ module.exports = new class OrderController extends Controller {
     }
 
 
-    async getInServiceOrders(req, res) {
+    async getreadyOrders(req, res) {
         try {
 
             let filter = { active: true, cookId: req.decodedData.user_id }
@@ -134,9 +137,16 @@ module.exports = new class OrderController extends Controller {
             let orders = await this.model.Order
                 .find(filter, { finishDate: 1, customer: 1, address: 1, products: 1 })
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
-                .populate('customer', { _id: 0, family: 1})
+                .populate('customer', { _id: 0, mobile: 1})
                 .populate('status', {status: 1, name: 1, _id: 0})
                 .sort({createdAt:-1})
+
+            orders = orders.map(order => order.products.map(product => {
+                return{
+                    name: product._id.name,
+                    quantity: product.quantity
+                }
+            }))
 
             orders = orders.filter(order => 
                 order.status.status === config.acceptDeliveryOrder ||
@@ -149,7 +159,7 @@ module.exports = new class OrderController extends Controller {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('getfinishedOrders')
+                .method('getreadyOrders')
                 .inputParams(req.params)
                 .call();
 
