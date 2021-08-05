@@ -8,6 +8,7 @@ const charge = require('./charge');
 
 router.use('/', home);
 router.use('/order', order);
+router.use('/location', location);
 router.use('/charge', charge);
 
 
