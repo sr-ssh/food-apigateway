@@ -8,15 +8,15 @@ const ChargeController = require(`${deliveryController}/v1/ChargeController`)
 
   
 /**
- * @api {get} /api/customer/v1/charge get customer charge
+ * @api {get} /api/delivery/v1/charge get delivery charge
  * @apiVersion 1.0.0
  * @apiName getCharge
- * @apiDescription get customer charge
- * @apiGroup customer
+ * @apiDescription get delivery charge
+ * @apiGroup delivery
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
- *      message: "شارژ مشتری با موفقیت ارسال شد",
+ *      message: "شارژ کاربر با موفقیت ارسال شد",
  *      data: 60000
  * }
  */

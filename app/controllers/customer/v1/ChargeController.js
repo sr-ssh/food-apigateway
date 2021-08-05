@@ -42,7 +42,11 @@ module.exports = new class ChargeController extends Controller {
             ])
         
             
-            return res.json({ success: true, message: "شارژ مشتری با موفقیت ارسال شد", data: charge[0].charge });
+            let data = 0;
+            if(charge.length)
+                data = charge[0].charge
+
+            return res.json({ success: true, message: "شارژ کاربر با موفقیت ارسال شد", data: data });
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
