@@ -94,6 +94,17 @@ describe(`${sectionName}`, () => {
                 .send(deliveryAcceptOrder);
             res.should.have.status(200);
         });
+
+
+        it('check not responsive customer', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/customer`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(deliveryAcceptOrder);
+            res.should.have.status(200);
+        });
     
     });
 

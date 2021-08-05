@@ -138,8 +138,32 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *      }
  * }
  */
-   router.get('/finished',OrderController.getfinishedOrders.bind(OrderController));
+  router.get('/finished',OrderController.getfinishedOrders.bind(OrderController));
 
+
+
+
+/**
+ * @api {post} /api/delivery/v1/order/customer not responsive customer
+ * @apiVersion 1.0.0
+ * @apiName notResposiveCustomer
+ * @apiDescription not responsive customer
+ * @apiGroup delivery
+ * @apiParam {String} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "اطلاعات دریافت شد",
+ *      data: { status: true }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: true,
+ *      message: "سفارش موجود نیست",
+ *      data: { status: false }
+ * }
+ */
+  router.post('/customer',OrderController.notResposiveCustomer.bind(OrderController));
 
 
  module.exports = router;

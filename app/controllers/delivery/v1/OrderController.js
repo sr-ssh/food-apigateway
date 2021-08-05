@@ -182,6 +182,27 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+    async notResposiveCustomer(req, res) {
+        try {
+
+            req.checkBody('orderId', 'please set order id').notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            
+            return res.json({ success : true, message : 'اطلاعات دریافت شد', data: { status: true }})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('notResposiveCustomer')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

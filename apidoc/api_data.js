@@ -810,6 +810,48 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/api/delivery/v1/order/customer",
+    "title": "not responsive customer",
+    "version": "1.0.0",
+    "name": "notResposiveCustomer",
+    "description": "<p>not responsive customer</p>",
+    "group": "delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"اطلاعات دریافت شد\",\n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش موجود نیست\",\n     data: { status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/order.js",
+    "groupTitle": "delivery"
+  },
+  {
+    "type": "post",
     "url": "/api/delivery/v1/register",
     "title": "register",
     "version": "1.0.0",
