@@ -29,6 +29,26 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  */
  router.get('/product',OrderController.getOrderProducts.bind(OrderController));
 
+
+
+ 
+/**
+ * @api {get} /api/customer/v1/orderproduct/type get order products types
+ * @apiVersion 1.0.0
+ * @apiName getOrderProductsTypes
+ * @apiDescription get order products types
+ * @apiGroup customer
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: ["پیش غذ", "پیتزا", "نوشیدنی", "سالاد", "سس"]
+ * }
+ */
+ router.get('/product/type',OrderController.getOrderProductsTypes.bind(OrderController));
+
+
+
  /**
  * @api {post} /api/customer/v1/order/ add order 
  * @apiVersion 1.0.0
@@ -144,6 +164,9 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * }
  */
 router.delete('/',OrderController.cancelOrder.bind(OrderController));
+
+
+
 
 
 

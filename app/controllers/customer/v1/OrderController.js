@@ -217,6 +217,29 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+
+    async getOrderProductsTypes(req, res) {
+        try {
+            let filter = { active: true }
+
+            let productTypes = await this.model.ProductTypes.find(filter, { name:1 }) 
+
+            let data = productTypes.map(type => type.name)
+
+            return res.json({ success: true, message: "محصولات سفارش با موفقیت ارسال شد", data: data });
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getOrderProductsTypes')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

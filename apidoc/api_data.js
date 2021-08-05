@@ -99,7 +99,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارش با موفقیت لغو شد\",\n     data: { status: true }\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارش با موفقیت لغو شد\",\n     data: { status: true }\n}",
           "type": "json"
         }
       ]
@@ -108,7 +108,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارش موجود نیست\",\n     data: { status: false }\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارش موجود نیست\",\n     data: { status: false }\n}",
           "type": "json"
         }
       ]
@@ -174,6 +174,26 @@ define({ "api": [
       ]
     },
     "filename": "app/routes/customer/v1/charge.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
+    "url": "/api/customer/v1/charge",
+    "title": "get customer charge",
+    "version": "1.0.0",
+    "name": "getCharge",
+    "description": "<p>get customer charge</p>",
+    "group": "customer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"شارژ مشتری با موفقیت ارسال شد\",\n     data: 60000\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/charge.js",
     "groupTitle": "customer"
   },
   {
@@ -262,6 +282,26 @@ define({ "api": [
         {
           "title": "Success-Response:",
           "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n         _id: '60fd0aacca33dd0374b55650',\n         name: \"نان سیر\",\n         description: \"سیر . خمیر تازه . اویشن\",\n         type: {name: 'pizza'},\n         img: 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',\n         size: [...{ name: \"medium\", price: 50 }]\n       }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/order.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
+    "url": "/api/customer/v1/orderproduct/type",
+    "title": "get order products types",
+    "version": "1.0.0",
+    "name": "getOrderProductsTypes",
+    "description": "<p>get order products types</p>",
+    "group": "customer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [\"پیش غذ\", \"پیتزا\", \"نوشیدنی\", \"سالاد\", \"سس\"]\n}",
           "type": "json"
         }
       ]
