@@ -90,7 +90,7 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  *             },
  *            createdAt: "2021-06-01T06:54:01.691Z",
  *            address: "معلم 43",
- *            status: { name: "در صف انتظار"}
+ *            status: { name: "در صف انتظار", status: 0}
  *          }]
  *      }
  * }

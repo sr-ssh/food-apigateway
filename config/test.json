@@ -211,12 +211,12 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "8668",
+            "code": "1265",
             "scope": "operator"
         },
         "getOrdersOperator":{
-            "type": "address",
-            "value": "هاشمیه"
+            "type": "family",
+            "value": "رضوی"
         },
         "getOrderOperator":{
             "orderId": "610545a7a5365707ccd6a308"
