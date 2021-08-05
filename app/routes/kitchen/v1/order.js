@@ -19,6 +19,7 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *      success: true,
  *      message: "سفارشات با موفقیت ارسال شد",
  *      data: [...{
+ *             "_id": "6107cfccf74a1a3398ca5dc8"
  *             products: [...{
  *                 _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                 quantity: 2,
@@ -93,10 +94,10 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
 
 
  /**
- * @api {get} /api/delivery/v1/order/finished get in service orders 
+ * @api {get} /api/delivery/v1/order/ready get ready orders 
  * @apiVersion 1.0.0
- * @apiName getInServiceOrders
- * @apiDescription get in service orders : "in service" orders are in cooking or in delivery
+ * @apiName getreadyOrders
+ * @apiDescription get ready orders : "ready" orders are in cooking or in delivery
  * @apiGroup kitchen
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -105,22 +106,21 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  *      data: [...{
  *             id: "60b72a70e353f0385c2fe5af",
  *             address: "کلاهدوز 4",
- *             finishDate: "2021-06-01T06:54:01.691Z",
+ *             createdAt: "2021-06-01T06:54:01.691Z",
  *             status: { status: 1, name: لغو شده},
  *             customer: {
- *                  family: "زهرا رضوی"
+ *                  family: "زهرا رضوی",
+ *                  mobile: "09307580143"
  *              },
  *             products: [...{
- *                  _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
- *                  price: "60000",
+ *                  name: "پپرونی",
  *                  quantity: 1,
- *                  size: 'medium'
  *              }]
  *          }]
  *      }
  * }
  */
-  router.get('/inservice',OrderController.getreadyOrders.bind(OrderController));
+  router.get('/ready',OrderController.getreadyOrders.bind(OrderController));
 
 
  module.exports = router;

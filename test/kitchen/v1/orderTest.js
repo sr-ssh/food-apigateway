@@ -61,10 +61,10 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
-        it('check get in service orders', async () => {
+        it('check get ready orders', async () => {
             const res = await chai
                 .request(server)
-                .get(`${baseRoute}/inservice`)
+                .get(`${baseRoute}/ready`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();
