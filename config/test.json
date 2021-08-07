@@ -55,7 +55,9 @@
             "description": "",
             "reminder": 7,
             "address": "معلم 24",
-            "duration": 40
+            "duration": 40,
+            "adrs": "کلاهدوز 4",
+            "orderId": "6107cfccf74a1a3398ca5dc8"
         },
         "product": {
             "name": "لیموناد",
@@ -146,7 +148,7 @@
         },
         "customer": {
             "mobile": "09307580143",
-            "family":"زهرا رضوی",
+            "family": "زهرا رضوی",
             "code": "4709"
         },
         "customerGetOrder": {
@@ -194,7 +196,7 @@
             ],
             "address": "راهنمایی 24",
             "lat": 33.297920,
-            "lng": 59.605933 ,
+            "lng": 59.605933,
             "deliveryCost": 5000,
             "description": ""
         },
@@ -205,7 +207,7 @@
             "code": "5141",
             "scope": "operator"
         },
-        "operatorVerification":{
+        "operatorVerification": {
             "mobile": "09152226262",
             "scope": "operator"
         },
@@ -214,21 +216,21 @@
             "code": "8234",
             "scope": "operator"
         },
-        "getOrdersOperator":{
+        "getOrdersOperator": {
             "type": "family",
             "value": "رضوی"
         },
-        "getOrderOperator":{
+        "getOrderOperator": {
             "orderId": "610545a7a5365707ccd6a308"
         },
         "operatorGetCustomer": {
             "mobile": "09307580143"
         },
         "addLocation": {
-            "lat": 38.066666, 
+            "lat": 38.066666,
             "lng": 46.299999,
             "speed": 80,
-            "bearing": 32 
+            "bearing": 32
         },
         "addOrderOperator": {
             "products": [
@@ -249,7 +251,7 @@
         "cancelOrderOperator": {
             "orderId": "6107cfccf74a1a3398ca5dc8"
         },
-        "operatorGetOrderDeliveryLocation":{
+        "operatorGetOrderDeliveryLocation": {
             "orderId": "610545a7a5365707ccd6a308"
         }
     }
