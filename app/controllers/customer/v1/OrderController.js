@@ -188,6 +188,7 @@ module.exports = new class OrderController extends Controller {
             let status = await this.model.OrderStatusBar.findOne(filter, '_id')
 
             order.status = status
+            order.finishDate = new Date()
             await order.save()
 
             // caculate total 

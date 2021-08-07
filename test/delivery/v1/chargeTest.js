@@ -41,7 +41,7 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get cherge', async () => {
+        it('check get charge', async () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/`)
