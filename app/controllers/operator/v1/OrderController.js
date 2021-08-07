@@ -106,6 +106,7 @@ module.exports = new class HomeController extends Controller {
             let status = await this.model.OrderStatusBar.findOne(filter, '_id')
 
             order.status = status
+            order.finishDate = new Date()
             await order.save()
 
             res.json({ success : true, message : 'سفارش با موفقیت لغو شد', data: { status: true }})
