@@ -136,6 +136,15 @@ module.exports = new class OrderController extends Controller {
             order.finishDate = new Date()
             await order.save()
 
+            //make deliveryFinance collection
+            let params = {
+                orderId: req.body.orderId,
+                deliveryId: req.decodedData.user_id,
+                type: config.debit,
+                cost: order.deliveryCost
+            }
+            await this.model.DeliveryFinance.create(params)
+
             res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد', data: { status: true }})
         }
         catch (err) {
