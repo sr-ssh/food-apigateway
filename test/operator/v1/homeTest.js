@@ -83,6 +83,17 @@ describe(`${sectionName}`, () => {
         });
 
 
+        it('check app info', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/app/info`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(appInfo);
+            res.should.have.status(200);
+        });
+
+
     });
 
 

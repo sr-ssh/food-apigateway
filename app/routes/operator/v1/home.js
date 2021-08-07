@@ -109,4 +109,40 @@ router.get('/home',HomeController.index.bind(HomeController));
 
 
 
+  /**
+  * @api {post} /api/operator/v1/app/info app info 
+  * @apiVersion 1.0.0
+  * @apiName info
+  * @apiDescription app info . send 'Android' as os if you are on android
+  * @apiGroup operator
+  * @apiParam  {int} versionCode versionCode
+  * @apiParam  {varchar} os os
+  * @apiSuccessExample {json} Success-Response:
+  * {
+  *   status: true,
+  *   message:"اطلاعات نرم افزار فرستاده شد",
+  *   data:{
+  *        status: true, 
+  *        update: true, 
+  *        isForce: false, 
+  *        updateUrl: "http://cafebazar.com/happypizza",
+  *        pushId: 0,
+  *        pushToken: 0,
+  *        family: "شکوهی",
+  *        sipNumber: 0,
+  *        sipServer: 0,
+  *        sipPassword: 0
+  *   }
+  *}
+  * @apiErrorExample {json} Error-Response:
+  *{
+  *    status: false,
+  *    message:"کاربر بلاک می باشد",
+  *    data:{}
+  *}
+  */
+  router.post('/app/info',HomeController.appInfo.bind(HomeController));
+
+
+
 module.exports = router;

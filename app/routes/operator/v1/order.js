@@ -90,7 +90,8 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  *             },
  *            createdAt: "2021-06-01T06:54:01.691Z",
  *            address: "معلم 43",
- *            status: { name: "در صف انتظار", status: 0}
+ *            status: { name: "در صف انتظار", status: 0},
+ *            paid: true
  *          }]
  *      }
  * }
@@ -137,7 +138,8 @@ const OrderController = require(`${operatorController}/v1/OrderController`)
  *              bearing: 32,
  *              saveDate: "2021-08-01T09:26:22.320Z"
  *             },
- *            tax: 12750
+ *            tax: 12750,
+ *            paid: true
  *      }
  * }
  */

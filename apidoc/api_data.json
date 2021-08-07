@@ -1470,7 +1470,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n             },\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n             deliveryId: \"610545a7a5365707ccd6a308\"\n           },\n           deliveryLocation: {\n             _id: \"60b72a70e353f0385c2fe5af\",\n             city: \"Mashhad\",\n             geo : [ -49.555555, 39.555555],\n             speed : 80,\n             bearing: 32,\n             saveDate: \"2021-08-01T09:26:22.320Z\"\n            },\n           tax: 12750\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n             },\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n             deliveryId: \"610545a7a5365707ccd6a308\"\n           },\n           deliveryLocation: {\n             _id: \"60b72a70e353f0385c2fe5af\",\n             city: \"Mashhad\",\n             geo : [ -49.555555, 39.555555],\n             speed : 80,\n             bearing: 32,\n             saveDate: \"2021-08-01T09:26:22.320Z\"\n            },\n           tax: 12750,\n           paid: true\n     }\n}",
           "type": "json"
         }
       ]
@@ -1510,7 +1510,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           status: { name: \"در صف انتظار\", status: 0}\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           status: { name: \"در صف انتظار\", status: 0},\n           paid: true\n         }]\n     }\n}",
           "type": "json"
         }
       ]
@@ -1549,6 +1549,55 @@
       ]
     },
     "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "post",
+    "url": "/api/operator/v1/app/info",
+    "title": "app info",
+    "version": "1.0.0",
+    "name": "info",
+    "description": "<p>app info . send 'Android' as os if you are on android</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "versionCode",
+            "description": "<p>versionCode</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "os",
+            "description": "<p>os</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n   status: false,\n   message:\"کاربر بلاک می باشد\",\n   data:{}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
     "groupTitle": "operator"
   },
   {

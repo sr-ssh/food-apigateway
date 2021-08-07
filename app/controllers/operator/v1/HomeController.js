@@ -75,6 +75,49 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async appInfo(req, res) {
+        try {
+            req.checkBody('versionCode', 'please enter versionCode').notEmpty();
+            req.checkBody('os', 'please enter os').notEmpty();
+
+            if (this.showValidationErrors(req, res)) return;
+
+            if(!req.decodedData.user_active)
+                return res.json({ success: false, message: "کاربر بلاک می باشد", data: {}})
+
+            // save in mongodb
+            let filter = { active: true, name: config.kitchenApp, os: req.body.os, latestVersion: req.body.versionCode}
+            let updateInfo = await this.model.AppInfo.findOne(filter).sort({createdAt:-1}).limit(1)
+            if(!updateInfo)
+                return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
+
+            let data = { 
+                status: true, 
+                update: updateInfo.update, 
+                isForce: updateInfo.isForce, 
+                updateUrl: updateInfo.updateUrl,
+                pushId: config.operatorPushId,
+                pushToken: config.operatorPushToken,
+                family: req.decodedData.family,
+                sipNumber: config.operatorSipNumber,
+                sipServer: config.operatorSipServer,
+                sipPassword: config.operatorSipPassword
+            }
+            return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('appInfo')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
 }
 
 

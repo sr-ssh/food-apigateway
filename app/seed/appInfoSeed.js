@@ -39,6 +39,14 @@ var data = [
                 update: false,
                 isForce: false,
                 updateUrl: ''
+            },
+            {
+                name: 'operatorApp',
+                os: 'Android',
+                latestVersion: '1',
+                update: false,
+                isForce: false,
+                updateUrl: ''
             }
         ]
     }
