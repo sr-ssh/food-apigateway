@@ -194,7 +194,7 @@ module.exports = new class OrderController extends Controller {
             let total = order.products.map(product => product.price * product.quantity)
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-            //make customerFinane collection
+            //make customerFinance collection
             let params = {
                 orderId: req.body.orderId,
                 customerId: req.decodedData.user_id,

@@ -4,8 +4,8 @@ const timestamps = require('mongoose-timestamp');
 
 let DeliveryFinance = new Schema({
     orderId: { type: Schema.Types.ObjectId, ref: 'Order' },
-    customerId: { type: Schema.Types.ObjectId, ref: 'User' },
-    type: { type: String, enum: ['credit', 'debt'] },
+    deliveryId: { type: Schema.Types.ObjectId, ref: 'User' },
+    type: { type: String, enum: ['credit', 'debit'] },
     cost: { type: Number }
 });
 
