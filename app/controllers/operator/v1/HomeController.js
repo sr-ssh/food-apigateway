@@ -117,6 +117,30 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async activate(req, res) {
+        try {
+            req.checkBody('state', 'please enter state').notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            if(!req.decodedData.user_active)
+                return res.json({ success: true, message: "کاربر بلاک می باشد", data: {status:false} })
+
+            // save in mongodb
+            user.status = req.body.state
+            await user.save()
+
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('activate')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
 
 }
 

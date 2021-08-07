@@ -1,4 +1,6 @@
 let appConfig = require('config');
+const Kavenegar = require('kavenegar');
+const jwt = require("jsonwebtoken");
 const ErrorTransform = require(`${config.path.transforms}/error/Transform`);
 const Order = require(`${config.path.models.root}/v1/Order`);
 const Product = require(`${config.path.models.root}/v1/Product`);
@@ -18,15 +20,18 @@ const Settings = require(`${config.path.models.root}/v1/Settings`);
 const Location = require(`${config.path.models.root}/v1/Location`);
 const DeliveryFinance = require(`${config.path.models.root}/v1/DeliveryFinance`);
 const CustomerFinance = require(`${config.path.models.root}/v1/CustomerFinance`);
-const Kavenegar = require('kavenegar');
-const jwt = require("jsonwebtoken");
+const Complaint = require(`${config.path.models.root}/v1/Complaint`);
 
 
 
 module.exports = class MainController {
 
     constructor() {
-        this.model = { User, Order, Product, Customer, AppInfo, Bill , Reminder , Discount, VerificationCode , Application, ProductTypes, UserTypes, OrderStatusBar, Kitchen, Settings, Location, DeliveryFinance, CustomerFinance }
+        this.model = {
+            User, Order, Product, Customer, AppInfo, Bill, Reminder, Discount, VerificationCode, Application,
+            ProductTypes, UserTypes, OrderStatusBar, Kitchen, Settings, Location, DeliveryFinance, CustomerFinance
+            , Complaint
+        }
         this.transforms = { ErrorTransform };
     }
 
@@ -59,7 +64,7 @@ module.exports = class MainController {
             sender: appConfig.sms.KavenegarApi.sender,
             receptor: phoneNumber
         }, (response, status) => {
-            console.log('send Sms ' + status+" message:"+message+" phonenumber:"+phoneNumber)
+            console.log('send Sms ' + status + " message:" + message + " phonenumber:" + phoneNumber)
         });
     }
 
@@ -117,146 +122,146 @@ module.exports = class MainController {
 
     async mainRegister(req, res) {
 
-            req.checkBody('password', 'please enter password').notEmpty().isString();
-            req.checkBody('family', 'please enter family').notEmpty().isString();
-            req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
-            req.checkBody('code', 'please enter code').notEmpty().isNumeric();
-            req.checkBody('scope', 'please enter user scope').notEmpty().isString();
-            if (this.showValidationErrors(req, res)) return;
+        req.checkBody('password', 'please enter password').notEmpty().isString();
+        req.checkBody('family', 'please enter family').notEmpty().isString();
+        req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
+        req.checkBody('code', 'please enter code').notEmpty().isNumeric();
+        req.checkBody('scope', 'please enter user scope').notEmpty().isString();
+        if (this.showValidationErrors(req, res)) return;
 
-            //check scope
-            let filter = { active: true, name: req.body.scope }
-            let type = await this.model.UserTypes.findOne(filter, 'id')
+        //check scope
+        let filter = { active: true, name: req.body.scope }
+        let type = await this.model.UserTypes.findOne(filter, 'id')
 
-            if(!type)
-                return res.json({ success: true, message: "اسکوپ وارد شده موجود نیست", data: { status: false }  });
-
-
-            //check verification code
-            filter = { code: req.body.code, mobile: req.body.mobile }
-
-            let veriCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
-            veriCode = veriCode[0]
-            if(!veriCode)
-                return res.json({ success: false, message: "کد تایید صحیح نمی باشد", data: { status: false } });
-            // timeDiff on verification code unit
-            let timeDiff = this.getTimeDiff(veriCode.createdAt.toISOString(), new Date().toISOString(), config.verificationCodeUnit)
-            // check verification code valid duration
-            if(timeDiff > config.verificationCodeDuration)
-                return res.json({ success: false, message: "کد تایید منقضی شده است", data: { status: false } });
-
-            //remove the code
-            // await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
+        if (!type)
+            return res.json({ success: true, message: "اسکوپ وارد شده موجود نیست", data: { status: false } });
 
 
-            // save user in mongodb
-            let params = {
-                type: type._id,
-                password: req.body.password,
-                family: req.body.family,
-                mobile: req.body.mobile
-            }
+        //check verification code
+        filter = { code: req.body.code, mobile: req.body.mobile }
 
-            filter = { mobile: params.mobile };
-            let user = await this.model.User.findOne(filter);
+        let veriCode = await this.model.VerificationCode.find(filter).sort({ createdAt: -1 }).limit(1)
+        veriCode = veriCode[0]
+        if (!veriCode)
+            return res.json({ success: false, message: "کد تایید صحیح نمی باشد", data: { status: false } });
+        // timeDiff on verification code unit
+        let timeDiff = this.getTimeDiff(veriCode.createdAt.toISOString(), new Date().toISOString(), config.verificationCodeUnit)
+        // check verification code valid duration
+        if (timeDiff > config.verificationCodeDuration)
+            return res.json({ success: false, message: "کد تایید منقضی شده است", data: { status: false } });
 
-            if (user)
-                return res.json({ success: true, message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است", data: { status: false } });
-            
-            user = await this.model.User.create(params);
+        //remove the code
+        // await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
 
-            //make a job application for employer
-            params = {
-                employee: user._id
-            }
-            await this.model.Application.create(params)
 
-            //token
-            let options = {
-                expiresIn: config.idTokenExpire,
-                algorithm: config.algorithm,
-                issuer: config.issuer,
-                audience: config.audience
-            }
-            let payload = {
-                user_id: user._id,
-                user_active: user.active,
-            }
-            let idToken = jwt.sign(payload, config.secret, options )
+        // save user in mongodb
+        let params = {
+            type: type._id,
+            password: req.body.password,
+            family: req.body.family,
+            mobile: req.body.mobile
+        }
 
-            options = {
-                expiresIn: config.accesssTokenExpire,
-                algorithm: config.algorithm,
-                issuer: config.issuer,
-                audience: config.audience
-            }
+        filter = { mobile: params.mobile };
+        let user = await this.model.User.findOne(filter);
 
-            payload = { scope : req.body.scope};
+        if (user)
+            return res.json({ success: true, message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است", data: { status: false } });
 
-            let accessToken = jwt.sign(payload, config.secret, options)
+        user = await this.model.User.create(params);
 
-            let data = { status: true, idToken, accessToken};
-            
-            return res.json({ success: true, message: "کاربر با موفقیت ثبت شد", data: data  });
-       
+        //make a job application for employer
+        params = {
+            employee: user._id
+        }
+        await this.model.Application.create(params)
+
+        //token
+        let options = {
+            expiresIn: config.idTokenExpire,
+            algorithm: config.algorithm,
+            issuer: config.issuer,
+            audience: config.audience
+        }
+        let payload = {
+            user_id: user._id,
+            user_active: user.active,
+        }
+        let idToken = jwt.sign(payload, config.secret, options)
+
+        options = {
+            expiresIn: config.accesssTokenExpire,
+            algorithm: config.algorithm,
+            issuer: config.issuer,
+            audience: config.audience
+        }
+
+        payload = { scope: req.body.scope };
+
+        let accessToken = jwt.sign(payload, config.secret, options)
+
+        let data = { status: true, idToken, accessToken };
+
+        return res.json({ success: true, message: "کاربر با موفقیت ثبت شد", data: data });
+
     }
 
     async mainVerificationCode(req, res) {
 
-            req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
-            req.checkBody('scope', 'please enter user scope').notEmpty().isString();
-            if (this.showValidationErrors(req, res)) return;
+        req.checkBody('mobile', 'please enter mobile').notEmpty().isNumeric();
+        req.checkBody('scope', 'please enter user scope').notEmpty().isString();
+        if (this.showValidationErrors(req, res)) return;
 
-            //check scope
-            let filter = { active: true, name: req.body.scope }
-            let type = await this.model.UserTypes.findOne(filter, 'id')
+        //check scope
+        let filter = { active: true, name: req.body.scope }
+        let type = await this.model.UserTypes.findOne(filter, 'id')
 
-            if(!type)
-                return res.json({ success: true, message: "اسکوپ وارد شده موجود نیست", data: { status: false }  });
+        if (!type)
+            return res.json({ success: true, message: "اسکوپ وارد شده موجود نیست", data: { status: false } });
 
-            filter = { active: true, type: type._id, mobile: req.body.mobile }
-            let user = await this.model.User.findOne(filter)
+        filter = { active: true, type: type._id, mobile: req.body.mobile }
+        let user = await this.model.User.findOne(filter)
 
-            if(!user)
-                return res.json({ success: true, message: "کاربری با این دسترسی موجود نیست", data: { status: false }  });
+        if (!user)
+            return res.json({ success: true, message: "کاربری با این دسترسی موجود نیست", data: { status: false } });
 
-            // save in mongodb
-            filter = { mobile: req.body.mobile };
+        // save in mongodb
+        filter = { mobile: req.body.mobile };
 
-            //code generation
-            let code;
+        //code generation
+        let code;
 
-            //check if the last code is still valid
-            let lastCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
-            lastCode = lastCode[0]
-            if(lastCode){
-                // timeDiff on verification code unit
-                let timeDiff = this.getTimeDiff(lastCode.createdAt, new Date().toISOString(), config.verificationCodeUnit)
-                // check verification code valid duration
-                if(timeDiff < config.verificationCodeDuration){
-                    code = lastCode.code
-                    this.sendSms(req.body.mobile, config.verificationCodeText + code)
-                    return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد", data: { status: true }});
-                }
-
+        //check if the last code is still valid
+        let lastCode = await this.model.VerificationCode.find(filter).sort({ createdAt: -1 }).limit(1)
+        lastCode = lastCode[0]
+        if (lastCode) {
+            // timeDiff on verification code unit
+            let timeDiff = this.getTimeDiff(lastCode.createdAt, new Date().toISOString(), config.verificationCodeUnit)
+            // check verification code valid duration
+            if (timeDiff < config.verificationCodeDuration) {
+                code = lastCode.code
+                this.sendSms(req.body.mobile, config.verificationCodeText + code)
+                return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد", data: { status: true } });
             }
 
-            //generate new code
+        }
 
-            //generate random number
-            code = this.generateRandomNumber();
-            this.sendSms(req.body.mobile, config.verificationCodeText + code)
+        //generate new code
 
-            //save in mongo
-            let params = {
-                mobile: req.body.mobile,
-                code: code
-            }
+        //generate random number
+        code = this.generateRandomNumber();
+        this.sendSms(req.body.mobile, config.verificationCodeText + code)
 
-            await this.model.VerificationCode.create(params);
+        //save in mongo
+        let params = {
+            mobile: req.body.mobile,
+            code: code
+        }
+
+        await this.model.VerificationCode.create(params);
 
 
-            return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد", data: { status: true } });
+        return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد", data: { status: true } });
     }
 
     async sendVerificationCode(req, res) {
@@ -271,13 +276,13 @@ module.exports = class MainController {
         let code;
 
         //check if the last code is steel valid
-        let lastCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
+        let lastCode = await this.model.VerificationCode.find(filter).sort({ createdAt: -1 }).limit(1)
         lastCode = lastCode[0]
-        if(lastCode){
+        if (lastCode) {
             // timeDiff on verification code unit
             let timeDiff = this.getTimeDiff(lastCode.createdAt, new Date().toISOString(), config.verificationCodeUnit)
             // check verification code valid duration
-            if(timeDiff < config.verificationCodeDuration){
+            if (timeDiff < config.verificationCodeDuration) {
                 code = lastCode.code
                 this.sendSms(req.body.mobile, config.verificationCodeText + code)
                 return res.json({ success: true, message: "کد تاییدیه به شماره موبایل داده شده ، با موفقیت فرستاده شد" });
@@ -313,14 +318,14 @@ module.exports = class MainController {
         //verification code
         let filter = { code: req.body.code, mobile: req.body.mobile }
 
-        let veriCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
+        let veriCode = await this.model.VerificationCode.find(filter).sort({ createdAt: -1 }).limit(1)
         veriCode = veriCode[0]
-        if(!veriCode)
+        if (!veriCode)
             return res.json({ success: false, message: "کد تایید صحیح نمی باشد", data: { status: false } });
         // timeDiff on verification code unit
         let timeDiff = this.getTimeDiff(veriCode.createdAt.toISOString(), new Date().toISOString(), config.verificationCodeUnit)
         // check verification code valid duration
-        if(timeDiff > config.verificationCodeDuration)
+        if (timeDiff > config.verificationCodeDuration)
             return res.json({ success: false, message: "کد تایید منقضی شده است", data: { status: false } });
 
         //remove the code
@@ -329,10 +334,10 @@ module.exports = class MainController {
         // check user
         filter = { active: true, mobile: req.body.mobile }
         let user = await this.model.User.findOne(filter).populate('type');
-        if (!user){
+        if (!user) {
             return res.json({ success: false, message: "کاربر در دسترس نمی باشد", data: { status: false } });
         }
-        if (user.type.name !== req.body.scope){
+        if (user.type.name !== req.body.scope) {
             return res.json({ success: false, message: "کاربری با این دسترسی موجود نیست", data: { status: false } });
         }
 
@@ -347,7 +352,7 @@ module.exports = class MainController {
             user_active: user.active,
             family: user.family
         }
-        let idToken = jwt.sign(payload, config.secret, options )
+        let idToken = jwt.sign(payload, config.secret, options)
 
         options = {
             expiresIn: config.accesssTokenExpire,
@@ -356,14 +361,14 @@ module.exports = class MainController {
             audience: config.audience
         }
 
-        payload = { scope : req.body.scope};
+        payload = { scope: req.body.scope };
 
         let accessToken = jwt.sign(payload, config.secret, options)
 
-        let data = { idToken, accessToken, status: true};
+        let data = { idToken, accessToken, status: true };
 
         return res.json({ success: true, message: "کاربر با موفقیت وارد شد", data: data });
-    
+
     }
 
 }

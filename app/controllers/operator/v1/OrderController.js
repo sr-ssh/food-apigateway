@@ -216,6 +216,36 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async editAddress(req, res) {
+        try {
+            req.checkBody('orderId', 'please set order id').notEmpty();
+            req.checkBody('adrs', 'please set adrs').notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true, _id: req.body.orderId }
+            let order = await this.model.Order.findOne(filter)
+
+            if(!order)
+                return res.json({ success : true, message : 'سفارش موجود نیست', data: { status: false }})
+
+            order.address = req.body.adrs
+            await order.save()
+
+            res.json({ success : true, message : 'عملیات با موفقیت انجام شد', data: { status: true }})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editAddress')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
 }
 
 

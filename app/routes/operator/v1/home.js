@@ -143,6 +143,20 @@ router.get('/home',HomeController.index.bind(HomeController));
   */
   router.post('/app/info',HomeController.appInfo.bind(HomeController));
 
+/**
+ * @api {put} /api/operator/v1/activate active
+ * @apiName activate
+ * @apiVersion 1.0.0
+ * @apiDescription active or deactive operator
+ * @apiGroup operator
+ * @apiParam {String} state active:1 , deactive:0
+ * @apiSuccessExample {json} Success-Response:
+ * { success: true, message: "عملیات با موفقیت انجام شد", data: { status: true } }
+ * @apiErrorExample {json} Error-Response:
+ * { success: true, message: "سفارش موجود نیست", data: { status: false } }
+ */
+ router.put('/activate', HomeController.activate.bind(HomeController));
+
 
 
 module.exports = router;
