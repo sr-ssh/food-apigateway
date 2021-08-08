@@ -24,13 +24,20 @@ module.exports = new class HomeController extends Controller {
 
             let customer = order.customer
 
-            params = {
+            //get complaint status
+            filter = {active: true, status: config.complaintCreated}
+            let status = await this.model.ComplaintStatus.findOne(filter, '_id')
+
+            let params = {
                 orderId: req.body.orderId,
                 description: req.body.des,
-                customer: customer
+                customer: customer,
+                registerUser: req.decodedData.user_id,
+                status: status
             }
 
             await this.model.Complaint.create(params)
+            
             res.json({ success: true, message: 'عملیات با موفقیت انجام شد', data: { status: true } })
         }
         catch (err) {

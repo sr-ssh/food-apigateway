@@ -5,11 +5,11 @@ const timestamps = require('mongoose-timestamp');
 let Complaint = new Schema({
   
   order: { type: Schema.Types.ObjectId, ref: 'Order' },
-  status: { type: Schema.Types.ObjectId, ref: 'complaintStatus', default:0 },
+  status: { type: Schema.Types.ObjectId, ref: 'ComplaintStatus' },
   description: { type: String },
   customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
   registerUser: { type: Schema.Types.ObjectId, ref: 'User' },
-
+  result: { type: String }
 });
 
 Complaint.plugin(timestamps);

@@ -46,6 +46,7 @@ module.exports = {
     tax: 0.09,
     debit: "debit",
     credit: "credit",
+    complaintCreated: 0,
     publicRoute: [
         '/api/user/v1/login', 
         '/api/user/v1/', 

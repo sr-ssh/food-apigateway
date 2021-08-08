@@ -21,6 +21,7 @@ const Location = require(`${config.path.models.root}/v1/Location`);
 const DeliveryFinance = require(`${config.path.models.root}/v1/DeliveryFinance`);
 const CustomerFinance = require(`${config.path.models.root}/v1/CustomerFinance`);
 const Complaint = require(`${config.path.models.root}/v1/Complaint`);
+const ComplaintStatus = require(`${config.path.models.root}/v1/ComplaintStatus`);
 
 
 
@@ -30,7 +31,8 @@ module.exports = class MainController {
         this.model = {
             User, Order, Product, Customer, AppInfo, Bill, Reminder, Discount, VerificationCode, Application,
             ProductTypes, UserTypes, OrderStatusBar, Kitchen, Settings, Location, DeliveryFinance, CustomerFinance
-            , Complaint
+            , Complaint,
+            ComplaintStatus
         }
         this.transforms = { ErrorTransform };
     }
