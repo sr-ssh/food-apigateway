@@ -107,10 +107,11 @@ describe(`${sectionName}`, () => {
                 .send(cancelOrderOperator);
             res.should.have.status(200);
         });
+
         it('check editAddress', async () => {
             const res = await chai
                 .request(server)
-                .delete(`${baseRoute}/editAddress`)
+                .put(`${baseRoute}/editAddress`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(order);
