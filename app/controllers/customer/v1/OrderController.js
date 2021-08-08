@@ -110,13 +110,33 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, customer: req.decodedData.user_id }
 
             let orders = await this.model.Order
-                .find(filter, { status: 1, createdAt: 1, paid: 1 })
+                .find(filter, { status: 1, createdAt: 1, paid: 1, products: 1, deliveryCost: 1 })
                 .populate('status', { status: 1, name: 1, _id: 0}) 
 
             orders = orders.filter(order => 
                 order.status.status !== config.finishedOrder &&
                 order.status.status !== config.canceledOrder
                 )
+            
+            // caculate total
+            orders = orders.map(order => {
+                let total = order.products.map(product => product.price * product.quantity);
+                total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+                // caculate tax 
+                let tax = order.products.map(product => product.price * product.quantity * config.tax)
+                tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+                total += (order.deliveryCost + tax);
+                return {
+                    _id: order._id,
+                    paid: order.paid,
+                    status: order.status,
+                    createdAt: order.createdAt,
+                    total: total
+                }
+            })
+            
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }

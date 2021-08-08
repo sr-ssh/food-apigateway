@@ -100,7 +100,8 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *            id: "60b72a70e353f0385c2fe5af",
  *            createdAt: "2021-06-01T06:54:01.691Z",
  *            paid: true,
- *            status: { name: "آماده", status: 2}
+ *            status: { name: "آماده", status: 2},
+ *            total: 60400
  *          }]
  *      }
  * }
