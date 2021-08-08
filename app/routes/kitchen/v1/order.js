@@ -83,6 +83,7 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  *              },
  *             products: [...{
  *                  name: "پپرونی",
+ *                  size: "medium",
  *                  quantity: 1,
  *              }],
  *            description: "بدون قارچ"
@@ -114,6 +115,7 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  *              },
  *             products: [...{
  *                  name: "پپرونی",
+ *                  size: "medium",
  *                  quantity: 1,
  *              }]
  *          }]

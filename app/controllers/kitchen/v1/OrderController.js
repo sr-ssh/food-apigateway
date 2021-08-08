@@ -103,6 +103,7 @@ module.exports = new class OrderController extends Controller {
                 order.products = order.products.map(product => {
                     return{
                         name: product._id.name,
+                        size: product.size,
                         quantity: product.quantity
                     }
                 });
@@ -145,6 +146,7 @@ module.exports = new class OrderController extends Controller {
                 order.products = order.products.map(product => {
                     return{
                         name: product._id.name,
+                        size: product.size,
                         quantity: product.quantity
                     }
                 });
