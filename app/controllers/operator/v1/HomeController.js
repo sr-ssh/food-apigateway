@@ -91,6 +91,10 @@ module.exports = new class HomeController extends Controller {
             if(!updateInfo)
                 return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
 
+            //get oparator status
+            filter = { active: true, _id: req.decodedData.user_id }
+            let operatorStatus = await this.model.User.findOne(filter, 'status')
+
             let data = { 
                 status: true, 
                 update: updateInfo.update, 
@@ -102,7 +106,8 @@ module.exports = new class HomeController extends Controller {
                 userId: req.decodedData.user_id,
                 sipNumber: config.operatorSipNumber,
                 sipServer: config.operatorSipServer,
-                sipPassword: config.operatorSipPassword
+                sipPassword: config.operatorSipPassword,
+                activeInQueue: operatorStatus.status
             }
             return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
         }
