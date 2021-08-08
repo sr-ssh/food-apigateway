@@ -215,6 +215,12 @@ module.exports = new class OrderController extends Controller {
             let total = order.products.map(product => product.price * product.quantity)
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
+            // caculate tax 
+            let tax = order.products.map(product => product.price * product.quantity * config.tax)
+            tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            total += (order.deliveryCost + tax);
+
             //make customerFinance collection
             let params = {
                 orderId: req.body.orderId,
