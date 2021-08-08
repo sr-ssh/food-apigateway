@@ -22,6 +22,7 @@ module.exports = {
     operatorPushToken: "pizzaOperatorAABMohsenX",
     operatorSipNumber: 423,
     operatorSipServer: "sbc.turbotaxi.ir:4060",
+    operatorSipPassword: 423,
     addOrderSms: "سفارش شما با موفقیت ثبت شد. از اینکه مارا انتخاب کرده اید متشکریم",
     deliveryAcknowledgeSms: "سفارش شما به راننده تحویل داده شد",
     verificationCodeDuration: 30,

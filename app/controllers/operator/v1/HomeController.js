@@ -99,6 +99,7 @@ module.exports = new class HomeController extends Controller {
                 pushId: config.operatorPushId,
                 pushToken: config.operatorPushToken,
                 family: req.decodedData.family,
+                userId: req.decodedData.user_id,
                 sipNumber: config.operatorSipNumber,
                 sipServer: config.operatorSipServer,
                 sipPassword: config.operatorSipPassword
