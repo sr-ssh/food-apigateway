@@ -188,7 +188,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n           id: \"60b72a70e353f0385c2fe5af\",\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           paid: true,\n           status: { name: \"آماده\", status: 2},\n           total: 60000\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n           id: \"60b72a70e353f0385c2fe5af\",\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           paid: true,\n           status: { name: \"آماده\", status: 2},\n           total: 60400\n         }]\n     }\n}",
           "type": "json"
         }
       ]
