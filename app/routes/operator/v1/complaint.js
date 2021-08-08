@@ -8,7 +8,7 @@ const ComplaintController = require(`${operatorController}/v1/ComplaintControlle
 
 
 /**
- * @api {post} /api/operator/v1/complaint
+ * @api {post} /api/operator/v1/complaint add complaint
  * @apiName addComplaint
  * @apiVersion 1.0.0
  * @apiDescription insert complaint for an order

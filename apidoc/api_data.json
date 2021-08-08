@@ -1322,6 +1322,97 @@
     "groupTitle": "kitchen"
   },
   {
+    "type": "put",
+    "url": "/api/operator/v1/activate",
+    "title": "active",
+    "name": "activate",
+    "version": "1.0.0",
+    "description": "<p>active or deactive operator</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "state",
+            "description": "<p>active:1 , deactive:0</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{ success: true, message: \"عملیات با موفقیت انجام شد\", data: { status: true } }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{ success: true, message: \"سفارش موجود نیست\", data: { status: false } }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "post",
+    "url": "/api/operator/v1/complaint",
+    "title": "add complaint",
+    "name": "addComplaint",
+    "version": "1.0.0",
+    "description": "<p>insert complaint for an order</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "des",
+            "description": "<p>description</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{ success: true, message: \"عملیات با موفقیت انجام شد\", data: { status: true } }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{ success: true, message: \"سفارش موجود نیست\", data: { status: false } }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/complaint.js",
+    "groupTitle": "operator"
+  },
+  {
     "type": "post",
     "url": "/api/operator/v1/order/",
     "title": "add order",
@@ -1344,7 +1435,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        quantity: 2,\n        price: \"30000\",\n        size: \"medium\"\n    }],\n    customer: {\n        family: \"شکوهی\",\n        mobile: \"09307580142\",\n    },\n    address: \"معلم 24\",\n    description: \"ساعت 21:00 تحویل داده شود\"\n}",
+          "content": "{products: [...{_id: \"60b72a70e353f0385c2fe5af\", quantity: 2,price: \"30000\",size: \"medium\"}],\n customer: {family: \"شکوهی\",mobile: \"09307580142\",},address: \"معلم 24\",description: \"ساعت 21:00 تحویل داده شود\"}",
           "type": "json"
         }
       ]
@@ -1353,7 +1444,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارش شما با موفقیت ثبت شد\",\n     data: {\n       status: true\n     }\n}",
+          "content": "{success: true, message: \"سفارش شما با موفقیت ثبت شد\",data: {status: true }}",
           "type": "json"
         }
       ]
@@ -1386,7 +1477,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارش با موفقیت لغو شد\",\n     data: { status: true }\n}",
+          "content": "{ success: true, message: \"سفارش با موفقیت لغو شد\", data: { status: true } }",
           "type": "json"
         }
       ]
@@ -1395,7 +1486,56 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارش موجود نیست\",\n     data: { status: false }\n}",
+          "content": "{ success: true, message: \"سفارش موجود نیست\", data: { status: false } }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "put",
+    "url": "/api/operator/v1/order/editAddress",
+    "title": "editAddress",
+    "name": "editAddress",
+    "version": "1.0.0",
+    "description": "<p>edit address of order</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "adrs",
+            "description": "<p>new address</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{ success: true, message: \"عملیات با موفقیت انجام شد\", data: { status: true } }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{ success: true, message: \"سفارش موجود نیست\", data: { status: false } }",
           "type": "json"
         }
       ]
@@ -1470,7 +1610,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n             },\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n             deliveryId: \"610545a7a5365707ccd6a308\"\n           },\n           deliveryLocation: {\n             _id: \"60b72a70e353f0385c2fe5af\",\n             city: \"Mashhad\",\n             geo : [ -49.555555, 39.555555],\n             speed : 80,\n             bearing: 32,\n             saveDate: \"2021-08-01T09:26:22.320Z\"\n            },\n           tax: 12750,\n           paid: true\n     }\n}",
+          "content": "{  success: true, message: \"سفارشات با موفقیت ارسال شد\",data: { \n     order: { id: \"60b72a70e353f0385c2fe5af\", customer: { family: \"مصطفایی\", mobile: \"09152631225\", },\n     products: [...{ _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},  quantity: 2,  price: \"30000\",  size: \"medium\"  }],\n     createdAt: \"2021-06-01T06:54:01.691Z\", address: \"معلم 43\",  status: { name: \"در صف انتظار\"}, deliveryCost: 5, deliveryId: \"610545a7a5365707ccd6a308\"  },\n     deliveryLocation: {_id: \"60b72a70e353f0385c2fe5af\",  city: \"Mashhad\", geo : [ -49.555555, 39.555555],  speed : 80,  bearing: 32,  saveDate: \"2021-08-01T09:26:22.320Z\" },tax: 12750,  paid: true  }  }",
           "type": "json"
         }
       ]
@@ -1510,7 +1650,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           status: { name: \"در صف انتظار\", status: 0},\n           paid: true\n         }]\n     }\n}",
+          "content": "{success: true, message: \"سفارشات با موفقیت ارسال شد\",data: [...{id: \"60b72a70e353f0385c2fe5af\",customer: {family: \"مصطفایی\",mobile: \"09152631225\",},createdAt: \"2021-06-01T06:54:01.691Z\", address: \"معلم 43\",status: { name: \"در صف انتظار\", status: 0}, paid: true }]}}",
           "type": "json"
         }
       ]
@@ -1543,7 +1683,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"موقعیت پیک با موفقیت ارسال شد\",\n     data: {\n           status: true,\n           deliveryLocation: {\n             _id: \"60b72a70e353f0385c2fe5af\",\n             city: \"Mashhad\",\n             geo : [ -49.555555, 39.555555],\n             speed : 80,\n             bearing: 32,\n             saveDate: \"2021-08-01T09:26:22.320Z\"\n            }\n         }\n}",
+          "content": "{success: true, message: \"موقعیت پیک با موفقیت ارسال شد\",data: {status: true, deliveryLocation: {_id: \"60b72a70e353f0385c2fe5af\",city: \"Mashhad\",geo : [ -49.555555, 39.555555],speed : 80, bearing: 32,saveDate: \"2021-08-01T09:26:22.320Z\" }}}",
           "type": "json"
         }
       ]
