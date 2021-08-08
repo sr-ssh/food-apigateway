@@ -6,7 +6,7 @@ const baseRoute = '/api/operator/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let appInfo, accessToken, idToken, operatorRegister, operatorVerification, operatorLogin;
+let appInfo, accessToken, idToken, operatorRegister, operatorVerification, operatorLogin, operatorState;
 const axios = require('axios').default;
 
 
@@ -17,6 +17,7 @@ describe(`${sectionName}`, () => {
 
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
+        operatorState = appConfig.test.operatorState;
         appInfo = appConfig.test.appInfo;
         operatorVerification = appConfig.test.operatorVerification;
         operatorRegister = appConfig.test.operatorRegister;
@@ -41,11 +42,6 @@ describe(`${sectionName}`, () => {
             });
     })
 
-
-    describe('Check get Apis', () => {
-
-
-    });
 
     describe('Check Post Apis', () => {
 
@@ -95,6 +91,22 @@ describe(`${sectionName}`, () => {
 
 
     });
+
+
+    describe('Check Put Apis', () => {
+
+        it('check active operator', async () => {
+            const res = await chai
+                .request(server)
+                .put(`${baseRoute}/activate`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(operatorState);
+            res.should.have.status(200);
+        });
+
+    });
+
 
 
     after(async () => {

@@ -126,11 +126,12 @@ module.exports = new class HomeController extends Controller {
                 return res.json({ success: true, message: "کاربر بلاک می باشد", data: {status:false} })
 
             // save in mongodb
-            let filter = { active: true, _id: req.decodedData.id }
+            let filter = { active: true, _id: req.decodedData.user_id }
             let user = await this.model.User.findOne(filter)
             user.status = req.body.state
             await user.save()
 
+            return res.json({ success: true, message: "وضعیت کاربر با موفقیت ثبت شد", data: {status: true} })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

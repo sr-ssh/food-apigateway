@@ -257,6 +257,9 @@
         "operatorComplaint":{
             "orderId": "610aa3914ffad40698336116",
             "des": "سفارش اشتباه اورده شده"
+        },
+        "operatorState": {
+            "state": 1
         }
     }
 }
