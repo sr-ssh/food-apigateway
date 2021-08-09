@@ -213,7 +213,7 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "4606",
+            "code": "5540",
             "scope": "operator"
         },
         "getOrdersOperator": {
@@ -259,7 +259,7 @@
             "des": "سفارش اشتباه اورده شده"
         },
         "operatorState": {
-            "state": 1
+            "state": 0
         }
     }
 }

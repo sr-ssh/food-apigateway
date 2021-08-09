@@ -137,7 +137,12 @@ module.exports = new class HomeController extends Controller {
             user.status = req.body.state
             await user.save()
 
-            return res.json({ success: true, message: "وضعیت کاربر با موفقیت ثبت شد", data: {status: true} })
+            let message = "";
+            if (req.body.state)
+                message = "شما با موفقیت وارد صف شدید"
+            else message = "شما با موفقیت از صف خارج شدید"
+
+            return res.json({ success: true, message: message, data: {status: true} })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
