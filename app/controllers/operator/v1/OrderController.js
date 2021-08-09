@@ -70,6 +70,8 @@ module.exports = new class HomeController extends Controller {
 
             filter = { userId: order.deliveryId}
             let deliveryLocation = await this.model.Location.findOne(filter, { userId: 0 }).sort({createdAt:-1}).limit(1)
+            if(!deliveryLocation)
+                deliveryLocation = {}
 
             // caculate tax 
             let tax = order.products.map(product => product.price * product.quantity * config.tax)
