@@ -37,8 +37,8 @@ module.exports = new class HomeController extends Controller {
                     return find !== -1;
                 })    
             }
-            
 
+            
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }
         catch (err) {
@@ -69,9 +69,14 @@ module.exports = new class HomeController extends Controller {
             order.deliveryCost = order.deliveryCost / 1000;
 
             filter = { userId: order.deliveryId}
-            let deliveryLocation = await this.model.Location.findOne(filter, { userId: 0 }).sort({createdAt:-1}).limit(1)
-            if(!deliveryLocation)
-                deliveryLocation = {}
+            let delivery = await this.model.Location.findOne(filter, { userId: 0 }).sort({createdAt:-1}).limit(1)
+
+            let deliveryLocation = {}
+            if(delivery){
+                deliveryLocation.lat = delivery.geo[1]
+                deliveryLocation.lng = delivery.geo[0]
+            }
+                
 
             // caculate tax 
             let tax = order.products.map(product => product.price * product.quantity * config.tax)
@@ -81,6 +86,7 @@ module.exports = new class HomeController extends Controller {
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
             total += (order.deliveryCost + tax);
             
+           
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, deliveryLocation, tax, total}})
         }
         catch (err) {

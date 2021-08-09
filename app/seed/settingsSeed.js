@@ -29,9 +29,9 @@ var data = [
           'acceptCount': 1,
           'deliveryCost': 5000
         },
-        order: { 
-          cookTime: 8,
-          confirmTime: 1
+        'order': { 
+          'cookTime': 8,
+          'confirmTime': 1
         }
       }
     ]

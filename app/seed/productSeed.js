@@ -43,7 +43,7 @@ var data = [
               'description': "کالباس پپرونی . پنیر . قارچ . فلفل دلمه ای",
               'type': '610916826f9446153c5e268e',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '60'}, {'name': 'large', 'price': '80000'}]
+              'size': [{'name': 'medium', 'price': '60000'}, {'name': 'large', 'price': '80000'}]
             },
             {
               'name': "مرغ و قارچ",
