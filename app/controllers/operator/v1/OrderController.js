@@ -75,8 +75,11 @@ module.exports = new class HomeController extends Controller {
             let tax = order.products.map(product => product.price * product.quantity * config.tax)
             tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
+            let total = order.products.map(product => product.price * product.quantity);
+            total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+            total += (order.deliveryCost + tax);
             
-            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, deliveryLocation, tax}})
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, deliveryLocation, tax, total}})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

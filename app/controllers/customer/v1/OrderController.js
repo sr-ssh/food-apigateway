@@ -58,7 +58,7 @@ module.exports = new class OrderController extends Controller {
             let products = req.body.products.map(product =>{ return {
                 _id: product._id,
                 quantity: product.quantity,
-                price: product.price,
+                price: product.price * 1000,
                 size:product.size
             }})
 
@@ -67,7 +67,7 @@ module.exports = new class OrderController extends Controller {
                 products: products,
                 customer: req.decodedData.user_id,
                 address: req.body.address,
-                deliveryCost: req.body.deliveryCost,
+                deliveryCost: req.body.deliveryCost * 1000,
                 status: status._id,
                 description: req.body.description,
                 GPS: { type: "Point", coordinates: [ req.body.lng, req.body.lat]}
