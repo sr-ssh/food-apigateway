@@ -1,7 +1,8 @@
 
 const Controller = require(`${config.path.controllers.user}/Controller`);
 const TAG = 'v1_Charge';
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = new class ChargeController extends Controller {
 
@@ -13,7 +14,7 @@ module.exports = new class ChargeController extends Controller {
         try {
 
             let charge = await this.model.CustomerFinance.aggregate([
-                { "$match" : { "customerId" : req.decodedData.user_id }},                
+                { "$match" : { "customerId" : ObjectId(req.decodedData.user_id) }},                
                 {                   
                     "$group": {
                         "_id": '$customerId',
@@ -39,7 +40,7 @@ module.exports = new class ChargeController extends Controller {
                 },
                 {
                     "$project": {
-                        "charge": { "$subtract": ["$credit", "$debit"] }
+                        "charge": { "$subtract": ["$debit", "$credit"] }
                     }
                 }
             ])
