@@ -1,7 +1,7 @@
 var seeder = require('mongoose-seed');
  
 // Connect to MongoDB via Mongoose
-seeder.connect('mongodb://crm-x.ir:2714/food', function() {
+seeder.connect('mongodb://172.16.2.215/food', function() {
  
   // Load Mongoose models
   seeder.loadModels([
@@ -27,7 +27,8 @@ var data = [
       { 
         'delivery': {
           'acceptCount': 1,
-          'deliveryCost': 5000
+          'deliveryCost': 5000,
+          'isPayNecessary': false,
         },
         'order': { 
           'cookTime': 8,

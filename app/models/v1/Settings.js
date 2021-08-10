@@ -6,7 +6,8 @@ let Settings = new Schema({
     active: { type: Boolean, default: true },
     delivery: { type: Object, default: {
       acceptCount: { type: Number },
-      deliveryCost: { type: Number }
+      deliveryCost: { type: Number },
+      isPayNecessary: { type: Boolean, default: true }
     }},
     order: { type: Object, default: {
       cookTime: { type: Number },

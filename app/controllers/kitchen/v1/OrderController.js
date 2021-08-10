@@ -11,7 +11,13 @@ module.exports = new class OrderController extends Controller {
     async getActiveOrder(req, res) {
         try {
 
-            let filter = { active: true, paid: true }
+            let filter;
+
+            // check for payment status in settings
+            let settings = await this.model.Settings.findOne({ active: true }, 'order.isPayNecessary')
+            if(settings.order.isPayNecessary)
+                filter = { active: true, paid: true }
+            else filter = { active: true }
 
             let orders = await this.model.Order
                 .find(filter, { active : 0, updatedAt: 0, 'products.price': 0, paid: 0, deliveryCost: 0})
