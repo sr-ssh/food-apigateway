@@ -27,7 +27,8 @@ module.exports = new class OrderController extends Controller {
 
             let cookOrder = orders.filter(order => 
                 order.status.status === config.beforeCookOrder && 
-                order.cookId?.toString() === req.decodedData.user_id
+                order.cookId &&
+                order.cookId.toString() === req.decodedData.user_id
                 )
 
             if(!cookOrder.length)
