@@ -17,7 +17,8 @@ module.exports = new class LocationController extends Controller {
             let location = await this.model.Customer.findOne(filter, { locations: 1, _id: 0 })
 
             let data = location.locations
-            if(typeof location.locations[0].address !== "string")  
+            data.shift()
+            if(!data.length)  
                 data = {}
             
             return res.json({ success: true, message: "ادرس های مشتری با موفقیت ارسال شد", data: data });
