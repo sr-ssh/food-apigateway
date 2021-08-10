@@ -120,6 +120,27 @@ module.exports = new class HomeController extends Controller {
             order.finishDate = new Date()
             await order.save()
 
+            if(order.paid){
+                // caculate total 
+                let total = order.products.map(product => product.price * product.quantity)
+                total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+                // caculate tax 
+                let tax = order.products.map(product => product.price * product.quantity * config.tax)
+                tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+                total += (order.deliveryCost + tax);
+
+                //make customerFinance collection
+                let params = {
+                    orderId: req.body.orderId,
+                    customerId: req.decodedData.user_id,
+                    type: config.debit,
+                    cost: total
+                }
+                await this.model.CustomerFinance.create(params)
+            }
+
             res.json({ success : true, message : 'سفارش با موفقیت لغو شد', data: { status: true }})
         }
         catch (err) {
