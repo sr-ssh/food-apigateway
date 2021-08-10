@@ -44,7 +44,7 @@ var data = [
             { 
               "products": [
                 {
-                    "_id": "61091b0ca9335b389819e896",
+                    "_id": "61091b0ca9335b389819e898",
                     "quantity": 3,
                     "price": "60000",
                     "size": "medium"
@@ -96,7 +96,7 @@ var data = [
             { 
               "products": [
                 {
-                    "_id": "61091b0ca9335b389819e896",
+                    "_id": "61091b0ca9335b389819e897",
                     "quantity": 1,
                     "price": "60000",
                     "size": "medium"
@@ -119,13 +119,7 @@ var data = [
             { 
               "products": [
                 {
-                    "_id": "61091b0ca9335b389819e896",
-                    "quantity": 1,
-                    "price": "60000",
-                    "size": "medium"
-                },
-                {
-                  "_id": "61091b0ca9335b389819e89b",
+                  "_id": "61091b0ca9335b389819e897",
                   "quantity": 2,
                   "price": "5000",
                   "size": "medium"
@@ -142,7 +136,7 @@ var data = [
             { 
               "products": [
                 {
-                    "_id": "61091b0ca9335b389819e896",
+                    "_id": "61091b0ca9335b389819e894",
                     "quantity": 5,
                     "price": "60000",
                     "size": "medium"

@@ -46,8 +46,8 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, deliveryId: req.decodedData.user_id }
             let acceptedOrders = await this.model.Order.find(filter).populate('status', {_id: 0, status: 1, name: 1})
 
-            acceptedOrders = acceptedOrders.map(order => 
-                order.status.status !== config.finishedOrder || 
+            acceptedOrders = acceptedOrders.filter(order => 
+                order.status.status !== config.finishedOrder &&
                 order.status.status !== config.canceledOrder
                 )
 
