@@ -290,6 +290,26 @@
     "groupTitle": "customer"
   },
   {
+    "type": "get",
+    "url": "/api/customer/v1/order/finished",
+    "title": "get finished orders",
+    "version": "1.0.0",
+    "name": "getfinishedOrders",
+    "description": "<p>get finished orders : &quot;finished&quot; orders have delivered to the customer or canceled</p>",
+    "group": "customer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            finishDate: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: \"لغو شده\"},\n            products: [...{\n                 name: \"پپرونی\",\n                 size: \"medium\",\n                 quantity: 1,\n                 price: 60\n             }]\n         }]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/order.js",
+    "groupTitle": "customer"
+  },
+  {
     "type": "post",
     "url": "/api/customer/v1/app/info",
     "title": "app info",

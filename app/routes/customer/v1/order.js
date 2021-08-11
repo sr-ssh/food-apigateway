@@ -110,6 +110,36 @@ const OrderController = require(`${customerController}/v1/OrderController`)
 
 
 
+ /**
+ * @api {get} /api/customer/v1/order/finished get finished orders 
+ * @apiVersion 1.0.0
+ * @apiName getfinishedOrders
+ * @apiDescription get finished orders : "finished" orders have delivered to the customer or canceled
+ * @apiGroup customer
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: [...{
+ *             id: "60b72a70e353f0385c2fe5af",
+ *             address: "کلاهدوز 4",
+ *             finishDate: "2021-06-01T06:54:01.691Z",
+ *             status: { status: 1, name: "لغو شده"},
+ *             products: [...{
+ *                  name: "پپرونی",
+ *                  size: "medium",
+ *                  quantity: 1,
+ *                  price: 60
+ *              }]
+ *          }]
+ *      }
+ * }
+ */
+  router.get('/finished',OrderController.getfinishedOrders.bind(OrderController));
+
+
+
+  
 /**
  * @api {get} /api/customer/v1/order get order
  * @apiVersion 1.0.0
@@ -165,9 +195,6 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * }
  */
 router.delete('/',OrderController.cancelOrder.bind(OrderController));
-
-
-
 
 
 

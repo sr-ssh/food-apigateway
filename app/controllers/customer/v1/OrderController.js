@@ -269,6 +269,47 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+    async getfinishedOrders(req, res) {
+        try {
+
+            let filter = { active: true, customer: req.decodedData.user_id }
+
+            let orders = await this.model.Order
+                .find(filter, { finishDate: 1, address: 1, products: 1, status: 1})
+                .populate({ path: 'products._id', model: 'Product', select: 'name'})
+                .populate('status', {status: 1, name: 1, _id: 0})
+            
+            orders = orders.map(order => {
+                order.products = order.products.map(product => {
+                    return{
+                        name: product._id.name,
+                        size: product.size,
+                        quantity: product.quantity,
+                        price: product.price / 1000
+                    }
+                });
+                return order;
+            })
+
+            orders = orders.filter(order => 
+                order.status.status === config.finishedOrder ||
+                order.status.status === config.canceledOrder 
+                )
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getfinishedOrders')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

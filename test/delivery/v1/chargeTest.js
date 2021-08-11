@@ -48,7 +48,7 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();
-            res.should.have.status(200);
+            res.wshould.have.status(200);
         });
 
     });
