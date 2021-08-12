@@ -166,7 +166,7 @@
         },
         "cook": {
             "mobile": "09152226565",
-            "code": "8417",
+            "code": "4766",
             "scope": "cook"
         },
         "deliveryRegister": {
@@ -178,7 +178,7 @@
         },
         "deliveryMan": {
             "mobile": "09152226363",
-            "code": "9305",
+            "code": "7369",
             "scope": "deliveryMan"
         },
         "deliveryAcceptOrder": {

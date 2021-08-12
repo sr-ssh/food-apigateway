@@ -12,6 +12,7 @@ let Product = new Schema({
         price: { type: Number, required: true }
     }] , required: true}, 
     img: { type: String, required: true },
+    supply: { type: Number, default: 0 }, 
     description: { type: String },
 });
 

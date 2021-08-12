@@ -994,7 +994,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            \"_id\": \"6107cfccf74a1a3398ca5dc8\"\n            products: [...{\n                _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                quantity: 2,\n                size: 'medium'\n            }],\n            customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"}\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            _id: \"6107cfccf74a1a3398ca5dc8\"\n            products: [...{\n                _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                quantity: 2,\n                size: 'medium'\n            }],\n            customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"},\n           description: \"بدون قارچ\"\n         }]\n     }\n}",
           "type": "json"
         }
       ]

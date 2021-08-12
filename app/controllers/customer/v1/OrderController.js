@@ -47,7 +47,7 @@ module.exports = new class OrderController extends Controller {
             req.checkBody('lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
             req.checkBody('lng', 'please enter lng').notEmpty().isFloat({ min: -180, max: 180});
             req.checkBody('deliveryCost', 'please enter description').notEmpty().isInt({min: 0});
-            // req.checkBody('description', 'please enter description').exists().isString();
+            req.checkBody('description', 'please enter description').exists().isString();
             
             if (this.showValidationErrors(req, res)) return;
 
@@ -55,12 +55,23 @@ module.exports = new class OrderController extends Controller {
             let filter = {active: true, name: config.activeOrders}
             let status = await this.model.OrderStatusBar.findOne(filter, '_id')
 
-            let products = req.body.products.map(product =>{ return {
-                _id: product._id,
-                quantity: product.quantity,
-                price: product.price * 1000,
-                size:product.size
-            }})
+            let products = req.body.products.map(product =>  { 
+
+                // recalculate product supply
+                // let productSupply = await this.model.Product.findOne({_id: product._id}, 'supply')
+                // let supply = productSupply - product.quantity;
+                // if(supply < 0)
+                //     return res.json({ success : true, message : 'موجودی محصول کافی نیست', data: {status: false}})
+                // productSupply.supply = supply;
+                // await productSupply.save()
+
+                return {
+                    _id: product._id,
+                    quantity: product.quantity,
+                    price: product.price * 1000,
+                    size:product.size
+                }
+            })
 
             // add order
             let params = {

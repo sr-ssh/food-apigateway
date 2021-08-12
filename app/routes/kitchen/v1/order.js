@@ -19,7 +19,7 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *      success: true,
  *      message: "سفارشات با موفقیت ارسال شد",
  *      data: [...{
- *             "_id": "6107cfccf74a1a3398ca5dc8"
+ *             _id: "6107cfccf74a1a3398ca5dc8"
  *             products: [...{
  *                 _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                 quantity: 2,
@@ -32,7 +32,8 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *            createdAt: "2021-06-01T06:54:01.691Z",
  *            address: "معلم 43",
  *            GPS: { type: "point", coordinates: [-122.5, 37.7]},
- *            status: { name: "active"}
+ *            status: { name: "active"},
+ *            description: "بدون قارچ"
  *          }]
  *      }
  * }
