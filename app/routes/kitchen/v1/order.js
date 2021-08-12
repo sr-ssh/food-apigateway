@@ -117,7 +117,8 @@ router.put('/ready',OrderController.readyOrder.bind(OrderController));
  *                  name: "پپرونی",
  *                  size: "medium",
  *                  quantity: 1,
- *              }]
+ *              }],
+ *             description: "بدون قارچ"
  *          }]
  *      }
  * }

@@ -143,7 +143,7 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, cookId: req.decodedData.user_id }
 
             let orders = await this.model.Order
-                .find(filter, { createdAt: 1, customer: 1, address: 1, products: 1 })
+                .find(filter, { createdAt: 1, customer: 1, address: 1, products: 1, description: 1 })
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
                 .populate('customer', { _id: 0, mobile: 1, family: 1})
                 .populate('status', {status: 1, name: 1, _id: 0})
