@@ -37,6 +37,7 @@ var data = [
               "address": "راهنمایی 24",
               "GPS": { type: "Point", coordinates: [33.297920, 59.605933]},
               "status": "610910cc5b637837dce1ea98",
+              "supply": 100,
               "paid": true,
               "deliveryCost": 5000,
               "description": "ساعت 12 تحویل داده شود"
@@ -66,6 +67,7 @@ var data = [
               "address": "راهنمایی 24",
               "GPS": { type: "Point", coordinates: [33.297920, 59.605933]},
               "status": "610910cc5b637837dce1ea98",
+              "supply": 100,
               "paid": true,
               "deliveryCost": 5000,
               "description": "ساعت 12 تحویل داده شود"
@@ -89,6 +91,7 @@ var data = [
               "address": "راهنمایی 24",
               "GPS": { type: "Point", coordinates: [33.297920, 59.605933]},
               "status": "610910cc5b637837dce1ea98",
+              "supply": 100,
               "paid": true,
               "deliveryCost": 5000,
               "description": "ساعت 12 تحویل داده شود"
@@ -112,6 +115,7 @@ var data = [
               "address": "راهنمایی 24",
               "GPS": { type: "Point", coordinates: [33.297920, 59.605933]},
               "status": "610910cc5b637837dce1ea98",
+              "supply": 100,
               "paid": true,
               "deliveryCost": 5000,
               "description": "ساعت 12 تحویل داده شود"
@@ -129,6 +133,7 @@ var data = [
               "address": "راهنمایی 24",
               "GPS": { type: "Point", coordinates: [33.297920, 59.605933]},
               "status": "610910cc5b637837dce1ea98",
+              "supply": 100,
               "paid": true,
               "deliveryCost": 5000,
               "description": "ساعت 12 تحویل داده شود"
@@ -146,6 +151,7 @@ var data = [
               "address": "راهنمایی 24",
               "GPS": { type: "Point", coordinates: [33.297920, 59.605933]},
               "status": "610910cc5b637837dce1ea98",
+              "supply": 100,
               "paid": true,
               "deliveryCost": 5000,
               "description": "ساعت 12 تحویل داده شود"

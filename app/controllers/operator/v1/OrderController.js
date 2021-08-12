@@ -122,6 +122,14 @@ module.exports = new class HomeController extends Controller {
             order.finishDate = new Date()
             await order.save()
 
+            // recalculate product supply
+            for (let index = 0; index < order.products.length; index++) {
+                await this.model.Product.findOneAndUpdate(
+                    {_id: order.products[index]._id}, 
+                    { $inc: { supply: order.products[index].quantity }}
+                )
+            }
+            
             if(order.paid){
                 // caculate total 
                 let total = order.products.map(product => product.price * product.quantity)
