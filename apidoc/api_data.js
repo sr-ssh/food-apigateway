@@ -1034,7 +1034,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: لغو شده},\n            customer: {\n                 family: \"زهرا رضوی\",\n                 mobile: \"09307580143\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 size: \"medium\",\n                 quantity: 1,\n             }]\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: لغو شده},\n            customer: {\n                 family: \"زهرا رضوی\",\n                 mobile: \"09307580143\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 size: \"medium\",\n                 quantity: 1,\n             }],\n            description: \"بدون قارچ\"\n         }]\n     }\n}",
           "type": "json"
         }
       ]
