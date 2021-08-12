@@ -61,7 +61,7 @@ router.get('/:type/:value', OrderController.getOrdersByFilter.bind(OrderControll
 *      order: { id: "60b72a70e353f0385c2fe5af", customer: { family: "مصطفایی", mobile: "09152631225", },
 *      products: [...{ _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},  quantity: 2,  price: "30000",  size: "medium"  }],
 *      createdAt: "2021-06-01T06:54:01.691Z", address: "معلم 43",  status: { name: "در صف انتظار"}, deliveryCost: 5, deliveryId: "610545a7a5365707ccd6a308"  },
-*      deliveryLocation: {lat: 38.066666, lng: 46.299999},tax: 12750,  paid: true  }  }
+*      deliveryLocation: {_id: '610668be772e0f31883fb280', lat: 38.066666, lng: 46.299999, date: '2021-08-01T09:26:22.320Z'},tax: 12750,  paid: true  }  }
 */
 router.get('/:orderId', OrderController.getOrder.bind(OrderController));
 

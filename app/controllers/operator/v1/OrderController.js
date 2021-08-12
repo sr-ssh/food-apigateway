@@ -73,8 +73,10 @@ module.exports = new class HomeController extends Controller {
 
             let deliveryLocation = {}
             if(delivery){
+                deliveryLocation._id = delivery._id
                 deliveryLocation.lat = delivery.geo[1]
                 deliveryLocation.lng = delivery.geo[0]
+                deliveryLocation.date = delivery.saveDate
             }
                 
 
@@ -162,6 +164,9 @@ module.exports = new class HomeController extends Controller {
 
             let filter = { active : true, _id: req.params.orderId }
             let order = await this.model.Order.findOne(filter, 'deliveryId').populate('status')
+
+            if(!order)
+                return res.json({ success : true, message : 'سفارش موجود نیست', data: { status: false }})
 
             if(!order.deliveryId)
                 return res.json({ success : true, message : `است ${order.status.name} سفارش شما در مرحله `, data: { status: false }})
