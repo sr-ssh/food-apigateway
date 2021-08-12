@@ -103,7 +103,8 @@ module.exports = new class HomeController extends Controller {
                 sipNumber: 0,
                 sipServer: 0,
                 sipPassword: 0,
-                neshanAPIKey: config.deliveryNeshanAPIKey
+                neshanAPIKey: config.deliveryNeshanAPIKey,
+                userCode: req.decodedData.user_id
             }
             return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
         }
