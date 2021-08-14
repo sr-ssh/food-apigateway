@@ -134,6 +134,12 @@ module.exports = new class OrderController extends Controller {
                 order.status.status === config.canceledOrder 
                 )
 
+            orders = orders.map(order => {
+                if(!order.description)
+                    order.description = ""
+                return order
+            })
+
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }
         catch (err) {
@@ -176,6 +182,12 @@ module.exports = new class OrderController extends Controller {
                 order.status.status === config.acceptDeliveryOrder ||
                 order.status.status === config.inCookingOrder 
                 )
+            
+            orders = orders.map(order => {
+                if(!order.description)
+                    order.description = ""
+                return order
+            })
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }
