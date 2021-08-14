@@ -102,6 +102,12 @@ module.exports = new class OrderController extends Controller {
 
             orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder )
 
+            orders = orders.map(order => {
+                if(!order.description)
+                    order.description = ""
+                return order
+            })
+            
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }
         catch (err) {
