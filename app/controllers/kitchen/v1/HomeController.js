@@ -101,6 +101,7 @@ module.exports = new class HomeController extends Controller {
                 pushId: config.kitchenPushId,
                 pushToken: config.kitchenPushToken,
                 family: req.decodedData.family,
+                userId: req.decodedData.user_id,
                 sipNumber: 0,
                 sipServer: 0,
                 sipPassword: 0
