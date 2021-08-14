@@ -31,6 +31,12 @@ module.exports = new class OrderController extends Controller {
                 order.cookId.toString() === req.decodedData.user_id
                 )
 
+            cookOrder = cookOrder.map(order => {
+                if(!order.description)
+                    order.description = ""
+                return order
+            })
+
             if(!cookOrder.length)
                 cookOrder = orders.filter(order => order.status.status === config.activeOrdersStatus)
             else 
@@ -45,6 +51,12 @@ module.exports = new class OrderController extends Controller {
 
             let update = { status: status, cookId: req.decodedData.user_id}
             await this.model.Order.findByIdAndUpdate(cookOrder[0]._id, update)
+
+            cookOrder = cookOrder.map(order => {
+                if(!order.description)
+                    order.description = ""
+                return order
+            })
 
             return res.json({ success : true, message : 'سفارش با موفقیت ارسال شد', data: cookOrder[0] })
         }
