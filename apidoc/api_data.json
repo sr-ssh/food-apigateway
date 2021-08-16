@@ -1569,7 +1569,7 @@
     "title": "get customer",
     "version": "1.0.0",
     "name": "getCustomer",
-    "description": "<p>get customer .It gives you the customer information of the mobile you sent , if there is no customer with that mobile number it sends false</p>",
+    "description": "<p>get customer .It gives you the customer information of the mobile you sent , if there is no customer with that mobile number it sends false. in &quot;orderStatus&quot; status: 2 means last order has registered in less than 40 minutes, status: 0 means last order has registered in more than 40 minutes or there is no order, status: 1 means the customer is blocked</p>",
     "group": "operator",
     "parameter": {
       "fields": {
@@ -1588,7 +1588,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"اطلاعات مشتری با موفقیت ارسال شد\",\n     data: {\n         status: true,\n         cuatomer: {\n           family: \"مصطفایی\",\n           mobile: \"09625846122\",\n           locations: [...{\n             address: \"کلاهدوز 4\", \n             GPS: { type: \"Point\", coordinates: [-43.837452, 33.987689] }\n           }]\n         }\n      }\n}",
+          "content": "{\n     success: true,\n     message: \"اطلاعات مشتری با موفقیت ارسال شد\",\n     data: {\n         status: true,\n         cuatomer: {\n           family: \"مصطفایی\",\n           mobile: \"09625846122\",\n           locations: [...{\n             address: \"کلاهدوز 4\", \n             GPS: { type: \"Point\", coordinates: [-43.837452, 33.987689] }\n           }]\n         },\n         orderStatus: {\n           status: 2,\n           descriptionStatus: \"کاربر کمتر از 40 دقیقه قبل ثبت سفارش کرده است\",\n           orderInterval: 25,\n           orderState: \"در صف انتظار\"\n         }\n      }\n}",
           "type": "json"
         }
       ]
