@@ -184,7 +184,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
- *      message: "سفارش با موفقیت لغو شد",
+ *      message: "سفارش شما  لغو شد ,
  *      data: { status: true }
  * }
  * @apiErrorExample {json} Error-Response:

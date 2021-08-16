@@ -73,7 +73,7 @@ router.get('/:orderId', OrderController.getOrder.bind(OrderController));
  * @apiGroup operator
  * @apiParam {String} orderId order id
  * @apiSuccessExample {json} Success-Response:
- * { success: true, message: "سفارش با موفقیت لغو شد", data: { status: true } }
+ * { success: true, message: "سفارش شما  لغو شد ", data: { status: true } }
  * @apiErrorExample {json} Error-Response:
  * { success: true, message: "سفارش موجود نیست", data: { status: false } }
  */

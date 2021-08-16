@@ -213,7 +213,7 @@ module.exports = new class OrderController extends Controller {
             let confirmTime = await this.model.Settings.findOne(filter, 'order.confirmTime')
 
             if(this.getTimeDiff(order.createdAt.toISOString(), new Date().toISOString(), config.confirmTimeUnit) > confirmTime.order.confirmTime)
-                return res.json({ success : true, message : 'امکان کنسل سفارش نیست', data:{ status: false}})
+                return res.json({ success : true, message : 'امکان کنسل سفارش وجود ندارد', data:{ status: false}})
             
             //get status id
             filter = {active: true, status: config.canceledOrder}
@@ -252,7 +252,7 @@ module.exports = new class OrderController extends Controller {
                 await this.model.CustomerFinance.create(params)
             }
             
-            res.json({ success : true, message : 'سفارش با موفقیت لغو شد', data:{ status: true} })
+            res.json({ success : true, message : 'سفارش شما  لغو شد ', data:{ status: true} })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

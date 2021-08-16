@@ -80,7 +80,7 @@ module.exports = new class HomeController extends Controller {
             let veriCode = await this.model.VerificationCode.find(filter).sort({createdAt:-1}).limit(1)
             veriCode = veriCode[0]
             if(!veriCode)
-                return res.json({ success: false, message: "کد تایید صحیح نمی باشد", data: {} });
+                return res.json({ success: false, message: "کد ورود صحیح نمی باشد", data: {} });
             // timeDiff on verification code unit
             let timeDiff = this.getTimeDiff(veriCode.createdAt.toISOString(), new Date().toISOString(), config.verificationCodeUnit)
             // check verification code valid duration

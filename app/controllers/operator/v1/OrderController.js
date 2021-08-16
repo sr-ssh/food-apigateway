@@ -151,7 +151,7 @@ module.exports = new class HomeController extends Controller {
                 await this.model.CustomerFinance.create(params)
             }
 
-            res.json({ success : true, message : 'سفارش با موفقیت لغو شد', data: { status: true }})
+            res.json({ success : true, message : 'سفارش شما  لغو شد ', data: { status: true }})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
