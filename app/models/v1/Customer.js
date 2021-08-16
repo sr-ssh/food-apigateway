@@ -8,8 +8,8 @@ let Customer = new Schema({
     username: { type: String, required: true, sparse: true  },
     mobile: { type: String, required: true, sparse: true  },
     birthday: { type: Date},
-    order: { type: Array, default: [{ type: Schema.Types.ObjectId, ref: 'Order' }] },
-    locations: { type: Array, default: [{
+    order: [{ type: Schema.Types.ObjectId, ref: 'Order' }] ,
+    locations: [{
         address: { type: String },
         GPS: {
             type: {
@@ -22,7 +22,7 @@ let Customer = new Schema({
               required: true
             }
         }
-    }]}
+    }]
 });
 
 Customer.pre('validate', function(next){

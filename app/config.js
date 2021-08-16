@@ -48,6 +48,8 @@ module.exports = {
     debit: "debit",
     credit: "credit",
     complaintCreated: 0,
+    customerOrderIntervalUnit: "m",
+    customerMaxOrderInterval: 40,
     deliveryNeshanAPIKey: "service.5Unf1AsEuC9O4ftR0gLvFXZ5nDgUSg5sUghEd9Xu",
     publicRoute: [
         '/api/user/v1/login', 
