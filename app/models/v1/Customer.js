@@ -5,8 +5,8 @@ const timestamps = require('mongoose-timestamp');
 let Customer = new Schema({
     active: { type: Boolean, default: true },
     family: { type: String, required: true },
-    username: { type: String, required: true, sparse: true  },
-    mobile: { type: String, required: true, sparse: true  },
+    username: { type: String, unique: true, sparse: true },
+    mobile: { type: String, runique: true, sparse: true },
     birthday: { type: Date},
     order: [{ type: Schema.Types.ObjectId, ref: 'Order' }] ,
     locations: [{

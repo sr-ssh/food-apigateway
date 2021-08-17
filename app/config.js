@@ -68,7 +68,8 @@ module.exports = {
         '/api/operator/v1/login/verificationcode',
         '/api/operator/v1/register',
         '/api/operator/v1/verificationcode',
-        '/api/operator/v1/login'
+        '/api/operator/v1/login',
+        '/api/customer/v1/pay'
     ],
     path: {
         controllers: {

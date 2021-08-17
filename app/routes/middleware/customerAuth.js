@@ -6,10 +6,10 @@ module.exports = (req, res, next) => {
     
     let idToken = req.body.idToken || req.query.idToken || req.headers['idtoken']
     let accessToken = req.body.accessToken || req.query.accessToken || req.headers['authorization']
-
-    // // check for public route
+    
+    // check for public route
     let publicRoute = config.publicRoute;
-    if (publicRoute.includes(req.originalUrl))
+    if (publicRoute.includes(req.originalUrl) || publicRoute.includes(req.originalUrl.split('?')[0]))
         return next();
 
 

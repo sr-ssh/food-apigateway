@@ -25,6 +25,8 @@ let Order = new Schema({
     },
     status: { type: Schema.Types.ObjectId, ref: 'OrderStatusBar' },
     paid: { type: Boolean, default: false },
+    payAuthority: { type: String, unique: true, sparse: true },
+    payAmount: { type: Number },
     deliveryCost: { type: Number },
     deliveryId: { type: Schema.Types.ObjectId, ref: 'User' },
     cookId: { type: Schema.Types.ObjectId, ref: 'User' },

@@ -149,13 +149,20 @@
         "customer": {
             "mobile": "09307580143",
             "family": "زهرا رضوی",
-            "code": "9692"
+            "code": "6206"
         },
         "customerGetOrder": {
             "orderId": "610549791b4758463c7ac2b1"
         },
         "customerCancelOrder": {
             "orderId": "6107d01ac53ecf307cf92e70"
+        },
+        "customerPay": {
+            "orderId": "6107cfcb9ce9b70d74816e3e"
+        },
+        "customerPayValidate": {
+            "Authority": "000000000000000000000000000000585647",
+            "Status": "OK"
         },
         "cookRegister": {
             "password": "1234",

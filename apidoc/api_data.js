@@ -99,7 +99,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارش با موفقیت لغو شد\",\n     data: { status: true }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارش شما  لغو شد ,\n     data: { status: true }\n}",
           "type": "json"
         }
       ]
@@ -412,6 +412,97 @@ define({ "api": [
       ]
     },
     "filename": "app/routes/customer/v1/home.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
+    "url": "/api/customer/v1/pay",
+    "title": "pay order",
+    "version": "1.0.0",
+    "name": "payOrder",
+    "description": "<p>pay order: if the order pay with charge, &quot;onlinePay: false&quot; and no more fields, if the online pay was unsuccessfull , there will be no &quot;payURl&quot;.</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: {\n       onlinePay: true, \n       payStatus: 100, \n       payURL: \"https://www.zarinpal.com/pg/transaction/pay/585657\"\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارش موجود نیست\", \n     data: { status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/pay.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
+    "url": "/api/customer/v1/pay",
+    "title": "validate pay",
+    "version": "1.0.0",
+    "name": "validatePay",
+    "description": "<p>validate pay.send params as query.Status is &quot;OK&quot;,or &quot;NOK&quot;</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Authority",
+            "description": "<p>pay authority</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Status",
+            "description": "<p>pay status</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"پرداخت با موفقیت انجام شد\", \n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"پرداخت انجام نشد\", \n     data: { status: false }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/pay.js",
     "groupTitle": "customer"
   },
   {
@@ -1497,7 +1588,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{ success: true, message: \"سفارش با موفقیت لغو شد\", data: { status: true } }",
+          "content": "{ success: true, message: \"سفارش شما  لغو شد \", data: { status: true } }",
           "type": "json"
         }
       ]
