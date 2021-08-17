@@ -131,7 +131,7 @@ module.exports = new class PayController extends Controller {
             if(zarinRes.status === 100 || zarinRes.status === 101){
                 order.paid = true
                 await order.save()
-                return res.redirect('http://localhost:3012/pay/success')
+                return res.redirect('http://www.happypizza.ir:3012/pay/success')
                 // return res.json({ success: true, message: "پرداخت با موفقیت انجام شد", data: { status: true } });
             }
 
@@ -154,7 +154,7 @@ module.exports = new class PayController extends Controller {
                 }
                 await this.model.CustomerFinance.create(params)
             }
-            return res.redirect('http://localhost:3012/pay/fail')
+            return res.redirect('http://www.happypizza.ir:3012/pay/fail')
             // return res.json({ success: true, message: "پرداخت انجام نشد", data: { status: false } });
         }
         catch (err) {
