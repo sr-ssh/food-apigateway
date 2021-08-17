@@ -86,7 +86,7 @@ module.exports = new class PayController extends Controller {
             //payment 
             let zarinRes = await zarinpal.PaymentRequest({
                 Amount: amount, // In Tomans
-                CallbackURL: 'http://localhost:3010/api/customer/v1/pay',
+                CallbackURL: 'http://www.happypizza.ir:3010/api/customer/v1/pay',
                 Description: 'از خرید شما ممنونیم'
             })
             if(zarinRes.status != 100)
