@@ -18,9 +18,9 @@ module.exports = new class CustomerController extends Controller {
             let filter = {mobile: req.params.mobile};
 
             let customer = await this.model.Customer.findOne(filter, { active: 1, family:1, mobile:1, locations:1, order: {$slice: -1}}).populate('order', {createdAt: 1, status: 1})
-            await this.model.Order.populate(customer.order, {path: 'status', select: 'name'})
             if(!customer)
                 return res.json({ success : true, message : 'مشتری موجود نیست', data: { status: false}})
+            await this.model.Order.populate(customer.order, {path: 'status', select: 'name'})
 
             let orderStatus = {};
             let orderInterval = 0;
@@ -52,7 +52,7 @@ module.exports = new class CustomerController extends Controller {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('getCustomers')
+                .method('getCustomer')
                 .inputParams(req.body)
                 .call();
 
