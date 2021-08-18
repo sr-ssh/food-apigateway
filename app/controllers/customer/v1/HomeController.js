@@ -111,7 +111,8 @@ module.exports = new class HomeController extends Controller {
             }
             let payload = {
                 user_id: customer._id,
-                user_active: customer.active
+                user_active: customer.active,
+                user_mobile: customer.mobile
             }
             let idToken = jwt.sign(payload, config.secret, options )
 

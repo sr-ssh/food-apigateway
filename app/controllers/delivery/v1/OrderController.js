@@ -52,7 +52,7 @@ module.exports = new class OrderController extends Controller {
                 )
 
             //get accepted count from settings
-            let settings = await this.model.Settings.findOne({active: true}, 'delivery.acceptCount')
+            let settings = await this.model.Settings.findOne({active: true})
 
             if(acceptedOrders.length >= settings.delivery.acceptCount)
                 return res.json({ success : true, message : 'تعداد سفارش های شما به حد نصاب رسیده است', data: { status: false }})
@@ -74,6 +74,10 @@ module.exports = new class OrderController extends Controller {
             await order.save()
 
             res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد', data: { status: true }})
+
+            //send smd
+            if(settings.order.inServiceOrderSms.status)
+                this.sendSms(order.customer.mobile, settings.order.inServiceOrderSms.text + '\n' + settings.companyName)
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
@@ -152,6 +156,11 @@ module.exports = new class OrderController extends Controller {
             await this.model.DeliveryFinance.create(params)
 
             res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد', data: { status: true }})
+
+            //send smd
+            let settings = await this.model.Settings.findOne({active: true})
+            if(settings.order.finishedOrderSms.status)
+                this.sendSms(order.customer.mobile, settings.order.finishedOrderSms.text + '\n' + settings.companyName)
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

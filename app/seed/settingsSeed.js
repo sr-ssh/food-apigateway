@@ -27,13 +27,20 @@ var data = [
       { 
         'delivery': {
           'acceptCount': 1,
-          'deliveryCost': 5000,
-          'isPayNecessary': false,
+          'deliveryCost': 5000
         },
         'order': { 
           'cookTime': 8,
-          'confirmTime': 1
-        }
+          'confirmTime': 1,
+          'isPayNecessary': false,
+          'addOrderSms': { 'text': 'سفارش شما با موفقیت ثبت شد.', 'status': true },
+          'successfullPaymentSms': { 'text': 'سفارش شما با موفقیت پرداخت شد.', 'status': true },
+          'inProcessOrderSms': { 'text': 'سفارش شما در حال آماده سازی است.', 'status': true },
+          'inCookingOrderSms': { 'text': 'سفارش شما در حال پخت می باشد.', 'status': true },
+          'inServiceOrderSms': { 'text': 'سفارش شما در حال ارسال است.', 'status': true },
+          'finishedOrderSms': { 'text': 'سفارش شما به مقصد رسید. از اعتماد شما به هپی پیتزا ممنونیم. منتظر سفارش های بعدی شما هستیم.', 'status': true }
+        },
+        'companyName': 'هپی پیتزا'
       }
     ]
   }

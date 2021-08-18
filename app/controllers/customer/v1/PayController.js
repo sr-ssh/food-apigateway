@@ -131,6 +131,10 @@ module.exports = new class PayController extends Controller {
             if(zarinRes.status === 100 || zarinRes.status === 101){
                 order.paid = true
                 await order.save()
+                //send smd
+                let settings = await this.model.Settings.findOne({active: true})
+                if(settings.order.successfullPaymentSms.status)
+                    this.sendSms(req.decodedData.user_mobile, settings.order.successfullPaymentSms.text + '\n' + settings.companyName)
                 return res.redirect('http://www.happypizza.ir:3012/pay/success')
                 // return res.json({ success: true, message: "پرداخت با موفقیت انجام شد", data: { status: true } });
             }

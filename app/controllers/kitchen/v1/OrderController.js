@@ -14,7 +14,7 @@ module.exports = new class OrderController extends Controller {
             let filter;
 
             // check for payment status in settings
-            let settings = await this.model.Settings.findOne({ active: true }, 'order.isPayNecessary')
+            let settings = await this.model.Settings.findOne({ active: true })
             if(settings.order.isPayNecessary)
                 filter = { active: true, paid: true }
             else filter = { active: true }
@@ -58,7 +58,11 @@ module.exports = new class OrderController extends Controller {
                 return order
             })
 
-            return res.json({ success : true, message : 'سفارش با موفقیت ارسال شد', data: cookOrder[0] })
+            res.json({ success : true, message : 'سفارش با موفقیت ارسال شد', data: cookOrder[0] })
+
+            //send smd
+            if(settings.order.inProcessOrderSms.status)
+                this.sendSms(cookOrder[0].customer.mobile, settings.order.inProcessOrderSms.text + '\n' + settings.companyName)
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
@@ -93,6 +97,11 @@ module.exports = new class OrderController extends Controller {
             await order.save()
 
             res.json({ success : true, message : 'وضعیت سفارش با موفقیت ویرایش شد'})
+
+            //send smd
+            let settings = await this.model.Settings.findOne({active: true})
+            if(settings.order.inCookingOrderSms.status)
+                this.sendSms(order.customer.mobile, settings.order.inCookingOrderSms.text + '\n' + settings.companyName)
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

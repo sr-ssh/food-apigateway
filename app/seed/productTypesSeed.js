@@ -25,19 +25,19 @@ var data = [
         'model': 'ProductTypes',
         'documents': [
             {
-                'name': 'appetizer'
+                'name': 'پیتزا'
             },
             {
-                'name': 'pizza'
+                'name': 'پیش غذا'
             },
             {
-                'name': 'drinks'
+                'name': 'نوشیدنی'
             },
             {
-                'name': 'salad'
+                'name': 'سالاد'
             },
             {
-                'name': 'sauce'
+                'name': 'سس'
             }
         ]
     }
