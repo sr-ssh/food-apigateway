@@ -10,6 +10,7 @@ let Customer = new Schema({
     birthday: { type: Date},
     order: [{ type: Schema.Types.ObjectId, ref: 'Order' }] ,
     locations: [{
+        _id: false,
         address: { type: String },
         GPS: {
             type: {
