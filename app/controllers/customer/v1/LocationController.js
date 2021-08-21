@@ -51,7 +51,7 @@ module.exports = new class LocationController extends Controller {
 
 
             let data = { 
-                deliveryCost: deliveryCost.delivery.deliveryCost / 1000,
+                deliveryCost: deliveryCost.delivery.deliveryCost,
                 provider: {
                     status:true,
                     kitchenArea: kitchens[0].area
