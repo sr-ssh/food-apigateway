@@ -65,7 +65,7 @@ module.exports = new class OrderController extends Controller {
                 return {
                     _id: product._id,
                     quantity: product.quantity,
-                    price: product.price * 1000,
+                    price: product.price,
                     size:product.size
                 }
             })
@@ -75,7 +75,7 @@ module.exports = new class OrderController extends Controller {
                 products: products,
                 customer: req.decodedData.user_id,
                 address: req.body.address,
-                deliveryCost: req.body.deliveryCost * 1000,
+                deliveryCost: req.body.deliveryCost,
                 status: status._id,
                 description: req.body.description,
                 GPS: { type: "Point", coordinates: [ req.body.lng, req.body.lat]}
@@ -94,7 +94,7 @@ module.exports = new class OrderController extends Controller {
             let data = { 
                 orderId: order._id,
                 products: req.body.products,
-                deliveryCost: params.deliveryCost / 1000,
+                deliveryCost: params.deliveryCost,
                 tax: tax
             }
 
