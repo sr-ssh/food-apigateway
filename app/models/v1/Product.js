@@ -9,7 +9,8 @@ let Product = new Schema({
     //sellingPrice: { type: String , required: true},
     size: { type: Array, default: [{
         name: { type: String, required: true },
-        price: { type: Number, required: true }
+        price: { type: Number, required: true },
+        discount: { type: Number, required: true, default: 0 },
     }] , required: true}, 
     img: { type: String, required: true },
     supply: { type: Number, default: 0 }, 

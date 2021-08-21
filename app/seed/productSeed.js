@@ -29,56 +29,56 @@ var data = [
               'description': "سیر . خمیر تازه . اویشن",
               'type': '610916826f9446153c5e268d',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '25000'}]
+              'size': [{'name': 'medium', 'price': '25000', 'discount': '5000'}]
             },
             {
               'name': "رست بیف",
               'description': "گوشت گوساله . پنیر . قارچ . فلفل دلمه ای . پیازجه",
               'type': '610916826f9446153c5e268e',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '75000'}, {'name': 'large', 'price': '100000'}]
+              'size': [{'name': 'medium', 'price': '75000', 'discount': '15000'}]
             },
             {
               'name': "پپرونی",
               'description': "کالباس پپرونی . پنیر . قارچ . فلفل دلمه ای",
               'type': '610916826f9446153c5e268e',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '60000'}, {'name': 'large', 'price': '80000'}]
+              'size': [{'name': 'medium', 'price': '60000', 'discount': '10000'}]
             },
             {
               'name': "مرغ و قارچ",
               'description': "مرغ . پنیر . قارچ . فلفل دلمه ای . پیازجه",
               'type': '610916826f9446153c5e268e',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '70000'}, {'name': 'large', 'price': '90000'}]
+              'size': [{'name': 'medium', 'price': '70000', 'discount': '18000'}]
             },
             {
               'name': "مخصوص",
               'description': "گوشت گوساله . ژامبون . پنیر . قارچ . فلفل دلمه ای . پیازجه",
               'type': '610916826f9446153c5e268e',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '70000'}, {'name': 'large', 'price': '90000'}]
+              'size': [{'name': 'medium', 'price': '70000', 'discount': '18000'}]
             },
             {
               'name': "مارگاریتا",
               'description': "پنیر . قارچ . فلفل دلمه ای . پیازجه",
               'type': '610916826f9446153c5e268e',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '45000'}]
+              'size': [{'name': 'medium', 'price': '45000', 'discount': '8000'}]
             },
             {
               'name': "کوکا",
               'description': "",
               'type': '610916826f9446153c5e268f',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '9000'}]
+              'size': [{'name': 'medium', 'price': '9000', 'discount': '1000'}]
             },
             {
               'name': "سالاد فصل",
               'description': "",
               'type': '610916826f9446153c5e2690',
               'img': 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
-              'size': [{'name': 'medium', 'price': '5000'}]
+              'size': [{'name': 'medium', 'price': '5000', 'discount': '1000'}]
             },
             {
               'name': "سس کچاپ",
