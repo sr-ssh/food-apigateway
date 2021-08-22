@@ -119,7 +119,7 @@ module.exports = new class PayController extends Controller {
             if (this.showValidationErrors(req, res)) return;
 
             let filter = { payAuthority: req.query.Authority }
-            let order = await this.model.Order.findOne(filter)
+            let order = await this.model.Order.findOne(filter).populate('customer')
             if(!order)
                 return res.json({ success: true, message: "سفارش موجود نیست", data: { status: false}});
 
@@ -134,7 +134,7 @@ module.exports = new class PayController extends Controller {
                 //send smd
                 let settings = await this.model.Settings.findOne({active: true})
                 if(settings.order.successfullPaymentSms.status)
-                    this.sendSms(req.decodedData.user_mobile, settings.order.successfullPaymentSms.text + '\n' + settings.companyName)
+                    this.sendSms(order.customer.mobile, settings.order.successfullPaymentSms.text + '\n' + settings.companyName)
                 return res.redirect('http://www.happypizza.ir:3012/pay/success')
                 // return res.json({ success: true, message: "پرداخت با موفقیت انجام شد", data: { status: true } });
             }

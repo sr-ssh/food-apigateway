@@ -35,6 +35,7 @@ module.exports = new class LocationController extends Controller {
         }
     }
 
+
     async checkLocation(req, res) {
         try {
             req.checkBody('lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
@@ -73,7 +74,33 @@ module.exports = new class LocationController extends Controller {
         }
     }
 
-    
+
+    async checkLocation(req, res) {
+        try {
+            req.checkBody('location', 'please enter address').notEmpty().isObject();
+            req.checkBody('location.address', 'please enter address').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active : true }
+            await this.model.Customer.update({_id: req.decodedData.user_id}, { $pull: { locations: req.decodedData.location }})
+
+            Dive.update({ _id: diveId }, { "$pull": { "divers": { "user": userIdToRemove } }}, { safe: true, multi:true })
+
+
+            return res.json({ success : true, message : 'موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد', data: data})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('checkLocation')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 
