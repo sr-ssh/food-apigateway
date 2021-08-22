@@ -75,7 +75,7 @@ module.exports = new class LocationController extends Controller {
     }
 
 
-    async checkLocation(req, res) {
+    async deleteLocation(req, res) {
         try {
             req.checkBody('location', 'please enter address').notEmpty().isObject();
             req.checkBody('location.address', 'please enter address').notEmpty().isString();
@@ -93,7 +93,7 @@ module.exports = new class LocationController extends Controller {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('checkLocation')
+                .method('deleteLocation')
                 .inputParams(req.body)
                 .call();
 
