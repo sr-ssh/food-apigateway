@@ -148,7 +148,54 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد\",\n     data: {\n         deliveryCost: 5,\n            provider: {\n                status:true,\n                kitchenArea: 'هنرستان'\n            }\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد\",\n     data: {\n         deliveryCost: 5,\n         provider: {\n             status:true,\n             kitchenArea: 'هنرستان'\n         }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/location.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "delete",
+    "url": "/api/customer/v1/location",
+    "title": "delete location",
+    "version": "1.0.0",
+    "name": "deleteLocation",
+    "description": "<p>delete location</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "GPS",
+            "description": "<p>location gps</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>location address</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n     address: \"درب شمالی راه آهن\",\n     GPS: {\n         type: \"Point\",\n         coordinates: [\n             59.62104646283381,\n             36.313584005129016\n         ]\n     }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"آدرس شما با موفقیت حذف شد\"\n}",
           "type": "json"
         }
       ]

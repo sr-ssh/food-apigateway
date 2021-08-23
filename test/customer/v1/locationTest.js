@@ -6,7 +6,7 @@ const baseRoute = '/api/customer/v1/location';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user, accessToken, idToken, addLocation ;
+let user, accessToken, idToken, addLocation, deleteLocation ;
 const axios = require('axios').default;
 
 
@@ -20,6 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         customer = appConfig.test.customer;
         addLocation = appConfig.test.addLocation;
+        deleteLocation = appConfig.test.deleteLocation;
         axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
             .then(function (response) {
                 response = response.data;
@@ -64,6 +65,20 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(addLocation);
+            res.should.have.status(200);
+        });
+        
+    });
+
+    describe('Check Delete Apis', () => {
+
+        it('check delete location', async () => {
+            const res = await chai
+                .request(server)
+                .delete(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(deleteLocation);
             res.should.have.status(200);
         });
         

@@ -149,7 +149,7 @@
         "customer": {
             "mobile": "09307580143",
             "family": "زهرا رضوی",
-            "code": "3460"
+            "code": "8614"
         },
         "customerGetOrder": {
             "orderId": "610549791b4758463c7ac2b1"
@@ -238,6 +238,16 @@
             "lng": 46.299999,
             "speed": 80,
             "bearing": 32
+        },
+        "deleteLocation" : {
+            "address": "درب شمالی راه آهن",
+            "GPS": {
+                "type": "Point",
+                "coordinates": [
+                59.62104646283381,
+                36.313584005129016
+                ]
+            }
         },
         "addOrderOperator": {
             "products": [

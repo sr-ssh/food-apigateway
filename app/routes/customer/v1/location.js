@@ -41,14 +41,44 @@ const LocationController = require(`${customerController}/v1/LocationController`
  *      message: "موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد",
  *      data: {
  *          deliveryCost: 5,
-            provider: {
-                status:true,
-                kitchenArea: 'هنرستان'
-            }
+ *          provider: {
+ *              status:true,
+ *              kitchenArea: 'هنرستان'
+ *          }
  *      }
  * }
  */
   router.post('/',LocationController.checkLocation.bind(LocationController));
+
+
+
+
+  /**
+ * @api {delete} /api/customer/v1/location delete location 
+ * @apiVersion 1.0.0
+ * @apiName deleteLocation
+ * @apiDescription delete location
+ * @apiGroup customer
+ * @apiParam {Object} GPS location gps
+ * @apiParam {String} address location address
+ * @apiParamExample {json} Request-Example:
+ * {
+ *      address: "درب شمالی راه آهن",
+ *      GPS: {
+ *          type: "Point",
+ *          coordinates: [
+ *              59.62104646283381,
+ *              36.313584005129016
+ *          ]
+ *      }
+ *  }
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "آدرس شما با موفقیت حذف شد"
+ * }
+ */
+  router.delete('/',LocationController.deleteLocation.bind(LocationController));
 
 
 

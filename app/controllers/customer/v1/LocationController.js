@@ -77,17 +77,17 @@ module.exports = new class LocationController extends Controller {
 
     async deleteLocation(req, res) {
         try {
-            req.checkBody('location', 'please enter address').notEmpty().isObject();
-            req.checkBody('location.address', 'please enter address').notEmpty().isString();
+            req.checkBody('GPS', 'please enter address').notEmpty();
+            req.checkBody('address', 'please enter address').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
 
-            let filter = { active : true }
-            await this.model.Customer.update({_id: req.decodedData.user_id}, { $pull: { locations: req.decodedData.location }})
+            let result = await this.model.Customer.update(
+                {_id: req.decodedData.user_id}, 
+                { $pull: { locations: req.body }}, 
+                { safe: true, multi:true }
+            )
 
-            Dive.update({ _id: diveId }, { "$pull": { "divers": { "user": userIdToRemove } }}, { safe: true, multi:true })
-
-
-            return res.json({ success : true, message : 'موقعیت جغرافیایی فرستاده شده با موفقیت دریافت شد', data: data})
+            return res.json({ success : true, message : 'آدرس شما با موفقیت حذف شد'})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
