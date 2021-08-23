@@ -81,7 +81,7 @@ module.exports = new class LocationController extends Controller {
             req.checkBody('address', 'please enter address').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
 
-            let result = await this.model.Customer.update(
+            await this.model.Customer.update(
                 {_id: req.decodedData.user_id}, 
                 { $pull: { locations: req.body }}, 
                 { safe: true, multi:true }
@@ -94,6 +94,40 @@ module.exports = new class LocationController extends Controller {
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('deleteLocation')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+    async editLocation(req, res) {
+        try {
+            req.checkBody('oldLoc.address', 'please enter address').notEmpty().isString();
+            req.checkBody('oldLoc.lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
+            req.checkBody('oldLoc.lng', 'please enter lng').notEmpty().isFloat({ min: -180, max: 180});
+            req.checkBody('newLoc.address', 'please enter address').notEmpty().isString();
+            req.checkBody('newLoc.lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
+            req.checkBody('newLoc.lng', 'please enter lng').notEmpty().isFloat({ min: -180, max: 180});
+            if (this.showValidationErrors(req, res)) return;
+
+            let result = await this.model.Customer.find( 
+                { _id : req.decodedData.user_id , "locations.address" : req.body.oldLoc.address, 'locations.GPS.coordinates': [req.body.oldLoc.lng, req.body.oldLoc.lat] } );
+
+            let a = {'locations.GPS.coordinates': [req.body.oldLoc.lng,req.body.oldLoc.lat] }
+
+            result = await this.model.Customer.update( 
+                { _id : req.decodedData.user_id , "locations.address" : req.body.oldLoc.address, 'locations.GPS.coordinates': [req.body.oldLoc.lng, req.body.oldLoc.lat] } , 
+                { 'locations.$.address': req.body.newLoc.address, 'locations.$.GPS.coordinates': [req.body.newLoc.lng, req.body.newLoc.lat] } , 
+                { safe: true, multi:true });
+
+            return res.json({ success : true, message : 'آدرس شما با موفقیت ویرایش شد'})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editLocation')
                 .inputParams(req.body)
                 .call();
 

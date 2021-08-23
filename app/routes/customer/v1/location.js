@@ -53,7 +53,7 @@ const LocationController = require(`${customerController}/v1/LocationController`
 
 
 
-  /**
+/**
  * @api {delete} /api/customer/v1/location delete location 
  * @apiVersion 1.0.0
  * @apiName deleteLocation
@@ -79,6 +79,38 @@ const LocationController = require(`${customerController}/v1/LocationController`
  * }
  */
   router.delete('/',LocationController.deleteLocation.bind(LocationController));
+
+
+
+  
+/**
+ * @api {put} /api/customer/v1/location edit location 
+ * @apiVersion 1.0.0
+ * @apiName editLocation
+ * @apiDescription edit location
+ * @apiGroup customer
+ * @apiParam {Object} oldLOc old location
+ * @apiParam {Object} newLoc new location
+ * @apiParamExample {json} Request-Example:
+ * {
+ *      oldLoc: {
+ *              address: "راهنمایی 24",
+ *              lat: 33.29792,
+ *              lng: 59.605933
+ *          },
+ *      newLoc: {
+ *              address: "راهنمایی 24 - پلاک 117",
+ *              lat: 33.29793,
+ *              lng: 59.605933
+ *          }
+ *  }
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "آدرس شما با موفقیت ویرایش شد"
+ * }
+ */
+ router.put('/',LocationController.editLocation.bind(LocationController));
 
 
 

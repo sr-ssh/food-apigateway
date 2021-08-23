@@ -204,6 +204,53 @@
     "groupTitle": "customer"
   },
   {
+    "type": "put",
+    "url": "/api/customer/v1/location",
+    "title": "edit location",
+    "version": "1.0.0",
+    "name": "editLocation",
+    "description": "<p>edit location</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "oldLOc",
+            "description": "<p>old location</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "newLoc",
+            "description": "<p>new location</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n     oldLoc: {\n             address: \"راهنمایی 24\",\n             lat: 33.29792,\n             lng: 59.605933\n         },\n     newLoc: {\n             address: \"راهنمایی 24 - پلاک 117\",\n             lat: 33.29793,\n             lng: 59.605933\n         }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"آدرس شما با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/location.js",
+    "groupTitle": "customer"
+  },
+  {
     "type": "get",
     "url": "/api/customer/v1/charge",
     "title": "get customer charge",

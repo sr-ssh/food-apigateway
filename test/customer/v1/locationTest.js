@@ -6,7 +6,7 @@ const baseRoute = '/api/customer/v1/location';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user, accessToken, idToken, addLocation, deleteLocation ;
+let user, accessToken, idToken, addLocation, deleteLocation, editLocation ;
 const axios = require('axios').default;
 
 
@@ -21,6 +21,7 @@ describe(`${sectionName}`, () => {
         customer = appConfig.test.customer;
         addLocation = appConfig.test.addLocation;
         deleteLocation = appConfig.test.deleteLocation;
+        editLocation = appConfig.test.editLocation;
         axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
             .then(function (response) {
                 response = response.data;
@@ -65,6 +66,20 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(addLocation);
+            res.should.have.status(200);
+        });
+        
+    });
+
+    describe('Check Put Apis', () => {
+
+        it('check edit location', async () => {
+            const res = await chai
+                .request(server)
+                .put(`${baseRoute}/`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(editLocation);
             res.should.have.status(200);
         });
         
