@@ -77,7 +77,7 @@ module.exports = new class OrderController extends Controller {
                 address: req.body.address,
                 deliveryCost: req.body.deliveryCost,
                 status: status._id,
-                description: req.body.description,
+                description: req.body.description || "",
                 GPS: { type: "Point", coordinates: [ req.body.lng, req.body.lat]}
             }
 
