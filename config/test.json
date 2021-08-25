@@ -149,7 +149,7 @@
         "customer": {
             "mobile": "09307580143",
             "family": "زهرا رضوی",
-            "code": "9562"
+            "code": "9634"
         },
         "customerGetOrder": {
             "orderId": "610549791b4758463c7ac2b1"
@@ -240,15 +240,15 @@
             "bearing": 32
         },
         "deleteLocation" : {
-            "address": "درب شمالی راه آهن",
+            "address": "بلوار موسوی قوچانی",
             "GPS": {
-                "type": "Point",
-                "coordinates": [
-                59.62104646283381,
-                36.313584005129016
-                ]
+              "type": "Point",
+              "coordinates": [
+                59.588463347651405,
+                36.32792679437667
+              ]
             }
-        },
+          },
         "editLocation" : {
             "oldLoc": {
                 "address": "راهنمایی 24",

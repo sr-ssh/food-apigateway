@@ -1,6 +1,6 @@
 
 const Controller = require(`${config.path.controllers.user}/Controller`);
-const TAG = 'v1_Home';
+const TAG = 'v1_Order';
 
 
 module.exports = new class OrderController extends Controller {

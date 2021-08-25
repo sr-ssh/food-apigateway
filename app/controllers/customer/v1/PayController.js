@@ -103,7 +103,7 @@ module.exports = new class PayController extends Controller {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('getCharge')
+                .method('payOrder')
                 .inputParams(req.body)
                 .call();
 

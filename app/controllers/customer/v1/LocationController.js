@@ -83,7 +83,7 @@ module.exports = new class LocationController extends Controller {
 
             await this.model.Customer.update(
                 {_id: req.decodedData.user_id}, 
-                { $pull: { locations: req.body }}, 
+                { $pull: { locations: {address: req.body.address, 'GPS.coordinates': req.body.GPS.coordinates }}}, 
                 { safe: true, multi:true }
             )
 

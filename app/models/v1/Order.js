@@ -9,6 +9,7 @@ let Order = new Schema({
         quantity: { type: Number, default: 1 },
         size: { type: String , required: true, default: 'meduim' },
         price: { type: Number , required: true },
+        discount: { type: Number , required: true, default: 0 }
     }]},
     customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
     address: { type: String },
