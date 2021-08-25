@@ -137,11 +137,11 @@ module.exports = new class OrderController extends Controller {
             
             // caculate total
             orders = orders.map(order => {
-                let total = order.products.map(product => product.price * product.quantity);
+                let total = order.products.map(product => (product.price - product.discount) * product.quantity);
                 total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 // caculate tax 
-                let tax = order.products.map(product => product.price * product.quantity * config.tax)
+                let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
                 tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 total += (order.deliveryCost + tax);
@@ -182,7 +182,7 @@ module.exports = new class OrderController extends Controller {
                 .populate('status', {name: 1, _id: 0}) 
 
             // caculate tax 
-            let tax = order.products.map(product => product.price * product.quantity * config.tax)
+            let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
             tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, tax}})
@@ -238,11 +238,11 @@ module.exports = new class OrderController extends Controller {
 
             if(order.paid){
                 // caculate total 
-                let total = order.products.map(product => product.price * product.quantity)
+                let total = order.products.map(product => (product.price - product.discount) * product.quantity)
                 total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 // caculate tax 
-                let tax = order.products.map(product => product.price * product.quantity * config.tax)
+                let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
                 tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 total += (order.deliveryCost + tax);
@@ -310,7 +310,8 @@ module.exports = new class OrderController extends Controller {
                         name: product._id.name,
                         size: product.size,
                         quantity: product.quantity,
-                        price: product.price
+                        price: product.price,
+                        discount: product.discount
                     }
                 });
                 return order;
@@ -323,10 +324,10 @@ module.exports = new class OrderController extends Controller {
 
             orders = orders.map(order => {
                 // caculate total 
-                let total = order.products.map(product => product.price * product.quantity)
+                let total = order.products.map(product => (product.price - product.discount) * product.quantity)
                 total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
                 // caculate tax 
-                let tax = order.products.map(product => product.price * product.quantity * config.tax)
+                let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
                 tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 total += (order.deliveryCost + tax);
