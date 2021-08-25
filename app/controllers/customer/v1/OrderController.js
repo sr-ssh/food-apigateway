@@ -70,6 +70,8 @@ module.exports = new class OrderController extends Controller {
                 }
             })
 
+            let lng = Math.round(req.body.lng * 1000000) / 1000000;
+            let lat = Math.round(req.body.lat * 1000000) / 1000000;
             // add order
             let params = {
                 products: products,
@@ -78,7 +80,7 @@ module.exports = new class OrderController extends Controller {
                 deliveryCost: req.body.deliveryCost,
                 status: status._id,
                 description: req.body.description || "",
-                GPS: { type: "Point", coordinates: [ req.body.lng, req.body.lat]}
+                GPS: { type: "Point", coordinates: [ lng, lat]}
             }
 
             let order = await this.model.Order.create(params)

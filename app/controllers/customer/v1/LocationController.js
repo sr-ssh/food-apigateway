@@ -17,7 +17,6 @@ module.exports = new class LocationController extends Controller {
             let location = await this.model.Customer.findOne(filter, { locations: 1, _id: 0 })
 
             let data = location.locations
-            data.shift()
             if(!data.length)  
                 data = {}
             
