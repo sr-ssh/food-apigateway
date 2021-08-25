@@ -23,7 +23,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *          description: "سیر . خمیر تازه . اویشن",
  *          type: {name: 'pizza'},
  *          img: 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',
- *          size: [...{ name: "medium", price: 50 }]
+ *          size: [...{ name: "medium", price: 50000, discount: 10000 }]
  *        }]
  * }
  */
@@ -68,7 +68,8 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *          name: "نان سیر"
  *          quantity: 2,
  *          price: "30000",
- *          size: "meduim"
+ *          size: "meduim",
+ *          discount: "10000"
  *      }],
  *      address: "کلاهدوز 4",
  *      lat: 36.297920,
@@ -129,7 +130,8 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *                  name: "پپرونی",
  *                  size: "medium",
  *                  quantity: 1,
- *                  price: 60
+ *                  price: 60000,
+ *                  disconut: 20000
  *              }]
  *          }]
  *      }
@@ -158,7 +160,8 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *                _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                quantity: 2,
  *                price: "30000",
- *                size: "medium"
+ *                size: "medium",
+ *                discount: "10000"
  *              }],
  *              createdAt: "2021-06-01T06:54:01.691Z",
  *              address: "معلم 43",

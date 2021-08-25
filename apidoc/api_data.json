@@ -57,7 +57,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        name: \"نان سیر\"\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\"\n    }],\n    address: \"کلاهدوز 4\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        name: \"نان سیر\"\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\",\n        discount: \"10000\"\n    }],\n    address: \"کلاهدوز 4\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
           "type": "json"
         }
       ]
@@ -335,7 +335,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n           },\n           tax: 12750\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\",\n               discount: \"10000\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n           },\n           tax: 12750\n     }\n}",
           "type": "json"
         }
       ]
@@ -355,7 +355,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n         _id: '60fd0aacca33dd0374b55650',\n         name: \"نان سیر\",\n         description: \"سیر . خمیر تازه . اویشن\",\n         type: {name: 'pizza'},\n         img: 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',\n         size: [...{ name: \"medium\", price: 50 }]\n       }]\n}",
+          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n         _id: '60fd0aacca33dd0374b55650',\n         name: \"نان سیر\",\n         description: \"سیر . خمیر تازه . اویشن\",\n         type: {name: 'pizza'},\n         img: 'https://www.dropbox.com/s/cd9h8ooxo75w5ie/picc-pizza.png?dl=0',\n         size: [...{ name: \"medium\", price: 50000, discount: 10000 }]\n       }]\n}",
           "type": "json"
         }
       ]
@@ -395,7 +395,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            finishDate: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: \"لغو شده\"},\n            products: [...{\n                 name: \"پپرونی\",\n                 size: \"medium\",\n                 quantity: 1,\n                 price: 60\n             }]\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            finishDate: \"2021-06-01T06:54:01.691Z\",\n            status: { status: 1, name: \"لغو شده\"},\n            products: [...{\n                 name: \"پپرونی\",\n                 size: \"medium\",\n                 quantity: 1,\n                 price: 60000,\n                 disconut: 20000\n             }]\n         }]\n     }\n}",
           "type": "json"
         }
       ]
