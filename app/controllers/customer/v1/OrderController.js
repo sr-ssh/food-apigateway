@@ -38,6 +38,7 @@ module.exports = new class OrderController extends Controller {
             req.checkBody('products.*.name', 'please enter product id').notEmpty().isString();
             req.checkBody('products.*.quantity', 'please enter product quantity').notEmpty().isInt({min:1});
             req.checkBody('products.*.price', 'please enter product price').notEmpty().isInt({min: 0});
+            req.checkBody('products.*.discount', 'please enter product discount').notEmpty().isInt({min: 0});
             req.checkBody('products.*.size', 'please enter product size').notEmpty().isString();
             req.checkBody('address', 'please enter address').notEmpty().isString();
             req.checkBody('lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
@@ -60,13 +61,14 @@ module.exports = new class OrderController extends Controller {
             //get status id
             let filter = {active: true, name: config.activeOrders}
             let status = await this.model.OrderStatusBar.findOne(filter, '_id')
-
+            
             let products = req.body.products.map(product =>  { 
                 return {
                     _id: product._id,
                     quantity: product.quantity,
                     price: product.price,
-                    size:product.size
+                    size:product.size,
+                    discount: product.discount
                 }
             })
 
