@@ -22,9 +22,9 @@ module.exports = new class PayController extends Controller {
                 return res.json({ success: true, message: "سفارش موجود نیست", data: { status: false}});
 
             // caculate total
-            let tax = order.products.map(product => product.price * product.quantity * config.tax)
+            let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
             tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
-            let total = order.products.map(product => product.price * product.quantity);
+            let total = order.products.map(product => (product.price - product.discount) * product.quantity);
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
             total += (order.deliveryCost + tax);
             
@@ -140,15 +140,14 @@ module.exports = new class PayController extends Controller {
             }
 
             // caculate total
-            let tax = order.products.map(product => product.price * product.quantity * config.tax)
+            let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
             tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
-            let total = order.products.map(product => product.price * product.quantity);
+            let total = order.products.map(product => (product.price - product.discount) * product.quantity);
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
             total += (order.deliveryCost + tax);
 
             if(order.payAmount < total){
                 //get back the charge
-                console.log(order.payAmount, total, total - order.payAmount )
 
                 let params = {
                     orderId: req.body.orderId,
