@@ -140,11 +140,11 @@ module.exports = new class HomeController extends Controller {
             
             if(order.paid){
                 // caculate total 
-                let total = order.products.map(product => product.price * product.quantity)
+                let total = order.products.map(product => (product.price - product.discount) * product.quantity)
                 total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 // caculate tax 
-                let tax = order.products.map(product => product.price * product.quantity * config.tax)
+                let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
                 tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 total += (order.deliveryCost + tax);

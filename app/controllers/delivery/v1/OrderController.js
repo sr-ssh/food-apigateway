@@ -109,8 +109,18 @@ module.exports = new class OrderController extends Controller {
             orders = orders.map(order => {
                 if(!order.description)
                     order.description = ""
+                order.products = order.products.map(product => {
+                    return{
+                        name: product._id.name,
+                        size: product.size,
+                        quantity: product.quantity,
+                        price: product.price - product.discount,
+                        discount: !!product.discount
+                    }
+                });
                 return order
             })
+
             
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }
@@ -191,6 +201,19 @@ module.exports = new class OrderController extends Controller {
                 order.status.status === config.finishedOrder ||
                 order.status.status === config.canceledOrder 
                 )
+
+            orders = orders.map(order => {
+                order.products = order.products.map(product => {
+                    return{
+                        name: product._id.name,
+                        size: product.size,
+                        quantity: product.quantity,
+                        price: product.price - product.discount,
+                        discount: !!product.discount
+                    }
+                });
+                return order
+            })
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }

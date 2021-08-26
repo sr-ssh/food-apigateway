@@ -76,7 +76,8 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *                  _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                  price: "60000",
  *                  quantity: 1,
- *                  size: 'medium'
+ *                  size: 'medium',
+ *                  discount: false
  *              }],
  *              desciption: "ساعت 1 تحویل داده شود"
  *          }]
@@ -132,7 +133,8 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *                  _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
  *                  price: "60000",
  *                  quantity: 1,
- *                  size: 'medium'
+ *                  size: 'medium',
+ *                  discount : true
  *              }]
  *          }]
  *      }
