@@ -69,7 +69,7 @@ module.exports = new class HomeController extends Controller {
             filter = { userId: order.deliveryId}
             let delivery = await this.model.Location.findOne(filter, { userId: 0 }).sort({createdAt:-1}).limit(1)
 
-            let deliveryLocation = {_id: "", lat: "", lng: "", date: ""}
+            let deliveryLocation = {_id: "", lat: 0, lng: 0, date: ""}
             if(delivery){
                 deliveryLocation._id = delivery._id
                 deliveryLocation.lat = delivery.geo[1]
