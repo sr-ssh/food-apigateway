@@ -87,6 +87,22 @@ module.exports = new class HomeController extends Controller {
                 }
             });
 
+            let params = {
+                id: order._id,
+                customer: order.customer,
+                products: order.products,
+                createdAt: order.createdAt, 
+                address: order.address,  
+                status: order.status, 
+                deliveryCost: order.deliveryCost, 
+                deliveryId: order.deliveryId
+            }
+
+            if(!params.deliveryId)
+                params.deliveryId = ""
+            if(!params.description)
+                params.description = ""    
+
             // caculate tax 
             let tax = order.products.map(product => product.price * product.quantity * config.tax)
             tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
@@ -97,7 +113,7 @@ module.exports = new class HomeController extends Controller {
             
             
 
-            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, deliveryLocation, tax, total}})
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order: params, deliveryLocation, tax, total}})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
