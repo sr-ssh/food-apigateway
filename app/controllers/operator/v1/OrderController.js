@@ -88,7 +88,16 @@ module.exports = new class HomeController extends Controller {
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
             total += (order.deliveryCost + tax);
             
-           
+            order.products = order.products.map(product => {
+                return{
+                    name: product._id.name,
+                    size: product.size,
+                    quantity: product.quantity,
+                    price: product.price - product.discount,
+                    discount: !!product.discount
+                }
+            });
+
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, deliveryLocation, tax, total}})
         }
         catch (err) {
