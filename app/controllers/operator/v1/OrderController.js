@@ -16,7 +16,7 @@ module.exports = new class HomeController extends Controller {
 
             let filter = { active: true }
 
-            let orders = await this.model.Order.find(filter, { status: 1, createdAt: 1, address: 1, paid: 1}).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, status: 1, _id: 0}) 
+            let orders = await this.model.Order.find(filter, { status: 1, createdAt: 1, address: 1, paid: 1}).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, status: 1, _id: 0}).sort({createdAt: -1})
 
             if(req.params.type === "family"){
 
