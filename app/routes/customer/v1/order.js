@@ -91,19 +91,21 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  * @api {get} /api/customer/v1/order get orders
  * @apiVersion 1.0.0
  * @apiName getInLineOrders
- * @apiDescription get order products
+ * @apiDescription get order products.'cancelTime' unit is minute.
  * @apiGroup customer
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
  *      message: "محصولات سفارش با موفقیت ارسال شد",
- *      data: [...{
- *            id: "60b72a70e353f0385c2fe5af",
- *            createdAt: "2021-06-01T06:54:01.691Z",
- *            paid: true,
- *            status: { name: "آماده", status: 2},
- *            total: 60400
- *          }]
+ *      data: {
+ *            orders: [...{
+ *              id: "60b72a70e353f0385c2fe5af",
+ *              createdAt: "2021-06-01T06:54:01.691Z",
+ *              paid: true,
+ *              status: { name: "آماده", status: 2},
+ *              total: 60400
+ *            }],
+ *           cancelTime: 1 
  *      }
  * }
  */
@@ -168,7 +170,8 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *              status: { name: "در صف انتظار"},
  *              deliveryCost: 5,
  *            },
- *            tax: 12750
+ *            tax: 12750,
+ *            discounts: 20000
  *      }
  * }
  */
