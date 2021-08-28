@@ -185,7 +185,10 @@ module.exports = new class OrderController extends Controller {
             let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
             tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, tax}})
+            filter = {active:true}
+            let cooktime = await this.model.Settings.findOne(filter,'order.cookTime')
+
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order,cooktime}})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

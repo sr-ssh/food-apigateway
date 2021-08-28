@@ -28,12 +28,15 @@ let User = new Schema({
         }
     },
 
-    setting: { type: Object } // {
-    // order: {
-    //     preSms: { text: config.addOrderSms, status: false },
-    //     postDeliverySms: { text: "" , status: false },
-    //     postCustomerSms: { text: config.deliveryAcknowledgeSms , status: false }
-    // }
+    setting: { type: Object,default:{
+        order: {
+            preSms: { text: config.addOrderSms, status: false },
+            postDeliverySms: { text: "" , status: false },
+            postCustomerSms: { text: config.deliveryAcknowledgeSms , status: false }
+        }
+    } 
+}
+    
 });
 
 User.pre('validate', function (next) {

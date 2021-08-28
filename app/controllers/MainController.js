@@ -64,7 +64,7 @@ module.exports = class MainController {
         });
 
         api.Send({
-            message: message,
+            message,
             sender: appConfig.sms.KavenegarApi.sender,
             receptor: phoneNumber
         }, (response, status) => {
