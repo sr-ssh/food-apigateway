@@ -276,13 +276,13 @@
     "title": "get orders",
     "version": "1.0.0",
     "name": "getInLineOrders",
-    "description": "<p>get order products</p>",
+    "description": "<p>get order products.'cancelTime' unit is minute.</p>",
     "group": "customer",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: [...{\n           id: \"60b72a70e353f0385c2fe5af\",\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           paid: true,\n           status: { name: \"آماده\", status: 2},\n           total: 60400\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: {\n           orders: [...{\n             id: \"60b72a70e353f0385c2fe5af\",\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             paid: true,\n             status: { name: \"آماده\", status: 2},\n             total: 60400\n           }],\n          cancelTime: 1 \n     }\n}",
           "type": "json"
         }
       ]
@@ -335,7 +335,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\",\n               discount: \"10000\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n           },\n           tax: 12750\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\",\n               discount: \"10000\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n           },\n           tax: 12750,\n           discounts: 20000\n     }\n}",
           "type": "json"
         }
       ]
@@ -831,7 +831,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium',\n                 discount: false\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\"\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium',\n                 discount: false\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\",\n             discounts: 20000\n         }]\n     }\n}",
           "type": "json"
         }
       ]
@@ -1815,7 +1815,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{  success: true, message: \"سفارشات با موفقیت ارسال شد\",data: { \n     order: { id: \"60b72a70e353f0385c2fe5af\", customer: { family: \"مصطفایی\", mobile: \"09152631225\", },\n     products: [...{ _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},  quantity: 2,  price: \"30000\",  size: \"medium\", discount: true  }],\n     createdAt: \"2021-06-01T06:54:01.691Z\", address: \"معلم 43\",  status: { name: \"در صف انتظار\"}, deliveryCost: 5, deliveryId: \"610545a7a5365707ccd6a308\"  },\n     deliveryLocation: {_id: '610668be772e0f31883fb280', lat: 38.066666, lng: 46.299999, date: '2021-08-01T09:26:22.320Z'},tax: 12750,  paid: true  }  }",
+          "content": "{  \n    success: true, \n    message: \"سفارشات با موفقیت ارسال شد\",\n    data: { \n      order: { \n            id: \"60b72a70e353f0385c2fe5af\", \n            customer: { family: \"مصطفایی\", mobile: \"09152631225\", },\n          products: [...{ \n                name: \"پپرونی\",  \n                quantity: 2,  \n                price: \"30000\",  \n                size: \"medium\", \n                discount: true  \n            }],\n          createdAt: \"2021-06-01T06:54:01.691Z\", \n            address: \"معلم 43\",  \n            status: { name: \"در صف انتظار\"}, \n            deliveryCost: 5000, \n            deliveryId: \"610545a7a5365707ccd6a308\",\n            paid: true  \n        },\n     deliveryLocation: {\n            _id: \"610668be772e0f31883fb280\", \n            lat: 38.066666, \n            lng: 46.299999, \n            date: \"2021-08-01T09:26:22.320Z\"\n        },\n        tax: 12750, \n        total: 72750,\n        discounts: 20000\n    }  \n}",
           "type": "json"
         }
       ]

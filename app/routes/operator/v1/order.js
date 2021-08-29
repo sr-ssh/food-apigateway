@@ -57,11 +57,38 @@ router.get('/:type/:value', OrderController.getOrdersByFilter.bind(OrderControll
 * @apiGroup operator
 * @apiParam {String} orderId order id
 * @apiSuccessExample {json} Success-Response:
-* {  success: true, message: "سفارشات با موفقیت ارسال شد",data: { 
-*      order: { id: "60b72a70e353f0385c2fe5af", customer: { family: "مصطفایی", mobile: "09152631225", },
-*      products: [...{ name: "پپرونی",  quantity: 2,  price: "30000",  size: "medium", discount: true  }],
-*      createdAt: "2021-06-01T06:54:01.691Z", address: "معلم 43",  status: { name: "در صف انتظار"}, deliveryCost: 5, deliveryId: "610545a7a5365707ccd6a308"  },
-*      deliveryLocation: {_id: '610668be772e0f31883fb280', lat: 38.066666, lng: 46.299999, date: '2021-08-01T09:26:22.320Z'},tax: 12750,  paid: true  }  }
+* {  
+    success: true, 
+    message: "سفارشات با موفقیت ارسال شد",
+    data: { 
+*       order: { 
+            id: "60b72a70e353f0385c2fe5af", 
+            customer: { family: "مصطفایی", mobile: "09152631225", },
+*           products: [...{ 
+                name: "پپرونی",  
+                quantity: 2,  
+                price: "30000",  
+                size: "medium", 
+                discount: true  
+            }],
+*           createdAt: "2021-06-01T06:54:01.691Z", 
+            address: "معلم 43",  
+            status: { name: "در صف انتظار"}, 
+            deliveryCost: 5000, 
+            deliveryId: "610545a7a5365707ccd6a308",
+            paid: true  
+        },
+*      deliveryLocation: {
+            _id: "610668be772e0f31883fb280", 
+            lat: 38.066666, 
+            lng: 46.299999, 
+            date: "2021-08-01T09:26:22.320Z"
+        },
+        tax: 12750, 
+        total: 72750,
+        discounts: 20000
+    }  
+}
 */
 router.get('/:orderId', OrderController.getOrder.bind(OrderController));
 
