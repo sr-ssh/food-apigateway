@@ -77,6 +77,11 @@ module.exports = new class HomeController extends Controller {
                 deliveryLocation.date = delivery.saveDate
             }
                 
+            //calculate dicounts
+            let discounts = order.products.map(product => product.discount * product.quantity)
+            discounts = discounts.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            
             order.products = order.products.map(product => {
                 return{
                     name: product._id.name,
@@ -114,7 +119,7 @@ module.exports = new class HomeController extends Controller {
             
             
 
-            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order: params, deliveryLocation, tax, total}})
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order: params, deliveryLocation, tax, total, discounts}})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
