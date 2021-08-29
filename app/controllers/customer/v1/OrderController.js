@@ -141,10 +141,13 @@ module.exports = new class OrderController extends Controller {
                 total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 // caculate tax 
-                let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
-                tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+                // let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
+                // tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-                total += (order.deliveryCost + tax);
+                // add tax
+                // total += (order.deliveryCost + tax);
+                total += order.deliveryCost;
+
                 return {
                     _id: order._id,
                     paid: order.paid,
@@ -250,10 +253,12 @@ module.exports = new class OrderController extends Controller {
                 total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 // caculate tax 
-                let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
-                tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+                // let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
+                // tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-                total += (order.deliveryCost + tax);
+                // add tax
+                // total += (order.deliveryCost + tax);
+                total += order.deliveryCost;
 
                 //make customerFinance collection
                 let params = {
@@ -338,7 +343,10 @@ module.exports = new class OrderController extends Controller {
                 let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
                 tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-                total += (order.deliveryCost + tax);
+                // add tax
+                // total += (order.deliveryCost + tax);
+                total += order.deliveryCost;
+
                 return {
                     order,
                     total,

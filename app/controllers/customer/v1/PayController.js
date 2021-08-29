@@ -4,7 +4,9 @@ const TAG = 'v1_Pay';
 const ZarinpalCheckout = require('zarinpal-checkout');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
-const zarinpal = ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
+const zarinpal = ZarinpalCheckout.create('0ad3b01d-bbd3-40f3-baa9-1387f32e1a8d', true);
+
+//xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 module.exports = new class PayController extends Controller {
 
@@ -22,11 +24,13 @@ module.exports = new class PayController extends Controller {
                 return res.json({ success: true, message: "سفارش موجود نیست", data: { status: false}});
 
             // caculate total
-            let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
-            tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+            // let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
+            // tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
             let total = order.products.map(product => (product.price - product.discount) * product.quantity);
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
-            total += (order.deliveryCost + tax);
+            // add tax
+            // total += (order.deliveryCost + tax);
+            total += order.deliveryCost;
             
             //calculate customer charge
             let charge = await this.model.CustomerFinance.aggregate([
@@ -140,11 +144,13 @@ module.exports = new class PayController extends Controller {
             }
 
             // caculate total
-            let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
-            tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+            // let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
+            // tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
             let total = order.products.map(product => (product.price - product.discount) * product.quantity);
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
-            total += (order.deliveryCost + tax);
+            // add tax
+            // total += (order.deliveryCost + tax);
+            total += order.deliveryCost;
 
             if(order.payAmount < total){
                 //get back the charge

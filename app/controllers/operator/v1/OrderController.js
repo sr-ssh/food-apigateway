@@ -115,8 +115,9 @@ module.exports = new class HomeController extends Controller {
 
             let total = order.products.map(product => product.price * product.quantity);
             total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
-            total += (order.deliveryCost + tax);
-            
+            //add tax
+            // total += (order.deliveryCost + tax);
+            total += order.deliveryCost;
             
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order: params, deliveryLocation, tax, total, discounts}})
@@ -166,10 +167,12 @@ module.exports = new class HomeController extends Controller {
                 total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 // caculate tax 
-                let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
-                tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+                // let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
+                // tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-                total += (order.deliveryCost + tax);
+                //add tax
+                // total += (order.deliveryCost + tax);
+                total += order.deliveryCost;
 
                 //make customerFinance collection
                 let params = {
