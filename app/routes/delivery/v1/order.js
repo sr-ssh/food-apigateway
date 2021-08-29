@@ -73,13 +73,14 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *                  family: "زهرا رضوی"
  *              },
  *             products: [...{
- *                  _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
+ *                  name: "پپرونی",
  *                  price: "60000",
  *                  quantity: 1,
  *                  size: 'medium',
  *                  discount: false
  *              }],
- *              desciption: "ساعت 1 تحویل داده شود"
+ *              desciption: "ساعت 1 تحویل داده شود",
+ *              discounts: 20000
  *          }]
  *      }
  * }

@@ -103,12 +103,18 @@ module.exports = new class OrderController extends Controller {
                 .populate('customer', { _id: 0, family: 1, mobile: 1})
                 .populate('status', {status: 1, name: 1, _id: 0})
                 .sort({createdAt:-1})
+                .lean()
 
             orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder )
 
             orders = orders.map(order => {
                 if(!order.description)
                     order.description = ""
+
+                //calculate dicounts
+                let discounts = order.products.map(product => product.discount * product.quantity)
+                order.discounts = discounts.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
                 order.products = order.products.map(product => {
                     return{
                         name: product._id.name,
@@ -118,8 +124,11 @@ module.exports = new class OrderController extends Controller {
                         discount: !!product.discount
                     }
                 });
+
                 return order
             })
+
+            
 
             
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })

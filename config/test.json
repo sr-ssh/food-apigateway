@@ -185,7 +185,7 @@
         },
         "deliveryMan": {
             "mobile": "09152226363",
-            "code": "8940",
+            "code": "2391",
             "scope": "deliveryMan"
         },
         "deliveryAcceptOrder": {
@@ -220,7 +220,7 @@
         },
         "operatorLogin": {
             "mobile": "09152226262",
-            "code": "2618",
+            "code": "2391",
             "scope": "operator"
         },
         "getOrdersOperator": {
