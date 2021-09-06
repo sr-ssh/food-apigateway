@@ -102,14 +102,12 @@ module.exports = new class OrderController extends Controller {
                 tax: tax
             }
 
+            res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد', data: data})
 
             //send smd
             let settings = await this.model.Settings.findOne({active: true})
             if(settings.order.addOrderSms.status)
                 this.sendSms(req.decodedData.user_mobile, settings.order.addOrderSms.text + '\n' + settings.companyName)
-
-            
-            return res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد', data: data})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
