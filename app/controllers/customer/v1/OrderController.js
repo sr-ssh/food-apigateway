@@ -130,13 +130,17 @@ module.exports = new class OrderController extends Controller {
 
             let orders = await this.model.Order
                 .find(filter, { status: 1, createdAt: 1, paid: 1, products: 1, deliveryCost: 1 })
-                .populate('status', { status: 1, name: 1, _id: 0}) 
+                .populate('status', { status: 1, name: 1, _id: 0})
+                .lean()
 
             orders = orders.filter(order => 
                 order.status.status !== config.finishedOrder &&
                 order.status.status !== config.canceledOrder
                 )
             
+            filter = {active:true}
+            let settings = await this.model.Settings.findOne(filter)
+
             // caculate total
             orders = orders.map(order => {
                 let total = order.products.map(product => (product.price - product.discount) * product.quantity);
@@ -150,6 +154,14 @@ module.exports = new class OrderController extends Controller {
                 // total += (order.deliveryCost + tax);
                 total += order.deliveryCost;
 
+                //todo
+                //add در حال پرداخت status
+                if(settings.order.isPayNecessary &&
+                    (order.paid === false) &&
+                    (order.status.status !== config.canceledOrder)){
+                    order.status = {name: config.inPayOrders, status: config.inPayOrdersStatus}
+                }
+
                 return {
                     _id: order._id,
                     paid: order.paid,
@@ -158,10 +170,6 @@ module.exports = new class OrderController extends Controller {
                     total: total
                 }
             })
-            
-            filter = {active:true}
-            let settings = await this.model.Settings.findOne(filter,'order.confirmTime')
-
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {orders, cancelTime: settings.order.confirmTime} })
         }

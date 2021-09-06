@@ -1,7 +1,7 @@
 {
     "appPort": 3010,
     "mongo": {
-        "host": "mongodb://crm-x.ir:2714/food"
+        "host": "mongodb://172.16.2.215/food"
     },
     "sms": {
         "negin": {
