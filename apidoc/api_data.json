@@ -335,7 +335,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\",\n               discount: \"10000\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n           },\n           tax: 12750,\n           discounts: 20000\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\",\n               discount: \"10000\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n             paid: true\n           },\n           tax: 12750,\n           discounts: 20000\n     }\n}",
           "type": "json"
         }
       ]

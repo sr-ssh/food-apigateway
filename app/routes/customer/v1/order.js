@@ -169,6 +169,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *              address: "معلم 43",
  *              status: { name: "در صف انتظار"},
  *              deliveryCost: 5,
+ *              paid: true
  *            },
  *            tax: 12750,
  *            discounts: 20000
