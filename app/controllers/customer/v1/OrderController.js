@@ -185,9 +185,9 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, _id: req.params.orderId, customer: req.decodedData.user_id }
 
             let order = await this.model.Order
-                .findOne(filter, { status: 1, createdAt: 1, address: 1, description: 1, deliveryCost: 1, products: 1})
+                .findOne(filter, { status: 1, createdAt: 1, address: 1, description: 1, deliveryCost: 1, products: 1, paid: 1})
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
-                .populate('status', {name: 1, _id: 0}) 
+                .populate('status', {name: 1, _id: 0}).lean()
 
             // caculate tax 
             let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
@@ -196,6 +196,15 @@ module.exports = new class OrderController extends Controller {
             //calculate dicounts
             let discounts = order.products.map(product => product.discount * product.quantity)
             discounts = discounts.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            //todo
+            //add در حال پرداخت status
+            let settings = await this.model.Settings.findOne({active: true}, 'order.isPayNecessary')
+            if(settings.order.isPayNecessary &&
+                (order.paid === false) &&
+                (order.status.status !== config.canceledOrder)){
+                    order.status = {name: config.inPayOrders}
+            }
 
             
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, discounts, tax}})
