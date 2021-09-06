@@ -130,6 +130,15 @@ module.exports = new class HomeController extends Controller {
             // total += (order.deliveryCost + tax);
             total += order.deliveryCost;
             
+            //todo
+            //add در حال پرداخت status
+            let settings = await this.model.Settings.findOne({active: true}, 'order.isPayNecessary')
+            if(settings.order.isPayNecessary &&
+                (params.paid === false) &&
+                (params.status.status !== config.canceledOrder)){
+                    params.status = {name: config.inPayOrders, status: config.inPayOrdersStatus}
+            }
+
 
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order: params, deliveryLocation, tax, total, discounts}})
         }
