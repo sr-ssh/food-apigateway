@@ -59,7 +59,7 @@ module.exports = new class OrderController extends Controller {
 
 
             filter = { active : true, _id: req.body.orderId }
-            let order = await this.model.Order.findOne(filter)
+            let order = await this.model.Order.findOne(filter).populate('customer')
 
             if(!order)
                 return res.json({ success : true, message : 'سفارش موجود نیست', data: { status: false }})
