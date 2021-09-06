@@ -16,7 +16,7 @@ module.exports = new class HomeController extends Controller {
 
             let filter = { active: true }
 
-            let orders = await this.model.Order.find(filter, { status: 1, createdAt: 1, address: 1, paid: 1}).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, status: 1, _id: 0}).sort({createdAt: -1})
+            let orders = await this.model.Order.find(filter, { status: 1, createdAt: 1, address: 1, paid: 1}).populate('customer', { family: 1, mobile: 1, _id: 0 }).populate('status', {name: 1, status: 1, _id: 0}).sort({createdAt: -1}).lean()
 
             if(req.params.type === "family"){
 
@@ -38,6 +38,17 @@ module.exports = new class HomeController extends Controller {
                 })    
             }
 
+            //todo
+            //add در حال پرداخت status
+            let settings = await this.model.Settings.findOne({active: true}, 'order.isPayNecessary')
+            orders = orders.map(order => {
+                if(settings.order.isPayNecessary &&
+                    (order.paid === false) &&
+                    (order.status.status !== config.canceledOrder)){
+                    order.status = {name: config.inPayOrders, status: config.inPayOrdersStatus}
+                }
+                return order;
+            })
             
             return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: orders })
         }

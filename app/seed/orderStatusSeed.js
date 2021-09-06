@@ -53,6 +53,11 @@ var data = [
           'name': 'تمام شده',
           'status': 4,
           'description': 'orders that have delivered to customer'
+        },
+        {
+          'name': 'در انتظار پرداخت',
+          'status': 6,
+          'description': 'سفارشاتی که منتظر پرداختند تا به مرحله بعد برسند'
         }
       ]
     }
