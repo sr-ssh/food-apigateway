@@ -90,7 +90,7 @@ module.exports = new class PayController extends Controller {
             //payment 
             let zarinRes = await zarinpal.PaymentRequest({
                 Amount: amount, // In Tomans
-                CallbackURL: 'http://www.happypizza.ir:3010/api/customer/v1/pay',
+                CallbackURL: config.payCallBackUrl,
                 Description: 'از خرید شما ممنونیم'
             })
             if(zarinRes.status != 100)
@@ -139,8 +139,7 @@ module.exports = new class PayController extends Controller {
                 let settings = await this.model.Settings.findOne({active: true})
                 if(settings.order.successfullPaymentSms.status)
                     this.sendSms(order.customer.mobile, settings.order.successfullPaymentSms.text + '\n' + settings.companyName)
-                return res.redirect('http://www.happypizza.ir:3012/pay/success')
-                // return res.json({ success: true, message: "پرداخت با موفقیت انجام شد", data: { status: true } });
+                return res.redirect(config.payRedirectSuccess)
             }
 
             // caculate total
@@ -163,8 +162,7 @@ module.exports = new class PayController extends Controller {
                 }
                 await this.model.CustomerFinance.create(params)
             }
-            return res.redirect('http://www.happypizza.ir:3012/pay/fail')
-            // return res.json({ success: true, message: "پرداخت انجام نشد", data: { status: false } });
+            return res.redirect(config.payRedirectFail)
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
