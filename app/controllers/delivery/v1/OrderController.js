@@ -152,7 +152,7 @@ module.exports = new class OrderController extends Controller {
             if (this.showValidationErrors(req, res)) return;
 
             let filter = { active : true, _id: req.body.orderId, deliveryId: req.decodedData.user_id }
-            let order = await this.model.Order.findOne(filter)
+            let order = await this.model.Order.findOne(filter).populate('customer')
 
             if(!order)
                 return res.json({ success : false, message : 'سفارش موجود نیست', data: { status: false }})
