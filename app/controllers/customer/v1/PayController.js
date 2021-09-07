@@ -4,9 +4,8 @@ const TAG = 'v1_Pay';
 const ZarinpalCheckout = require('zarinpal-checkout');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
-const zarinpal = ZarinpalCheckout.create('0ad3b01d-bbd3-40f3-baa9-1387f32e1a8d', true);
+const zarinpal = ZarinpalCheckout.create('0ad3b01d-bbd3-40f3-baa9-1387f32e1a8d', false);//if true it brings sandbox
 
-//xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 module.exports = new class PayController extends Controller {
 
