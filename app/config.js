@@ -53,7 +53,7 @@ module.exports = {
     customerOrderIntervalUnit: "m",
     customerMaxOrderInterval: 40,
     deliveryNeshanAPIKey: "service.5Unf1AsEuC9O4ftR0gLvFXZ5nDgUSg5sUghEd9Xu",
-    payCallBackUrl: "http://localhost:3010/api/customer/v1/pay",
+    payCallBackUrl: "http://www.happypizza.ir:3010/api/customer/v1/pay",
     payRedirectSuccess: "http://www.happypizza.ir/pay/success",
     payRedirectFail: "http://www.happypizza.ir/pay/fail",
     publicRoute: [
