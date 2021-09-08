@@ -117,7 +117,7 @@ module.exports = new class PayController extends Controller {
 
     async validatePay(req, res) {
         try {
-            req.checkQuery('Authority', 'please enter Authority').notEmpty().isNumeric();
+            req.checkQuery('Authority', 'please enter Authority').notEmpty();
             req.checkQuery('Status', 'please enter Status').notEmpty().isIn(['OK', 'NOK']);
             if (this.showValidationErrors(req, res)) return;
 
