@@ -110,14 +110,12 @@ module.exports = new class LocationController extends Controller {
             req.checkBody('newLoc.lng', 'please enter lng').notEmpty().isFloat({ min: -180, max: 180});
             if (this.showValidationErrors(req, res)) return;
 
-            let result = await this.model.Customer.find( 
-                { _id : req.decodedData.user_id , "locations.address" : req.body.oldLoc.address, 'locations.GPS.coordinates': [req.body.oldLoc.lng, req.body.oldLoc.lat] } );
+            let lng = Math.round(req.body.newLoc.lng * 1000000) / 1000000;
+            let lat = Math.round(req.body.newLoc.lat * 1000000) / 1000000;
 
-            let a = {'locations.GPS.coordinates': [req.body.oldLoc.lng,req.body.oldLoc.lat] }
-
-            result = await this.model.Customer.update( 
+            await this.model.Customer.update( 
                 { _id : req.decodedData.user_id , "locations.address" : req.body.oldLoc.address, 'locations.GPS.coordinates': [req.body.oldLoc.lng, req.body.oldLoc.lat] } , 
-                { 'locations.$.address': req.body.newLoc.address, 'locations.$.GPS.coordinates': [req.body.newLoc.lng, req.body.newLoc.lat] } , 
+                { 'locations.$.address': req.body.newLoc.address, 'locations.$.GPS.coordinates': [lng, lat] } , 
                 { safe: true, multi:true });
 
             return res.json({ success : true, message : 'آدرس شما با موفقیت ویرایش شد'})
