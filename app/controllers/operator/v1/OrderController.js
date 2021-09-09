@@ -38,14 +38,17 @@ module.exports = new class HomeController extends Controller {
                 })    
             }
 
-            //todo
             //add در حال پرداخت status
+            //get status id
+            filter = {active: true, status: config.inPayOrdersStatus}
+            let status = await this.model.OrderStatusBar.findOne(filter)
+
             let settings = await this.model.Settings.findOne({active: true}, 'order.isPayNecessary')
             orders = orders.map(order => {
                 if(settings.order.isPayNecessary &&
                     (order.paid === false) &&
                     (order.status.status !== config.canceledOrder)){
-                    order.status = {name: config.inPayOrders, status: config.inPayOrdersStatus}
+                    order.status = {name: status.name, status: status.status}
                 }
                 return order;
             })
@@ -130,13 +133,16 @@ module.exports = new class HomeController extends Controller {
             // total += (order.deliveryCost + tax);
             total += order.deliveryCost;
             
-            //todo
             //add در حال پرداخت status
+            //get status id
+            filter = {active: true, status: config.inPayOrdersStatus}
+            let status = await this.model.OrderStatusBar.findOne(filter)
+
             let settings = await this.model.Settings.findOne({active: true}, 'order.isPayNecessary')
             if(settings.order.isPayNecessary &&
                 (params.paid === false) &&
                 (params.status.status !== config.canceledOrder)){
-                    params.status = {name: config.inPayOrders, status: config.inPayOrdersStatus}
+                    params.status = {name: status.name, status: status.status}
             }
 
 

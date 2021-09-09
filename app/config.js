@@ -42,7 +42,6 @@ module.exports = {
     finishedOrder: 4,
     inCookingOrder: 2,
     beforeCookOrder: 5,
-    inPayOrders: "در انتظار پرداخت",
     inPayOrdersStatus: 6,
     cookTimeUnit: "m",
     confirmTimeUnit: "m",

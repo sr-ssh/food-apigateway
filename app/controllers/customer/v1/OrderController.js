@@ -139,6 +139,10 @@ module.exports = new class OrderController extends Controller {
             filter = {active:true}
             let settings = await this.model.Settings.findOne(filter)
 
+            //get status id
+            filter = {active: true, status: config.inPayOrdersStatus}
+            let status = await this.model.OrderStatusBar.findOne(filter)
+
             // caculate total
             orders = orders.map(order => {
                 let total = order.products.map(product => (product.price - product.discount) * product.quantity);
@@ -152,12 +156,11 @@ module.exports = new class OrderController extends Controller {
                 // total += (order.deliveryCost + tax);
                 total += order.deliveryCost;
 
-                //todo
                 //add در حال پرداخت status
                 if(settings.order.isPayNecessary &&
                     (order.paid === false) &&
                     (order.status.status !== config.canceledOrder)){
-                    order.status = {name: config.inPayOrders, status: config.inPayOrdersStatus}
+                    order.status = {name: status.name, status: status.status}
                 }
 
                 return {
@@ -203,13 +206,16 @@ module.exports = new class OrderController extends Controller {
             let discounts = order.products.map(product => product.discount * product.quantity)
             discounts = discounts.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
-            //todo
             //add در حال پرداخت status
+            //get status id
+            filter = {active: true, status: config.inPayOrdersStatus}
+            let status = await this.model.OrderStatusBar.findOne(filter)
+
             let settings = await this.model.Settings.findOne({active: true}, 'order.isPayNecessary')
             if(settings.order.isPayNecessary &&
                 (order.paid === false) &&
                 (order.status.status !== config.canceledOrder)){
-                    order.status = {name: config.inPayOrders}
+                    order.status = {name: status.name}
             }
 
             
