@@ -99,6 +99,32 @@ const OrderController = require(`${userController}/v1/OrderController`)
    router.put('/status',OrderController.editOrderStatus.bind(OrderController));
 
 
+
+/**
+ * @api {post} /api/user/v1/order/status add order status
+ * @apiVersion 1.0.0
+ * @apiName addOrderStatus
+ * @apiDescription add order status
+ * @apiGroup user
+ * @apiParam {int} status order status status
+ * @apiParam {String} name order status name
+ * @apiParam {String} [description] order status description
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "وضعیت سفارش با موفقیت اضافه شد", 
+ *      data: { status: true }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: true,
+ *      message : "وضعیتی با این اطلاعات موجود است", 
+ *      data: {status: false}
+ * }
+ */
+  router.post('/status',OrderController.addOrderStatus.bind(OrderController));
+
+
 /**
  * @api {post} /api/user/v1/order/delivery/sms send delivery sms
  * @apiVersion 1.0.0

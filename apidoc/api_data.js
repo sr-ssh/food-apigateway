@@ -2408,6 +2408,62 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/api/user/v1/order/status",
+    "title": "add order status",
+    "version": "1.0.0",
+    "name": "addOrderStatus",
+    "description": "<p>add order status</p>",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>order status status</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>order status name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>order status description</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"وضعیت سفارش با موفقیت اضافه شد\", \n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message : \"وضعیتی با این اطلاعات موجود است\", \n     data: {status: false}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/order.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "post",
     "url": "/api/user/v1/product/",
     "title": "add product",
     "version": "1.0.0",

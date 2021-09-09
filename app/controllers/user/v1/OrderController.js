@@ -375,6 +375,38 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async addOrderStatus(req, res) {
+        try {
+            req.checkBody('name', 'please set order name').notEmpty().isString()
+            req.checkBody('status', 'please set order status').notEmpty().isInt();
+            req.checkBody('description', 'please set order description').optional().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let prev = await this.model.OrderStatusBar.findOne({$or: [{name: req.body.name}, {status: req.body.status}]})
+            if (prev)
+                return res.json({ success : true, message : 'وضعیتی با این اطلاعات موجود است', data: {status: false}})
+
+            let params = {
+                name: req.body.name,
+                status: req.body.status,
+                description: req.body.description
+            }
+            await this.model.OrderStatusBar.create(params)
+
+            res.json({ success : true, message : 'وضعیت سفارش با موفقیت اضافه شد', data: { status: true } })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('addOrderStatus')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 
 }
 

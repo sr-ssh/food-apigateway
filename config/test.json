@@ -19,7 +19,7 @@
             "password": "1234",
             "family": "شکوه",
             "email": "m.sh@gmail.com",
-            "mobile": "09354400369",
+            "mobile": "09307580142",
             "companyName": "shokouh",
             "companyAddress": "کلاهدوز 4",
             "mobileOrEmail": "09354400369",
@@ -145,6 +145,10 @@
             "type": 2,
             "text": " ",
             "status": true
+        },
+        "addOrderStatus": {
+            "name": "در انتظار پرداخت",
+            "status": 6
         },
         "customer": {
             "mobile": "09307580143",
