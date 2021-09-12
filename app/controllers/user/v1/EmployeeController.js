@@ -10,36 +10,6 @@ module.exports = new class EmployeeController extends Controller {
 
     }
 
-    async addEmployee(req, res) {
-        try {
-            req.checkBody('usernameOrMobile', 'please enter username or mobile').notEmpty();
-            if (this.showValidationErrors(req, res)) return;
-
-            let filter = { $or: [{ username: req.body.usernameOrMobile }, { mobile: req.body.usernameOrMobile }]}
-            let user = await this.model.User.findOne(filter)
-            if(!user)
-                return res.json({ success: false, message: 'کاربر موجود نمی باشد'})
-            
-            filter = {_id: user._id}
-            let update = { employer: req.decodedData.user_id }
-            await this.model.User.findOneAndUpdate(filter, update)
-            update = { $addToSet: { employee: user._id}}
-            await this.model.User.findByIdAndUpdate(req.decodedData.user_id, update)
-
-            return res.json({ success: true, message: 'کاربر با موفقیت اضافه شد'})
-        }
-        catch (err) {
-            let handelError = new this.transforms.ErrorTransform(err)
-                .parent(this.controllerTag)
-                .class(TAG)
-                .method('addEmployee')
-                .inputParams(req.body)
-                .call();
-
-            if (!res.headersSent) return res.status(500).json(handelError);
-        }
-    }
-
     
     async changeEmployeePermission(req, res) {
         try {
@@ -56,13 +26,7 @@ module.exports = new class EmployeeController extends Controller {
             req.checkBody('permissions.getDiscounts', 'please enter getDiscounts status').notEmpty().isBoolean();
             if (this.showValidationErrors(req, res)) return;
 
-            let filter = { active: true, _id: req.decodedData.user_id}
-            let employer = await this.model.User.findOne(filter)
-
-            if(!employer.employee.includes(req.body._id))
-                return res.json({ success: false, message: "کاربر وارد شده جزو کامندان شما نمی باشد" })
-
-            filter = { _id: req.body._id }
+            let filter = { _id: req.body._id }
             let employee = await this.model.User.findOne(filter)
 
             if(!employee)
@@ -91,7 +55,7 @@ module.exports = new class EmployeeController extends Controller {
         try {
 
 
-            let filter = { active: true , _id: { $ne: req.decodedData.user_id }}
+            let filter = { active: true , _id: { $ne: req.decodedData.user_id }, hired: true}
             let employees = await this.model.User.find(filter, { family: 1, mobile: 1, permission: 1 })
             
             return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
@@ -166,28 +130,13 @@ module.exports = new class EmployeeController extends Controller {
             req.checkBody('_id', 'please enter employee id').notEmpty().isString();
             if (this.showValidationErrors(req, res)) return;
 
-            let filter = { _id: req.decodedData.user_id}
-            let employer = await this.model.User.findOne(filter)
-
-            if(!employer.employee.includes(req.body._id))
-                return res.json({ success: false, message: "کاربر وارد شده جزو کامندان شما نمی باشد" })
-
-            let newEmplyees = employer.employee.filter(emp => {
-                let a = emp.toString() //"60d822795b250a2550a41ca4"
-                return emp.toString() !==  req.body._id
-            })
-            employer.employee = newEmplyees
-            await employer.save()
-
-
-            filter = { _id: req.body._id }
+            let filter = { _id: req.body._id }
             let employee = await this.model.User.findOne(filter)
 
             if(!employee)
                 return res.json({ success: false, message: "کاربر وارد شده موجود نمی باشد" })
 
-            //employee.active = false
-            employee.employer = employee._id
+            employee.hired = false
             employee.permission = [];
             for(let i = 0; i< config.permissionCount; i++) {
                 employee.permission.push({ no: i + 1, status: true })
@@ -212,39 +161,10 @@ module.exports = new class EmployeeController extends Controller {
     async getApplications(req, res) {
         try {
 
-            let filter = { active: true, employer: req.decodedData.user_employer, status: 1 }
-            let applications = await this.model.Application.find(filter)
+            let filter = { active: true, status: 1 }
+            let applications = await this.model.Application.find(filter, {__v: 0}).populate('employee', {family: 1, _id: 1, mobile: 1}).lean()
 
-            let params = [];
-            for (let index = 0; index < applications.length; index++) {
-                let param = {
-                    id: applications[index]._id,
-                    active: applications[index].active,
-                    status: applications[index].status,
-                    createdAt: applications[index].createdAt,
-                    updatedAt: applications[index].updatedAt,
-                    employee: applications[index].employee,
-                    employer: applications[index].employer
-                }     
-                params.push(param)           
-            }
-
-            let employees = []
-            for (let index = 0; index < applications.length; index++) {
-                employees.push(applications[index].employee)
-            }
-
-            filter = { _id: { $in: employees } }
-            employees = await this.model.User.find(filter, { _id: 1, family: 1, mobile: 1 })
-
-            let employeeInfo;
-            for (let index = 0; index < applications.length; index++) {
-                employeeInfo = employees.find(user => user._id.toString() == applications[index].employee)
-                params[index].employee = employeeInfo;
-            }
-
-
-            return res.json({ success: true, message: "ارسال درخواست ها با موفقیت انجام شد", data: params})
+            return res.json({ success: true, message: "ارسال درخواست ها با موفقیت انجام شد", data: applications})
             
         }
         catch (err) {
@@ -344,27 +264,13 @@ module.exports = new class EmployeeController extends Controller {
      
     async editApplication(req, res) {
         try {
-
+            console.log(req.body)
             req.checkBody('applicationId', 'please set application id').notEmpty();
-
-            if(req.decodedData.user_type == config.employer){
-                req.checkBody('status', 'please set application status').notEmpty().isInt({min: 2, max: 3});
-            }
-
-            if(req.decodedData.user_type == config.employee){
-                req.checkBody('status', 'please set application status').notEmpty().isInt({min: 3, max: 3});
-            }
+            req.checkBody('status', 'please set application status').notEmpty().isInt({min: 2, max: 3});
             if (this.showValidationErrors(req, res)) return;
 
             let filter;
-            if(req.decodedData.user_type == config.employee){
                 filter = { active : true, _id: req.body.applicationId }
-            }
-
-            if(req.decodedData.user_type == config.employer){
-                filter = { active : true, _id: req.body.applicationId, employer: req.decodedData.user_employer }
-            }
-            
             let application = await this.model.Application.findOne(filter)
 
             if(!application)
@@ -374,17 +280,15 @@ module.exports = new class EmployeeController extends Controller {
             await application.save()
 
             //if the employer calles this api and hires the emplyee
-            if(req.decodedData.user_type == config.employer && req.body.status === 2){
-                filter = { active: true, _id: application.employee , type: config.employee }
+            if(req.body.status === 2){
+                filter = { active: true, _id: application.employee }
                 let user = await this.model.User.findOne(filter)
                 if(!user)
                     return res.json({ success: false, message: 'کاربر موجود نمی باشد'})
                 
-                filter = {_id: user._id}
-                let update = { employer: req.decodedData.user_id }
-                await this.model.User.findOneAndUpdate(filter, update)
-                update = { $addToSet: { employee: user._id}}
-                await this.model.User.findByIdAndUpdate(req.decodedData.user_id, update)
+                user.hired = true
+                await user.save()
+                
             }
             
             res.json({ success : true, message : 'درخواست با موفقیت ویرایش شد'})

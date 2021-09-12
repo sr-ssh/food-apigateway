@@ -7,6 +7,7 @@ let User = new Schema({
     active: { type: Boolean, default: true },
     status: { type: Boolean, default: 0 },
     type: { type: Schema.Types.ObjectId, ref: 'UserTypes' },
+    hired: { type: Boolean, default: false },
     name: { type: String },
     family: { type: String, required: true },
     username: { type: String, required: true, unique: true },

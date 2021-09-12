@@ -8,26 +8,6 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
 
 
 
- /**
- * @api {post} /api/user/v1/employee add employee
- * @apiVersion 1.0.0
- * @apiName addEmployee
- * @apiDescription add employee
- * @apiGroup user
- * @apiParam {varchar} usernameOrMobile employee username or mobile
- * @apiSuccessExample {json} Success-Response:
- * {
- *     success: true,
- *     message: "کاربر با موفقیت اضافه شد"
- * }
- * @apiErrorExample {json} Error-Response:
- * {
- *     success: false,
- *     message: "کاربر موجود نمی باشد"
- * }
- */
-  router.post('/',EmployeeController.addEmployee.bind(EmployeeController)); 
-
   /**
  * @api {get} /api/user/v1/employee get employees
  * @apiVersion 1.0.0
@@ -140,7 +120,7 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  *     message: "ارسال درخواست ها با موفقیت انجام شد",
  *     data: 
  *      {
- *          "id": "60d9ce1bef1e876eb29265cf",
+ *          "_id": "60d9ce1bef1e876eb29265cf",
  *          "active": true,
  *          "status": 1,
  *          "employer": "60d9ce1bef1e876eb29278c4",
