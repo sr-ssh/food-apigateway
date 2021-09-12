@@ -264,7 +264,6 @@ module.exports = new class EmployeeController extends Controller {
      
     async editApplication(req, res) {
         try {
-            console.log(req.body)
             req.checkBody('applicationId', 'please set application id').notEmpty();
             req.checkBody('status', 'please set application status').notEmpty().isInt({min: 2, max: 3});
             if (this.showValidationErrors(req, res)) return;
