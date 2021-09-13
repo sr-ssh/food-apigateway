@@ -82,15 +82,15 @@ const ProductController = require(`${userController}/v1/ProductController`)
 
 
  /**
- * @api {get} /api/user/v1/product/ get products 
+ * @api {get} /api/user/v1/product/ get product tyoes
  * @apiVersion 1.0.0
- * @apiName getProducts
- * @apiDescription get products 
+ * @apiName getProductTypes
+ * @apiDescription get product tyoes
  * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
- *      message: "محصولات با موفقیت ارسال شد",
+ *      message: "تایپ های محصولات با موفقیت ارسال شد",
  *      data: [...{
  *          active: true,
  *          name: "روغن" ,

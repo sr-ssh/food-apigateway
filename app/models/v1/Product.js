@@ -14,7 +14,7 @@ let Product = new Schema({
     }] , required: true}, 
     img: { type: String, required: true },
     supply: { type: Number, default: 0 }, 
-    description: { type: String },
+    description: { type: String, default: "" },
 });
 
 Product.plugin(timestamps);

@@ -80,7 +80,9 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *                  discount: false
  *              }],
  *              desciption: "ساعت 1 تحویل داده شود",
- *              discounts: 20000
+ *              discounts: 20000,
+ *              total: 120000,
+ *              deliveryCost: 5000
  *          }]
  *      }
  * }

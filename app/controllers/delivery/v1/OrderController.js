@@ -98,7 +98,7 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, deliveryId: req.decodedData.user_id }
 
             let orders = await this.model.Order
-                .find(filter, { createdAt: 1, customer: 1, address: 1, 'GPS.coordinates': 1, products: 1, description: 1 })
+                .find(filter, { createdAt: 1, customer: 1, address: 1, 'GPS.coordinates': 1, products: 1, description: 1, deliveryCost: 1 })
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
                 .populate('customer', { _id: 0, family: 1, mobile: 1})
                 .populate('status', {status: 1, name: 1, _id: 0})
@@ -114,6 +114,10 @@ module.exports = new class OrderController extends Controller {
                 //calculate dicounts
                 let discounts = order.products.map(product => product.discount * product.quantity)
                 order.discounts = discounts.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+                //calculate total
+                let total = order.products.map(product => (product.price - product.discount) * product.quantity)
+                order.total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
                 order.products = order.products.map(product => {
                     return{

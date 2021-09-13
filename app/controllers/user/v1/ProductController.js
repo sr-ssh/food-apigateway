@@ -11,32 +11,34 @@ module.exports = new class ProductController extends Controller {
 
     async addProduct(req, res) {
         try {
-            req.checkBody('name', 'please enter name').notEmpty().isString();
-            req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty().isFloat({min: 0});
-            req.checkBody('description', 'please enter description').notEmpty().isString();
+            req.checkBody('name', 'please enter product name').notEmpty().isString();
+            req.checkBody('typeId', 'please enter product type id').notEmpty().isString();
+            req.checkBody('img', 'please enter product image').notEmpty().isString();
+            req.checkBody('price', 'please enter sellingPrice').notEmpty().isFloat({min: 0});
+            req.checkBody('description', 'please enter description').optional().isString();
             if (this.showValidationErrors(req, res)) return;
 
-            const STRING_FLAG = " ";
-            const NUMBER_FLAG = "0";
-
+            let productType = await this.model.ProductTypes.findOne({_id: req.body.typeId})
+            if(!productTypes)
+                return res.json({ success : true, message : 'نوع وارد شده موجود نیست', data: { status: false }})
+            
             let params = {
                 name: req.body.name,
-                sellingPrice: req.body.sellingPrice,
-                user: req.decodedData.user_employer
+                type: req.body.type,
+                size: {name: "medium", price: req.body.price, discount: 0},
+                img: req.body.img,
+                description: req.body.description
             }
 
-            if(req.body.description !== STRING_FLAG)
-                params.description = req.body.description
-
-            let filter = { name: params.name, sellingPrice: params.sellingPrice, user: params.user}
+            let filter = { name: params.name }
             let product = await this.model.Product.findOne(filter)
 
             if(product)
-                return res.json({ success : false, message : 'محصول وارد شده، موجود است'})
+                return res.json({ success : true, message : 'محصولی با این نام موجود است', data: { status: false }})
                 
             await this.model.Product.create(params)
 
-            res.json({ success : true, message : 'محصول شما با موفقیت ثبت شد'})
+            res.json({ success : true, message : 'محصول شما با موفقیت ثبت شد', data: { status: true }})
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
