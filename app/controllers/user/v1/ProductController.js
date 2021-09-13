@@ -19,12 +19,12 @@ module.exports = new class ProductController extends Controller {
             if (this.showValidationErrors(req, res)) return;
 
             let productType = await this.model.ProductTypes.findOne({_id: req.body.typeId})
-            if(!productTypes)
+            if(!productType)
                 return res.json({ success : true, message : 'نوع وارد شده موجود نیست', data: { status: false }})
             
             let params = {
                 name: req.body.name,
-                type: req.body.type,
+                type: req.body.typeId,
                 size: {name: "medium", price: req.body.price, discount: 0},
                 img: req.body.img,
                 description: req.body.description
