@@ -55,7 +55,7 @@ module.exports = new class ProductController extends Controller {
     async getProducts(req, res) {
         try {
             let filter = { user: req.decodedData.user_employer }
-            let products = await this.model.Product.find(filter).populate('type', {_id: 0, name: 1}).sort({createdAt: -1});
+            let products = await this.model.Product.find(filter).populate('type', {_id: 1, name: 1}).sort({createdAt: -1});
             res.json({ success : true, message : 'محصولات با موفقیت ارسال شد', data: products})
         }
         catch (err) {
@@ -75,20 +75,28 @@ module.exports = new class ProductController extends Controller {
             req.checkBody('_id', 'please enter product id').notEmpty();
             req.checkBody('active', 'please enter activity status').notEmpty().isBoolean();
             req.checkBody('name', 'please enter name').notEmpty().isString();
-            req.checkBody('sellingPrice', 'please enter sellingPrice').notEmpty().isFloat({min: 0});
-            req.checkBody('description', 'please enter description').notEmpty().isString();
+            req.checkBody('typeId', 'please enter type id').notEmpty().isString();
+            req.checkBody('img', 'please enter img').notEmpty().isString();
+            req.checkBody('price', 'please enter price').notEmpty().isFloat({min: 0});
+            req.checkBody('discount', 'please enter disocunt').notEmpty().isFloat({min: 0});
+            req.checkBody('supply', 'please enter supply').notEmpty().isFloat({min: 0});
+            req.checkBody('description', 'please enter description').optional().isString();
             if (this.showValidationErrors(req, res)) return;
 
-            const STRING_FLAG = " ";
 
+            let productType = await this.model.ProductTypes.findOne({_id: req.body.typeId})
+            if(!productType)
+                return res.json({ success : true, message : 'نوع وارد شده موجود نیست', data: { status: false }})
+            
             let params = {
                 active: req.body.active,
                 name: req.body.name,
-                sellingPrice: req.body.sellingPrice
+                type: req.body.typeId,
+                size: {name: "medium", price: req.body.price, discount: req.body.discount},
+                img: req.body.img,
+                description: req.body.description,
+                supply: req.body.supply
             }
-
-            if(req.body.description !== STRING_FLAG)
-                params.description = req.body.description
 
             let filter = { _id: req.body._id }
             let product = await this.model.Product.findOneAndUpdate(filter, params)
