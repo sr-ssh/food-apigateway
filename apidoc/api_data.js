@@ -831,7 +831,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium',\n                 discount: false\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\",\n             discounts: 20000\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium',\n                 discount: false\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\",\n             discounts: 20000,\n             total: 120000,\n             deliveryCost: 5000\n         }]\n     }\n}",
           "type": "json"
         }
       ]
@@ -2298,48 +2298,6 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/user/v1/employee",
-    "title": "add employee",
-    "version": "1.0.0",
-    "name": "addEmployee",
-    "description": "<p>add employee</p>",
-    "group": "user",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "usernameOrMobile",
-            "description": "<p>employee username or mobile</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"کاربر با موفقیت اضافه شد\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\n    success: false,\n    message: \"کاربر موجود نمی باشد\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/user/v1/employee.js",
-    "groupTitle": "user"
-  },
-  {
-    "type": "post",
     "url": "/api/user/v1/order/",
     "title": "add order",
     "version": "1.0.0",
@@ -2775,6 +2733,53 @@ define({ "api": [
   },
   {
     "type": "put",
+    "url": "/api/user/v1/settings/sms",
+    "title": "edit sms settings",
+    "version": "1.0.0",
+    "name": "editSms",
+    "description": "<p>edit sms settings, type 1 is customer sms after adding order, type 2 is customer info for delivery, type 3 ic acknowledge for customer that your product is sent.</p>",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "type",
+            "description": "<p>sms type , {min:1, max:3}</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "text",
+            "description": "<p>sms text</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "status",
+            "description": "<p>sms status</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"ویرایش با موفقیت انجام شد\"",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/settings.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "put",
     "url": "/api/user/v1/account",
     "title": "edit user account",
     "version": "1.0.0",
@@ -2841,7 +2846,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"ارسال درخواست ها با موفقیت انجام شد\",\n    data: \n     {\n         \"id\": \"60d9ce1bef1e876eb29265cf\",\n         \"active\": true,\n         \"status\": 1,\n         \"employer\": \"60d9ce1bef1e876eb29278c4\",\n         \"employee\": {\n             \"_id\": \"\",\n             \"family\": \"شکوهی\",\n             \"mobile\": \"09307580142\"\n         },\n         \"createdAt\": \"2021-06-01T06:54:01.691Z\",\n         \"updatedAt\": \"2021-06-01T06:54:01.691Z\"\n}",
+          "content": "{\n    success: true,\n    message: \"ارسال درخواست ها با موفقیت انجام شد\",\n    data: \n     {\n         \"_id\": \"60d9ce1bef1e876eb29265cf\",\n         \"active\": true,\n         \"status\": 1,\n         \"employer\": \"60d9ce1bef1e876eb29278c4\",\n         \"employee\": {\n             \"_id\": \"\",\n             \"family\": \"شکوهی\",\n             \"mobile\": \"09307580142\"\n         },\n         \"createdAt\": \"2021-06-01T06:54:01.691Z\",\n         \"updatedAt\": \"2021-06-01T06:54:01.691Z\"\n}",
           "type": "json"
         }
       ]
@@ -3089,6 +3094,26 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/user/v1/settings/order",
+    "title": "get order settings",
+    "version": "1.0.0",
+    "name": "getOrderSettings",
+    "description": "<p>get order settings</p>",
+    "group": "user",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"تنظیمات سفارش با موفقیت فرستاده شد\",\n     data: {\n         addOrderSms: {\n             text: \"سفارش شما با موفقیت ثبت شد.\\n ورود : \\n http://happypizza.ir\", \n             status: true\n         },\n            confirmTime: 1,\n            cookTime: 8,\n            finishedOrderSms: {\n                text: \"سفارش شما به مقصد رسید. از اعتماد شما به هپی پیتزا ممنونیم. منتظر سفارش های بعدی شما هستیم.\", \n                status: true\n            },\n            inCookingOrderSms: {\n                text: \"سفارش شما در حال پخت می باشد.\", \n                status: true\n            },\n            inProcessOrderSms: {\n                text: \"سفارش شما در حال آماده سازی است.\", \n                status: true\n            },\n            inServiceOrderSms: {\n                text: \"سفارش شما در حال ارسال است.\", \n                status: true\n            },\n            isPayNecessary: false,\n            successfullPaymentSms: {\n                text: \"سفارش شما با موفقیت پرداخت شد.\", \n                status: true\n            }\n        }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/settings.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "get",
     "url": "/api/user/v1/order/",
     "title": "get orders",
     "version": "1.0.0",
@@ -3144,16 +3169,16 @@ define({ "api": [
   {
     "type": "get",
     "url": "/api/user/v1/product/",
-    "title": "get products",
+    "title": "get product tyoes",
     "version": "1.0.0",
-    "name": "getProducts",
-    "description": "<p>get products</p>",
+    "name": "getProductTypes",
+    "description": "<p>get product tyoes</p>",
     "group": "user",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"محصولات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         name: \"روغن\" ,\n         sellingPrice: \"100000\",\n         description: \"خریداری شده از شرکت روغن سازان مشهد\"\n         createdAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
+          "content": "{\n     success: true,\n     message: \"تایپ های محصولات با موفقیت ارسال شد\",\n     data: [...{\n         active: true,\n         name: \"روغن\" ,\n         sellingPrice: \"100000\",\n         description: \"خریداری شده از شرکت روغن سازان مشهد\"\n         createdAt: \"2021-06-01T06:54:01.691Z\"\n     }]\n}",
           "type": "json"
         }
       ]
