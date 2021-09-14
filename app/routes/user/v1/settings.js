@@ -40,6 +40,6 @@ const SettingsController = require(`${userController}/v1/SettingsController`)
  * }
  *     
  */
- router.get('/sms',SettingsController.getSms.bind(SettingsController));
+ router.get('/order',SettingsController.getOrderSettings.bind(SettingsController));
 
  module.exports = router;

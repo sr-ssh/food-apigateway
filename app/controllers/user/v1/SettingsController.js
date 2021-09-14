@@ -9,17 +9,18 @@ module.exports = new class SettingsController extends Controller {
     }
 
     
-    async getSms(req, res) {
+    async getOrderSettings(req, res) {
         try {
-            
+            let filter = { active : true }
+            let settings = await this.model.Settings.findOne(filter, 'order')
 
-            res.json({ success: true, message: "با موفقیت انجام شد", data: user}) 
+            res.json({ success: true, message: "تنظیمات سفارش با موفقیت فرستاده شد", data: settings.order}) 
 
         } catch (err) {
                 let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
-                .method('getSms')
+                .method('getOrderSettings')
                 .inputParams(req.body)
                 .call();
 
