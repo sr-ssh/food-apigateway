@@ -51,12 +51,45 @@ module.exports = new class EmployeeController extends Controller {
     }
 
 
+    async editEmployee(req, res) {
+        try {
+
+            req.checkBody('_id', 'please enter employee id').notEmpty().isString();
+            req.checkBody('family', 'please enter employee family').notEmpty().isString();
+            req.checkBody('mobile', 'please enter employee mobile').notEmpty().isNumeric();
+            req.checkBody('typeId', 'please enter employee typeId').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active: true, _id: req.body.typeId }
+            let userType = await this.model.UserTypes.findOne(filter)
+
+            if(!userType)
+                return res.json({ success: true, message: "نوع کارمند موجود نیست", data: { status: false }})
+
+            filter = { active: true , _id: req.body._id }
+            await this.model.User.update(filter, { family: req.body.family, mobile: req.body.mobile, type: req.body.typeId })
+            
+            return res.json({ success: true, message: "اطلاعات کارمند با موفقیت ویرایش شد", data: { status: true }})
+            
+        }catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editEmployee')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+        
+    }
+
     async getEmployees(req, res) {
         try {
 
 
-            let filter = { active: true , _id: { $ne: req.decodedData.user_id }, hired: true}
-            let employees = await this.model.User.find(filter, { family: 1, mobile: 1, permission: 1 })
+            let filter = { _id: { $ne: req.decodedData.user_id }, hired: true}
+            let employees = await this.model.User.find(filter, { family: 1, mobile: 1, active: 1 , type: 1, createdAt: 1 }).populate('type', { persianName: 1, status: 1})
             
             return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employees})
             
@@ -65,6 +98,27 @@ module.exports = new class EmployeeController extends Controller {
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('getEmployees')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+        
+    }
+
+    async getEmployeeTypes(req, res) {
+        try {
+
+            let filter = { active: true }
+            let employeeTypes = await this.model.UserTypes.find(filter, { persianName: 1, status: 1 }).lean()
+            
+            return res.json({ success: true, message: "کارمندان با موفقیت فرستاده شدند", data: employeeTypes})
+            
+        }catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getEmployeeTypes')
                 .inputParams(req.body)
                 .call();
 
@@ -150,6 +204,34 @@ module.exports = new class EmployeeController extends Controller {
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('addEmployee')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+    async blockEmployee(req, res) {
+        try {
+            req.checkBody('_id', 'please enter employee id').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { _id: req.body._id }
+            let employee = await this.model.User.findOne(filter)
+
+            if(!employee)
+                return res.json({ success: false, message: "کاربر وارد شده موجود نمی باشد" })
+
+            employee.active = !employee.active
+            await employee.save()  
+
+            return res.json({ success: true, message: "وضعیت کارمند با موفقیت عوض شد" })
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('blockEmployee')
                 .inputParams(req.body)
                 .call();
 

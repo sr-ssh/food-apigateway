@@ -34,9 +34,9 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
 
 
   /**
- * @api {put} /api/user/v1/employee change employee permission
+ * @api {put} /api/user/v1/employee edit employee
  * @apiVersion 1.0.0
- * @apiName changeEmployeePermission
+ * @apiName editEmployee
  * @apiDescription change employee permission
  * @apiGroup user
  * @apiParam {varchar} _id employee id
@@ -52,11 +52,11 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  *     message: "دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا نکرد"
  * }
  */
-  router.put('/',EmployeeController.changeEmployeePermission.bind(EmployeeController)); 
+  router.put('/',EmployeeController.editEmployee.bind(EmployeeController)); 
 
 
 
-   /**
+/**
  * @api {delete} /api/user/v1/employee remove employee
  * @apiVersion 1.0.0
  * @apiName removeEmployee
@@ -181,5 +181,53 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
 router.put('/application',EmployeeController.editApplication.bind(EmployeeController));
 
   
+
+ /**
+ * @api {get} /api/user/v1/employee/types get employee types
+ * @apiVersion 1.0.0
+ * @apiName getEmployeeTypes
+ * @apiDescription get employee types
+ * @apiGroup user
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success: true,
+ *     message: "کارمندان با موفقیت فرستاده شدند"و
+ *     data: [...{
+ *          _id: '60d9ce1bef1e876eb29265cf',
+ *          family: 'علی رضایی',
+ *          mobile: '093012342',
+ *          permission: [...{
+ *              no: 1,
+ *              status: true
+ *          }]
+ *      }]
+ * }
+ */
+  router.get('/type',EmployeeController.getEmployeeTypes.bind(EmployeeController)); 
+
+
+
+/**
+ * @api {post} /api/user/v1/employee/block block unblock employee
+ * @apiVersion 1.0.0
+ * @apiName blockEmployee
+ * @apiDescription add application
+ * @apiGroup user
+ * @apiParam {varchar} mobile employer mobile
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "درخواست با موفقیت ویرایش شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success: false,
+ *      message: "درخواستی موجود نیست"
+ * }
+ */
+ router.post('/block',EmployeeController.blockEmployee.bind(EmployeeController));
+
+
+
 
  module.exports = router;

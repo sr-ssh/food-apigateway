@@ -25,16 +25,24 @@ var data = [
     'model': 'UserTypes',
     'documents': [
       { 
-        name: 'manager'
+        name: 'manager',
+        persianName: 'مدیر',
+        status: 1
       },
       { 
-        name: 'operator'
+        name: 'operator',
+        persianName: 'اپراتور',
+        status: 2
       },
       { 
-        name: 'cook'
+        name: 'cook',
+        persianName: 'آشپز',
+        status: 3
       },
       { 
-        name: 'deliveryMan'
+        name: 'deliveryMan',
+        persianName: 'پیک',
+        status: 4
       }
     ]
     }
