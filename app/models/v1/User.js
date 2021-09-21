@@ -29,13 +29,21 @@ let User = new Schema({
         }
     },
 
-    setting: { type: Object,default:{
+    setting: { type: Object, default:{
         order: {
             preSms: { text: config.addOrderSms, status: false },
             postDeliverySms: { text: "" , status: false },
             postCustomerSms: { text: config.deliveryAcknowledgeSms , status: false }
         }
-    } 
+    },
+
+    account: { 
+        type: Object, default:{
+            sheba: "",
+            accountNumber: "",
+            cardNumber: ""
+        }
+    }
 }
     
 });

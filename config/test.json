@@ -182,14 +182,14 @@
         },
         "deliveryRegister": {
             "password": "1234",
-            "family": "تینا برایی",
-            "mobile": "09152226363",
-            "code": "1504",
+            "family": "صبا",
+            "mobile": "09152221313",
+            "code": "9777",
             "scope": "deliveryMan"
         },
         "deliveryMan": {
-            "mobile": "09152226363",
-            "code": "2391",
+            "mobile": "09152221313",
+            "code": "9777",
             "scope": "deliveryMan"
         },
         "deliveryAcceptOrder": {

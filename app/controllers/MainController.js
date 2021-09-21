@@ -163,7 +163,12 @@ module.exports = class MainController {
             type: type._id,
             password: req.body.password,
             family: req.body.family,
-            mobile: req.body.mobile
+            mobile: req.body.mobile,
+            account: {
+                sheba: "",
+                accountNumber: "",
+                cardNumber: ""
+            }
         }
 
         filter = { mobile: params.mobile };
@@ -190,6 +195,7 @@ module.exports = class MainController {
         let payload = {
             user_id: user._id,
             user_active: user.active,
+            family: user.family
         }
         let idToken = jwt.sign(payload, config.secret, options)
 
