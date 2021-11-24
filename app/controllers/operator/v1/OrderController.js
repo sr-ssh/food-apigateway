@@ -350,6 +350,36 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async getOrderProducts(req, res) {
+        try {
+          let filter = { active: true };
+
+          let products = await this.model.Product.find(filter, {
+            _id: 1,
+            description: 1,
+            name: 1,
+            type: 1,
+            size: 1
+          }).populate("type", { name: 1, _id: 0 })
+          .lean();
+
+          return res.json({
+            success: true,
+            message: "محصولات سفارش با موفقیت ارسال شد",
+            data: { products, status: true },
+          });
+        } catch (err) {
+          let handelError = new this.transforms.ErrorTransform(err)
+            .parent(this.controllerTag)
+            .class(TAG)
+            .method("getOrderProducts")
+            .inputParams(req.params)
+            .call();
+
+          if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 
 }
 

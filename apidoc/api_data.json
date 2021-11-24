@@ -796,6 +796,26 @@
         }
       ]
     },
+    "filename": "app/routes/delivery/v1/account.js",
+    "groupTitle": "delivery"
+  },
+  {
+    "type": "get",
+    "url": "/api/delivery/v1/charge",
+    "title": "get delivery charge",
+    "version": "1.0.0",
+    "name": "getCharge",
+    "description": "<p>get delivery charge</p>",
+    "group": "delivery",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: 60000\n}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "app/routes/delivery/v1/charge.js",
     "groupTitle": "delivery"
   },
@@ -1123,6 +1143,26 @@
       ]
     },
     "filename": "app/routes/delivery/v1/home.js",
+    "groupTitle": "delivery"
+  },
+  {
+    "type": "get",
+    "url": "/api/delivery/v1/charge",
+    "title": "get delivery charge",
+    "version": "1.0.0",
+    "name": "registerAccount",
+    "description": "<p>get delivery charge</p>",
+    "group": "delivery",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: 60000\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/delivery/v1/account.js",
     "groupTitle": "delivery"
   },
   {
@@ -1825,6 +1865,26 @@
   },
   {
     "type": "get",
+    "url": "/api/operator/v1/order/product",
+    "title": "get order products",
+    "version": "1.0.0",
+    "name": "getOrderProducts",
+    "description": "<p>get order products</p>",
+    "group": "operator",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: {\n         status: true,\n         products: [...{\n         _id: \"60fd0aacca33dd0374b55650\",\n         name: \"نان سیر\",\n         description: \"سیر . خمیر تازه . اویشن\",\n         type: {name: \"پیتزا\"},\n         size: [{ name: \"medium\", price: 50000, discount: 10000 }]\n       }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "get",
     "url": "/api/operator/v1/order/",
     "title": "get orders",
     "version": "1.0.0",
@@ -2477,12 +2537,12 @@
     "groupTitle": "user"
   },
   {
-    "type": "put",
-    "url": "/api/user/v1/employee",
-    "title": "change employee permission",
+    "type": "post",
+    "url": "/api/user/v1/employee/block",
+    "title": "block unblock employee",
     "version": "1.0.0",
-    "name": "changeEmployeePermission",
-    "description": "<p>change employee permission</p>",
+    "name": "blockEmployee",
+    "description": "<p>add application</p>",
     "group": "user",
     "parameter": {
       "fields": {
@@ -2491,15 +2551,8 @@
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "_id",
-            "description": "<p>employee id</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "object",
-            "optional": false,
-            "field": "permissions",
-            "description": "<p>object exactly like it is sent</p>"
+            "field": "mobile",
+            "description": "<p>employer mobile</p>"
           }
         ]
       }
@@ -2508,7 +2561,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا کرد\"\n}",
+          "content": "{\n     success: true,\n     message: \"درخواست با موفقیت ویرایش شد\"\n}",
           "type": "json"
         }
       ]
@@ -2517,7 +2570,7 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "{\n    success: false,\n    message: \"دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا نکرد\"\n}",
+          "content": "{\n     success: false,\n     message: \"درخواستی موجود نیست\"\n}",
           "type": "json"
         }
       ]
@@ -2572,6 +2625,102 @@
       ]
     },
     "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "put",
+    "url": "/api/user/v1/employee",
+    "title": "edit employee",
+    "version": "1.0.0",
+    "name": "editEmployee",
+    "description": "<p>change employee permission</p>",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>employee id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "object",
+            "optional": false,
+            "field": "permissions",
+            "description": "<p>object exactly like it is sent</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا کرد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n    success: false,\n    message: \"دسترسی های کارمند خواسته شده با موفقیت تغییر پیدا نکرد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "put",
+    "url": "/api/user/v1/settings/sms",
+    "title": "edit sms settings",
+    "version": "1.0.0",
+    "name": "editOrderSettings",
+    "description": "<p>edit sms settings, type 1 is customer sms after adding order, type 2 is customer info for delivery, type 3 ic acknowledge for customer that your product is sent.</p>",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "type",
+            "description": "<p>sms type , {min:1, max:3}</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "text",
+            "description": "<p>sms text</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "status",
+            "description": "<p>sms status</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"ویرایش با موفقیت انجام شد\"",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/settings.js",
     "groupTitle": "user"
   },
   {
@@ -2729,53 +2878,6 @@
       ]
     },
     "filename": "app/routes/user/v1/order.js",
-    "groupTitle": "user"
-  },
-  {
-    "type": "put",
-    "url": "/api/user/v1/settings/sms",
-    "title": "edit sms settings",
-    "version": "1.0.0",
-    "name": "editSms",
-    "description": "<p>edit sms settings, type 1 is customer sms after adding order, type 2 is customer info for delivery, type 3 ic acknowledge for customer that your product is sent.</p>",
-    "group": "user",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "type",
-            "description": "<p>sms type , {min:1, max:3}</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "text",
-            "description": "<p>sms text</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "status",
-            "description": "<p>sms status</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"ویرایش با موفقیت انجام شد\"",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/user/v1/settings.js",
     "groupTitle": "user"
   },
   {
@@ -3030,6 +3132,26 @@
       ]
     },
     "filename": "app/routes/user/v1/discount.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/employee/types",
+    "title": "get employee types",
+    "version": "1.0.0",
+    "name": "getEmployeeTypes",
+    "description": "<p>get employee types</p>",
+    "group": "user",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    success: true,\n    message: \"کارمندان با موفقیت فرستاده شدند\"و\n    data: [...{\n         _id: '60d9ce1bef1e876eb29265cf',\n         family: 'علی رضایی',\n         mobile: '093012342',\n         permission: [...{\n             no: 1,\n             status: true\n         }]\n     }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/employee.js",
     "groupTitle": "user"
   },
   {

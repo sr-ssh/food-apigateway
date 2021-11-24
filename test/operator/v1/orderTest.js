@@ -78,6 +78,16 @@ describe(`${sectionName}`, () => {
                 .send();
             res.should.have.status(200);
         });
+        
+        it('check get order products', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/product`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send();
+            res.should.have.status(200);
+        });
 
 
     });
