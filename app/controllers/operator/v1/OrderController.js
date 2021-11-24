@@ -360,13 +360,17 @@ module.exports = new class HomeController extends Controller {
             name: 1,
             type: 1,
             size: 1
-          }).populate("type", { name: 1, _id: 0 })
+          }).populate("type", { name: 1 })
           .lean();
+
+          let types = await this.model.ProductTypes.find(filter, {
+            name: 1
+          }).lean(); 
 
           return res.json({
             success: true,
             message: "محصولات سفارش با موفقیت ارسال شد",
-            data: { products, status: true },
+            data: { products, types, status: true },
           });
         } catch (err) {
           let handelError = new this.transforms.ErrorTransform(err)

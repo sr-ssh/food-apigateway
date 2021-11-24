@@ -34,12 +34,16 @@ router.post("/", OrderController.addOrder.bind(OrderController));
  *      data: {
  *          status: true,
  *          products: [...{
- *          _id: "60fd0aacca33dd0374b55650",
- *          name: "نان سیر",
- *          description: "سیر . خمیر تازه . اویشن",
- *          type: {name: "پیتزا"},
- *          size: [{ name: "medium", price: 50000, discount: 10000 }]
- *        }]
+ *              _id: "60fd0aacca33dd0374b55650",
+ *              name: "نان سیر",
+ *              description: "سیر . خمیر تازه . اویشن",
+ *              type: {_id: "610916826f9446153c5e268d", name: "پیتزا"},
+ *              size: [{ name: "medium", price: 50000, discount: 10000 }]
+ *          }],
+ *          types: [...{
+ *              name: "پیتزا",
+ *              _id: "610916826f9446153c5e268d"
+ *          }]
  * }
  */
 router.get("/product", OrderController.getOrderProducts.bind(OrderController));

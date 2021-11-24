@@ -1875,7 +1875,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: {\n         status: true,\n         products: [...{\n         _id: \"60fd0aacca33dd0374b55650\",\n         name: \"نان سیر\",\n         description: \"سیر . خمیر تازه . اویشن\",\n         type: {name: \"پیتزا\"},\n         size: [{ name: \"medium\", price: 50000, discount: 10000 }]\n       }]\n}",
+          "content": "{\n     success: true,\n     message: \"محصولات سفارش با موفقیت ارسال شد\",\n     data: {\n         status: true,\n         products: [...{\n             _id: \"60fd0aacca33dd0374b55650\",\n             name: \"نان سیر\",\n             description: \"سیر . خمیر تازه . اویشن\",\n             type: {_id: \"610916826f9446153c5e268d\", name: \"پیتزا\"},\n             size: [{ name: \"medium\", price: 50000, discount: 10000 }]\n         }],\n         types: [...{\n             name: \"پیتزا\",\n             _id: \"610916826f9446153c5e268d\"\n         }]\n}",
           "type": "json"
         }
       ]
