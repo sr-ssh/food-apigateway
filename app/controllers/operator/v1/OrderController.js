@@ -266,6 +266,7 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('customer.family', 'please enter customer family').notEmpty().isString();
             req.checkBody('customer.mobile', 'please enter customer mobile').notEmpty().isNumeric();
             req.checkBody('address', 'please enter address').notEmpty().isString();
+            req.checkBody('station', 'please enter station').notEmpty().isNumeric();
             req.checkBody('description', 'please enter description').exists().isString();
             if (this.showValidationErrors(req, res)) return;
 
@@ -306,6 +307,8 @@ module.exports = new class HomeController extends Controller {
             await customer.order.push(order._id)
             await customer.locations.push({addres: req.body.address})
             await customer.save()
+
+            //station
 
             return res.json({ success : true, message : 'سفارش شما با موفقیت ثبت شد'})
         }
