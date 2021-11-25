@@ -2182,6 +2182,39 @@
   },
   {
     "type": "post",
+    "url": "/api/operator/v1/order/menu",
+    "title": "send menu",
+    "version": "1.0.0",
+    "name": "sendMenuForCustomer",
+    "description": "<p>send menu</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>customer mobile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"اس ام اس منو با موفقیت برای مشتری ارسال شد\",\n     data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "post",
     "url": "/api/operator/v1/verificationcode",
     "title": "requset verification Code",
     "version": "1.0.0",

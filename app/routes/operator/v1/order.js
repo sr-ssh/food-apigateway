@@ -49,6 +49,22 @@ router.post("/", OrderController.addOrder.bind(OrderController));
 router.get("/product", OrderController.getOrderProducts.bind(OrderController));
 
 /**
+ * @api {post} /api/operator/v1/order/menu send menu
+ * @apiVersion 1.0.0
+ * @apiName sendMenuForCustomer
+ * @apiDescription send menu
+ * @apiGroup operator
+ * @apiParam {Number} mobile customer mobile
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "اس ام اس منو با موفقیت برای مشتری ارسال شد",
+ *      data: { status: true }
+ * }
+ */
+ router.post("/menu", OrderController.sendMenuForCustomer.bind(OrderController));
+
+/**
 * @api {get} /api/operator/v1/order/ get order
 * @apiVersion 1.0.0
 * @apiName getOrder
