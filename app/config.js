@@ -55,7 +55,7 @@ module.exports = {
     payCallBackUrl: "http://www.happypizza.ir:3010/api/customer/v1/pay",
     payRedirectSuccess: "http://www.happypizza.ir/pay/success",
     payRedirectFail: "http://www.happypizza.ir/pay/fail",
-    menuLink: "http://happypizza.ir/menu",
+    menuLink: "http://happypizza.ir/menu.html",
     publicRoute: [
         '/api/user/v1/login', 
         '/api/user/v1/', 
