@@ -1,7 +1,5 @@
 const Controller = require(`${config.path.controllers.user}/Controller`);
 const TAG = "v1_Account";
-const mongoose = require("mongoose");
-const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = new (class AccountController extends Controller {
   async index(req, res) {
@@ -10,43 +8,27 @@ module.exports = new (class AccountController extends Controller {
 
   async getAccount(req, res) {
     try {
-      // charge
-      let charge = await this.model.DeliveryFinance.aggregate([
-        { $match: { deliveryId: ObjectId(req.decodedData.user_id) } },
-        {
-          $group: {
-            _id: "$deliveryId",
-            debit: {
-              $sum: {
-                $cond: [{ $eq: ["$type", "debit"] }, "$cost", 0],
-              },
-            },
-            credit: {
-              $sum: {
-                $cond: [{ $eq: ["$type", "credit"] }, "$cost", 0],
-              },
-            },
-          },
-        },
-        {
-          $project: {
-            charge: { $subtract: ["$debit", "$credit"] },
-          },
-        },
-      ]);
+      let filter = { active: true, _id: req.decodedData.user_id };
+      let delivery = await this.model.User.findOne(filter, "account").lean();
 
-      let data = 0;
-      if (charge.length) data = charge[0].charge;
+      if (!delivery)
+        return res.json({
+          success: true,
+          message: "کاربر موجود نمی باشد",
+          data: { status: false },
+        });
 
-      //
-      // sheba: { type: String },
-      // accountNumber: { type: String },
-      // cardNumber: {
+      let data = {
+        sheba: (delivery.account && delivery.account.sheba) || "",
+        accountNumber:
+          (delivery.account && delivery.account.accountNumber) || "",
+        cardNumber: (delivery.account && delivery.account.cardNumber) || "",
+      };
 
       return res.json({
         success: true,
-        message: "شارژ کاربر با موفقیت ارسال شد",
-        data: data,
+        message: "اطلاعات حساب کاربری با موفقیت ارسال شد",
+        data: { status: true, data },
       });
     } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)
@@ -78,13 +60,20 @@ module.exports = new (class AccountController extends Controller {
 
       let filter = { active: true, _id: req.decodedData.user_id };
       let update = {
-        account: {
-          cardNumber: req.body.cardNumber,
-        }
+          account: {
+            cardNumber: req.body.cardNumber,
+            sheba: req.body.sheba || "",
+            accountNumber: req.body.accountNumber || "",
+        },
       };
-      if (req.body.sheba) update.sheba = req.body.sheba;
-      if (req.body.accountNumber) update.accountNumber = req.body.accountNumber;
-      await this.model.User.update(filter, update);
+      // if (req.body.sheba) update.$set['account.sheba'] = req.body.sheba;
+      // if (req.body.accountNumber)
+      //   update.$set['account.accountNumber'] = req.body.accountNumber;
+      let user = await this.model.User.findOne(filter);
+      user.account.cardNumber = req.body.cardNumber
+      user.markModified('account')
+      await user.save()
+
 
       return res.json({
         success: true,

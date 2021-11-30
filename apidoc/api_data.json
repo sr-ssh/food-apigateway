@@ -781,17 +781,26 @@
   },
   {
     "type": "get",
-    "url": "/api/delivery/v1/charge",
-    "title": "get delivery charge",
+    "url": "/api/delivery/v1/account",
+    "title": "get delivery account",
     "version": "1.0.0",
-    "name": "getCharge",
-    "description": "<p>get delivery charge</p>",
+    "name": "getAccount",
+    "description": "<p>get delivery account</p>",
     "group": "delivery",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: 60000\n}",
+          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: {\n       status: true,\n       data: {\n         sheba: \"1631241743125\", \n         accountNumber: \"659721567835487\", \n         cardNumber: \"5859 8310 9970 9288\"\n       }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n     success: true,\n     message: \"کاربر موجود نمی باشد\",\n     data: {\n       status: false\n     }\n}",
           "type": "json"
         }
       ]
