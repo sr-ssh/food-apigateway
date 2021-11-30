@@ -7,21 +7,20 @@ let Order = new Schema({
     products: { type: Array, default: [{ 
         _id: { type: Schema.Types.ObjectId, ref: 'Product', required: true }, 
         quantity: { type: Number, default: 1 },
-        size: { type: String , required: true, default: 'meduim' },
+        size: { type: String , required: true, default: 'medium' },
         price: { type: Number , required: true },
         discount: { type: Number , required: true, default: 0 }
     }]},
     customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
     address: { type: String },
+    station: { type: Schema.Types.ObjectId, ref: 'Station' },
     GPS: {
         type: {
           type: String, 
           enum: ['Point'],
-          required: true
         },
         coordinates: {
           type: [Number],
-          required: true
         }
     },
     status: { type: Schema.Types.ObjectId, ref: 'OrderStatusBar' },

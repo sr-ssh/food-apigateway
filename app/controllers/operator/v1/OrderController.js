@@ -1,5 +1,8 @@
 const Controller = require(`${config.path.controllers.user}/Controller`);
 const TAG = "v1_Order";
+let mongoose = require("mongoose");
+
+const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = new (class HomeController extends Controller {
   async index(req, res) {
@@ -326,77 +329,143 @@ module.exports = new (class HomeController extends Controller {
       req
         .checkBody("products.*._id", "please enter product id")
         .notEmpty()
-        .isString();
+        .isMongoId();
       req
         .checkBody("products.*.quantity", "please enter product quantity")
         .notEmpty()
-        .inInt({ min: 1 });
+        .isInt({ min: 1 });
       req
-        .checkBody("products.*.price", "please enter product sellingPrice")
-        .notEmpty()
-        .inInt({ min: 0 });
-      req
-        .checkBody("products.*.size", "please enter product sellingPrice")
+        .checkBody("products.*.size", "please enter product size")
         .notEmpty()
         .isString();
-      req.checkBody("customer", "please enter customer").notEmpty();
-      req
-        .checkBody("customer.family", "please enter customer family")
-        .notEmpty()
-        .isString();
-      req
-        .checkBody("customer.mobile", "please enter customer mobile")
-        .notEmpty()
-        .isNumeric();
+      req.checkBody("family", "please enter family").notEmpty().isString();
+      req.checkBody("mobile", "please enter mobile").notEmpty().isNumeric();
       req.checkBody("address", "please enter address").notEmpty().isString();
+      req.checkBody("addressId", "please enter address id").notEmpty();
       req.checkBody("station", "please enter station").notEmpty().isNumeric();
       req
         .checkBody("description", "please enter description")
-        .exists()
+        .optional()
         .isString();
+
       if (this.showValidationErrors(req, res)) return;
 
-      // add customer
-      let filter = { mobile: req.body.customer.mobile };
-      let customer = await this.model.Customer.findOne(filter);
+      //merge duplicated product ids
+      let userProducts = [];
+      req.body.products.forEach(function (item) {
+        var existing = userProducts.filter(function (v, i) {
+          return v._id == item._id && v.size == item.size;
+        });
+        if (existing.length) {
+          var existingIndex = userProducts.indexOf(existing[0]);
+          userProducts[existingIndex].quantity += item.quantity;
+        } else {
+          userProducts.push(item);
+        }
+      });
 
-      let params = {
-        family: req.body.customer.family,
-        mobile: req.body.customer.mobile,
-        locations: [{ addres: req.body.address }],
-      };
+      // recalculate product supply
+      for (let index = 0; index < userProducts.length; index++) {
+        let productSupply = await this.model.Product.findOne(
+          { _id: userProducts[index]._id },
+          "supply size"
+        );
+        let supply = productSupply.supply - userProducts[index].quantity;
+        if (supply < 0)
+          return res.json({
+            success: true,
+            message: "موجودی محصول کافی نیست",
+            data: { status: false },
+          });
+        productSupply.supply = supply;
+        await productSupply.save();
 
-      if (!customer) {
-        customer = await this.model.Customer.create(params);
+        //add price and discount
+        userProducts[index].price = productSupply.size.find(
+          (s) => s.name == userProducts[index].size
+        ).price;
+        userProducts[index].discount = productSupply.size.find(
+          (s) => s.name == userProducts[index].size
+        ).discount;
       }
 
-      //get delivery cost
-      let deliveryCost = await this.model.Settings.findOne({}, "delivery");
-
       //get status id
-      filter = { active: true, name: config.activeOrders };
+      let filter = { active: true, name: config.activeOrders };
       let status = await this.model.OrderStatusBar.findOne(filter, "_id");
 
+      let products = userProducts.map((product) => {
+        return {
+          _id: product._id,
+          quantity: product.quantity,
+          price: product.price,
+          size: product.size,
+          discount: product.discount,
+        };
+      });
+
+      //find station
+      filter = { code: req.body.station };
+      let station = await this.model.Station.findOne(filter);
+      if (!station)
+        return res.json({
+          success: true,
+          message: "ایستگاه موجود نمی باشد",
+          data: { status: false },
+        });
+
+      //find customer
+      filter = { mobile: req.body.mobile };
+      let update = {
+        $addToSet: {
+          $setOnInsert: {
+            mobile: req.body.mobile,
+            family: req.body.family, //family doesnt save
+            locations: [{ address: req.body.address, station: station._id }],
+          },
+        },
+      };
+      if (req.body.addressId == 0) {
+        update.$addToSet.locations = {
+          address: req.body.address,
+          station: station._id,
+        };
+      }
+      let customer = await this.model.Customer.findOneAndUpdate(
+        filter,
+        update,
+        { upsert: true, new: true }
+      );
+
       // add order
-      params = {
-        products: req.body.products,
+      let params = {
+        products: products,
         customer: customer._id,
         address: req.body.address,
-        deliveryCost: deliveryCost.delivery.deliveryCost,
         status: status._id,
-        description: req.body.description,
+        description: req.body.description || "",
+        station: station.id,
       };
 
       let order = await this.model.Order.create(params);
 
-      // add order and address to customer
-      await customer.order.push(order._id);
-      await customer.locations.push({ addres: req.body.address });
+      // add order to customer
+      customer.family = req.body.family
+      customer.order = order._id;
       await customer.save();
 
-      //station
+      res.json({
+        success: true,
+        message: "سفارش شما با موفقیت ثبت شد",
+        data: { status: true },
+      });
 
-      return res.json({ success: true, message: "سفارش شما با موفقیت ثبت شد" });
+      //send smd
+      let settings = await this.model.Settings.findOne({ active: true });
+      if (settings.order.addOrderSms.status)
+        this.sendSms(
+          customer.mobile,
+          settings.order.addOrderSms.text + "\n" + settings.companyName
+        );
     } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)
         .parent(this.controllerTag)
@@ -484,20 +553,16 @@ module.exports = new (class HomeController extends Controller {
     try {
       req.checkBody("mobile", "please set customer mobile").notEmpty();
       if (this.showValidationErrors(req, res)) return;
-      
+
       res.json({
         success: true,
         message: "اس ام اس منو با موفقیت برای مشتری ارسال شد",
-        data: { status: true }
+        data: { status: true },
       });
 
-      let massage = ":لینک منو هپی پیتزا \n" + config.menuLink
+      let massage = ":لینک منو هپی پیتزا \n" + config.menuLink;
 
-      this.sendSms(
-        req.body.mobile,
-        massage
-      );
-      
+      this.sendSms(req.body.mobile, massage);
     } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)
         .parent(this.controllerTag)

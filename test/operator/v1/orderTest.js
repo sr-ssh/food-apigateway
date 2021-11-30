@@ -105,12 +105,13 @@ describe(`${sectionName}`, () => {
   });
 
   describe("Check Post Apis", () => {
+
     it("check add order", async () => {
       const res = await chai
         .request(server)
         .post(`${baseRoute}/`)
-        .set("Authorization", accessToken)
-        .set("idToken", idToken)
+        .set("Authorization", operatorLogin.accessToken)
+        .set("idToken", operatorLogin.idToken)
         .send(addOrderOperator);
       res.should.have.status(200);
     });

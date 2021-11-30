@@ -57,7 +57,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        name: \"نان سیر\"\n        quantity: 2,\n        price: \"30000\",\n        size: \"meduim\",\n        discount: \"10000\"\n    }],\n    address: \"کلاهدوز 4\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
+          "content": "{\n    products: [...{\n        _id: \"60b72a70e353f0385c2fe5af\",\n        name: \"نان سیر\"\n        quantity: 2,\n        price: \"30000\",\n        size: \"medium\",\n        discount: \"10000\"\n    }],\n    address: \"کلاهدوز 4\",\n    lat: 36.297920,\n    lng: 59.605933 ,\n    deliveryCost: 5000,\n    description: \"تحویل در اسانسور\"\n}",
           "type": "json"
         }
       ]
@@ -1672,7 +1672,7 @@ define({ "api": [
     "title": "add order",
     "version": "1.0.0",
     "name": "addOrder",
-    "description": "<p>add order: customer birthday and reminder are optional.all params are necessary and in case of no entry , there is a flag for each optional param.if that flag entered it asumed as no entry.birthday flag is &quot;1900-01-01T05:42:13.845Z&quot;.reminder flag and duration flag are -1.address flag is &quot; &quot;</p>",
+    "description": "<p>add order: if the address is new send 0</p>",
     "group": "operator",
     "parameter": {
       "fields": {
@@ -1689,7 +1689,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{products: [...{_id: \"60b72a70e353f0385c2fe5af\", quantity: 2,price: \"30000\",size: \"medium\"}],\n customer: {family: \"شکوهی\",mobile: \"09307580142\",},address: \"معلم 24\",description: \"ساعت 21:00 تحویل داده شود\"}",
+          "content": " {\n   products: [...{\n     _id: \"60b72a70e353f0385c2fe5af\", \n     quantity: 2,\n     size: \"medium\"\n   }],\n   family: \" شکوهی\",\n   mobile: \"09307580131\",\n   description: \"با سس قرمز تند\",\n   address: \"معلم 3\",\n   addressId: 0,\n   station: 31\n}",
           "type": "json"
         }
       ]
@@ -1698,7 +1698,16 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{success: true, message: \"سفارش شما با موفقیت ثبت شد\",data: {status: true }}",
+          "content": "{\n   success: true, \n   message: \"سفارش شما با موفقیت ثبت شد\",\n   data: { status: true }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n   success: true, \n   message: \"سفارش ثبت نمی شود\",\n   data: { status: false }\n}",
           "type": "json"
         }
       ]

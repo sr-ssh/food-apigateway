@@ -68,7 +68,7 @@ const OrderController = require(`${customerController}/v1/OrderController`)
  *          name: "نان سیر"
  *          quantity: 2,
  *          price: "30000",
- *          size: "meduim",
+ *          size: "medium",
  *          discount: "10000"
  *      }],
  *      address: "کلاهدوز 4",

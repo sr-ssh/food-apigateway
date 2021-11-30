@@ -1,315 +1,321 @@
 {
-    "appPort": 4000,
-    "mongo": {
-        "host": "mongodb://172.16.2.215/food"
+  "appPort": 4000,
+  "mongo": {
+    "host": "mongodb://172.16.2.215/food"
+  },
+  "sms": {
+    "negin": {
+      "user": "",
+      "password": "",
+      "host": "http://sms.3300.ir/services/wsSend.ashx"
     },
-    "sms": {
-        "negin": {
-            "user": "",
-            "password": "",
-            "host": "http://sms.3300.ir/services/wsSend.ashx"
-        },
-        "KavenegarApi": {
-            "apikey": "36792F47687237546569536A4F56303472794A6F50673D3D",
-            "sender": "100018801880"
-        }
-    },
-    "test": {
-        "user": {
-            "password": "1234",
-            "family": "شکوه",
-            "email": "m.sh@gmail.com",
-            "mobile": "09307580142",
-            "companyName": "shokouh",
-            "companyAddress": "کلاهدوز 4",
-            "mobileOrEmail": "09354400369",
-            "code": "5154",
-            "position": 2,
-            "employerMobile": "09307580142"
-        },
-        "newUser": {
-            "password": "1234",
-            "family": "علی محمودی",
-            "email": "a.mhm@gmail.com",
-            "mobile": "09202223366",
-            "code": "5338",
-            "position": 2,
-            "companyName": "mhmnejad",
-            "companyAddress": "راهنمایی 24222",
-            "employerMobile": "09307580142"
-        },
-        "userScope": "user",
-        "order": {
-            "products": [
-                {
-                    "_id": "60b72afa1f24b03fe4fc7b51",
-                    "quantity": 3,
-                    "sellingPrice": "75000"
-                }
-            ],
-            "customer": {
-                "family": "ریحانه شکوهی",
-                "mobile": "09307580142",
-                "birthday": "1900-01-01T05:42:13.845Z"
-            },
-            "description": "",
-            "reminder": 7,
-            "address": "معلم 24",
-            "duration": 40,
-            "adrs": "کلاهدوز 4",
-            "orderId": "6107cfccf74a1a3398ca5dc8"
-        },
-        "product": {
-            "name": "لیموناد",
-            "description": "دورچین لیمو",
-            "sellingPrice": "20000"
-        },
-        "editedProduct": {
-            "_id": "60c98bbbfa4cab1dd8c70d77",
-            "active": true,
-            "name": "موهیتو عربی",
-            "description": "نعنا تازه",
-            "sellingPrice": "20000"
-        },
-        "appInfo": {
-            "versionCode": 1,
-            "os": "Android"
-        },
-        "Bill": {
-            "name": "اجاره",
-            "cost": "2000000"
-        },
-        "employee": {
-            "usernameOrMobile": "0996"
-        },
-        "getOrderParams": {
-            "customerName": " ",
-            "customerMobile": "0",
-            "startDate": "1900-01-01T05:42:13.845Z",
-            "endDate": "1900-01-01T05:42:13.845Z"
-        },
-        "getCustomerParams": {
-            "family": " ",
-            "mobile": "0",
-            "createdAtFrom": "1900-01-01T05:42:13.845Z",
-            "createdAtTo": "1900-01-01T05:42:13.845Z",
-            "lastBuyFrom": "1900-01-01T05:42:13.845Z",
-            "lastBuyTo": "2021-07-06",
-            "orderFrom": "0",
-            "orderTo": "0",
-            "totalFrom": "0",
-            "totalTo": "0"
-        },
-        "discount": {
-            "name": "تولد",
-            "type": 0,
-            "customer": "0935",
-            "percentage": 5,
-            "sms": true
-        },
-        "editedEmployee": {
-            "_id": "60d953d772c6de4484069ecb",
-            "permissions": {
-                "addOrder": true,
-                "getOrders": true,
-                "reminder": true,
-                "getProducts": true,
-                "finance": true,
-                "getCustomers": true,
-                "getEmployees": true,
-                "getDiscounts": true
-            }
-        },
-        "deleteEmployee": {
-            "_id": "60d823a1f674e530e09fc6ce"
-        },
-        "editOrderStatus": {
-            "orderId": "6110bcd020601247f463dabe"
-        },
-        "deliverySms": {
-            "orderId": "60e1b387cef3a81c70726ede",
-            "mobile": "09307580142"
-        },
-        "editApplicationByEmployer": {
-            "applicationId": "60e555fd9637c83760618ac9",
-            "status": 3
-        },
-        "editApplicationByEmployee": {
-            "employeeId": "60e555fd9637c83760618ac8",
-            "status": 3
-        },
-        "editAccount": {
-            "company": "mohaddes"
-        },
-        "editSms": {
-            "type": 2,
-            "text": " ",
-            "status": true
-        },
-        "addOrderStatus": {
-            "name": "در انتظار پرداخت",
-            "status": 6
-        },
-        "customer": {
-            "mobile": "09307580143",
-            "family": "زهرا رضوی",
-            "code": "3118"
-        },
-        "customerGetOrder": {
-            "orderId": "6125cb5483afb1a90bfa4b8f"
-        },
-        "customerCancelOrder": {
-            "orderId": "6107d01ac53ecf307cf92e70"
-        },
-        "customerPay": {
-            "orderId": "6107cfcb9ce9b70d74816e3e"
-        },
-        "customerPayValidate": {
-            "Authority": "000000000000000000000000000000585647",
-            "Status": "OK"
-        },
-        "cookRegister": {
-            "password": "1234",
-            "family": "مینا محمودی",
-            "mobile": "09152226565",
-            "code": "8920",
-            "scope": "cook"
-        },
-        "cook": {
-            "mobile": "09152226565",
-            "code": "5234",
-            "scope": "cook"
-        },
-        "deliveryRegister": {
-            "password": "1234",
-            "family": "صبا",
-            "mobile": "09152221313",
-            "code": "9777",
-            "scope": "deliveryMan"
-        },
-        "deliveryMan": {
-            "mobile": "09152226363",
-            "code": "3037",
-            "scope": "deliveryMan",
-            "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjEyNzMwNDk1MmI0NWEwM2Y4Mzk3NTQ3IiwidXNlcl9hY3RpdmUiOnRydWUsImZhbWlseSI6Itiq24zZhtinINio2LHYp9uM24wiLCJpYXQiOjE2MzgxMDEzNjYsImV4cCI6MTY1OTcwMTM2NiwiYXVkIjoiYXVkaWVuY2UiLCJpc3MiOiJpc3N1ZXIifQ.vFLjXN0kPlkNcl_yNbIgpy-XtrO-kWlmTKBciiOslZ4",
-            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6ImRlbGl2ZXJ5TWFuIiwiaWF0IjoxNjM4MTAxMzY2LCJleHAiOjE2NjQwMjEzNjYsImF1ZCI6ImF1ZGllbmNlIiwiaXNzIjoiaXNzdWVyIn0.rh9eQ_jEI1HIbkBupzKixc4kxwroukTSL1-QVDppwMM"
-        },
-        "deliveryAcceptOrder": {
-            "orderId": "611b44cd83919a711a189191"
-        },
-        "customerOrder": {
-            "products": [
-                {
-                    "_id": "61014026a1701735e409000b",
-                    "name": "پپرونی",
-                    "quantity": 1,
-                    "price": "60000",
-                    "size": "medium"
-                }
-            ],
-            "address": "راهنمایی 24",
-            "lat": 33.297920,
-            "lng": 59.605933,
-            "deliveryCost": 5000,
-            "description": ""
-        },
-        "operatorRegister": {
-            "password": "1234",
-            "family": "سیما نظری",
-            "mobile": "09152226262",
-            "code": "8510",
-            "scope": "operator"
-        },
-        "operatorVerification": {
-            "mobile": "09152226262",
-            "scope": "operator"
-        },
-        "operatorLogin": {
-            "mobile": "09152226262",
-            "code": "5829",
-            "scope": "operator",
-            "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjEyNzJiNmEwM2I3OTE0YTQ4ZDZkMTcxIiwidXNlcl9hY3RpdmUiOnRydWUsImZhbWlseSI6Itiz24zZhdinINmG2LjYsduMIiwiaWF0IjoxNjM3NzU3NDA4LCJleHAiOjE2NTkzNTc0MDgsImF1ZCI6ImF1ZGllbmNlIiwiaXNzIjoiaXNzdWVyIn0.xFisGHu2-tK_2qMpXF20I40FNicY2TJom2YeWt3mvZE",
-            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6Im9wZXJhdG9yIiwiaWF0IjoxNjM3NzU3NDA4LCJleHAiOjE2NjM2Nzc0MDgsImF1ZCI6ImF1ZGllbmNlIiwiaXNzIjoiaXNzdWVyIn0.DQwJA-G8enrFqrfSPitMVJTzQjj7CHXKxtBb2bMsevE"
-        },
-        "getOrdersOperator": {
-            "type": "family",
-            "value": "شکوهی"
-        },
-        "getOrderOperator": {
-            "orderId": "612b86b72b02a800ac343a86"
-        },
-        "operatorGetCustomer": {
-            "mobile": "09307580143"
-        },
-        "addLocation": {
-            "lat": 38.066666,
-            "lng": 46.299999,
-            "speed": 80,
-            "bearing": 32
-        },
-        "deleteLocation" : {
-            "address": "بلوار موسوی قوچانی",
-            "GPS": {
-              "type": "Point",
-              "coordinates": [
-                59.588463347651405,
-                36.32792679437667
-              ]
-            }
-          },
-        "editLocation" : {
-            "oldLoc": {
-                "address": "راهنمایی 24",
-                "lat": 33.29792,
-                "lng": 59.605933
-            },
-            "newLoc": {
-                "address": "راهنمایی 24 - پلاک 117",
-                "lat": 33.29793,
-                "lng": 59.605933
-            }
-        },
-        "addOrderOperator": {
-            "products": [
-                {
-                    "_id": "61014026a1701735e409000b",
-                    "quantity": 3,
-                    "price": 75000,
-                    "size": "medium"
-                }
-            ],
-            "customer": {
-                "family": "ریحانه شکوهی",
-                "mobile": "09307580142"
-            },
-            "description": "",
-            "address": "معلم 24"
-        },
-        "cancelOrderOperator": {
-            "orderId": "611254f7e1b2a135145db25e"
-        },
-        "operatorGetOrderDeliveryLocation": {
-            "orderId": "610545a7a5365707ccd6a308"
-        },
-        "operatorComplaint":{
-            "orderId": "610aa3914ffad40698336116",
-            "des": "سفارش اشتباه اورده شده"
-        },
-        "operatorState": {
-            "state": 0
-        },
-        "reihaneh": {
-            "mobile": "09307580142",
-            "family": "ریحانه شکوهی",
-            "code": "3118"
-        },
-        "sendMenu": {
-            "mobile": "09307580142"
-        },
-        "deliveryAccount": {
-            "sheba": "IR020190000000101975503003",
-            "accountNumber": "4415474710",
-            "cardNumber": "5859 8310 9970 9258"
-        }
+    "KavenegarApi": {
+      "apikey": "36792F47687237546569536A4F56303472794A6F50673D3D",
+      "sender": "100018801880"
     }
+  },
+  "test": {
+    "user": {
+      "password": "1234",
+      "family": "شکوه",
+      "email": "m.sh@gmail.com",
+      "mobile": "09307580142",
+      "companyName": "shokouh",
+      "companyAddress": "کلاهدوز 4",
+      "mobileOrEmail": "09354400369",
+      "code": "5154",
+      "position": 2,
+      "employerMobile": "09307580142"
+    },
+    "newUser": {
+      "password": "1234",
+      "family": "علی محمودی",
+      "email": "a.mhm@gmail.com",
+      "mobile": "09202223366",
+      "code": "5338",
+      "position": 2,
+      "companyName": "mhmnejad",
+      "companyAddress": "راهنمایی 24222",
+      "employerMobile": "09307580142"
+    },
+    "userScope": "user",
+    "order": {
+      "products": [
+        {
+          "_id": "60b72afa1f24b03fe4fc7b51",
+          "quantity": 3,
+          "sellingPrice": "75000"
+        }
+      ],
+      "customer": {
+        "family": "ریحانه شکوهی",
+        "mobile": "09307580142",
+        "birthday": "1900-01-01T05:42:13.845Z"
+      },
+      "description": "",
+      "reminder": 7,
+      "address": "معلم 24",
+      "duration": 40,
+      "adrs": "کلاهدوز 4",
+      "orderId": "6107cfccf74a1a3398ca5dc8"
+    },
+    "product": {
+      "name": "لیموناد",
+      "description": "دورچین لیمو",
+      "sellingPrice": "20000"
+    },
+    "editedProduct": {
+      "_id": "60c98bbbfa4cab1dd8c70d77",
+      "active": true,
+      "name": "موهیتو عربی",
+      "description": "نعنا تازه",
+      "sellingPrice": "20000"
+    },
+    "appInfo": {
+      "versionCode": 1,
+      "os": "Android"
+    },
+    "Bill": {
+      "name": "اجاره",
+      "cost": "2000000"
+    },
+    "employee": {
+      "usernameOrMobile": "0996"
+    },
+    "getOrderParams": {
+      "customerName": " ",
+      "customerMobile": "0",
+      "startDate": "1900-01-01T05:42:13.845Z",
+      "endDate": "1900-01-01T05:42:13.845Z"
+    },
+    "getCustomerParams": {
+      "family": " ",
+      "mobile": "0",
+      "createdAtFrom": "1900-01-01T05:42:13.845Z",
+      "createdAtTo": "1900-01-01T05:42:13.845Z",
+      "lastBuyFrom": "1900-01-01T05:42:13.845Z",
+      "lastBuyTo": "2021-07-06",
+      "orderFrom": "0",
+      "orderTo": "0",
+      "totalFrom": "0",
+      "totalTo": "0"
+    },
+    "discount": {
+      "name": "تولد",
+      "type": 0,
+      "customer": "0935",
+      "percentage": 5,
+      "sms": true
+    },
+    "editedEmployee": {
+      "_id": "60d953d772c6de4484069ecb",
+      "permissions": {
+        "addOrder": true,
+        "getOrders": true,
+        "reminder": true,
+        "getProducts": true,
+        "finance": true,
+        "getCustomers": true,
+        "getEmployees": true,
+        "getDiscounts": true
+      }
+    },
+    "deleteEmployee": {
+      "_id": "60d823a1f674e530e09fc6ce"
+    },
+    "editOrderStatus": {
+      "orderId": "6110bcd020601247f463dabe"
+    },
+    "deliverySms": {
+      "orderId": "60e1b387cef3a81c70726ede",
+      "mobile": "09307580142"
+    },
+    "editApplicationByEmployer": {
+      "applicationId": "60e555fd9637c83760618ac9",
+      "status": 3
+    },
+    "editApplicationByEmployee": {
+      "employeeId": "60e555fd9637c83760618ac8",
+      "status": 3
+    },
+    "editAccount": {
+      "company": "mohaddes"
+    },
+    "editSms": {
+      "type": 2,
+      "text": " ",
+      "status": true
+    },
+    "addOrderStatus": {
+      "name": "در انتظار پرداخت",
+      "status": 6
+    },
+    "customer": {
+      "mobile": "09307580143",
+      "family": "زهرا رضوی",
+      "code": "3118"
+    },
+    "customerGetOrder": {
+      "orderId": "6125cb5483afb1a90bfa4b8f"
+    },
+    "customerCancelOrder": {
+      "orderId": "6107d01ac53ecf307cf92e70"
+    },
+    "customerPay": {
+      "orderId": "6107cfcb9ce9b70d74816e3e"
+    },
+    "customerPayValidate": {
+      "Authority": "000000000000000000000000000000585647",
+      "Status": "OK"
+    },
+    "cookRegister": {
+      "password": "1234",
+      "family": "مینا محمودی",
+      "mobile": "09152226565",
+      "code": "8920",
+      "scope": "cook"
+    },
+    "cook": {
+      "mobile": "09152226565",
+      "code": "5234",
+      "scope": "cook"
+    },
+    "deliveryRegister": {
+      "password": "1234",
+      "family": "صبا",
+      "mobile": "09152221313",
+      "code": "9777",
+      "scope": "deliveryMan"
+    },
+    "deliveryMan": {
+      "mobile": "09152226363",
+      "code": "3037",
+      "scope": "deliveryMan",
+      "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjEyNzMwNDk1MmI0NWEwM2Y4Mzk3NTQ3IiwidXNlcl9hY3RpdmUiOnRydWUsImZhbWlseSI6Itiq24zZhtinINio2LHYp9uM24wiLCJpYXQiOjE2MzgxMDEzNjYsImV4cCI6MTY1OTcwMTM2NiwiYXVkIjoiYXVkaWVuY2UiLCJpc3MiOiJpc3N1ZXIifQ.vFLjXN0kPlkNcl_yNbIgpy-XtrO-kWlmTKBciiOslZ4",
+      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6ImRlbGl2ZXJ5TWFuIiwiaWF0IjoxNjM4MTAxMzY2LCJleHAiOjE2NjQwMjEzNjYsImF1ZCI6ImF1ZGllbmNlIiwiaXNzIjoiaXNzdWVyIn0.rh9eQ_jEI1HIbkBupzKixc4kxwroukTSL1-QVDppwMM"
+    },
+    "deliveryAcceptOrder": {
+      "orderId": "611b44cd83919a711a189191"
+    },
+    "customerOrder": {
+      "products": [
+        {
+          "_id": "61014026a1701735e409000b",
+          "name": "پپرونی",
+          "quantity": 1,
+          "price": "60000",
+          "size": "medium"
+        }
+      ],
+      "address": "راهنمایی 24",
+      "lat": 33.29792,
+      "lng": 59.605933,
+      "deliveryCost": 5000,
+      "description": ""
+    },
+    "operatorRegister": {
+      "password": "1234",
+      "family": "سیما نظری",
+      "mobile": "09152226262",
+      "code": "8510",
+      "scope": "operator"
+    },
+    "operatorVerification": {
+      "mobile": "09152226262",
+      "scope": "operator"
+    },
+    "operatorLogin": {
+      "mobile": "09152226262",
+      "code": "5829",
+      "scope": "operator",
+      "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjEyNzJiNmEwM2I3OTE0YTQ4ZDZkMTcxIiwidXNlcl9hY3RpdmUiOnRydWUsImZhbWlseSI6Itiz24zZhdinINmG2LjYsduMIiwiaWF0IjoxNjM3NzU3NDA4LCJleHAiOjE2NTkzNTc0MDgsImF1ZCI6ImF1ZGllbmNlIiwiaXNzIjoiaXNzdWVyIn0.xFisGHu2-tK_2qMpXF20I40FNicY2TJom2YeWt3mvZE",
+      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6Im9wZXJhdG9yIiwiaWF0IjoxNjM3NzU3NDA4LCJleHAiOjE2NjM2Nzc0MDgsImF1ZCI6ImF1ZGllbmNlIiwiaXNzIjoiaXNzdWVyIn0.DQwJA-G8enrFqrfSPitMVJTzQjj7CHXKxtBb2bMsevE"
+    },
+    "getOrdersOperator": {
+      "type": "family",
+      "value": "شکوهی"
+    },
+    "getOrderOperator": {
+      "orderId": "612b86b72b02a800ac343a86"
+    },
+    "operatorGetCustomer": {
+      "mobile": "09307580143"
+    },
+    "addLocation": {
+      "lat": 38.066666,
+      "lng": 46.299999,
+      "speed": 80,
+      "bearing": 32
+    },
+    "deleteLocation": {
+      "address": "بلوار موسوی قوچانی",
+      "GPS": {
+        "type": "Point",
+        "coordinates": [59.588463347651405, 36.32792679437667]
+      }
+    },
+    "editLocation": {
+      "oldLoc": {
+        "address": "راهنمایی 24",
+        "lat": 33.29792,
+        "lng": 59.605933
+      },
+      "newLoc": {
+        "address": "راهنمایی 24 - پلاک 117",
+        "lat": 33.29793,
+        "lng": 59.605933
+      }
+    },
+    "addOrderOperator": {
+      "products": [
+        {
+          "_id": "61091b0ca9335b389819e893",
+          "quantity": 3,
+          "size": "medium"
+        },
+        {
+          "_id": "61091b0ca9335b389819e896",
+          "quantity": 1,
+          "size": "medium"
+        },
+        {
+          "_id": "61091b0ca9335b389819e893",
+          "quantity": 2,
+          "size": "medium"
+        }
+      ],
+      "family": " شکوهی",
+      "mobile": "09307580131",
+      "description": "",
+      "address": "معلم 3",
+      "addressId": 0,
+      "station": 31
+    },
+    "cancelOrderOperator": {
+      "orderId": "611254f7e1b2a135145db25e"
+    },
+    "operatorGetOrderDeliveryLocation": {
+      "orderId": "610545a7a5365707ccd6a308"
+    },
+    "operatorComplaint": {
+      "orderId": "610aa3914ffad40698336116",
+      "des": "سفارش اشتباه اورده شده"
+    },
+    "operatorState": {
+      "state": 0
+    },
+    "reihaneh": {
+      "mobile": "09307580142",
+      "family": "ریحانه شکوهی",
+      "code": "3118"
+    },
+    "sendMenu": {
+      "mobile": "09307580142"
+    },
+    "deliveryAccount": {
+      "sheba": "IR020190000000101975503003",
+      "accountNumber": "4415474710",
+      "cardNumber": "5859 8310 9970 9258"
+    }
+  }
 }

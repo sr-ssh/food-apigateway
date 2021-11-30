@@ -12,6 +12,7 @@ seeder.connect('mongodb://crm-x.ir:2714/food', function() {
   seeder.clearModels(['UserTypes'], function() {
  
     // Callback to populate DB once collections have been cleared
+    // Callback to populate DB once collections have been cleared
     seeder.populateModels(data, function() {
       seeder.disconnect();
     });

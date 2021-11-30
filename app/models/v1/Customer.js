@@ -6,21 +6,20 @@ let Customer = new Schema({
     active: { type: Boolean, default: true },
     family: { type: String, required: true },
     username: { type: String, unique: true, sparse: true },
-    mobile: { type: String, runique: true, sparse: true },
+    mobile: { type: String, unique: true, sparse: true },
     birthday: { type: Date},
     order: [{ type: Schema.Types.ObjectId, ref: 'Order' }] ,
     locations: [{
-        _id: false,
+        id: Schema.Types.ObjectId ,
         address: { type: String },
+        station: { type: Schema.Types.ObjectId, ref: 'Station' } ,
         GPS: {
             type: {
               type: String, 
               enum: ['Point'],
-              required: true
             },
             coordinates: {
               type: [Number],
-              required: true
             }
         }
     }]
