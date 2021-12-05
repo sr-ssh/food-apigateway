@@ -45,8 +45,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/active`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
+                .set('Authorization', cook.accessToken)
+                .set('idToken', cook.idToken)
                 .send();
             res.should.have.status(200);
         });

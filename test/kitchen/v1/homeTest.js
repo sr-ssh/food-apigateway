@@ -71,7 +71,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/verificationcode`)
-                .send(cookRegister);
+                .send(cook);
             res.should.have.status(200);
         });
 

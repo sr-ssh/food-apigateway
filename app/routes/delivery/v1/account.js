@@ -22,7 +22,8 @@ const AccountController = require(`${deliveryController}/v1/AccountController`)
  *        data: {
  *          sheba: "1631241743125", 
  *          accountNumber: "659721567835487", 
- *          cardNumber: "5859 8310 9970 9288"
+ *          cardNumber: "5859 8310 9970 9288",
+ *          charge: "140000"
  *        }
  *      }
  * }

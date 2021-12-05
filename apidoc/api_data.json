@@ -791,7 +791,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: {\n       status: true,\n       data: {\n         sheba: \"1631241743125\", \n         accountNumber: \"659721567835487\", \n         cardNumber: \"5859 8310 9970 9288\"\n       }\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: {\n       status: true,\n       data: {\n         sheba: \"1631241743125\", \n         accountNumber: \"659721567835487\", \n         cardNumber: \"5859 8310 9970 9288\",\n         charge: \"140000\"\n       }\n     }\n}",
           "type": "json"
         }
       ]
