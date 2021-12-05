@@ -72,7 +72,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/verificationcode`)
-                .send(deliveryMan);
+                .send(deliveryRegister);
             res.should.have.status(200);
         });
 
@@ -80,7 +80,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/login/verificationcode`)
-                .send(deliveryMan);
+                .send(deliveryRegister);
             res.should.have.status(200);
         });
 
@@ -88,7 +88,7 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/login`)
-                .send(deliveryMan);
+                .send(deliveryRegister);
             res.should.have.status(200);
         });
 

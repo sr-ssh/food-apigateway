@@ -29,6 +29,13 @@ let User = new Schema({
         }
     },
 
+    account: { 
+        type: Object, default:{
+            sheba: "",
+            accountNumber: "",
+            cardNumber: ""
+        }
+    },
     setting: { type: Object, default:{
         order: {
             preSms: { text: config.addOrderSms, status: false },
@@ -37,13 +44,7 @@ let User = new Schema({
         }
     },
 
-    account: { 
-        type: Object, default:{
-            sheba: "",
-            accountNumber: "",
-            cardNumber: ""
-        }
-    }
+    financialAccount: {}
 }
     
 });

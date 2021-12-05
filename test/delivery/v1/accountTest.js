@@ -6,7 +6,7 @@ const baseRoute = '/api/delivery/v1/account';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let accessToken, idToken, deliveryAccount;
+let accessToken, idToken, deliveryAccount, deliveryRegister;
 const axios = require('axios').default;
 
 
@@ -19,7 +19,8 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         deliveryAccount = appConfig.test.deliveryAccount;
         deliveryMan = appConfig.test.deliveryMan;
-        axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryMan)
+        deliveryRegister = appConfig.test.deliveryRegister;
+        axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryRegister)
             .then(function (response) {
                 response = response.data;
                 console.log(response.message)
@@ -60,8 +61,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/`)
-                .set('Authorization', deliveryMan.accessToken)
-                .set('idToken', deliveryMan.idToken)
+                .set('Authorization', deliveryRegister.accessToken)
+                .set('idToken', deliveryRegister.idToken)
                 .send(deliveryAccount);
             res.should.have.status(200);
         });

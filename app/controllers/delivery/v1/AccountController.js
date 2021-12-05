@@ -1,6 +1,6 @@
 const Controller = require(`${config.path.controllers.user}/Controller`);
 const TAG = "v1_Account";
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = new (class AccountController extends Controller {
@@ -10,8 +10,6 @@ module.exports = new (class AccountController extends Controller {
 
   async getAccount(req, res) {
     try {
-
-
       // charge
       let charge = await this.model.DeliveryFinance.aggregate([
         { $match: { deliveryId: ObjectId(req.decodedData.user_id) } },
@@ -39,7 +37,6 @@ module.exports = new (class AccountController extends Controller {
 
       let data = {};
       if (charge.length) data.charge = charge[0].charge;
-
 
       let filter = { active: true, _id: req.decodedData.user_id };
       let delivery = await this.model.User.findOne(filter, "account").lean();
@@ -92,24 +89,18 @@ module.exports = new (class AccountController extends Controller {
         .isString();
       if (this.showValidationErrors(req, res)) return;
 
-      let filter = { active: true, _id: req.decodedData.user_id };
+      let filter = { active: true, _id: ObjectId(req.decodedData.user_id) };
       let update = {
-        account: {
-          cardNumber: req.body.cardNumber,
-          sheba: req.body.sheba || "",
-          accountNumber: req.body.accountNumber || "",
+        $set: {
+          account: {
+            cardNumber: req.body.cardNumber,
+            sheba: req.body.sheba || "",
+            accountNumber: req.body.accountNumber || ""
+          },
         },
       };
-      // if (req.body.sheba) update.$set['account.sheba'] = req.body.sheba;
-      // if (req.body.accountNumber)
-      //   update.$set['account.accountNumber'] = req.body.accountNumber;
-      let user = await this.model.User.findOne(filter, 'account');
-      let a = user.hired
-      a = user.account;
-      a = user.account.cardNumber
-      user.account.cardNumber = req.body.cardNumber;
-      user.markModified("account");
-      await user.save();
+      
+      await this.model.User.update(filter, update, { multi: true});
 
       return res.json({
         success: true,
