@@ -3056,6 +3056,26 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/delivery/v1/charge",
+    "title": "get delivery charges",
+    "version": "1.0.0",
+    "name": "getCharges",
+    "description": "<p>get delivery charges</p>",
+    "group": "user",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"شارژ پیک ها با موفقیت ارسال شد\",\n     data: [...{\n         _id: \"612a05bc30b788f3a369ad8e\", \n         charge: 10000, \n         mobile: \"09152226363\", \n         family: \"تینا برایی\", \n         sheba: \"IR020190000000101975503003\", \n         cardNumber: \"5859 8310 9970 9258\",\n         accountNumber: \"4415474710\"\n      }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/charge.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "get",
     "url": "/api/user/v1/customer/",
     "title": "get customer",
     "version": "1.0.0",

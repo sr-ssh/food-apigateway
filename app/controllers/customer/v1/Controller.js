@@ -116,7 +116,7 @@ module.exports = new class HomeController extends Controller {
             let idToken = jwt.sign(payload, config.secret, options )
 
             options = {
-                expiresIn: config.accesssTokenExpire,
+                expiresIn: config.accessTokenExpire,
                 algorithm: config.algorithm,
                 issuer: config.issuer,
                 audience: config.audience
