@@ -18,6 +18,7 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         deliveryMan = appConfig.test.deliveryMan;
         deliveryAcceptOrder = appConfig.test.deliveryAcceptOrder;
+        deliveryRegister = appConfig.test.deliveryRegister;
         axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryMan)
             .then(function (response) {
                 response = response.data;
@@ -68,7 +69,7 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send();
-            resshould.have.status(200);
+            res.should.have.status(200);
         });
 
     })
@@ -79,8 +80,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
+                .set('Authorization', deliveryRegister.accessToken)
+                .set('idToken', deliveryRegister.idToken)
                 .send(deliveryAcceptOrder);
             res.should.have.status(200);
         });
@@ -89,8 +90,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/finish`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
+                .set('Authorization', deliveryRegister.accessToken)
+                .set('idToken', deliveryRegister.idToken)
                 .send(deliveryAcceptOrder);
             res.should.have.status(200);
         });
