@@ -6,7 +6,7 @@ const baseRoute = '/api/delivery/v1/charge';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let accessToken, idToken, customer ;
+let accessToken, idToken, customer;
 const axios = require('axios').default;
 
 

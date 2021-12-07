@@ -29,6 +29,8 @@ let User = new Schema({
         }
     },
 
+    charge:{type:Schema.Types.ObjectId,ref:'DliveryFinance'},
+
     setting: { type: Object, default:{
         order: {
             preSms: { text: config.addOrderSms, status: false },

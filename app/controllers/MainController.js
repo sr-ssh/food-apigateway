@@ -156,7 +156,7 @@ module.exports = class MainController {
             return res.json({ success: false, message: "کد تایید منقضی شده است", data: { status: false } });
 
         //remove the code
-        await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
+        await this.model.VerificationCode.findOneAndRemove({ _id: veriCode._id })
 
 
         // save user in mongodb
@@ -381,5 +381,25 @@ module.exports = class MainController {
         return res.json({ success: true, message: "کاربر با موفقیت وارد شد", data: data });
 
     }
+
+    convertPersianNumberToEnglish(str) {
+        let
+            persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
+            arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g]
+
+
+        if (typeof str === 'string') {
+            for (var i = 0; i < 10; i++) {
+                str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
+            }
+        }
+        return str;
+    };
+
+    seprateNumberFromString(str) {
+        return str.match(/\d+/)[0] // "3"
+    }
+
+
 
 }

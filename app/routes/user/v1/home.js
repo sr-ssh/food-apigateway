@@ -33,70 +33,70 @@ const HomeController = require(`${userController}/v1/HomeController`)
  *     message:"کاربری با این مشخصات موجود است"
  * }
  */
- router.post('/',HomeController.register.bind(HomeController));
+router.post('/', HomeController.register.bind(HomeController));
 
 
 
 
- /**
-  * @api {post} /api/user/v1/app/info app info 
-  * @apiVersion 1.0.0
-  * @apiName info
-  * @apiDescription app info 
-  * @apiGroup user
-  * @apiParam  {int} versionCode versionCode
-  * @apiParam  {varchar} os os
-  * @apiSuccessExample {json} Success-Response:
-  * {
-  *   status: true,
-  *   message:"اطلاعات نرم افزار فرستاده شد",
-  *   data:{
-  *       update:false,
-  *       updateUrl:"http://cafebazar.com/ir.team-x.ir/mohsenapp,
-  *       force:false
-  *  }
-  *}
-  * @apiErrorExample {json} Error-Response:
-  *{
-  *    status: false,
-  *    message:"کاربر بلاک می باشد",
-  *    data:{}
-  *}
-  */
-  router.post('/app/info',HomeController.appInfo.bind(HomeController));
- 
- 
- 
- 
- /**
-  * @api {post} /api/user/v1/login login
-  * @apiVersion 1.0.0
-  * @apiName login
-  * @apiDescription login user
-  * @apiGroup user
-  * @apiParam  {varchar} mobileOrEmail user mobile or email
-  * @apiParam  {varchar} password user password
-  * @apiSuccessExample {json} Success-Response:
-  * {
-  *     success:true,
-  *     message:"کاربر با موفقیت وارد شد",
-  *     data:{
-  *          idToken: idToken, 
-  *          accessToken: accessToken
-  *     }
-  * }
-  * @apiErrorExample {json} Error-Response:
-  * {
-  *      success:false,
-  *      message:"کاربر وارد نشد",
-  *      data:{}
-  * }
-  */
-  router.post('/login',HomeController.login.bind(HomeController));
+/**
+ * @api {post} /api/user/v1/app/info app info 
+ * @apiVersion 1.0.0
+ * @apiName info
+ * @apiDescription app info 
+ * @apiGroup user
+ * @apiParam  {int} versionCode versionCode
+ * @apiParam  {varchar} os os
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *   status: true,
+ *   message:"اطلاعات نرم افزار فرستاده شد",
+ *   data:{
+ *       update:false,
+ *       updateUrl:"http://cafebazar.com/ir.team-x.ir/mohsenapp,
+ *       force:false
+ *  }
+ *}
+ * @apiErrorExample {json} Error-Response:
+ *{
+ *    status: false,
+ *    message:"کاربر بلاک می باشد",
+ *    data:{}
+ *}
+ */
+router.post('/app/info', HomeController.appInfo.bind(HomeController));
 
 
 
-  
+
+/**
+ * @api {post} /api/user/v1/login login
+ * @apiVersion 1.0.0
+ * @apiName login
+ * @apiDescription login user
+ * @apiGroup user
+ * @apiParam  {varchar} mobileOrEmail user mobile or email
+ * @apiParam  {varchar} password user password
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *     success:true,
+ *     message:"کاربر با موفقیت وارد شد",
+ *     data:{
+ *          idToken: idToken, 
+ *          accessToken: accessToken
+ *     }
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * {
+ *      success:false,
+ *      message:"کاربر وارد نشد",
+ *      data:{}
+ * }
+ */
+router.post('/login', HomeController.login.bind(HomeController));
+
+
+
+
 /**
  * @api {post} /api/user/v1/verificationcode requset verification Code 
  * @apiVersion 1.0.0
@@ -115,6 +115,6 @@ const HomeController = require(`${userController}/v1/HomeController`)
  *      message:"کاربری با این شماره موبایل در دسترس نمی باشد"
  * }
  */
- router.post('/verificationcode',HomeController.verificationCode.bind(HomeController));
+router.post('/verificationcode', HomeController.verificationCode.bind(HomeController));
 
- module.exports = router;
+module.exports = router;

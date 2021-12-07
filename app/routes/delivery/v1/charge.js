@@ -6,7 +6,7 @@ const { delivery: deliveryController } = config.path.controllers;
 
 const ChargeController = require(`${deliveryController}/v1/ChargeController`)
 
-  
+
 /**
  * @api {get} /api/delivery/v1/charge get delivery charge
  * @apiVersion 1.0.0
@@ -20,7 +20,7 @@ const ChargeController = require(`${deliveryController}/v1/ChargeController`)
  *      data: 60000
  * }
  */
- router.get('/',ChargeController.getCharge.bind(ChargeController));
+router.get('/', ChargeController.getCharge.bind(ChargeController));
 
 
 module.exports = router;

@@ -16,35 +16,39 @@ module.exports = new class ChargeController extends Controller {
         try {
 
             let charge = await this.model.DeliveryFinance.aggregate([
-                { "$match" : { "deliveryId" : ObjectId(req.decodedData.user_id) }},
-                { "$group": {
-                    "_id": "$deliveryId",
-                    "debit": {
-                        "$sum": { 
-                            "$cond": [
-                                { "$eq": [ "$type", "debit" ] },
-                                "$cost", 
-                                0
-                            ]
-                        }
-                    },
-                    "credit": { 
-                        "$sum": { 
-                            "$cond": [
-                                { "$eq": [ "$type", "credit"] },
-                                "$cost", 
-                                0
-                            ]
-                        }
-                    },
-                }},
-                { "$project": {
-                    "charge": { "$subtract": [ "$debit", "$credit" ] }
-                }}
+                { "$match": { "deliveryId": ObjectId(req.decodedData.user_id) } },
+                {
+                    "$group": {
+                        "_id": "$deliveryId",
+                        "debit": {
+                            "$sum": {
+                                "$cond": [
+                                    { "$eq": ["$type", "debit"] },
+                                    "$cost",
+                                    0
+                                ]
+                            }
+                        },
+                        "credit": {
+                            "$sum": {
+                                "$cond": [
+                                    { "$eq": ["$type", "credit"] },
+                                    "$cost",
+                                    0
+                                ]
+                            }
+                        },
+                    }
+                },
+                {
+                    "$project": {
+                        "charge": { "$subtract": ["$debit", "$credit"] }
+                    }
+                }
             ])
 
             let data = 0;
-            if(charge.length)
+            if (charge.length)
                 data = charge[0].charge
 
             return res.json({ success: true, message: "شارژ کاربر با موفقیت ارسال شد", data: data });
@@ -61,9 +65,9 @@ module.exports = new class ChargeController extends Controller {
         }
     }
 
-    
 
-    
+
+
 }
 
 

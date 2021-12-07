@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 
-//middlewares
-const authMiddleware = require("../middleware/operatorAuth")
-const authError = require('../middleware/authError');
+// //middlewares
+// const authMiddleware = require("../middleware/operatorAuth")
+// const authError = require('../middleware/authError');
 
 const v1 = require('./v1');
 
@@ -16,9 +16,9 @@ const corsOptions = {
     optionSuccessStatus: 200,
 }
 
-router.use(cors(corsOptions));
+// router.use(cors(corsOptions));
 
-router.use(authMiddleware, authError);
+// router.use(authMiddleware, authError);
 
 router.use('/v1', v1);
 

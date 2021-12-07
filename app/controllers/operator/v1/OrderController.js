@@ -1,6 +1,8 @@
 const Controller = require(`${config.path.controllers.user}/Controller`);
 const TAG = "v1_Order";
 let mongoose = require("mongoose");
+const axios = require('axios');
+const appConfig = require('config')
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -348,7 +350,9 @@ module.exports = new (class HomeController extends Controller {
         .optional()
         .isString();
 
-      if (this.showValidationErrors(req, res)) return;
+      // if (this.showValidationErrors(req, res)) return;
+
+
 
       //merge duplicated product ids
       let userProducts = [];
@@ -389,7 +393,7 @@ module.exports = new (class HomeController extends Controller {
         ).discount;
       }
 
-      //get status id
+      // //get status id
       let filter = { active: true, name: config.activeOrders };
       let status = await this.model.OrderStatusBar.findOne(filter, "_id");
 
@@ -404,7 +408,7 @@ module.exports = new (class HomeController extends Controller {
       });
 
       //find station
-      filter = { code: req.body.station };
+      filter = { code: 31 };
       let station = await this.model.Station.findOne(filter);
       if (!station)
         return res.json({
@@ -412,6 +416,8 @@ module.exports = new (class HomeController extends Controller {
           message: "ایستگاه موجود نمی باشد",
           data: { status: false },
         });
+
+      let priceDelivery = this.calcingPricePeyk(req.body, { lat: 36.334363, lng: 59.544461 }, { lat: req.body.latitude, lng: req.body.longitudes })
 
       //find customer
       filter = { mobile: req.body.mobile };
@@ -476,6 +482,68 @@ module.exports = new (class HomeController extends Controller {
 
       if (!res.headersSent) return res.status(500).json(handelError);
     }
+  }
+
+
+  async calcingPricePeyk(req, originStation, destinationStation) {
+
+    // console.log(originStation, destinationStation, "484");
+
+    let data = await axios.get(`https://api.neshan.org/v3/direction?type=motorcycle&origin=${originStation.lat},${originStation.lng}&destination=${destinationStation.lat},${destinationStation.lng}`, { headers: appConfig.neshan }).then(data => data.data.routes[0].legs[0]);
+
+    let distance = "۲۵ کیلومتر"
+    let time = "۵ دقیقه";
+    let price;
+
+
+    if (!distance) distance = "۰ کیلومتر"
+    if (!time) time = "۰ دقیقه"
+
+
+    const mystr = this.convertPersianNumberToEnglish(distance);
+
+
+    distance = this.seprateNumberFromString(mystr) * 1000;
+
+    time = this.convertPersianNumberToEnglish(time);
+
+    time = this.seprateNumberFromString(time);
+
+
+    let config = await this.model.Settings.findOne({}, "pricing");
+    let priceConfig = config.pricing;
+
+    price = priceConfig.entry;
+
+
+    price += distance * priceConfig.distance;
+
+
+    price += (time / 60) * priceConfig.duration;
+
+
+
+    if (price < priceConfig.lowest) price = priceConfig.lowest
+
+
+    let bigPart = Math.floor(price / 1000) * 1000 //37000
+    let smallPart = price - bigPart;   //833333
+
+    if (smallPart <= 250) {
+      smallPart = 0;
+    } else if (smallPart <= 500) {
+      smallPart = 500;
+    } else if (smallPart <= 750) {
+      smallPart = 500;
+    } else {
+      smallPart = 1000;
+    }
+    price = bigPart + smallPart;
+
+
+
+    return price;
+
   }
 
   async editAddress(req, res) {
