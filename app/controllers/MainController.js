@@ -201,7 +201,7 @@ module.exports = class MainController {
         let idToken = jwt.sign(payload, config.secret, options)
 
         options = {
-            expiresIn: config.accesssTokenExpire,
+            expiresIn: config.accessTokenExpire,
             algorithm: config.algorithm,
             issuer: config.issuer,
             audience: config.audience
@@ -366,7 +366,7 @@ module.exports = class MainController {
         let idToken = jwt.sign(payload, config.secret, options)
 
         options = {
-            expiresIn: config.accesssTokenExpire,
+            expiresIn: config.accessTokenExpire,
             algorithm: config.algorithm,
             issuer: config.issuer,
             audience: config.audience

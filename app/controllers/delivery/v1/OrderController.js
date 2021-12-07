@@ -183,7 +183,7 @@ module.exports = new class OrderController extends Controller {
             //send smd
             let settings = await this.model.Settings.findOne({active: true})
             if(settings.order.finishedOrderSms.status)
-                this.sendSms(order.customer.mobile, settings.order.finishedOrderSms.text + '\n' + settings.companyName)
+                this.sendSms(order.customer.mobile, settings.order.finishedOrderSms.text + '\n' + settings.order.surveySms.text + '\n' + settings.companyName)
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)

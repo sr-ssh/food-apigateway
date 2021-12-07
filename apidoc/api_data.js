@@ -791,7 +791,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: {\n       status: true,\n       data: {\n         sheba: \"1631241743125\", \n         accountNumber: \"659721567835487\", \n         cardNumber: \"5859 8310 9970 9288\"\n       }\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: {\n       status: true,\n       data: {\n         sheba: \"1631241743125\", \n         accountNumber: \"659721567835487\", \n         cardNumber: \"5859 8310 9970 9288\",\n         charge: \"140000\"\n       }\n     }\n}",
           "type": "json"
         }
       ]
@@ -1156,17 +1156,44 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/delivery/v1/charge",
-    "title": "get delivery charge",
+    "url": "/api/delivery/v1/account",
+    "title": "add and edit delivery account",
     "version": "1.0.0",
     "name": "registerAccount",
-    "description": "<p>get delivery charge</p>",
+    "description": "<p>add and edit delivery account</p>",
     "group": "delivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "cardNumber",
+            "description": "<p>delivery card number</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "accountNumber",
+            "description": "<p>delivery account number</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "sheba",
+            "description": "<p>delivery sheba</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"شارژ کاربر با موفقیت ارسال شد\",\n     data: 60000\n}",
+          "content": "{\n     success: true,\n     message: \"اطلاعات حساب با موفقیت ثبت شد\",\n     data: {\n       status: true\n     }\n}",
           "type": "json"
         }
       ]
@@ -3025,6 +3052,26 @@ define({ "api": [
       ]
     },
     "filename": "app/routes/user/v1/finance.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "get",
+    "url": "/api/delivery/v1/charge",
+    "title": "get delivery charges",
+    "version": "1.0.0",
+    "name": "getCharges",
+    "description": "<p>get delivery charges</p>",
+    "group": "user",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"شارژ پیک ها با موفقیت ارسال شد\",\n     data: [...{\n         _id: \"612a05bc30b788f3a369ad8e\", \n         charge: 10000, \n         mobile: \"09152226363\", \n         family: \"تینا برایی\", \n         sheba: \"IR020190000000101975503003\", \n         cardNumber: \"5859 8310 9970 9258\",\n         accountNumber: \"4415474710\"\n      }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/charge.js",
     "groupTitle": "user"
   },
   {

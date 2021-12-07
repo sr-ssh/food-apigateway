@@ -6,7 +6,7 @@ module.exports = {
     audience: "audience",
     algorithm: "HS256",
     issuer: "issuer",
-    accesssTokenExpire: "300 days" ,
+    accessTokenExpire: "300 days" ,
     idTokenExpire: "250 days",
     userScope: "manager",
     customerScope: "customer",

@@ -83,8 +83,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/app/info`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
+                .set('Authorization', operatorLogin.accessToken)
+                .set('idToken', operatorLogin.idToken)
                 .send(appInfo);
             res.should.have.status(200);
         });

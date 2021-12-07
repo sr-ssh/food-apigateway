@@ -16,14 +16,13 @@ module.exports = new class EmployeeController extends Controller {
 
             req.checkBody('_id', 'please enter employee id').notEmpty().isString();
             req.checkBody('permissions', 'please enter employee permissions').notEmpty();
-            req.checkBody('permissions.addOrder', 'please enter addOrder status').notEmpty().isBoolean();
-            req.checkBody('permissions.getOrders', 'please enter getOrders status').notEmpty().isBoolean();
-            req.checkBody('permissions.reminder', 'please enter reminder status').notEmpty().isBoolean();
+            req.checkBody('permissions.getSalesReport', 'please enter getSalesReport status').notEmpty().isBoolean();
+            req.checkBody('permissions.getPricing', 'please enter getPricing status').notEmpty().isBoolean();
             req.checkBody('permissions.getProducts', 'please enter getProducts status').notEmpty().isBoolean();
-            req.checkBody('permissions.finance', 'please enter finance status').notEmpty().isBoolean();
+            req.checkBody('permissions.getStations', 'please enter getStations status').notEmpty().isBoolean();
             req.checkBody('permissions.getCustomers', 'please enter getCustomers status').notEmpty().isBoolean();
             req.checkBody('permissions.getEmployees', 'please enter getEmployees status').notEmpty().isBoolean();
-            req.checkBody('permissions.getDiscounts', 'please enter getDiscounts status').notEmpty().isBoolean();
+            req.checkBody('permissions.getDeliveryCharges', 'please enter getDeliveryCharges status').notEmpty().isBoolean();
             if (this.showValidationErrors(req, res)) return;
 
             let filter = { _id: req.body._id }

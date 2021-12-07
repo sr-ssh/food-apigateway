@@ -21,6 +21,7 @@ let Settings = new Schema({
       inCookingOrderSms: { text: { type: String }, status: { type: Boolean } },
       inServiceOrderSms: { text: { type: String }, status: { type: Boolean } },
       finishedOrderSms: { text: { type: String }, status: { type: Boolean } },
+      surveySms: { text: { type: String }, status: { type: Boolean } }
 
     }
   },

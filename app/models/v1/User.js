@@ -18,36 +18,37 @@ let User = new Schema({
     address: String,
     permission: {
         type: Object, default: {
-            addOrder: false,
-            getOrders: false,
-            reminder: false,
+            getSalesReport: false,
             getProducts: false,
-            finance: false,
             getCustomers: false,
             getEmployees: false,
-            getDiscounts: false
+            getDeliveryCharges: false,
+            getPricing: false,
+            getStations: false
         }
     },
 
-    charge:{type:Schema.Types.ObjectId,ref:'DliveryFinance'},
-
-    setting: { type: Object, default:{
-        order: {
-            preSms: { text: config.addOrderSms, status: false },
-            postDeliverySms: { text: "" , status: false },
-            postCustomerSms: { text: config.deliveryAcknowledgeSms , status: false }
-        }
-    },
-
-    account: { 
-        type: Object, default:{
+    account: {
+        type: Object, default: {
             sheba: "",
             accountNumber: "",
             cardNumber: ""
         }
+    },
+    setting: {
+        type: Object, default: {
+            order: {
+                preSms: { text: config.addOrderSms, status: false },
+                postDeliverySms: { text: "", status: false },
+                postCustomerSms: { text: config.deliveryAcknowledgeSms, status: false }
+            }
+        },
+
+        financialAccount: {},
+        sipNumber: { type: Number, unique: true, sparse: true },
+        sipPass: String
     }
-}
-    
+
 });
 
 User.pre('validate', function (next) {

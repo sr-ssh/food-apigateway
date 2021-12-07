@@ -1,12 +1,12 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
-const sectionName = 'V1 delivery account Tests';
-const baseRoute = '/api/delivery/v1/account';
+const sectionName = 'V1 user charge Tests';
+const baseRoute = '/api/user/v1/charge';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let accessToken, idToken, deliveryAccount, deliveryRegister;
+let accessToken, idToken, user ;
 const axios = require('axios').default;
 
 
@@ -16,14 +16,11 @@ describe(`${sectionName}`, () => {
 
 
     before((done) => {
-        console.log('Waiting to ensure database connection stablished ');
-        deliveryAccount = appConfig.test.deliveryAccount;
-        deliveryMan = appConfig.test.deliveryMan;
-        deliveryRegister = appConfig.test.deliveryRegister;
-        axios.post(`http://localhost:4000/api/delivery/v1/login`, deliveryRegister)
+        console.log('Waiting to ensure database connection established ');
+        user = appConfig.test.user;
+        axios.post(`http://127.0.0.1:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
-                console.log(response.message)
                 if (response.success) {
                     idToken = response.data.idToken
                     accessToken = response.data.accessToken
@@ -43,12 +40,12 @@ describe(`${sectionName}`, () => {
 
     describe('Check get Apis', () => {
 
-        it('check get account', async () => {
+        it('check get charge', async () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/`)
-                .set('Authorization', deliveryMan.accessToken)
-                .set('idToken', deliveryMan.idToken)
+                .set('Authorization', user.accessToken)
+                .set('idToken', user.idToken)
                 .send();
             res.should.have.status(200);
         });
@@ -56,16 +53,6 @@ describe(`${sectionName}`, () => {
     });
 
     describe('Check Post Apis', () => {
-
-        it('check add account', async () => {
-            const res = await chai
-                .request(server)
-                .post(`${baseRoute}/`)
-                .set('Authorization', deliveryRegister.accessToken)
-                .set('idToken', deliveryRegister.idToken)
-                .send(deliveryAccount);
-            res.should.have.status(200);
-        });
 
     });
 

@@ -16,7 +16,7 @@ module.exports = new class ChargeController extends Controller {
         try {
 
             let charge = await this.model.DeliveryFinance.aggregate([
-                { "$match": { "deliveryId": ObjectId(req.decodedData.user_id) } },
+                // { "$match" : { "deliveryId" : ObjectId(req.decodedData.user_id) }},
                 {
                     "$group": {
                         "_id": "$deliveryId",

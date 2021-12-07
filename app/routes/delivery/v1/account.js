@@ -22,7 +22,8 @@ const AccountController = require(`${deliveryController}/v1/AccountController`)
  *        data: {
  *          sheba: "1631241743125", 
  *          accountNumber: "659721567835487", 
- *          cardNumber: "5859 8310 9970 9288"
+ *          cardNumber: "5859 8310 9970 9288",
+ *          charge: "140000"
  *        }
  *      }
  * }
@@ -41,16 +42,21 @@ const AccountController = require(`${deliveryController}/v1/AccountController`)
 
 
  /**
- * @api {get} /api/delivery/v1/charge get delivery charge
+ * @api {get} /api/delivery/v1/account add and edit delivery account
  * @apiVersion 1.0.0
  * @apiName registerAccount
- * @apiDescription get delivery charge
+ * @apiDescription add and edit delivery account
  * @apiGroup delivery
+ * @apiParam {String} cardNumber delivery card number
+ * @apiParam {String} [accountNumber] delivery account number
+ * @apiParam {String} [sheba] delivery sheba
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
- *      message: "شارژ کاربر با موفقیت ارسال شد",
- *      data: 60000
+ *      message: "اطلاعات حساب با موفقیت ثبت شد",
+ *      data: {
+ *        status: true
+ *      }
  * }
  */
   router.post('/',AccountController.registerAccount.bind(AccountController));
