@@ -43,7 +43,9 @@ let User = new Schema({
         }
     },
 
-    financialAccount: {}
+    financialAccount: {},
+    sipNumber: { type: Number, unique: true, sparse: true},
+    sipPass: String
 }
     
 });
