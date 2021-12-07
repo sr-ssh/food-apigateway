@@ -31,7 +31,7 @@ const DiscountController = require(`${userController}/v1/DiscountController`)
  /**
  * @api {get} /api/user/v1/discount/ get discounts 
  * @apiVersion 1.0.0
- * @apiName getDiscounts
+ * @apiName getDeliveryCharges
  * @apiDescription get discounts.There is only 2 types: "تولد" and "فرد" ,if the type be "تولد" then we don't have customer field otherwise we have customer.
  * @apiGroup user
  * @apiSuccessExample {json} Success-Response:

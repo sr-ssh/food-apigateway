@@ -128,14 +128,13 @@ module.exports = new (class HomeController extends Controller {
         },
       };
       params.permission = {
-        addOrder: true,
-        getOrders: true,
-        reminder: true,
+        getSalesReport: true,
         getProducts: true,
-        finance: true,
         getCustomers: true,
         getEmployees: true,
-        getDiscounts: true,
+        getDeliveryCharges: true,
+        getPricing: true,
+        getStations: true
       };
     }
 

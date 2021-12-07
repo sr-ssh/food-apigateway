@@ -90,14 +90,13 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
  *     data: 
  *      {
  *         permission: { 
-            addOrder: true,
-            getOrders: true,
-            reminder: true,
-            getProducts: true,
-            finance: true,
-            getCustomers: true,
-            getEmployees: true,
-            getDiscounts: true
+            getSalesReport: false,
+            getProducts: false,
+            getCustomers: false,
+            getEmployees: false,
+            getDeliveryCharges: false,
+            getPricing: false,
+            getStations: false
           },
         type: 1,
         status: 3

@@ -18,14 +18,13 @@ let User = new Schema({
     address: String,
     permission: {
         type: Object, default: {
-            addOrder: false,
-            getOrders: false,
-            reminder: false,
+            getSalesReport: false,
             getProducts: false,
-            finance: false,
             getCustomers: false,
             getEmployees: false,
-            getDiscounts: false
+            getDeliveryCharges: false,
+            getPricing: false,
+            getStations: false
         }
     },
 
