@@ -350,7 +350,7 @@ module.exports = new (class HomeController extends Controller {
         .optional()
         .isString();
 
-      // if (this.showValidationErrors(req, res)) return;
+      if (this.showValidationErrors(req, res)) return;
 
 
 
