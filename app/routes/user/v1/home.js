@@ -130,6 +130,23 @@ router.post('/verificationcode', HomeController.verificationCode.bind(HomeContro
  */
 router.get('/stations', HomeController.getStations.bind(HomeController));
 
+/**
+ * @api {post} /api/user/v1/stations addStations
+ * @apiVersion 1.0.0
+ * @apiName adding stations
+ * @apiDescription adding stations
+ * @apiGroup user
+ * @apiParam  {String} description
+ * @apiParam  {boolean} active
+ * @apiParam  {Number} latitude
+ * @apiParam  {Number} longitudes
+ * @apiParam  {Number} code
+ * @apiParam  {Number} dimeter
+ * @apiSuccessExample {json} Success-Response:
+ * {success:true,message:"عملیات با موفقیت انجام شد",data:{}}
+ * @apiErrorExample {json} Error-Response:{}
+ */
+router.post('/stations', HomeController.addStations.bind(HomeController));
 
 
 module.exports = router;
