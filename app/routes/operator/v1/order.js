@@ -83,7 +83,7 @@ router.get("/product", OrderController.getOrderProducts.bind(OrderController));
  *      data: { status: true }
  * }
  */
- router.post("/menu", OrderController.sendMenuForCustomer.bind(OrderController));
+router.post("/menu", OrderController.sendMenuForCustomer.bind(OrderController));
 
 /**
 * @api {get} /api/operator/v1/order/ get order

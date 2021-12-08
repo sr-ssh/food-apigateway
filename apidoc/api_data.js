@@ -1785,6 +1785,48 @@ define({ "api": [
     "groupTitle": "operator"
   },
   {
+    "type": "delete",
+    "url": "/api/operator/v1/queue/exit",
+    "title": "queue",
+    "name": "deleteQueue",
+    "version": "1.0.0",
+    "description": "<p>delete queue db: api_op_deleteQueue</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "sipNumber",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{success: true, message: 'عملیات با موفقیت انجام شد.', data: {queues: \"100,200\",sipnumber: 545}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"errors\":[]}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
+    "groupTitle": "operator"
+  },
+  {
     "type": "put",
     "url": "/api/operator/v1/order/editAddress",
     "title": "editAddress",
@@ -1831,6 +1873,48 @@ define({ "api": [
       ]
     },
     "filename": "app/routes/operator/v1/order.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "post",
+    "url": "/api/operator/v1/queue/enter",
+    "title": "enter",
+    "name": "enterQueue",
+    "version": "1.0.0",
+    "description": "<p>enter queue db: api_op_enterqueue</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "sipNumber",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{success: true, message: 'عملیات با موفقیت انجام شد.', data: {queues: \"100,200\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"errors\":[{\"param\":\"sipNumber\",\"msg\":\"please enter sipNumber\"}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
     "groupTitle": "operator"
   },
   {
@@ -3217,7 +3301,7 @@ define({ "api": [
     "url": "/api/user/v1/discount/",
     "title": "get discounts",
     "version": "1.0.0",
-    "name": "getDiscounts",
+    "name": "getDeliveryCharges",
     "description": "<p>get discounts.There is only 2 types: &quot;تولد&quot; and &quot;فرد&quot; ,if the type be &quot;تولد&quot; then we don't have customer field otherwise we have customer.</p>",
     "group": "user",
     "success": {
@@ -3284,7 +3368,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        permission: { \n            addOrder: true,\n            getOrders: true,\n            reminder: true,\n            getProducts: true,\n            finance: true,\n            getCustomers: true,\n            getEmployees: true,\n            getDiscounts: true\n          },\n        type: 1,\n        status: 3\n}",
+          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        permission: { \n            getSalesReport: false,\n            getProducts: false,\n            getCustomers: false,\n            getEmployees: false,\n            getDeliveryCharges: false,\n            getPricing: false,\n            getStations: false\n          },\n        type: 1,\n        status: 3\n}",
           "type": "json"
         }
       ]

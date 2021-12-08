@@ -408,7 +408,7 @@ module.exports = new (class HomeController extends Controller {
       });
 
       //find station
-      filter = { code: 31 };
+      filter = { code: req.body.station };
       let station = await this.model.Station.findOne(filter);
       if (!station)
         return res.json({
@@ -417,7 +417,7 @@ module.exports = new (class HomeController extends Controller {
           data: { status: false },
         });
 
-      let priceDelivery = this.calcingPricePeyk(req.body, { lat: 36.334363, lng: 59.544461 }, { lat: req.body.latitude, lng: req.body.longitudes })
+      let priceDelivery = this.calcingPricePeyk(req.body, { lat: 36.334363, lng: 59.544461 }, { lat: station.latitude, lng: station.longitudes })
 
       //find customer
       filter = { mobile: req.body.mobile };
@@ -444,12 +444,13 @@ module.exports = new (class HomeController extends Controller {
 
       // add order
       let params = {
-        products: products,
+        products,
         customer: customer._id,
         address: req.body.address,
         status: status._id,
         description: req.body.description || "",
         station: station.id,
+        priceDelivery
       };
 
       let order = await this.model.Order.create(params);

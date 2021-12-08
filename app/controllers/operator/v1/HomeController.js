@@ -107,7 +107,7 @@ module.exports = new class HomeController extends Controller {
                 family: req.decodedData.family,
                 userId: req.decodedData.user_id,
                 sipNumber: operatorStatus.sipNumber || "",
-                sipServer: config.operatorSipServer,
+                sipServer: appConfig.sipServer.host,
                 sipPassword: operatorStatus.sipPass || "",
                 activeInQueue: operatorStatus.status
             }
@@ -163,6 +163,10 @@ module.exports = new class HomeController extends Controller {
         try {
             req.checkBody("sipNumber", "please enter sipNumber").notEmpty();
             if (this.showValidationErrors(req, res)) return;
+
+            if (!req.decodedData.user_active)
+                return res.json({ success: true, message: "کاربر بلاک می باشد", data: { status: false } })
+
             let queue = 1882;
             await axios.get(
                 `${appConfig.sipServer.host}/api/v1/queue/add/?queue=${queue}&source=${req.body.sipNumber}&agent=${req.body.sipNumber}&penalty=0`,
@@ -171,17 +175,19 @@ module.exports = new class HomeController extends Controller {
                         username: appConfig.sipServer.username,
                         password: appConfig.sipServer.password,
                     },
-                }
-            )
-                .then(function (res) {
-                    console.log(res);
-                })
-                .catch(function (error) {
-                    console.log('activate voip error' + error.status);
-                });
+                }).then().catch((error) => console.log('activate voip error' + error.status));
 
+            // save in mongodb
+            let filter = { active: true, _id: req.decodedData.user_id }
+            let user = await this.model.User.findOne(filter)
+            user.status = true
+            await user.save()
 
-            return res.json({ success: true, message: 'عملیات با موفقیت انجام شد.' });
+            let message
+
+            if (req.body.sipNumber) message = "شما با موفقیت وارد صف شدید"
+
+            return res.json({ success: true, message, data: { status: true } })
         } catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
@@ -197,9 +203,7 @@ module.exports = new class HomeController extends Controller {
         try {
             req.checkBody("sipNumber", "please enter sipNumber").notEmpty();
             if (this.showValidationErrors(req, res)) return;
-
             let queue = 1882;
-
             await axios.get(`${appConfig.sipServer.host}/api/v1/queue/remove/?queue=${queue}&agent=${req.body.sipNumber}`,
                 {
                     auth: {
@@ -207,9 +211,20 @@ module.exports = new class HomeController extends Controller {
                         password: appConfig.sipServer.password,
                     },
                 }
-            ).then((res) => console.log(res)).catch(err => console.log('activate voip error' + err.status));
+            ).then().catch(err => console.log('activate voip error' + err.status));
 
-            return res.json({ success: true, message: 'عملیات با موفقیت انجام شد.' });
+            // save in mongodb
+            let filter = { active: true, _id: req.decodedData.user_id }
+            let user = await this.model.User.findOne(filter)
+            user.status = true
+            await user.save()
+
+            let message
+
+            if (req.body.sipNumber) message = "شما با موفقیت از صف خارج شدید"
+
+            return res.json({ success: true, message, data: { status: true } })
+
 
         } catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
