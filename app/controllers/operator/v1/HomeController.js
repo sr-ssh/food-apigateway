@@ -107,7 +107,7 @@ module.exports = new class HomeController extends Controller {
                 family: req.decodedData.family,
                 userId: req.decodedData.user_id,
                 sipNumber: operatorStatus.sipNumber || 423,
-                sipServer: appConfig.sipServer.host,
+                sipServer: appConfig.sipServer.operatorSipServer,
                 sipPassword: operatorStatus.sipPass || "423",
                 activeInQueue: operatorStatus.status
             }

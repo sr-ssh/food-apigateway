@@ -17,7 +17,8 @@
     "sipServer": {
         "host": "http://simotel.tehran.turbotaxi.ir",
         "username": "mohsen",
-        "password": "mohsen123"
+        "password": "mohsen123",
+        "operatorSipServer": "sbc.turbotaxi.ir:4060"
 },
     "neshan": {
         "Api-Key": "service.A9lOxhl5xqZ2Aadyh89zAOYj4azGXP4BDtFgElVj"
