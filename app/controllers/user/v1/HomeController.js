@@ -389,4 +389,25 @@ module.exports = new (class HomeController extends Controller {
       if (!res.headersSent) return res.status(500).json(handelError);
     }
   }
+
+  async getStations(req, res) {
+    try {
+
+      let data = await this.model.Station.find({}, 'active code description latitude longitudes dimeter')
+
+      return res.json({ success: true, message: "عملیات با موفقیت انجام شد", data })
+
+    }
+    catch (err) {
+      let handelError = new this.transforms.ErrorTransform(err)
+        .parent(this.controllerTag)
+        .class(TAG)
+        .method('getStations')
+        .inputParams(req.body)
+        .call();
+
+      if (!res.headersSent) return res.status(500).json(handelError);
+    }
+  }
+
 })();

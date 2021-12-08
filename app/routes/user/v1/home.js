@@ -117,4 +117,19 @@ router.post('/login', HomeController.login.bind(HomeController));
  */
 router.post('/verificationcode', HomeController.verificationCode.bind(HomeController));
 
+
+/**
+ * @api {get} /api/user/v1/stations getStations
+ * @apiVersion 1.0.0
+ * @apiName get stations
+ * @apiDescription getting stations
+ * @apiGroup user
+ * @apiSuccessExample {json} Success-Response:
+ * {success:true,message:"عملیات با موفقیت انجام شد",data:{}}
+ * @apiErrorExample {json} Error-Response:{}
+ */
+router.get('/stations', HomeController.getStations.bind(HomeController));
+
+
+
 module.exports = router;
