@@ -159,11 +159,10 @@ router.put('/activate', HomeController.activate.bind(HomeController));
 
 
 /**
- * @api {post} /api/operator/v1/queue/enter enter
+ * @api {post} /api/operator/v1/queue/enter enterQueue
  * @apiName enterQueue
  * @apiVersion 1.0.0
  * @apiDescription enter queue 
- * db: api_op_enterqueue
  * @apiGroup operator
  * @apiParam {int} sipNumber
  * @apiParam {String} sipPassword
@@ -175,11 +174,10 @@ router.put('/activate', HomeController.activate.bind(HomeController));
 router.post('/queue/enter', HomeController.enterQueue.bind(HomeController));
 
 /**
- * @api {delete} /api/operator/v1/queue/exit queue
- * @apiName deleteQueue
+ * @api {delete} /api/operator/v1/queue/exit exitQueue
+ * @apiName exitQueue
  * @apiVersion 1.0.0
- * @apiDescription delete queue 
- * db: api_op_deleteQueue
+ * @apiDescription exit queue 
  * @apiGroup operator
  * @apiParam {int} sipNumber
  * @apiSuccessExample {json} Success-Response:

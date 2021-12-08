@@ -1785,48 +1785,6 @@
     "groupTitle": "operator"
   },
   {
-    "type": "delete",
-    "url": "/api/operator/v1/queue/exit",
-    "title": "queue",
-    "name": "deleteQueue",
-    "version": "1.0.0",
-    "description": "<p>delete queue db: api_op_deleteQueue</p>",
-    "group": "operator",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "sipNumber",
-            "description": ""
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{success: true, message: 'عملیات با موفقیت انجام شد.', data: {queues: \"100,200\",sipnumber: 545}}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\"errors\":[]}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/operator/v1/home.js",
-    "groupTitle": "operator"
-  },
-  {
     "type": "put",
     "url": "/api/operator/v1/order/editAddress",
     "title": "editAddress",
@@ -1878,10 +1836,10 @@
   {
     "type": "post",
     "url": "/api/operator/v1/queue/enter",
-    "title": "enter",
+    "title": "enterQueue",
     "name": "enterQueue",
     "version": "1.0.0",
-    "description": "<p>enter queue db: api_op_enterqueue</p>",
+    "description": "<p>enter queue</p>",
     "group": "operator",
     "parameter": {
       "fields": {
@@ -1917,6 +1875,48 @@
         {
           "title": "Error-Response:",
           "content": "{\"errors\":[{\"param\":\"sipNumber\",\"msg\":\"please enter sipNumber\"}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/operator/v1/home.js",
+    "groupTitle": "operator"
+  },
+  {
+    "type": "delete",
+    "url": "/api/operator/v1/queue/exit",
+    "title": "exitQueue",
+    "name": "exitQueue",
+    "version": "1.0.0",
+    "description": "<p>exit queue</p>",
+    "group": "operator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "sipNumber",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{success: true, message: 'عملیات با موفقیت انجام شد.', data: {queues: \"100,200\",sipnumber: 545}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"errors\":[]}",
           "type": "json"
         }
       ]
