@@ -106,9 +106,9 @@ module.exports = new class HomeController extends Controller {
                 pushToken: config.operatorPushToken,
                 family: req.decodedData.family,
                 userId: req.decodedData.user_id,
-                sipNumber: operatorStatus.sipNumber || "",
+                sipNumber: operatorStatus.sipNumber || 421,
                 sipServer: appConfig.sipServer.host,
-                sipPassword: operatorStatus.sipPass || "",
+                sipPassword: operatorStatus.sipPass || "423",
                 activeInQueue: operatorStatus.status
             }
             return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
