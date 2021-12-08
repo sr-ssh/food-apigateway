@@ -353,7 +353,6 @@ module.exports = new (class HomeController extends Controller {
       if (this.showValidationErrors(req, res)) return;
 
 
-
       //merge duplicated product ids
       let userProducts = [];
       req.body.products.forEach(function (item) {
@@ -398,6 +397,7 @@ module.exports = new (class HomeController extends Controller {
       let status = await this.model.OrderStatusBar.findOne(filter, "_id");
 
       let products = userProducts.map((product) => {
+
         return {
           _id: product._id,
           quantity: product.quantity,
@@ -408,8 +408,9 @@ module.exports = new (class HomeController extends Controller {
       });
 
       //find station
-      filter = { code: req.body.station };
+      filter = { code: 31 };
       let station = await this.model.Station.findOne(filter);
+      console.log(station);
       if (!station)
         return res.json({
           success: true,
@@ -417,7 +418,7 @@ module.exports = new (class HomeController extends Controller {
           data: { status: false },
         });
 
-      let priceDelivery = this.calcingPricePeyk(req.body, { lat: 36.334363, lng: 59.544461 }, { lat: station.latitude, lng: station.longitudes })
+      let priceDelivery = this.calcingPricePeyk({ lat: 36.334363, lng: 59.544461 }, { lat: station.latitude, lng: station.longitudes })
 
       //find customer
       filter = { mobile: req.body.mobile };
@@ -436,6 +437,7 @@ module.exports = new (class HomeController extends Controller {
           station: station._id,
         };
       }
+
       let customer = await this.model.Customer.findOneAndUpdate(
         filter,
         update,
@@ -486,23 +488,18 @@ module.exports = new (class HomeController extends Controller {
   }
 
 
-  async calcingPricePeyk(req, originStation, destinationStation) {
-
-    // console.log(originStation, destinationStation, "484");
+  async calcingPricePeyk(originStation, destinationStation) {
 
     let data = await axios.get(`https://api.neshan.org/v3/direction?type=motorcycle&origin=${originStation.lat},${originStation.lng}&destination=${destinationStation.lat},${destinationStation.lng}`, { headers: appConfig.neshan }).then(data => data.data.routes[0].legs[0]);
 
-    let distance = "۲۵ کیلومتر"
-    let time = "۵ دقیقه";
+    let distance = data.distance.text;
+    let time = data.duration.text;
     let price;
-
 
     if (!distance) distance = "۰ کیلومتر"
     if (!time) time = "۰ دقیقه"
 
-
     const mystr = this.convertPersianNumberToEnglish(distance);
-
 
     distance = this.seprateNumberFromString(mystr) * 1000;
 
@@ -510,19 +507,14 @@ module.exports = new (class HomeController extends Controller {
 
     time = this.seprateNumberFromString(time);
 
-
     let config = await this.model.Settings.findOne({}, "pricing");
     let priceConfig = config.pricing;
 
-    price = priceConfig.entry;
-
+    price = priceConfig.enter * 1;
 
     price += distance * priceConfig.distance;
 
-
     price += (time / 60) * priceConfig.duration;
-
-
 
     if (price < priceConfig.lowest) price = priceConfig.lowest
 
@@ -540,8 +532,6 @@ module.exports = new (class HomeController extends Controller {
       smallPart = 1000;
     }
     price = bigPart + smallPart;
-
-
 
     return price;
 
