@@ -2,6 +2,8 @@
 const Controller = require(`${config.path.controllers.user}/Controller`);
 const TAG = 'v1_Home';
 const jwt = require("jsonwebtoken");
+const axios = require("axios")
+const appConfig = require('config')
 
 
 module.exports = new class HomeController extends Controller {
@@ -82,23 +84,23 @@ module.exports = new class HomeController extends Controller {
 
             if (this.showValidationErrors(req, res)) return;
 
-            if(!req.decodedData.user_active)
-                return res.json({ success: false, message: "کاربر بلاک می باشد", data: {}})
+            if (!req.decodedData.user_active)
+                return res.json({ success: false, message: "کاربر بلاک می باشد", data: {} })
 
             // save in mongodb
-            let filter = { active: true, name: config.kitchenApp, os: req.body.os, latestVersion: req.body.versionCode}
-            let updateInfo = await this.model.AppInfo.findOne(filter).sort({createdAt:-1}).limit(1)
-            if(!updateInfo)
+            let filter = { active: true, name: config.kitchenApp, os: req.body.os, latestVersion: req.body.versionCode }
+            let updateInfo = await this.model.AppInfo.findOne(filter).sort({ createdAt: -1 }).limit(1)
+            if (!updateInfo)
                 return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
 
             //get oparator status
             filter = { active: true, _id: req.decodedData.user_id }
             let operatorStatus = await this.model.User.findOne(filter, 'status sipNumber sipPass')
 
-            let data = { 
-                status: true, 
-                update: updateInfo.update, 
-                isForce: updateInfo.isForce, 
+            let data = {
+                status: true,
+                update: updateInfo.update,
+                isForce: updateInfo.isForce,
                 updateUrl: updateInfo.updateUrl,
                 pushId: config.operatorPushId,
                 pushToken: config.operatorPushToken,
@@ -128,12 +130,13 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('state', 'please enter state').notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
-            if(!req.decodedData.user_active)
-                return res.json({ success: true, message: "کاربر بلاک می باشد", data: {status:false} })
+            if (!req.decodedData.user_active)
+                return res.json({ success: true, message: "کاربر بلاک می باشد", data: { status: false } })
 
             // save in mongodb
             let filter = { active: true, _id: req.decodedData.user_id }
             let user = await this.model.User.findOne(filter)
+            console.log(user);
             user.status = req.body.state
             await user.save()
 
@@ -142,7 +145,7 @@ module.exports = new class HomeController extends Controller {
                 message = "شما با موفقیت وارد صف شدید"
             else message = "شما با موفقیت از صف خارج شدید"
 
-            return res.json({ success: true, message: message, data: {status: true} })
+            return res.json({ success: true, message: message, data: { status: true } })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
@@ -152,6 +155,39 @@ module.exports = new class HomeController extends Controller {
                 .inputParams(req.body)
                 .call();
 
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+    async enterQueue(req, res) {
+        try {
+            req.checkBody("sipNumber", "please enter sipNumber").notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+            let queue = 1882;
+            await axios.get(
+                `${appConfig.sipServer.host}/api/v1/queue/add/?queue=${queue}&source=${req.body.sipNumber}&agent=${req.body.sipNumber}&penalty=0`,
+                {
+                    auth: {
+                        username: appConfig.sipServer.username,
+                        password: appConfig.sipServer.password,
+                    },
+                }
+            )
+                .then(function (response) {
+                })
+                .catch(function (error) {
+                    console.log('activate voip error' + error.status);
+                });
+
+
+            return res.json({ success: true, message: 'عملیات با موفقیت انجام شد.' });
+        } catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method("enterQueue")
+                .inputParams(req.body)
+                .call();
             if (!res.headersSent) return res.status(500).json(handelError);
         }
     }

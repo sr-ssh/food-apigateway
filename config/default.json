@@ -14,6 +14,11 @@
             "sender": "100018801880"
         }
     },
+    "sipServer": {
+        "host": "http://simotel.tehran.turbotaxi.ir",
+        "username": "mohsen",
+        "password": "47421team-x"
+},
     "neshan": {
         "Api-Key": "service.A9lOxhl5xqZ2Aadyh89zAOYj4azGXP4BDtFgElVj"
 }
