@@ -408,7 +408,7 @@ module.exports = new (class HomeController extends Controller {
       });
 
       //find station
-      filter = { code: 31 };
+      filter = { code: req.body.station };
       let station = await this.model.Station.findOne(filter);
       console.log(station);
       if (!station)
