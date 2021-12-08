@@ -1892,6 +1892,13 @@ define({ "api": [
             "optional": false,
             "field": "sipNumber",
             "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "sipPassword",
+            "description": ""
           }
         ]
       }
