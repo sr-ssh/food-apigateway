@@ -16,6 +16,8 @@ let User = new Schema({
     mobile: { type: String, required: true, unique: true },
     company: String,
     address: String,
+    sipNumber: { type: Number, unique: true, sparse: true },
+    sipPass: String,
     permission: {
         type: Object, default: {
             getSalesReport: false,
@@ -44,10 +46,10 @@ let User = new Schema({
             }
         },
 
-        financialAccount: {},
-        sipNumber: { type: Number, unique: true, sparse: true },
-        sipPass: String
-    }
+        financialAccount: {}
+
+    },
+
 
 });
 

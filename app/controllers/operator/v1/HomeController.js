@@ -84,18 +84,16 @@ module.exports = new class HomeController extends Controller {
 
             if (this.showValidationErrors(req, res)) return;
 
-            if (!req.decodedData.user_active)
-                return res.json({ success: false, message: "کاربر بلاک می باشد", data: {} })
+            if (!req.decodedData.user_active) return res.json({ success: false, message: "کاربر بلاک می باشد", data: {} })
 
             // save in mongodb
             let filter = { active: true, name: config.kitchenApp, os: req.body.os, latestVersion: req.body.versionCode }
             let updateInfo = await this.model.AppInfo.findOne(filter).sort({ createdAt: -1 }).limit(1)
-            if (!updateInfo)
-                return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
+            if (!updateInfo) return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
 
             //get oparator status
-            filter = { active: true, _id: req.decodedData.user_id }
-            let operatorStatus = await this.model.User.findOne(filter, 'status sipNumber sipPass')
+            filter = { active: true, _id: "619b8516782bb7809cc3c8f4" }
+            let operatorStatus = await this.model.User.findOne(filter)
 
             let data = {
                 status: true,
@@ -106,12 +104,12 @@ module.exports = new class HomeController extends Controller {
                 pushToken: config.operatorPushToken,
                 family: req.decodedData.family,
                 userId: req.decodedData.user_id,
-                sipNumber: operatorStatus.sipNumber || 423,
+                sipNumber: operatorStatus.sipNumber || '',
                 sipServer: appConfig.sipServer.operatorSipServer,
-                sipPassword: operatorStatus.sipPass || "423",
+                sipPassword: operatorStatus.sipPass || "",
                 activeInQueue: operatorStatus.status
             }
-            return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
+            return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data });
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
