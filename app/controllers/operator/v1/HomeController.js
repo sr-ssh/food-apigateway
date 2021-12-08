@@ -106,7 +106,7 @@ module.exports = new class HomeController extends Controller {
                 pushToken: config.operatorPushToken,
                 family: req.decodedData.family,
                 userId: req.decodedData.user_id,
-                sipNumber: operatorStatus.sipNumber || 421,
+                sipNumber: operatorStatus.sipNumber || 423,
                 sipServer: appConfig.sipServer.host,
                 sipPassword: operatorStatus.sipPass || "423",
                 activeInQueue: operatorStatus.status
