@@ -173,5 +173,20 @@ router.put('/activate', HomeController.activate.bind(HomeController));
  */
 router.post('/queue/enter', HomeController.enterQueue.bind(HomeController));
 
+/**
+ * @api {delete} /api/operator/v1/queue/exit queue
+ * @apiName deleteQueue
+ * @apiVersion 1.0.0
+ * @apiDescription delete queue 
+ * db: api_op_deleteQueue
+ * @apiGroup operator
+ * @apiParam {int} sipNumber
+ * @apiSuccessExample {json} Success-Response:
+ * {success: true, message: 'عملیات با موفقیت انجام شد.', data: {queues: "100,200",sipnumber: 545}}
+ * @apiErrorExample {json} Error-Response:
+ * {"errors":[]}
+ */
+router.delete('/queue/exit', HomeController.deleteQueue.bind(HomeController));
+
 
 module.exports = router;

@@ -193,6 +193,35 @@ module.exports = new class HomeController extends Controller {
         }
     }
 
+    async deleteQueue(req, res) {
+        try {
+            req.checkBody("sipNumber", "please enter sipNumber").notEmpty();
+            if (this.showValidationErrors(req, res)) return;
+
+            let queue = 1882;
+
+            await axios.get(`${appConfig.sipServer.host}/api/v1/queue/remove/?queue=${queue}&agent=${req.body.sipNumber}`,
+                {
+                    auth: {
+                        username: appConfig.sipServer.username,
+                        password: appConfig.sipServer.password,
+                    },
+                }
+            ).then((res) => console.log(res)).catch(err => console.log('activate voip error' + err.status));
+
+            return res.json({ success: true, message: 'عملیات با موفقیت انجام شد.' });
+
+        } catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method("deleteQueue")
+                .inputParams()
+                .call();
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 
