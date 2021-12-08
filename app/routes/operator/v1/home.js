@@ -166,6 +166,7 @@ router.put('/activate', HomeController.activate.bind(HomeController));
  * db: api_op_enterqueue
  * @apiGroup operator
  * @apiParam {int} sipNumber
+ * @apiParam {String} sipPassword
  * @apiSuccessExample {json} Success-Response:
  * {success: true, message: 'عملیات با موفقیت انجام شد.', data: {queues: "100,200"}}
  * @apiErrorExample {json} Error-Response:

@@ -162,6 +162,7 @@ module.exports = new class HomeController extends Controller {
     async enterQueue(req, res) {
         try {
             req.checkBody("sipNumber", "please enter sipNumber").notEmpty();
+            req.checkBody("sipPassword", "please enter sipPassword").notEmpty();
             if (this.showValidationErrors(req, res)) return;
 
             if (!req.decodedData.user_active)
@@ -169,7 +170,7 @@ module.exports = new class HomeController extends Controller {
 
             let queue = 1882;
             await axios.get(
-                `${appConfig.sipServer.host}/api/v1/queue/add/?queue=${queue}&source=${req.body.sipNumber}&agent=${req.body.sipNumber}&penalty=0`,
+                `${appConfig.sipServer.host}/api/v1/queue/add/?queue=${queue}&source=${req.body.sipNumber}&agent=${req.body.sipPassword}&penalty=0`,
                 {
                     auth: {
                         username: appConfig.sipServer.username,
