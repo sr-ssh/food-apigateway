@@ -173,7 +173,8 @@ module.exports = new class HomeController extends Controller {
                     },
                 }
             )
-                .then(function (response) {
+                .then(function (res) {
+                    console.log(res);
                 })
                 .catch(function (error) {
                     console.log('activate voip error' + error.status);
