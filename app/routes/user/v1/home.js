@@ -126,7 +126,10 @@ router.post('/verificationcode', HomeController.verificationCode.bind(HomeContro
  * @apiGroup user
  * @apiSuccessExample {json} Success-Response:
  * {success:true,message:"عملیات با موفقیت انجام شد",data:{}}
- * @apiErrorExample {json} Error-Response:{}
+ * @apiErrorExample {json} Error-Response:
+ * {
+ * 
+ * }
  */
 router.get('/stations', HomeController.getStations.bind(HomeController));
 
@@ -144,7 +147,9 @@ router.get('/stations', HomeController.getStations.bind(HomeController));
  * @apiParam  {Number} dimeter
  * @apiSuccessExample {json} Success-Response:
  * {success:true,message:"عملیات با موفقیت انجام شد",data:{}}
- * @apiErrorExample {json} Error-Response:{}
+ * @apiErrorExample {json} Error-Response:
+ * {
+ * }
  */
 router.post('/stations', HomeController.addStations.bind(HomeController));
 

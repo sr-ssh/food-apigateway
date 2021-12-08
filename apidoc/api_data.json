@@ -2707,6 +2707,83 @@
   },
   {
     "type": "post",
+    "url": "/api/user/v1/stations",
+    "title": "addStations",
+    "version": "1.0.0",
+    "name": "adding_stations",
+    "description": "<p>adding stations</p>",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "active",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "latitude",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "longitudes",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "dimeter",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{success:true,message:\"عملیات با موفقیت انجام شد\",data:{}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/home.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "post",
     "url": "/api/user/v1/employee/block",
     "title": "block unblock employee",
     "version": "1.0.0",
@@ -3575,6 +3652,35 @@
       ]
     },
     "filename": "app/routes/user/v1/account.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/stations",
+    "title": "getStations",
+    "version": "1.0.0",
+    "name": "get_stations",
+    "description": "<p>getting stations</p>",
+    "group": "user",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{success:true,message:\"عملیات با موفقیت انجام شد\",data:{}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/home.js",
     "groupTitle": "user"
   },
   {
