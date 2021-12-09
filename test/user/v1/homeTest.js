@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user,appInfo, accessToken, idToken, newUser;
+let user, appInfo, accessToken, idToken, newUser;
 const axios = require('axios').default;
 
 
@@ -41,7 +41,13 @@ describe(`${sectionName}`, () => {
 
 
     describe('Check get Apis', () => {
-
+        it('check register', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/`)
+                .send(user);
+            res.should.have.status(200);
+        });
     });
 
     describe('Check Post Apis', () => {
@@ -73,7 +79,7 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
-        
+
         it('check verification code', async () => {
             const res = await chai
                 .request(server)
