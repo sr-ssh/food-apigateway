@@ -6,7 +6,7 @@ const { user: userController } = config.path.controllers;
 
 const ChargeController = require(`${userController}/v1/ChargeController`)
 
-  
+
 /**
  * @api {get} /api/delivery/v1/charge get delivery charges
  * @apiVersion 1.0.0
@@ -28,7 +28,30 @@ const ChargeController = require(`${userController}/v1/ChargeController`)
  *       }]
  * }
  */
- router.get('/',ChargeController.getCharges.bind(ChargeController));
+router.get('/', ChargeController.getCharges.bind(ChargeController));
+
+/**
+* @api {post} /api/delivery/v1/charge adding charge delivery
+* @apiVersion 1.0.0
+* @apiName addingCharges
+* @apiDescription adding delivery charges
+* @apiGroup user
+* @apiSuccessExample {json} Success-Response:
+* {
+*      success: true,
+*      message: "شارژ پیک با موفقیت دریافت شد",
+*      data: [...{
+*          _id: "612a05bc30b788f3a369ad8e", 
+*          charge: 10000, 
+*          mobile: "09152226363", 
+*          family: "تینا برایی", 
+*          sheba: "IR020190000000101975503003", 
+*          cardNumber: "5859 8310 9970 9258",
+*          accountNumber: "4415474710"
+*       }]
+* }
+*/
+router.post('/', ChargeController.addCharges.bind(ChargeController));
 
 
 module.exports = router;

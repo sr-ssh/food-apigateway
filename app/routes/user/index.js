@@ -17,7 +17,7 @@ const corsOptions = {
 }
 router.use(cors(corsOptions));
 
-router.use(authMiddleware, authError);
+// router.use(authMiddleware, authError);
 
 router.use('/v1', v1);
 
