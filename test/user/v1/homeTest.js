@@ -41,11 +41,13 @@ describe(`${sectionName}`, () => {
 
 
     describe('Check get Apis', () => {
-        it('check register', async () => {
+
+        it('check get stations', async () => {
+
             const res = await chai
                 .request(server)
-                .post(`${baseRoute}/`)
-                .send(user);
+                .get(`${baseRoute}/stations`)
+
             res.should.have.status(200);
         });
     });

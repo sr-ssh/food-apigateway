@@ -37,6 +37,9 @@
        "lowest":"8000"
 
     },
+    "stations":{
+        
+    },
     "newUser": {
       "password": "1234",
       "family": "علی محمودی",
