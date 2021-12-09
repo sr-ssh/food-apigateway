@@ -121,6 +121,25 @@ module.exports = new class SettingsController extends Controller {
         }
     }
 
+    async getPricing(req, res) {
+        try {
+            let filter = { active: true }
+            let settings = await this.model.Settings.findOne(filter, 'pricing')
+
+            res.json({ success: true, message: "تنظیمات قیمتم دهی با موفقیت فرستاده شد", data: settings.pricing })
+
+        } catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getPricing')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

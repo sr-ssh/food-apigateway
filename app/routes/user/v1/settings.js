@@ -1,12 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-// controllers 
+// controllers
 const { user: userController } = config.path.controllers;
 
-const SettingsController = require(`${userController}/v1/SettingsController`)
-
-
+const SettingsController = require(`${userController}/v1/SettingsController`);
 
 /**
  * @api {put} /api/user/v1/settings/sms edit sms settings
@@ -22,9 +20,10 @@ const SettingsController = require(`${userController}/v1/SettingsController`)
  *      success: true,
  *      message: "ویرایش با موفقیت انجام شد"
  */
-router.put('/order', SettingsController.editOrderSettings.bind(SettingsController));
-
-
+router.put(
+  "/order",
+  SettingsController.editOrderSettings.bind(SettingsController)
+);
 
 /**
  * @api {get} /api/user/v1/settings/order get order settings
@@ -67,9 +66,33 @@ router.put('/order', SettingsController.editOrderSettings.bind(SettingsControlle
         }
  * }
  */
-router.get('/order', SettingsController.getOrderSettings.bind(SettingsController));
+router.get(
+  "/order",
+  SettingsController.getOrderSettings.bind(SettingsController)
+);
 
-
+/**
+ * @api {get} /api/user/v1/settings/order get pricing settings
+ * @apiVersion 1.0.0
+ * @apiName getPricing
+ * @apiDescription get pricing settings
+ * @apiGroup user
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "تنظیمات قیمت دهی با موفقیت فرستاده شد",
+ *      data: {
+ *          enter: "3000", 
+ *          distance: 2, 
+ *          duration: 2, 
+ *          lowest: "8000"
+ *      }
+ * }
+ */
+router.get(
+  "/pricing",
+  SettingsController.getPricing.bind(SettingsController)
+);
 
 /**
  * @api {put} /api/user/v1/settings/pricing editPricing
@@ -81,12 +104,12 @@ router.get('/order', SettingsController.getOrderSettings.bind(SettingsController
  * @apiParam {Number} distance
  * @apiParam {Number} duration
  * @apiParam {String} lowest
- * 
+ *
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
  *      message: "ویرایش با موفقیت انجام شد"
  */
-router.put('/pricing', SettingsController.editPricing.bind(SettingsController));
+router.put("/pricing", SettingsController.editPricing.bind(SettingsController));
 
 module.exports = router;

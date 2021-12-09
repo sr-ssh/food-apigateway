@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
 const sectionName = 'V1 user settings Tests';
-const baseRoute = '/api/user/v1/setting';
+const baseRoute = '/api/user/v1/settings';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
@@ -52,6 +52,16 @@ describe(`${sectionName}`, () => {
                 .get(`${baseRoute}/sms`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
+                .send()
+            res.should.have.status(200)
+        })
+
+        it('check get pricing', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/pricing`)
+                .set('Authorization', user.accessToken)
+                .set('idToken', user.idToken)
                 .send()
             res.should.have.status(200)
         })

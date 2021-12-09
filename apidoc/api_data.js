@@ -3694,6 +3694,26 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/user/v1/settings/order",
+    "title": "get pricing settings",
+    "version": "1.0.0",
+    "name": "getPricing",
+    "description": "<p>get pricing settings</p>",
+    "group": "user",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"تنظیمات قیمت دهی با موفقیت فرستاده شد\",\n     data: {\n         enter: \"3000\", \n         distance: 2, \n         duration: 2, \n         lowest: \"8000\"\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/settings.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "get",
     "url": "/api/user/v1/product/",
     "title": "get product tyoes",
     "version": "1.0.0",
