@@ -3011,6 +3011,60 @@ define({ "api": [
   },
   {
     "type": "put",
+    "url": "/api/user/v1/settings/pricing",
+    "title": "editPricing",
+    "version": "1.0.0",
+    "name": "editPricing",
+    "description": "<p>manager can change pricing with this api !</p>",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "enter",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "distance",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "duration",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lowest",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"ویرایش با موفقیت انجام شد\"",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/settings.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "put",
     "url": "/api/user/v1/product/",
     "title": "edit product",
     "version": "1.0.0",
@@ -3759,11 +3813,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-<<<<<<< HEAD
-          "content": "{\n\n}",
-=======
           "content": "{\n}",
->>>>>>> 84c080f9e4faf7cfc0636b4782a56e2d5c93d6b0
           "type": "json"
         }
       ]
