@@ -35,33 +35,33 @@ module.exports = new (class ChargeController extends Controller {
             as: "delivery",
           },
         },
-        {$unwind: '$delivery'},
+        { $unwind: '$delivery' },
         {
           $project: {
             charge: { $subtract: ["$debit", "$credit"] },
             mobile: "$delivery.mobile",
             family: "$delivery.family",
             sheba: {
-                $cond: [
-                  { $gt: ["$delivery.account.sheba", null] },
-                  "$delivery.account.sheba",
-                  "",
-                ],
-              },
+              $cond: [
+                { $gt: ["$delivery.account.sheba", null] },
+                "$delivery.account.sheba",
+                "",
+              ],
+            },
             cardNumber: {
-                $cond: [
-                  { $gt: ["$delivery.account.cardNumber", null] },
-                  "$delivery.account.cardNumber",
-                  "",
-                ],
-              },
+              $cond: [
+                { $gt: ["$delivery.account.cardNumber", null] },
+                "$delivery.account.cardNumber",
+                "",
+              ],
+            },
             accountNumber: {
-                $cond: [
-                  { $gt: ["$delivery.account.accountNumber", null] },
-                  "$delivery.account.accountNumber",
-                  "",
-                ],
-              }, 
+              $cond: [
+                { $gt: ["$delivery.account.accountNumber", null] },
+                "$delivery.account.accountNumber",
+                "",
+              ],
+            },
           },
         },
       ]);
@@ -76,6 +76,40 @@ module.exports = new (class ChargeController extends Controller {
         .parent(this.controllerTag)
         .class(TAG)
         .method("getCharges")
+        .inputParams(req.params)
+        .call();
+
+      if (!res.headersSent) return res.status(500).json(handelError);
+    }
+  }
+
+  async addCharges(req, res) {
+    try {
+
+      console.log(req.body);
+      const params = {
+        deliveryId: "610922f3e5bdcc11fd46c051",
+        type: config.debit,
+        cost: 5000
+
+      }
+      let data = await this.model.DeliveryFinance.create({
+        params
+
+      })
+
+      console.log(data);
+
+      // return res.json({
+      //   success: true,
+      //   message: "شارژ کاربر با موفقیت ارسال شد",
+      //   data: data,
+      // });
+    } catch (err) {
+      let handelError = new this.transforms.ErrorTransform(err)
+        .parent(this.controllerTag)
+        .class(TAG)
+        .method("addCharges")
         .inputParams(req.params)
         .call();
 
