@@ -38,6 +38,11 @@
 
     },
     "stations":{
+        "description":"ایستگاه تست",
+        "active":false,
+        "latitude":"5454555",
+        "longitudes":"5588888",
+        "code":250
         
     },
     "newUser": {

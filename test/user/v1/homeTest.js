@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let user, appInfo, accessToken, idToken, newUser;
+let user, appInfo, accessToken, idToken, newUser, stations;
 const axios = require('axios').default;
 
 
@@ -20,6 +20,7 @@ describe(`${sectionName}`, () => {
         user = appConfig.test.user;
         appInfo = appConfig.test.appInfo;
         newUser = appConfig.test.newUser;
+        stations = appConfig.test.stations;
         axios.post(`http://localhost:4000/api/user/v1/login`, user)
             .then(function (response) {
                 response = response.data;
@@ -59,6 +60,14 @@ describe(`${sectionName}`, () => {
                 .request(server)
                 .post(`${baseRoute}/`)
                 .send(user);
+            res.should.have.status(200);
+        });
+
+        it('check stations', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/stations`)
+                .send(stations);
             res.should.have.status(200);
         });
 
