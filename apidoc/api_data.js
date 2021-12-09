@@ -3183,6 +3183,90 @@ define({ "api": [
     "groupTitle": "user"
   },
   {
+    "type": "put",
+    "url": "/api/user/v1/stations",
+    "title": "editStations",
+    "version": "1.0.0",
+    "name": "editing_stations",
+    "description": "<p>editing stations</p>",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "active",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "latitude",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "longitudes",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "dimeter",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{success:true,message:\"عملیات با موفقیت انجام شد\",data:{}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/home.js",
+    "groupTitle": "user"
+  },
+  {
     "type": "get",
     "url": "/api/user/v1/employee/application",
     "title": "get employees applications",
@@ -3675,7 +3759,11 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
+<<<<<<< HEAD
           "content": "{\n\n}",
+=======
+          "content": "{\n}",
+>>>>>>> 84c080f9e4faf7cfc0636b4782a56e2d5c93d6b0
           "type": "json"
         }
       ]

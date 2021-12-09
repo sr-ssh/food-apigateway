@@ -128,7 +128,6 @@ router.post('/verificationcode', HomeController.verificationCode.bind(HomeContro
  * {success:true,message:"عملیات با موفقیت انجام شد",data:{}}
  * @apiErrorExample {json} Error-Response:
  * {
- * 
  * }
  */
 router.get('/stations', HomeController.getStations.bind(HomeController));
@@ -152,6 +151,28 @@ router.get('/stations', HomeController.getStations.bind(HomeController));
  * }
  */
 router.post('/stations', HomeController.addStations.bind(HomeController));
+
+/**
+ * @api {put} /api/user/v1/stations editStations
+ * @apiVersion 1.0.0
+ * @apiName editing stations
+ * @apiDescription editing stations
+ * @apiGroup user
+ * @apiParam  {varchar} _id
+ * @apiParam  {String} description
+ * @apiParam  {boolean} active
+ * @apiParam  {Number} latitude
+ * @apiParam  {Number} longitudes
+ * @apiParam  {Number} code
+ * @apiParam  {Number} dimeter
+ * @apiSuccessExample {json} Success-Response:
+ * {success:true,message:"عملیات با موفقیت انجام شد",data:{}}
+ * @apiErrorExample {json} Error-Response:
+ * {
+ * }
+ */
+router.put('/stations', HomeController.editStations.bind(HomeController));
+
 
 
 module.exports = router;
