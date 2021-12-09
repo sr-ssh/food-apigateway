@@ -27,7 +27,10 @@ module.exports = new (class ChargeController extends Controller {
             },
           },
         },
+
+
         {
+
           $lookup: {
             from: "users",
             localField: "_id",
@@ -64,12 +67,14 @@ module.exports = new (class ChargeController extends Controller {
             },
           },
         },
-      ]);
+      ])
+
+      data = data.filter(i => i.charge > 0)
 
       return res.json({
         success: true,
         message: "شارژ کاربر با موفقیت ارسال شد",
-        data: data,
+        data,
       });
     } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)
@@ -86,25 +91,20 @@ module.exports = new (class ChargeController extends Controller {
   async addCharges(req, res) {
     try {
 
-      console.log(req.body);
       const params = {
-        deliveryId: "610922f3e5bdcc11fd46c051",
-        type: config.debit,
-        cost: 5000
+        deliveryId: req.body._id,
+        type: config.credit,
+        cost: req.body.charge
 
       }
-      let data = await this.model.DeliveryFinance.create({
-        params
+      await this.model.DeliveryFinance.create(params)
 
-      })
 
-      console.log(data);
+      return res.json({
+        success: true,
+        message: "حساب کاربر با موفقیت تسویه شد",
 
-      // return res.json({
-      //   success: true,
-      //   message: "شارژ کاربر با موفقیت ارسال شد",
-      //   data: data,
-      // });
+      });
     } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)
         .parent(this.controllerTag)
