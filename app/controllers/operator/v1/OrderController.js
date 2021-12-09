@@ -418,7 +418,7 @@ module.exports = new (class HomeController extends Controller {
           data: { status: false },
         });
 
-      let priceDelivery = this.calcingPricePeyk({ lat: 36.334363, lng: 59.544461 }, { lat: station.latitude, lng: station.longitudes })
+      let priceDelivery = await this.calcingPricePeyk({ lat: 36.334363, lng: 59.544461 }, { lat: station.latitude, lng: station.longitudes })
 
       //find customer
       filter = { mobile: req.body.mobile };
@@ -452,7 +452,7 @@ module.exports = new (class HomeController extends Controller {
         status: status._id,
         description: req.body.description || "",
         station: station.id,
-        priceDelivery
+        deliveryCost: priceDelivery
       };
 
       let order = await this.model.Order.create(params);
