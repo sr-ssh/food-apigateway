@@ -459,8 +459,6 @@ module.exports = new (class HomeController extends Controller {
       req.checkBody('dimeter', 'please enter dimeter').notEmpty();
       if (this.showValidationErrors(req, res)) return;
 
-      console.log(req.body);
-
       let filter = { _id: req.body._id }
 
       await this.model.Station.update(filter, {

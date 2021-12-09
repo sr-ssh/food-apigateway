@@ -8,16 +8,16 @@ module.exports = new class SettingsController extends Controller {
         return res.json({ success: true, message: "Settings v1" });
     }
 
-    
+
     async getOrderSettings(req, res) {
         try {
-            let filter = { active : true }
+            let filter = { active: true }
             let settings = await this.model.Settings.findOne(filter, 'order')
 
-            res.json({ success: true, message: "تنظیمات سفارش با موفقیت فرستاده شد", data: settings.order}) 
+            res.json({ success: true, message: "تنظیمات سفارش با موفقیت فرستاده شد", data: settings.order })
 
         } catch (err) {
-                let handelError = new this.transforms.ErrorTransform(err)
+            let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('getOrderSettings')
@@ -49,8 +49,8 @@ module.exports = new class SettingsController extends Controller {
             req.checkBody('finishedOrderSms.status', 'please set the finishedOrderSms status').notEmpty().isBoolean();
             req.checkBody('finishedOrderSms.text', 'please set the finishedOrderSms text').notEmpty().isString();
 
-            req.checkBody('cookTime', 'please set the cookTime').notEmpty().isInt({min: 0});
-            req.checkBody('confirmTime', 'please set the confirmTime').notEmpty().isInt({min: 0});
+            req.checkBody('cookTime', 'please set the cookTime').notEmpty().isInt({ min: 0 });
+            req.checkBody('confirmTime', 'please set the confirmTime').notEmpty().isInt({ min: 0 });
             req.checkBody('isPayNecessary', 'please set the isPayNecessary').notEmpty().isBoolean();
 
             if (this.showValidationErrors(req, res)) return;
@@ -58,7 +58,7 @@ module.exports = new class SettingsController extends Controller {
 
 
             await this.model.Settings.update(
-                {active: true}, 
+                { active: true },
                 {
                     'order.addOrderSms': req.body.addOrderSms,
                     'order.successfullPaymentSms': req.body.successfullPaymentSms,
@@ -70,17 +70,50 @@ module.exports = new class SettingsController extends Controller {
                     'order.confirmTime': req.body.confirmTime,
                     'order.isPayNecessary': req.body.isPayNecessary,
                 },
-                { safe: true, multi:true }
+                { safe: true, multi: true }
             )
-            
 
-            return res.json({ success : true, message : 'ویرایش با موفقیت انجام شد'})
+
+            return res.json({ success: true, message: 'ویرایش با موفقیت انجام شد' })
         }
         catch (err) {
             let handelError = new this.transforms.ErrorTransform(err)
                 .parent(this.controllerTag)
                 .class(TAG)
                 .method('editOrderSettings')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
+
+    async editPricing(req, res) {
+        try {
+
+            req.checkBody('id', 'please set the id').notEmpty();
+            req.checkBody('enter', 'please set the enter').notEmpty();
+            req.checkBody('distance', 'please set the distance').notEmpty();
+            req.checkBody('duration', 'please set the duration').notEmpty();
+            req.checkBody('lowest', 'please set the lowest').notEmpty();
+
+            if (this.showValidationErrors(req, res)) return;
+
+            await this.model.Settings.updateOne(
+                { id: req.body._id },
+                {
+                    'pricing.enter': req.body.enter,
+                    "pricing.distance": req.body.distance,
+                    "pricing.duration": req.body.duration,
+                    "pricing.lowest": req.body.lowest
+                }, e => e ? res.json({ success: false, message: `${e}` }) : res.json({ success: true, message: 'ویرایش با موفقیت انجام شد', data: { status: true } }))
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('editPricing')
                 .inputParams(req.body)
                 .call();
 

@@ -22,7 +22,7 @@ const SettingsController = require(`${userController}/v1/SettingsController`)
  *      success: true,
  *      message: "ویرایش با موفقیت انجام شد"
  */
- router.put('/order',SettingsController.editOrderSettings.bind(SettingsController));
+router.put('/order', SettingsController.editOrderSettings.bind(SettingsController));
 
 
 
@@ -67,6 +67,26 @@ const SettingsController = require(`${userController}/v1/SettingsController`)
         }
  * }
  */
- router.get('/order',SettingsController.getOrderSettings.bind(SettingsController));
+router.get('/order', SettingsController.getOrderSettings.bind(SettingsController));
 
- module.exports = router;
+
+
+/**
+ * @api {put} /api/user/v1/settings/pricing editPricing
+ * @apiVersion 1.0.0
+ * @apiName editPricing
+ * @apiDescription manager can change pricing with this api !
+ * @apiGroup user
+ * @apiParam {String} enter
+ * @apiParam {Number} distance
+ * @apiParam {Number} duration
+ * @apiParam {String} lowest
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "ویرایش با موفقیت انجام شد"
+ */
+router.put('/pricing', SettingsController.editPricing.bind(SettingsController));
+
+module.exports = router;

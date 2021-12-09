@@ -27,14 +27,13 @@ let Settings = new Schema({
   },
   companyName: { type: String },
   pricing: {
-    type: Object, default: {
 
-      enter: { type: String },
-      distance: { type: Number },
-      duration: { type: Number },
-      lowest: { type: String }
+    enter: { type: String },
+    distance: { type: Number },
+    duration: { type: Number },
+    lowest: { type: String }
 
-    }
+
   }
 });
 
