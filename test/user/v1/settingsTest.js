@@ -2,11 +2,11 @@ process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let should = chai.should();
 const sectionName = 'V1 user settings Tests';
-const baseRoute = '/api/user/v1/order';
+const baseRoute = '/api/user/v1/setting';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let order, user, getOrderParams, editOrderStatus, deliverySms, editSms, addOrderStatus;
+let order, user, getOrderParams, editOrderStatus, deliverySms, editSms, addOrderStatus, editSetting;
 const axios = require('axios').default;
 
 chai.use(chaiHttp);
@@ -18,6 +18,7 @@ describe(`${sectionName}`, () => {
         console.log('Waiting to ensure database connection stablished ');
         order = appConfig.test.order;
         user = appConfig.test.user;
+        editSetting = appConfig.test.setting;
         getOrderParams = appConfig.test.getOrderParams;
         editOrderStatus = appConfig.test.editOrderStatus;
         deliverySms = appConfig.test.deliverySms;
@@ -66,10 +67,20 @@ describe(`${sectionName}`, () => {
         it('check edit sms', async () => {
             const res = await chai
                 .request(server)
-                .put(`${baseRoute}/sms`)
+                .put(`${baseRoute}/order/sms`)
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(editSms);
+            res.should.have.status(200);
+        });
+
+        it('check edit pricing', async () => {
+            const res = await chai
+                .request(server)
+                .put(`${baseRoute}/pricing`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(editSetting);
             res.should.have.status(200);
         });
 
