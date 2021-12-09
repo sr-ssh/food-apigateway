@@ -29,6 +29,14 @@
       "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6Im1hbmFnZXIiLCJpYXQiOjE2Mzg3MDAxNjAsImV4cCI6MTY2NDYyMDE2MCwiYXVkIjoiYXVkaWVuY2UiLCJpc3MiOiJpc3N1ZXIifQ.FKAhgPPHAWKmO7RUdki0Vo7JGHg9CmlDtdSbrnIK7GE",
       "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFhYzk0N2Y5MzU5NmYzZGRlODkyOTNkIiwidXNlcl9hY3RpdmUiOnRydWUsInVzZXJfZW1wbG95ZXIiOiI2MWFjOTQ3ZjkzNTk2ZjNkZGU4OTI5M2QiLCJ1c2VyX2NvbXBhbnkiOiJzaG9rb3VoIiwidXNlcl90eXBlIjoxLCJpYXQiOjE2Mzg3MDAxNjAsImV4cCI6MTY2MDMwMDE2MCwiYXVkIjoiYXVkaWVuY2UiLCJpc3MiOiJpc3N1ZXIifQ.eqDGVV3yrD6WWNplJVgsiPJiDi6K5JWdur7myYvAicM"
     },
+   "setting" :{
+        "id":"611d0fb241c4f125549b6e46",
+       "enter":"5000",
+       "distance":2,
+       "duration":2,
+       "lowest":"8000"
+
+    },
     "newUser": {
       "password": "1234",
       "family": "علی محمودی",
