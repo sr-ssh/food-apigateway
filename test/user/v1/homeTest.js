@@ -95,10 +95,27 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/verificationcode`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
                 .send(user);
             res.should.have.status(200);
         });
 
+    });
+
+    describe('Check put Apis', () => {
+
+        it('check put stations', async () => {
+
+            const res = await chai
+                .request(server)
+                .put(`${baseRoute}/stations`)
+                .set('Authorization', accessToken)
+                .set('idToken', idToken)
+                .send(stations);
+
+            res.should.have.status(200);
+        });
     });
 
 

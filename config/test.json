@@ -38,6 +38,7 @@
 
     },
     "stations":{
+      "_id":"60b72afa1f24b03fe4fc7b51",
         "description":"ایستگاه تست",
         "active":false,
         "latitude":"5454555",
