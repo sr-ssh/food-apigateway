@@ -92,7 +92,6 @@ module.exports = new class SettingsController extends Controller {
     async editPricing(req, res) {
         try {
 
-            req.checkBody('id', 'please set the id').notEmpty();
             req.checkBody('enter', 'please set the enter').notEmpty();
             req.checkBody('distance', 'please set the distance').notEmpty();
             req.checkBody('duration', 'please set the duration').notEmpty();
@@ -101,7 +100,7 @@ module.exports = new class SettingsController extends Controller {
             if (this.showValidationErrors(req, res)) return;
 
             await this.model.Settings.updateOne(
-                { id: req.body._id },
+                {},
                 {
                     'pricing.enter': req.body.enter,
                     "pricing.distance": req.body.distance,
@@ -125,6 +124,7 @@ module.exports = new class SettingsController extends Controller {
         try {
             let filter = { active: true }
             let settings = await this.model.Settings.findOne(filter, 'pricing')
+
 
             res.json({ success: true, message: "تنظیمات قیمتم دهی با موفقیت فرستاده شد", data: settings.pricing })
 

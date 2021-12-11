@@ -89,10 +89,7 @@ router.get(
  *      }
  * }
  */
-router.get(
-  "/pricing",
-  SettingsController.getPricing.bind(SettingsController)
-);
+router.get("/pricing", SettingsController.getPricing.bind(SettingsController));
 
 /**
  * @api {put} /api/user/v1/settings/pricing editPricing
