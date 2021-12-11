@@ -67,9 +67,10 @@ module.exports = new (class ChargeController extends Controller {
             },
           },
         },
+        { $match: { 'charge': { $gt: 0 } } }
       ])
 
-      data = data.filter(i => i.charge > 0)
+      // data = data.filter(i => i.charge > 0)
 
       return res.json({
         success: true,

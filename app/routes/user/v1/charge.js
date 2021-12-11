@@ -8,7 +8,7 @@ const ChargeController = require(`${userController}/v1/ChargeController`)
 
 
 /**
- * @api {get} /api/delivery/v1/charge get delivery charges
+ * @api {get} /api/user/v1/charge getDeliveryCharges
  * @apiVersion 1.0.0
  * @apiName getCharges
  * @apiDescription get delivery charges
@@ -31,7 +31,7 @@ const ChargeController = require(`${userController}/v1/ChargeController`)
 router.get('/', ChargeController.getCharges.bind(ChargeController));
 
 /**
-* @api {post} /api/delivery/v1/charge adding charge delivery
+* @api {post} /api/user/v1/chargeAddingChargeDelivery
 * @apiVersion 1.0.0
 * @apiName addingCharges
 * @apiDescription adding delivery charges
