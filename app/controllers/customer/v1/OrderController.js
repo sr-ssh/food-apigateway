@@ -392,6 +392,57 @@ module.exports = new class OrderController extends Controller {
         }
     }
 
+    async getFactor(req, res) {
+        try {
+            req.checkParams('orderId', 'please enter order Id').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { active: true, _id: req.params.orderId }
+
+            let order = await this.model.Order
+                .findOne(filter, { status: 1, createdAt: 1, address: 1, description: 1, deliveryCost: 1, products: 1, paid: 1})
+                .populate({ path: 'products._id', model: 'Product', select: 'name'})
+                .populate('customer', { mobile: 1, family: 1})
+                .populate('status', {name: 1, _id: 0}).lean()
+
+            if(!order)
+                return res.json({ success : true, message : 'سفارش موجود نیست', data: { status: false }})
+
+            // caculate tax 
+            let tax = order.products.map(product => (product.price - product.discount) * product.quantity * config.tax)
+            tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            //calculate dicounts
+            let discounts = order.products.map(product => product.discount * product.quantity)
+            discounts = discounts.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+
+            //add در حال پرداخت status
+            //get status id
+            filter = {active: true, status: config.inPayOrdersStatus}
+            let status = await this.model.OrderStatusBar.findOne(filter)
+
+            let settings = await this.model.Settings.findOne({active: true}, 'order.isPayNecessary')
+            if(settings.order.isPayNecessary &&
+                (order.paid === false) &&
+                (order.status.status !== config.canceledOrder)){
+                    order.status = {name: status.name}
+            }
+
+            
+            return res.json({ success : true, message : 'سفارشات با موفقیت ارسال شد', data: {order, discounts, tax}})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('getFactor')
+                .inputParams(req.params)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
+
 }
 
 

@@ -204,6 +204,43 @@ const OrderController = require(`${customerController}/v1/OrderController`)
 router.delete('/',OrderController.cancelOrder.bind(OrderController));
 
 
-
+/**
+ * @api {get} /api/customer/v1/order/factor/:orderId get factor
+ * @apiVersion 1.0.0
+ * @apiName getFactor
+ * @apiDescription get factor
+ * @apiGroup customer
+ * @apiParam {String} orderId order id
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "سفارشات با موفقیت ارسال شد",
+ *      data: {
+ *            order: {
+ *               id: "60b72a70e353f0385c2fe5af",
+ *              products: [...{
+ *                _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
+ *                quantity: 2,
+ *                price: "30000",
+ *                size: "medium",
+ *                discount: "10000"
+ *              }],
+ *              createdAt: "2021-06-01T06:54:01.691Z",
+ *              address: "معلم 43",
+ *              status: { name: "در صف انتظار"},
+ *              deliveryCost: 5,
+ *              paid: true
+ *            },
+ *            tax: 12750,
+ *            discounts: 20000,
+ *            customer:{
+ *              family: "ریحانه شکوهی",
+ *              mobile: "09307580142",
+ *              _id: "610e7c9804d3bf1e70ac32aa"
+ *            }
+ *      }
+ * }
+ */
+ router.get('/factor/:orderId',OrderController.getFactor.bind(OrderController));
 
 module.exports = router;

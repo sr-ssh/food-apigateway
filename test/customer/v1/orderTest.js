@@ -22,24 +22,25 @@ describe(`${sectionName}`, () => {
         customerOrder = appConfig.test.customerOrder;
         customerGetOrder = appConfig.test.customerGetOrder;
         customerCancelOrder = appConfig.test.customerCancelOrder;
-        axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
-            .then(function (response) {
-                response = response.data;
-                console.log(response.message)
-                if (response.success) {
-                    idToken = response.data.idToken
-                    accessToken = response.data.accessToken
-                } else {
-                    console.log("errorrrrrrrrrr: no token provided ");
-                }
-                setTimeout(() => {
-                    console.log('Okay, lets begin!');
-                    done();
-                }, 1000);
-            })
-            .catch((error) => {
-                console.log("error", error);
-            });
+        // axios.post(`http://localhost:4000/api/customer/v1/login`, customer)
+        //     .then(function (response) {
+        //         response = response.data;
+        //         console.log(response.message)
+        //         if (response.success) {
+        //             idToken = response.data.idToken
+        //             accessToken = response.data.accessToken
+        //         } else {
+        //             console.log("errorrrrrrrrrr: no token provided ");
+        //         }
+        //         setTimeout(() => {
+        //             console.log('Okay, lets begin!');
+        //             done();
+        //         }, 1000);
+        //     })
+        //     .catch((error) => {
+        //         console.log("error", error);
+        //     });
+        done()
     })
 
 
@@ -95,6 +96,15 @@ describe(`${sectionName}`, () => {
                 .send();
             res.should.have.status(200);
         });
+
+        it('check get order factor', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/factor/${encodeURI(customerGetOrder.orderId)}`)
+                .send();
+            res.should.have.status(200);
+        });
+
 
     });
 

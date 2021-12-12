@@ -33,7 +33,7 @@ module.exports = new class PayController extends Controller {
             
             //calculate customer charge
             let charge = await this.model.CustomerFinance.aggregate([
-                { "$match" : { "customerId" : ObjectId(req.decodedData.user_id) }},                
+                { "$match" : { "customerId" : ObjectId(order.customer) }},                
                 {                   
                     "$group": {
                         "_id": '$customerId',
@@ -76,7 +76,7 @@ module.exports = new class PayController extends Controller {
                     cost = customerCharge
                 let params = {
                     orderId: req.body.orderId,
-                    customerId: req.decodedData.user_id,
+                    customerId: order.customer,
                     type: config.credit,
                     cost: cost
                 }
