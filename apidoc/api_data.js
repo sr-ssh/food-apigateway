@@ -1277,6 +1277,46 @@ define({ "api": [
     "groupTitle": "delivery"
   },
   {
+    "type": "put",
+    "url": "/api/kitchen/v1/product",
+    "title": "edit product supply",
+    "version": "1.0.0",
+    "name": "editSupply",
+    "description": "<p>edit product supply</p>",
+    "group": "kitchen",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "productId",
+            "description": "<p>product id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "supply",
+            "description": "<p>product supply</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"تعداد محصول با موفقیت ویرایش شد\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/product.js",
+    "groupTitle": "kitchen"
+  },
+  {
     "type": "get",
     "url": "/api/kitchen/v1/order/active",
     "title": "get active order",
@@ -1294,6 +1334,26 @@ define({ "api": [
       ]
     },
     "filename": "app/routes/kitchen/v1/order.js",
+    "groupTitle": "kitchen"
+  },
+  {
+    "type": "get",
+    "url": "/api/kitchen/v1/product",
+    "title": "get products",
+    "version": "1.0.0",
+    "name": "getProducts",
+    "description": "<p>get products</p>",
+    "group": "kitchen",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"موجودی محصولات با موفقیت ارسال شد\",\n     data: [...{\n            _id: \"60b72a70e353f0385c2fe5af\",\n            name: \"پپرونی\",\n            supply: 120\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/product.js",
     "groupTitle": "kitchen"
   },
   {
