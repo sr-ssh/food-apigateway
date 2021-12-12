@@ -22,7 +22,7 @@ module.exports = new class OrderController extends Controller {
             let orders = await this.model.Order
                 .find(filter, { active : 0, updatedAt: 0, 'products.price': 0, 'products.discount': 0, paid: 0, deliveryCost: 0})
                 .populate({ path: 'products._id', model: 'Product', select: 'name cookTimeNeeded'})
-                .populate({ path: 'products.status', model: 'OrderStatusBar', select: 'name status'})
+                .populate({ path: 'products.status', model: 'OrderStatusBar', select: {name: 1, status: 1, _id: 0}})
                 .populate('customer', { family: 1, mobile: 1, _id: 0 })
                 .populate('status', {status: 1, name: 1, _id: 0})
 
