@@ -473,7 +473,12 @@ module.exports = new (class HomeController extends Controller {
       if (settings.order.addOrderSms.status)
         this.sendSms(
           customer.mobile,
-          settings.order.addOrderSms.text + "\n" + settings.companyName
+          settings.order.addOrderSms.text +
+            "\n" +
+            "لینک پرداخت:‌" +
+            `http://happypizza.ir/factor/${order._id}` +
+            "\n" +
+            settings.companyName
         );
     } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)
