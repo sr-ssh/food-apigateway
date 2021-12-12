@@ -9,7 +9,8 @@ let Order = new Schema({
         quantity: { type: Number, default: 1 },
         size: { type: String , required: true, default: 'medium' },
         price: { type: Number , required: true },
-        discount: { type: Number , required: true, default: 0 }
+        discount: { type: Number , required: true, default: 0 },
+        status: { type: Schema.Types.ObjectId, ref: 'OrderStatusBar' }
     }]},
     customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
     address: { type: String },

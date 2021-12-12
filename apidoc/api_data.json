@@ -272,6 +272,39 @@
   },
   {
     "type": "get",
+    "url": "/api/customer/v1/order/factor/:orderId",
+    "title": "get factor",
+    "version": "1.0.0",
+    "name": "getFactor",
+    "description": "<p>get factor</p>",
+    "group": "customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "orderId",
+            "description": "<p>order id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: {\n           order: {\n              id: \"60b72a70e353f0385c2fe5af\",\n             products: [...{\n               _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n               quantity: 2,\n               price: \"30000\",\n               size: \"medium\",\n               discount: \"10000\"\n             }],\n             createdAt: \"2021-06-01T06:54:01.691Z\",\n             address: \"معلم 43\",\n             status: { name: \"در صف انتظار\"},\n             deliveryCost: 5,\n             paid: true\n           },\n           tax: 12750,\n           discounts: 20000,\n           customer:{\n             family: \"ریحانه شکوهی\",\n             mobile: \"09307580142\",\n             _id: \"610e7c9804d3bf1e70ac32aa\"\n           }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/customer/v1/order.js",
+    "groupTitle": "customer"
+  },
+  {
+    "type": "get",
     "url": "/api/customer/v1/order",
     "title": "get orders",
     "version": "1.0.0",
@@ -1249,13 +1282,13 @@
     "title": "get active order",
     "version": "1.0.0",
     "name": "getActiveOrder",
-    "description": "<p>get active order : &quot;active&quot; orders are not ready yet.</p>",
+    "description": "<p>get active order : &quot;active&quot; orders are not ready yet. status of orders and products are the same</p>",
     "group": "kitchen",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            _id: \"6107cfccf74a1a3398ca5dc8\"\n            products: [...{\n                _id: { _id: \"61014026a1701735e409000b\", name: \"پپرونی\"},\n                quantity: 2,\n                size: 'medium'\n            }],\n            customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"},\n           description: \"بدون قارچ\"\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            _id: \"6107cfccf74a1a3398ca5dc8\"\n            products: [...{\n                _id: { \n                   _id: \"61014026a1701735e409000b\", \n                   name: \"پپرونی\",\n                   cookTimeNeeded: true\n                 },\n                quantity: 2,\n                size: \"medium\",\n                status: { _id: \"610910cc5b637837dce1ea9d\", name: \"تمام شده\", status: 4}\n            }],\n            customer: {\n                family: \"مصطفایی\",\n                mobile: \"09152631225\",\n            },\n           createdAt: \"2021-06-01T06:54:01.691Z\",\n           address: \"معلم 43\",\n           GPS: { type: \"point\", coordinates: [-122.5, 37.7]},\n           status: { name: \"active\"},\n           description: \"بدون قارچ\"\n         }]\n     }\n}",
           "type": "json"
         }
       ]
@@ -2707,6 +2740,26 @@
   },
   {
     "type": "post",
+    "url": "/api/user/v1/chargeAddingChargeDelivery",
+    "title": "",
+    "version": "1.0.0",
+    "name": "addingCharges",
+    "description": "<p>adding delivery charges</p>",
+    "group": "user",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"شارژ پیک با موفقیت دریافت شد\",\n     data: [...{\n         _id: \"612a05bc30b788f3a369ad8e\", \n         charge: 10000, \n         mobile: \"09152226363\", \n         family: \"تینا برایی\", \n         sheba: \"IR020190000000101975503003\", \n         cardNumber: \"5859 8310 9970 9258\",\n         accountNumber: \"4415474710\"\n      }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/charge.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "post",
     "url": "/api/user/v1/stations",
     "title": "addStations",
     "version": "1.0.0",
@@ -3362,8 +3415,8 @@
   },
   {
     "type": "get",
-    "url": "/api/delivery/v1/charge",
-    "title": "get delivery charges",
+    "url": "/api/user/v1/charge",
+    "title": "getDeliveryCharges",
     "version": "1.0.0",
     "name": "getCharges",
     "description": "<p>get delivery charges</p>",

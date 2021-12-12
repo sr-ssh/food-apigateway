@@ -12,7 +12,7 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  * @api {get} /api/kitchen/v1/order/active get active order
  * @apiVersion 1.0.0
  * @apiName getActiveOrder
- * @apiDescription get active order : "active" orders are not ready yet.
+ * @apiDescription get active order : "active" orders are not ready yet. status of orders and products are the same
  * @apiGroup kitchen
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -21,9 +21,14 @@ const OrderController = require(`${kitchenController}/v1/OrderController`)
  *      data: [...{
  *             _id: "6107cfccf74a1a3398ca5dc8"
  *             products: [...{
- *                 _id: { _id: "61014026a1701735e409000b", name: "پپرونی"},
+ *                 _id: { 
+ *                    _id: "61014026a1701735e409000b", 
+ *                    name: "پپرونی",
+ *                    cookTimeNeeded: true
+ *                  },
  *                 quantity: 2,
- *                 size: 'medium'
+ *                 size: "medium",
+ *                 status: { _id: "610910cc5b637837dce1ea9d", name: "تمام شده", status: 4}
  *             }],
  *             customer: {
  *                 family: "مصطفایی",

@@ -404,6 +404,7 @@ module.exports = new (class HomeController extends Controller {
           price: product.price,
           size: product.size,
           discount: product.discount,
+          status: status._id
         };
       });
 

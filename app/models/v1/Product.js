@@ -13,6 +13,8 @@ let Product = new Schema({
     }] , required: true}, 
     img: { type: String, required: true },
     supply: { type: Number, default: 0 }, 
+    cookTime: { type: Number, default: 0},
+    cookTimeNeeded: { type: Boolean, default: false},
     description: { type: String, default: "" },
 });
 

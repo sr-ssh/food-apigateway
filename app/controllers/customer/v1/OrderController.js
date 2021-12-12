@@ -68,7 +68,8 @@ module.exports = new class OrderController extends Controller {
                     quantity: product.quantity,
                     price: product.price,
                     size:product.size,
-                    discount: product.discount
+                    discount: product.discount,
+                    status: status._id
                 }
             })
 
