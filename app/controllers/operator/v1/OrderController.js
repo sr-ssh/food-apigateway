@@ -107,7 +107,8 @@ module.exports = new (class HomeController extends Controller {
         products: 1,
         deliveryId: 1,
         paid: 1,
-        paymentType: 1
+        paymentType: 1,
+        orderType: 1
       })
         .populate({ path: "products._id", model: "Product", select: "name" })
         .populate("customer", { family: 1, mobile: 1, _id: 0 })
@@ -156,7 +157,8 @@ module.exports = new (class HomeController extends Controller {
         deliveryCost: order.deliveryCost,
         deliveryId: order.deliveryId,
         paid: order.paid,
-        paymentType: order.paymentType
+        paymentType: order.paymentType,
+        orderType: order.orderType
       };
 
       if (!params.deliveryId) params.deliveryId = "";
