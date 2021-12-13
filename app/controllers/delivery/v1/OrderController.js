@@ -98,14 +98,13 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, deliveryId: req.decodedData.user_id }
 
             let orders = await this.model.Order
-                .find(filter, { createdAt: 1, customer: 1, address: 1, 'GPS.coordinates': 1, products: 1, description: 1, deliveryCost: 1, paymentType: 1 })
+                .find(filter, { createdAt: 1, customer: 1, address: 1, 'GPS.coordinates': 1, products: 1, description: 1, deliveryCost: 1, paymentType: 1, paid: 1 })
                 .populate({ path: 'products._id', model: 'Product', select: 'name' })
                 .populate('customer', { _id: 0, family: 1, mobile: 1 })
                 .populate('status', { status: 1, name: 1, _id: 0 })
                 .sort({ createdAt: -1 })
                 .lean()
 
-            console.log(orders);
 
             orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder)
 
