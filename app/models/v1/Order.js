@@ -36,8 +36,7 @@ let Order = new Schema({
   cookId: { type: Schema.Types.ObjectId, ref: 'User' },
   description: { type: String },
   finishDate: { type: Date },
-  paymentType: { type: Number },
-  orderType: { type: Number }
+  orderType: { type: Number } // 0 -> phone, 1 -> online
 });
 
 Order.plugin(timestamps);
