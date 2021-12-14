@@ -229,7 +229,8 @@
           "name": "پپرونی",
           "quantity": 1,
           "price": "60000",
-          "size": "medium"
+          "size": "medium",
+          "discount": "10000"
         }
       ],
       "address": "راهنمایی 24",

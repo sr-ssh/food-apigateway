@@ -83,7 +83,8 @@ module.exports = new class OrderController extends Controller {
                 deliveryCost: req.body.deliveryCost,
                 status: status._id,
                 description: req.body.description || "",
-                GPS: { type: "Point", coordinates: [ lng, lat]}
+                GPS: { type: "Point", coordinates: [ lng, lat]},
+                orderType: 1
             }
 
             let order = await this.model.Order.create(params)

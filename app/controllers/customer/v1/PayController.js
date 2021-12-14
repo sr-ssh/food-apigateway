@@ -133,7 +133,7 @@ module.exports = new class PayController extends Controller {
 
             if(zarinRes.status === 100 || zarinRes.status === 101){
                 order.paid = true
-                order.payType = 1
+                order.paymentType = 1
                 await order.save()
                 //send smd
                 let settings = await this.model.Settings.findOne({active: true})
