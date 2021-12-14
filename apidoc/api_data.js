@@ -1338,6 +1338,26 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/kitchen/v1/product/type",
+    "title": "get product types",
+    "version": "1.0.0",
+    "name": "getProductTypes",
+    "description": "<p>get product types</p>",
+    "group": "kitchen",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"انواع محصولات با موفقیت ارسال شد\",\n     data: [...{\n         _id: \"610916826f9446153c5e268d\", \n         name: \"پیتزا\"\n         }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/product.js",
+    "groupTitle": "kitchen"
+  },
+  {
+    "type": "get",
     "url": "/api/kitchen/v1/product",
     "title": "get products",
     "version": "1.0.0",

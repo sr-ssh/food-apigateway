@@ -8,7 +8,6 @@ module.exports = new (class ProductController extends Controller {
 
   async getProducts(req, res) {
     try {
-
       let products = await this.model.Product.aggregate([
         { $match: { active: true } },
         {
@@ -27,7 +26,7 @@ module.exports = new (class ProductController extends Controller {
             name: 1,
             supply: 1,
             description: 1,
-            updatedAt: 1
+            updatedAt: 1,
           },
         },
       ]);
@@ -72,6 +71,31 @@ module.exports = new (class ProductController extends Controller {
         .class(TAG)
         .method("editSupply")
         .inputParams(req.body)
+        .call();
+
+      if (!res.headersSent) return res.status(500).json(handelError);
+    }
+  }
+
+  async getProductTypes(req, res) {
+    try {
+      let filter = { active: true };
+
+      let types = await this.model.ProductTypes.find(filter, {
+        name: 1,
+      }).lean();
+
+      return res.json({
+        success: true,
+        message: "محصولات سفارش با موفقیت ارسال شد",
+        data: types,
+      });
+    } catch (err) {
+      let handelError = new this.transforms.ErrorTransform(err)
+        .parent(this.controllerTag)
+        .class(TAG)
+        .method("getProductTypes")
+        .inputParams(req.params)
         .call();
 
       if (!res.headersSent) return res.status(500).json(handelError);

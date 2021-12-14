@@ -45,4 +45,23 @@ router.get("/", ProductController.getProducts.bind(ProductController));
  */
 router.put("/", ProductController.editSupply.bind(ProductController));
 
+/**
+ * @api {get} /api/kitchen/v1/product/type get product types
+ * @apiVersion 1.0.0
+ * @apiName getProductTypes
+ * @apiDescription get product types
+ * @apiGroup kitchen
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "انواع محصولات با موفقیت ارسال شد",
+ *      data: [...{
+ *          _id: "610916826f9446153c5e268d", 
+ *          name: "پیتزا"
+ *          }
+ *      }
+ * }
+ */
+ router.get("/type", ProductController.getProductTypes.bind(ProductController));
+
 module.exports = router;
