@@ -19,7 +19,11 @@ const ProductController = require(`${kitchenController}/v1/ProductController`);
  *      data: [...{
  *             _id: "60b72a70e353f0385c2fe5af",
  *             name: "پپرونی",
- *             supply: 120
+ *             supply: 120,
+ *             typeName: "پیتزا",
+ *             typeId: "610916826f9446153c5e268d",
+ *             description: "گوشت گوساله . پنیر . قارچ . فلفل دلمه ای . پیازجه",
+ *             updatedAt: "2021-12-14T05:44:38.386Z"
  *      }
  * }
  */

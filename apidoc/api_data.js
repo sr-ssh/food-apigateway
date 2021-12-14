@@ -1348,7 +1348,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"موجودی محصولات با موفقیت ارسال شد\",\n     data: [...{\n            _id: \"60b72a70e353f0385c2fe5af\",\n            name: \"پپرونی\",\n            supply: 120\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"موجودی محصولات با موفقیت ارسال شد\",\n     data: [...{\n            _id: \"60b72a70e353f0385c2fe5af\",\n            name: \"پپرونی\",\n            supply: 120,\n            typeName: \"پیتزا\",\n            typeId: \"610916826f9446153c5e268d\",\n            description: \"گوشت گوساله . پنیر . قارچ . فلفل دلمه ای . پیازجه\",\n            updatedAt: \"2021-12-14T05:44:38.386Z\"\n     }\n}",
           "type": "json"
         }
       ]
@@ -2892,7 +2892,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "app/routes/user/v1/home.js",
+    "filename": "app/routes/user/v1/station.js",
     "groupTitle": "user"
   },
   {
@@ -3376,13 +3376,6 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "boolean",
-            "optional": false,
-            "field": "active",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "latitude",
@@ -3430,7 +3423,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "app/routes/user/v1/home.js",
+    "filename": "app/routes/user/v1/station.js",
     "groupTitle": "user"
   },
   {
@@ -3951,7 +3944,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "app/routes/user/v1/home.js",
+    "filename": "app/routes/user/v1/station.js",
     "groupTitle": "user"
   },
   {
