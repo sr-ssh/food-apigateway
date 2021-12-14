@@ -428,7 +428,7 @@ module.exports = new (class HomeController extends Controller {
           data: { status: false },
         });
 
-      let priceDelivery = await this.calcingPricePeyk({ lat: 36.334363, lng: 59.544461 }, { lat: station.latitude, lng: station.longitudes })
+      let priceDelivery = await this.calcingPricePeyk({ lat: 36.334363, lng: 59.544461 }, { lat: station.location[1], lng: station.location[0] })
 
       //find customer
       filter = { mobile: req.body.mobile };

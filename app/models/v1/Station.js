@@ -6,8 +6,10 @@ let Station = new Schema({
   active: { type: Boolean, default: true },
   code: { type: Number },
   description: { type: String },
-  latitude: { type: Number },
-  longitudes: { type: Number },
+  location: {
+    type: [Number],
+    index: '2d'
+  },
   dimeter: { type: Number }
 });
 

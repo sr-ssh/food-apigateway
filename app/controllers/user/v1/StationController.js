@@ -11,7 +11,7 @@ module.exports = new (class StationController extends Controller {
   async getStations(req, res) {
     try {
 
-      let data = await this.model.Station.find({}, 'active code description latitude longitudes dimeter')
+      let data = await this.model.Station.find({}, 'active code description location dimeter')
 
       return res.json({ success: true, message: "عملیات با موفقیت انجام شد", data })
 
@@ -41,8 +41,7 @@ module.exports = new (class StationController extends Controller {
 
       let params = {
         description: req.body.description,
-        latitude: req.body.latitude,
-        longitudes: req.body.longitudes,
+        location: [req.body.longitudes, req.body.latitude],
         code: req.body.code,
         dimeter: req.body.dimeter,
       }
