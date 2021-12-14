@@ -56,8 +56,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/accepted`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
+                .set('Authorization', deliveryMan.accessToken)
+                .set('idToken', deliveryMan.idToken)
                 .send();
             res.should.have.status(200);
         });
@@ -66,8 +66,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/finished`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
+                .set('Authorization', deliveryRegister.accessToken)
+                .set('idToken', deliveryRegister.idToken)
                 .send();
             res.should.have.status(200);
         });
