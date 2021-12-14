@@ -92,6 +92,9 @@ module.exports = new class HomeController extends Controller {
             if(!updateInfo)
                 return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
 
+            filter = { active: true, _id: req.decodedData.user_id }
+            let user = await this.model.User.findOne(filter)
+        
             let data = { 
                 status: true, 
                 update: updateInfo.update, 
@@ -104,7 +107,8 @@ module.exports = new class HomeController extends Controller {
                 sipServer: 0,
                 sipPassword: 0,
                 neshanAPIKey: config.deliveryNeshanAPIKey,
-                userCode: req.decodedData.user_id
+                userCode: req.decodedData.user_id,
+                hired: user.hired
             }
             return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
         }

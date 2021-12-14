@@ -131,7 +131,8 @@ router.post('/login', HomeController.login.bind(HomeController));
 *        family: "شکوهی",
 *        sipNumber: 0,
 *        sipServer: 0,
-*        sipPassword: 0
+*        sipPassword: 0,
+*        hired: true
 *   }
 *}
 * @apiErrorExample {json} Error-Response:
