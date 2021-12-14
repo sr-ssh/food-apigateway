@@ -89,7 +89,7 @@ router.post("/menu", OrderController.sendMenuForCustomer.bind(OrderController));
 * @api {get} /api/operator/v1/order/ get order
 * @apiVersion 1.0.0
 * @apiName getOrder
-* @apiDescription get orders by id
+* @apiDescription get orders by id."paymentType=1" means online pay and "paymentType=0" means pose pay. "orderType=1" means online order and "orderType=0" means phone order
 * @apiGroup operator
 * @apiParam {String} orderId order id
 * @apiSuccessExample {json} Success-Response:
@@ -112,7 +112,9 @@ router.post("/menu", OrderController.sendMenuForCustomer.bind(OrderController));
             status: { name: "در صف انتظار"}, 
             deliveryCost: 5000, 
             deliveryId: "610545a7a5365707ccd6a308",
-            paid: true  
+            paid: true ,
+            paymentType: 1,
+            orderType: 1
         },
 *      deliveryLocation: {
             _id: "610668be772e0f31883fb280", 

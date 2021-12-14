@@ -56,7 +56,7 @@ router.post('/', OrderController.acceptOrder.bind(OrderController));
  * @api {get} /api/delivery/v1/order/accepted get accepted orders 
  * @apiVersion 1.0.0
  * @apiName getacceptedOrders
- * @apiDescription get accepted orders : "accepted" orders are accepted by delivery
+ * @apiDescription get accepted orders : "accepted" orders are accepted by delivery."paymentType=1" means online pay and "paymentType=0" means pose pay. "orderType=1" means online order and "orderType=0" means phone order
  * @apiGroup delivery
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -83,6 +83,9 @@ router.post('/', OrderController.acceptOrder.bind(OrderController));
  *              discounts: 20000,
  *              total: 120000,
  *              deliveryCost: 5000
+ *              paid: true ,
+ *              paymentType: 1,
+ *              orderType: 1
  *          }]
  *      }
  * }

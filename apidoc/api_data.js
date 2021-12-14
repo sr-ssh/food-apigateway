@@ -887,13 +887,13 @@ define({ "api": [
     "title": "get accepted orders",
     "version": "1.0.0",
     "name": "getacceptedOrders",
-    "description": "<p>get accepted orders : &quot;accepted&quot; orders are accepted by delivery</p>",
+    "description": "<p>get accepted orders : &quot;accepted&quot; orders are accepted by delivery.&quot;paymentType=1&quot; means online pay and &quot;paymentType=0&quot; means pose pay. &quot;orderType=1&quot; means online order and &quot;orderType=0&quot; means phone order</p>",
     "group": "delivery",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium',\n                 discount: false\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\",\n             discounts: 20000,\n             total: 120000,\n             deliveryCost: 5000\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium',\n                 discount: false\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\",\n             discounts: 20000,\n             total: 120000,\n             deliveryCost: 5000\n             paid: true ,\n             paymentType: 1,\n             orderType: 1\n         }]\n     }\n}",
           "type": "json"
         }
       ]
@@ -2065,7 +2065,7 @@ define({ "api": [
     "title": "get order",
     "version": "1.0.0",
     "name": "getOrder",
-    "description": "<p>get orders by id</p>",
+    "description": "<p>get orders by id.&quot;paymentType=1&quot; means online pay and &quot;paymentType=0&quot; means pose pay. &quot;orderType=1&quot; means online order and &quot;orderType=0&quot; means phone order</p>",
     "group": "operator",
     "parameter": {
       "fields": {
@@ -2084,7 +2084,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{  \n    success: true, \n    message: \"سفارشات با موفقیت ارسال شد\",\n    data: { \n      order: { \n            id: \"60b72a70e353f0385c2fe5af\", \n            customer: { family: \"مصطفایی\", mobile: \"09152631225\", },\n          products: [...{ \n                name: \"پپرونی\",  \n                quantity: 2,  \n                price: \"30000\",  \n                size: \"medium\", \n                discount: true  \n            }],\n          createdAt: \"2021-06-01T06:54:01.691Z\", \n            address: \"معلم 43\",  \n            status: { name: \"در صف انتظار\"}, \n            deliveryCost: 5000, \n            deliveryId: \"610545a7a5365707ccd6a308\",\n            paid: true  \n        },\n     deliveryLocation: {\n            _id: \"610668be772e0f31883fb280\", \n            lat: 38.066666, \n            lng: 46.299999, \n            date: \"2021-08-01T09:26:22.320Z\"\n        },\n        tax: 12750, \n        total: 72750,\n        discounts: 20000\n    }  \n}",
+          "content": "{  \n    success: true, \n    message: \"سفارشات با موفقیت ارسال شد\",\n    data: { \n      order: { \n            id: \"60b72a70e353f0385c2fe5af\", \n            customer: { family: \"مصطفایی\", mobile: \"09152631225\", },\n          products: [...{ \n                name: \"پپرونی\",  \n                quantity: 2,  \n                price: \"30000\",  \n                size: \"medium\", \n                discount: true  \n            }],\n          createdAt: \"2021-06-01T06:54:01.691Z\", \n            address: \"معلم 43\",  \n            status: { name: \"در صف انتظار\"}, \n            deliveryCost: 5000, \n            deliveryId: \"610545a7a5365707ccd6a308\",\n            paid: true ,\n            paymentType: 1,\n            orderType: 1\n        },\n     deliveryLocation: {\n            _id: \"610668be772e0f31883fb280\", \n            lat: 38.066666, \n            lng: 46.299999, \n            date: \"2021-08-01T09:26:22.320Z\"\n        },\n        tax: 12750, \n        total: 72750,\n        discounts: 20000\n    }  \n}",
           "type": "json"
         }
       ]
