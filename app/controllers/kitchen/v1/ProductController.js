@@ -54,11 +54,24 @@ module.exports = new (class ProductController extends Controller {
         .checkBody("productId", "please set product id")
         .notEmpty()
         .isMongoId();
+      req.checkBody("type", "please set type").notEmpty().isMongoId();
+      req.checkBody("name", "please set name").notEmpty().isString();
+      req
+        .checkBody("description", "please set description")
+        .notEmpty()
+        .isString();
       req.checkBody("supply", "please set supply").notEmpty().isInt({ min: 0 });
       if (this.showValidationErrors(req, res)) return;
 
       let filter = { active: true, _id: req.body.productId };
-      let update = { $set: { supply: req.body.supply } };
+      let update = {
+        $set: {
+          supply: req.body.supply,
+          name: req.body.name,
+          description: req.body.description,
+          type: req.body.type,
+        },
+      };
       await this.model.Product.updateOne(filter, update);
 
       res.json({

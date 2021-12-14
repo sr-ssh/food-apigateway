@@ -30,17 +30,20 @@ const ProductController = require(`${kitchenController}/v1/ProductController`);
 router.get("/", ProductController.getProducts.bind(ProductController));
 
 /**
- * @api {put} /api/kitchen/v1/product edit product supply
+ * @api {put} /api/kitchen/v1/product edit product
  * @apiVersion 1.0.0
  * @apiName editSupply
- * @apiDescription edit product supply 
+ * @apiDescription edit product 
  * @apiGroup kitchen
  * @apiParam {String} productId product id
  * @apiParam {String} supply product supply
+ * @apiParam {String} name product name
+ * @apiParam {String} description product description
+ * @apiParam {String} type product type id
  * @apiSuccessExample {json} Success-Response:
  * {
  *      success: true,
- *      message: "تعداد محصول با موفقیت ویرایش شد"
+ *      message: "محصول با موفقیت ویرایش شد"
  * }
  */
 router.put("/", ProductController.editSupply.bind(ProductController));

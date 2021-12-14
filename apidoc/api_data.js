@@ -1279,10 +1279,10 @@ define({ "api": [
   {
     "type": "put",
     "url": "/api/kitchen/v1/product",
-    "title": "edit product supply",
+    "title": "edit product",
     "version": "1.0.0",
     "name": "editSupply",
-    "description": "<p>edit product supply</p>",
+    "description": "<p>edit product</p>",
     "group": "kitchen",
     "parameter": {
       "fields": {
@@ -1300,6 +1300,27 @@ define({ "api": [
             "optional": false,
             "field": "supply",
             "description": "<p>product supply</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>product name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>product description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>product type id</p>"
           }
         ]
       }
@@ -1308,7 +1329,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"تعداد محصول با موفقیت ویرایش شد\"\n}",
+          "content": "{\n     success: true,\n     message: \"محصول با موفقیت ویرایش شد\"\n}",
           "type": "json"
         }
       ]
