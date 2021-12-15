@@ -8,7 +8,6 @@ const authError = require('../middleware/authError');
 
 const v1 = require('./v1');
 
-
 const cors = require('cors');
 const corsOptions = {
     origin: '*',
