@@ -93,6 +93,9 @@ module.exports = new class HomeController extends Controller {
             if(!updateInfo)
                 return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
 
+            filter = { active: true, _id: req.decodedData.user_id }
+            let user = await this.model.User.findOne(filter)
+
             let data = { 
                 status: true, 
                 update: updateInfo.update, 
@@ -104,7 +107,8 @@ module.exports = new class HomeController extends Controller {
                 userId: req.decodedData.user_id,
                 sipNumber: 0,
                 sipServer: 0,
-                sipPassword: 0
+                sipPassword: 0,
+                hired: user.hired
             }
             return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
         }

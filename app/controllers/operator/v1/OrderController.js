@@ -107,10 +107,15 @@ module.exports = new (class HomeController extends Controller {
         products: 1,
         deliveryId: 1,
         paid: 1,
+        paymentType: 1,
+        orderType: 1
       })
         .populate({ path: "products._id", model: "Product", select: "name" })
         .populate("customer", { family: 1, mobile: 1, _id: 0 })
         .populate("status", { name: 1, status: 1, _id: 0 });
+
+
+      console.log(order, "116");
 
       filter = { userId: order.deliveryId };
       let delivery = await this.model.Location.findOne(filter, { userId: 0 })
@@ -141,6 +146,7 @@ module.exports = new (class HomeController extends Controller {
         };
       });
 
+
       let params = {
         id: order._id,
         customer: order.customer,
@@ -151,6 +157,8 @@ module.exports = new (class HomeController extends Controller {
         deliveryCost: order.deliveryCost,
         deliveryId: order.deliveryId,
         paid: order.paid,
+        paymentType: order.paymentType,
+        orderType: order.orderType
       };
 
       if (!params.deliveryId) params.deliveryId = "";
@@ -186,6 +194,7 @@ module.exports = new (class HomeController extends Controller {
       ) {
         params.status = { name: status.name, status: status.status };
       }
+
 
       return res.json({
         success: true,
@@ -419,7 +428,7 @@ module.exports = new (class HomeController extends Controller {
           data: { status: false },
         });
 
-      let priceDelivery = await this.calcingPricePeyk({ lat: 36.334363, lng: 59.544461 }, { lat: station.latitude, lng: station.longitudes })
+      let priceDelivery = await this.calcingPricePeyk({ lat: 36.334363, lng: 59.544461 }, { lat: station.location[1], lng: station.location[0] })
 
       //find customer
       filter = { mobile: req.body.mobile };
@@ -453,7 +462,8 @@ module.exports = new (class HomeController extends Controller {
         status: status._id,
         description: req.body.description || "",
         station: station.id,
-        deliveryCost: priceDelivery
+        deliveryCost: priceDelivery,
+        orderType: 0
       };
 
       let order = await this.model.Order.create(params);
@@ -475,11 +485,11 @@ module.exports = new (class HomeController extends Controller {
         this.sendSms(
           customer.mobile,
           settings.order.addOrderSms.text +
-            "\n" +
-            "لینک پرداخت:‌" +
-            `http://happypizza.ir/factor/${order._id}` +
-            "\n" +
-            settings.companyName
+          "\n" +
+          "لینک پرداخت:‌" +
+          `http://happypizza.ir/factor/${order._id}` +
+          "\n" +
+          settings.companyName
         );
     } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)

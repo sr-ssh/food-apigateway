@@ -8,55 +8,55 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
 
 
 
- /**
- * @api {get} /api/delivery/v1/order/pending get pending orders 
- * @apiVersion 1.0.0
- * @apiName getPendingOrders
- * @apiDescription get pending orders : "pending" orders are ready and cooked and ready for delivery
- * @apiGroup delivery
- * @apiSuccessExample {json} Success-Response:
- * {
- *      success: true,
- *      message: "سفارشات با موفقیت ارسال شد",
- *      data: [...{
- *             id: "60b72a70e353f0385c2fe5af",
- *            createdAt: "2021-06-01T06:54:01.691Z",
- *            status: { name: "آماده"}
- *          }]
- *      }
- * }
- */
-  router.get('/pending',OrderController.getPendingOrders.bind(OrderController));
+/**
+* @api {get} /api/delivery/v1/order/pending get pending orders 
+* @apiVersion 1.0.0
+* @apiName getPendingOrders
+* @apiDescription get pending orders : "pending" orders are ready and cooked and ready for delivery
+* @apiGroup delivery
+* @apiSuccessExample {json} Success-Response:
+* {
+*      success: true,
+*      message: "سفارشات با موفقیت ارسال شد",
+*      data: [...{
+*             id: "60b72a70e353f0385c2fe5af",
+*            createdAt: "2021-06-01T06:54:01.691Z",
+*            status: { name: "آماده"}
+*          }]
+*      }
+* }
+*/
+router.get('/pending', OrderController.getPendingOrders.bind(OrderController));
 
 
 
-  /**
- * @api {post} /api/delivery/v1/order accept order
- * @apiVersion 1.0.0
- * @apiName acceptOrder
- * @apiDescription accept order for delivery
- * @apiGroup delivery
- * @apiParam {String} orderId order id
- * @apiSuccessExample {json} Success-Response:
- * {
- *      success: true,
- *      message: "سفارشات با موفقیت ارسال شد",
- *      data: { status: true }
- * }
- * @apiErrorExample {json} Error-Response:
- * {
- *      success: true,
- *      message: "سفارش موجود نیست",
- *      data: { status: false }
- * }
- */
-  router.post('/',OrderController.acceptOrder.bind(OrderController));
+/**
+* @api {post} /api/delivery/v1/order accept order
+* @apiVersion 1.0.0
+* @apiName acceptOrder
+* @apiDescription accept order for delivery
+* @apiGroup delivery
+* @apiParam {String} orderId order id
+* @apiSuccessExample {json} Success-Response:
+* {
+*      success: true,
+*      message: "سفارشات با موفقیت ارسال شد",
+*      data: { status: true }
+* }
+* @apiErrorExample {json} Error-Response:
+* {
+*      success: true,
+*      message: "سفارش موجود نیست",
+*      data: { status: false }
+* }
+*/
+router.post('/', OrderController.acceptOrder.bind(OrderController));
 
 /**
  * @api {get} /api/delivery/v1/order/accepted get accepted orders 
  * @apiVersion 1.0.0
  * @apiName getacceptedOrders
- * @apiDescription get accepted orders : "accepted" orders are accepted by delivery
+ * @apiDescription get accepted orders : "accepted" orders are accepted by delivery."paymentType=1" means online pay and "paymentType=0" means pose pay. "orderType=1" means online order and "orderType=0" means phone order
  * @apiGroup delivery
  * @apiSuccessExample {json} Success-Response:
  * {
@@ -83,11 +83,14 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *              discounts: 20000,
  *              total: 120000,
  *              deliveryCost: 5000
+ *              paid: true ,
+ *              paymentType: 1,
+ *              orderType: 1
  *          }]
  *      }
  * }
  */
-  router.get('/accepted',OrderController.getacceptedOrders.bind(OrderController));
+router.get('/accepted', OrderController.getacceptedOrders.bind(OrderController));
 
 
 /**
@@ -110,7 +113,7 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *      data: { status: false }
  * }
  */
-  router.post('/finish',OrderController.finishOrder.bind(OrderController));
+router.post('/finish', OrderController.finishOrder.bind(OrderController));
 
 
 
@@ -143,7 +146,7 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *      }
  * }
  */
-  router.get('/finished',OrderController.getfinishedOrders.bind(OrderController));
+router.get('/finished', OrderController.getfinishedOrders.bind(OrderController));
 
 
 
@@ -168,7 +171,7 @@ const OrderController = require(`${deliveryController}/v1/OrderController`)
  *      data: { status: false }
  * }
  */
-  router.post('/customer',OrderController.notResposiveCustomer.bind(OrderController));
+router.post('/customer', OrderController.notResposiveCustomer.bind(OrderController));
 
 
- module.exports = router;
+module.exports = router;

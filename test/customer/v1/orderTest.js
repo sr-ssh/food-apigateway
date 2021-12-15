@@ -114,8 +114,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .post(`${baseRoute}/`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
+                .set('Authorization', customer.accessToken)
+                .set('idToken', customer.idToken)
                 .send(customerOrder);
             res.should.have.status(200);
         });

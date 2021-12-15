@@ -12,6 +12,7 @@ const discount = require('./discount');
 const account = require('./account');
 const settings = require('./settings');
 const charge = require('./charge');
+const station = require('./station');
 
 
 
@@ -26,6 +27,7 @@ router.use('/discount', discount)
 router.use('/account', account)
 router.use('/settings', settings)
 router.use('/charge', charge)
+router.use('/station', station)
 
 
 module.exports = router;

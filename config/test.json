@@ -229,7 +229,8 @@
           "name": "پپرونی",
           "quantity": 1,
           "price": "60000",
-          "size": "medium"
+          "size": "medium",
+          "discount": "10000"
         }
       ],
       "address": "راهنمایی 24",
@@ -343,8 +344,11 @@
       "cardNumber": "5859 8310 9970 9258"
     },
     "productSupply": {
-      "productId": "61091b0ca9335b389819e893",
-      "supply": 100
+      "productId": "61091b0ca9335b389819e897",
+      "supply": 100,
+      "name": "مخصوصهپی پیتزا",
+      "description": "گوشت گوساله . ژامبون . پنیر . قارچ . فلفل دلمه ای . پیازجه",
+      "type": "610916826f9446153c5e268d"
     }
   }
 }

@@ -51,6 +51,16 @@ describe(`${sectionName}`, () => {
             res.should.have.status(200);
         });
 
+        it('check get product types', async () => {
+            const res = await chai
+                .request(server)
+                .get(`${baseRoute}/type`)
+                .set('Authorization', cook.accessToken)
+                .set('idToken', cook.idToken)
+                .send();
+            res.should.have.status(200);
+        });
+
     });
 
     describe('Check Put Apis', () => {

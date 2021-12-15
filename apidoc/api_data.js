@@ -887,13 +887,13 @@ define({ "api": [
     "title": "get accepted orders",
     "version": "1.0.0",
     "name": "getacceptedOrders",
-    "description": "<p>get accepted orders : &quot;accepted&quot; orders are accepted by delivery</p>",
+    "description": "<p>get accepted orders : &quot;accepted&quot; orders are accepted by delivery.&quot;paymentType=1&quot; means online pay and &quot;paymentType=0&quot; means pose pay. &quot;orderType=1&quot; means online order and &quot;orderType=0&quot; means phone order</p>",
     "group": "delivery",
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium',\n                 discount: false\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\",\n             discounts: 20000,\n             total: 120000,\n             deliveryCost: 5000\n         }]\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"سفارشات با موفقیت ارسال شد\",\n     data: [...{\n            id: \"60b72a70e353f0385c2fe5af\",\n            address: \"کلاهدوز 4\",\n            GPS: { coordinates: [59.605933, 36.29792]},\n            createdAt: \"2021-06-01T06:54:01.691Z\",\n            status: { name: \"در حال ارسال\", status: 3},\n            customer: {\n                 mobile: \"09307580143\",\n                 family: \"زهرا رضوی\"\n             },\n            products: [...{\n                 name: \"پپرونی\",\n                 price: \"60000\",\n                 quantity: 1,\n                 size: 'medium',\n                 discount: false\n             }],\n             desciption: \"ساعت 1 تحویل داده شود\",\n             discounts: 20000,\n             total: 120000,\n             deliveryCost: 5000\n             paid: true ,\n             paymentType: 1,\n             orderType: 1\n         }]\n     }\n}",
           "type": "json"
         }
       ]
@@ -953,7 +953,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0\n  }\n}",
+          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0,\n       hired: true\n  }\n}",
           "type": "json"
         }
       ]
@@ -1279,10 +1279,10 @@ define({ "api": [
   {
     "type": "put",
     "url": "/api/kitchen/v1/product",
-    "title": "edit product supply",
+    "title": "edit product",
     "version": "1.0.0",
     "name": "editSupply",
-    "description": "<p>edit product supply</p>",
+    "description": "<p>edit product</p>",
     "group": "kitchen",
     "parameter": {
       "fields": {
@@ -1300,6 +1300,27 @@ define({ "api": [
             "optional": false,
             "field": "supply",
             "description": "<p>product supply</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>product name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>product description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>product type id</p>"
           }
         ]
       }
@@ -1308,7 +1329,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"تعداد محصول با موفقیت ویرایش شد\"\n}",
+          "content": "{\n     success: true,\n     message: \"محصول با موفقیت ویرایش شد\"\n}",
           "type": "json"
         }
       ]
@@ -1338,6 +1359,26 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/kitchen/v1/product/type",
+    "title": "get product types",
+    "version": "1.0.0",
+    "name": "getProductTypes",
+    "description": "<p>get product types</p>",
+    "group": "kitchen",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success: true,\n     message: \"انواع محصولات با موفقیت ارسال شد\",\n     data: [...{\n         _id: \"610916826f9446153c5e268d\", \n         name: \"پیتزا\"\n         }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/kitchen/v1/product.js",
+    "groupTitle": "kitchen"
+  },
+  {
+    "type": "get",
     "url": "/api/kitchen/v1/product",
     "title": "get products",
     "version": "1.0.0",
@@ -1348,7 +1389,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"موجودی محصولات با موفقیت ارسال شد\",\n     data: [...{\n            _id: \"60b72a70e353f0385c2fe5af\",\n            name: \"پپرونی\",\n            supply: 120\n     }\n}",
+          "content": "{\n     success: true,\n     message: \"موجودی محصولات با موفقیت ارسال شد\",\n     data: [...{\n            _id: \"60b72a70e353f0385c2fe5af\",\n            name: \"پپرونی\",\n            supply: 120,\n            typeName: \"پیتزا\",\n            typeId: \"610916826f9446153c5e268d\",\n            description: \"گوشت گوساله . پنیر . قارچ . فلفل دلمه ای . پیازجه\",\n            updatedAt: \"2021-12-14T05:44:38.386Z\"\n     }\n}",
           "type": "json"
         }
       ]
@@ -1428,7 +1469,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0\n  }\n}",
+          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0,\n       hired: true\n  }\n}",
           "type": "json"
         }
       ]
@@ -2065,7 +2106,7 @@ define({ "api": [
     "title": "get order",
     "version": "1.0.0",
     "name": "getOrder",
-    "description": "<p>get orders by id</p>",
+    "description": "<p>get orders by id.&quot;paymentType=1&quot; means online pay and &quot;paymentType=0&quot; means pose pay. &quot;orderType=1&quot; means online order and &quot;orderType=0&quot; means phone order</p>",
     "group": "operator",
     "parameter": {
       "fields": {
@@ -2084,7 +2125,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{  \n    success: true, \n    message: \"سفارشات با موفقیت ارسال شد\",\n    data: { \n      order: { \n            id: \"60b72a70e353f0385c2fe5af\", \n            customer: { family: \"مصطفایی\", mobile: \"09152631225\", },\n          products: [...{ \n                name: \"پپرونی\",  \n                quantity: 2,  \n                price: \"30000\",  \n                size: \"medium\", \n                discount: true  \n            }],\n          createdAt: \"2021-06-01T06:54:01.691Z\", \n            address: \"معلم 43\",  \n            status: { name: \"در صف انتظار\"}, \n            deliveryCost: 5000, \n            deliveryId: \"610545a7a5365707ccd6a308\",\n            paid: true  \n        },\n     deliveryLocation: {\n            _id: \"610668be772e0f31883fb280\", \n            lat: 38.066666, \n            lng: 46.299999, \n            date: \"2021-08-01T09:26:22.320Z\"\n        },\n        tax: 12750, \n        total: 72750,\n        discounts: 20000\n    }  \n}",
+          "content": "{  \n    success: true, \n    message: \"سفارشات با موفقیت ارسال شد\",\n    data: { \n      order: { \n            id: \"60b72a70e353f0385c2fe5af\", \n            customer: { family: \"مصطفایی\", mobile: \"09152631225\", },\n          products: [...{ \n                name: \"پپرونی\",  \n                quantity: 2,  \n                price: \"30000\",  \n                size: \"medium\", \n                discount: true  \n            }],\n          createdAt: \"2021-06-01T06:54:01.691Z\", \n            address: \"معلم 43\",  \n            status: { name: \"در صف انتظار\"}, \n            deliveryCost: 5000, \n            deliveryId: \"610545a7a5365707ccd6a308\",\n            paid: true ,\n            paymentType: 1,\n            orderType: 1\n        },\n     deliveryLocation: {\n            _id: \"610668be772e0f31883fb280\", \n            lat: 38.066666, \n            lng: 46.299999, \n            date: \"2021-08-01T09:26:22.320Z\"\n        },\n        tax: 12750, \n        total: 72750,\n        discounts: 20000\n    }  \n}",
           "type": "json"
         }
       ]
@@ -2217,7 +2258,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0\n  }\n}",
+          "content": "{\n  status: true,\n  message:\"اطلاعات نرم افزار فرستاده شد\",\n  data:{\n       status: true, \n       update: true, \n       isForce: false, \n       updateUrl: \"http://cafebazar.com/happypizza\",\n       pushId: 0,\n       pushToken: 0,\n       family: \"شکوهی\",\n       sipNumber: 0,\n       sipServer: 0,\n       sipPassword: 0,\n       hired: true\n  }\n}",
           "type": "json"
         }
       ]
@@ -2892,7 +2933,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "app/routes/user/v1/home.js",
+    "filename": "app/routes/user/v1/station.js",
     "groupTitle": "user"
   },
   {
@@ -3376,13 +3417,6 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "boolean",
-            "optional": false,
-            "field": "active",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "latitude",
@@ -3430,7 +3464,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "app/routes/user/v1/home.js",
+    "filename": "app/routes/user/v1/station.js",
     "groupTitle": "user"
   },
   {
@@ -3951,7 +3985,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "app/routes/user/v1/home.js",
+    "filename": "app/routes/user/v1/station.js",
     "groupTitle": "user"
   },
   {
