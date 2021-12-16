@@ -3396,18 +3396,11 @@
     "title": "editStations",
     "version": "1.0.0",
     "name": "editing_stations",
-    "description": "<p>editing stations</p>",
+    "description": "<p>editing station</p>",
     "group": "user",
     "parameter": {
       "fields": {
         "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "_id",
-            "description": ""
-          },
           {
             "group": "Parameter",
             "type": "String",
@@ -3450,16 +3443,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{success:true,message:\"عملیات با موفقیت انجام شد\",data:{}}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\n}",
+          "content": "{    \n     success:true,\n     message:\"عملیات با موفقیت انجام شد\",\n     data:{}\n}",
           "type": "json"
         }
       ]
@@ -3737,7 +3721,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        permission: { \n            getSalesReport: false,\n            getProducts: false,\n            getCustomers: false,\n            getEmployees: false,\n            getDeliveryCharges: false,\n            getPricing: false,\n            getStations: false\n          },\n        type: 1,\n        status: 3\n}",
+          "content": "{\n    success: true,\n    message: \"با موفقیت انجام شد\",\n    data: \n     {\n        permission: { \n            getSalesReport: false,\n            getProducts: false,\n            getCustomers: false,\n            getEmployees: false,\n            getDeliveryCharges: false,\n            getPricing: false,\n            getStations: false,\n            getOrders: false\n          },\n        type: 1,\n        status: 3\n}",
           "type": "json"
         }
       ]
