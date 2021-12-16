@@ -110,7 +110,7 @@ module.exports = new class HomeController extends Controller {
                 neshanAPIKey: config.deliveryNeshanAPIKey,
                 userCode: req.decodedData.user_id,
                 hired: user.hired,
-                bankInfo: user.account.accountNumber && user.account.accountNumber !== "" ? true : false
+                bankInfo: user.account.cardNumber && user.account.cardNumber !== "" ? true : false
             }
             return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: data });
         }
