@@ -12,6 +12,7 @@ module.exports = new class HomeController extends Controller {
     }
 
     async register(req, res) {
+
         try {
             this.mainRegister(req, res)
         }
@@ -83,22 +84,22 @@ module.exports = new class HomeController extends Controller {
 
             if (this.showValidationErrors(req, res)) return;
 
-            if(!req.decodedData.user_active)
-                return res.json({ success: true, message: "کاربر بلاک می باشد", data: { isBlock: true }})
+            if (!req.decodedData.user_active)
+                return res.json({ success: true, message: "کاربر بلاک می باشد", data: { isBlock: true } })
 
             // save in mongodb
-            let filter = { active: true, name: config.deliveryApp, os: req.body.os, latestVersion: req.body.versionCode}
-            let updateInfo = await this.model.AppInfo.findOne(filter).sort({createdAt:-1}).limit(1)
-            if(!updateInfo)
+            let filter = { active: true, name: config.deliveryApp, os: req.body.os, latestVersion: req.body.versionCode }
+            let updateInfo = await this.model.AppInfo.findOne(filter).sort({ createdAt: -1 }).limit(1)
+            if (!updateInfo)
                 return res.json({ success: true, message: "اطلاعات نرم افزار فرستاده شد", data: {} });
 
             filter = { active: true, _id: req.decodedData.user_id }
             let user = await this.model.User.findOne(filter)
-        
-            let data = { 
-                status: true, 
-                update: updateInfo.update, 
-                isForce: updateInfo.isForce, 
+
+            let data = {
+                status: true,
+                update: updateInfo.update,
+                isForce: updateInfo.isForce,
                 updateUrl: updateInfo.updateUrl,
                 pushId: config.deliveryPushId,
                 pushToken: config.deliveryPushToken,
