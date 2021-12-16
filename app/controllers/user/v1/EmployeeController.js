@@ -19,7 +19,8 @@ module.exports = new class EmployeeController extends Controller {
             req.checkBody('permissions.getSalesReport', 'please enter getSalesReport status').notEmpty().isBoolean();
             req.checkBody('permissions.getPricing', 'please enter getPricing status').notEmpty().isBoolean();
             req.checkBody('permissions.getProducts', 'please enter getProducts status').notEmpty().isBoolean();
-            req.checkBody('permissions.getStations', 'please enter getStations status').notEmpty().isBoolean();
+            req.checkBody('permissions.getStations', 'please enter getStations status').notEmpty().isBoolean();getOrders
+            req.checkBody('permissions.getOrders', 'please enter getOrders status').notEmpty().isBoolean();getOrders
             req.checkBody('permissions.getCustomers', 'please enter getCustomers status').notEmpty().isBoolean();
             req.checkBody('permissions.getEmployees', 'please enter getEmployees status').notEmpty().isBoolean();
             req.checkBody('permissions.getDeliveryCharges', 'please enter getDeliveryCharges status').notEmpty().isBoolean();

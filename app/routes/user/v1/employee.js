@@ -96,7 +96,8 @@ const EmployeeController = require(`${userController}/v1/EmployeeController`)
             getEmployees: false,
             getDeliveryCharges: false,
             getPricing: false,
-            getStations: false
+            getStations: false,
+            getOrders: false
           },
         type: 1,
         status: 3

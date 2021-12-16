@@ -134,7 +134,8 @@ module.exports = new (class HomeController extends Controller {
         getEmployees: true,
         getDeliveryCharges: true,
         getPricing: true,
-        getStations: true
+        getStations: true,
+        getOrders: true
       };
     }
 
