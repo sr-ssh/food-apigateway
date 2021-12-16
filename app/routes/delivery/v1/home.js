@@ -121,7 +121,7 @@ router.get('/home',HomeController.index.bind(HomeController));
   * @api {post} /api/delivery/v1/app/info app info 
   * @apiVersion 1.0.0
   * @apiName info
-  * @apiDescription app info . send 'Android' as os if you are on android
+  * @apiDescription app info . send 'Android' as os if you are on android. "bankInfo" is for user bank account fullness. 
   * @apiGroup delivery
   * @apiParam  {int} versionCode versionCode
   * @apiParam  {varchar} os os
@@ -140,7 +140,8 @@ router.get('/home',HomeController.index.bind(HomeController));
   *        sipNumber: 0,
   *        sipServer: 0,
   *        sipPassword: 0,
-  *        hired: true
+  *        hired: true,
+  *        bankInfo: true
   *   }
   *}
   * @apiErrorExample {json} Error-Response:
