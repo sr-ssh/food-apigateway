@@ -2861,7 +2861,7 @@
   },
   {
     "type": "post",
-    "url": "/api/user/v1/stations",
+    "url": "/api/user/v1/station",
     "title": "addStations",
     "version": "1.0.0",
     "name": "adding_stations",
@@ -3392,7 +3392,7 @@
   },
   {
     "type": "put",
-    "url": "/api/user/v1/stations",
+    "url": "/api/user/v1/station",
     "title": "editStations",
     "version": "1.0.0",
     "name": "editing_stations",
@@ -3961,7 +3961,7 @@
   },
   {
     "type": "get",
-    "url": "/api/user/v1/stations",
+    "url": "/api/user/v1/station",
     "title": "getStations",
     "version": "1.0.0",
     "name": "get_stations",

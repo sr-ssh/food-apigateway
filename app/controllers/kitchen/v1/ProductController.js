@@ -76,7 +76,7 @@ module.exports = new (class ProductController extends Controller {
 
       res.json({
         success: true,
-        message: "تعداد محصول با موفقیت ویرایش شد",
+        message: "اطلاعات محصول با موفقیت ویرایش شد",
       });
     } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)

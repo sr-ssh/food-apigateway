@@ -8,7 +8,7 @@ const StationController = require(`${userController}/v1/StationController`)
 
 
 /**
- * @api {get} /api/user/v1/stations getStations
+ * @api {get} /api/user/v1/station getStations
  * @apiVersion 1.0.0
  * @apiName get stations
  * @apiDescription getting stations
@@ -22,7 +22,7 @@ const StationController = require(`${userController}/v1/StationController`)
 router.get('/', StationController.getStations.bind(StationController));
 
 /**
- * @api {post} /api/user/v1/stations addStations
+ * @api {post} /api/user/v1/station addStations
  * @apiVersion 1.0.0
  * @apiName adding stations
  * @apiDescription adding stations
@@ -42,21 +42,21 @@ router.get('/', StationController.getStations.bind(StationController));
 router.post('/', StationController.addStations.bind(StationController));
 
 /**
- * @api {put} /api/user/v1/stations editStations
+ * @api {put} /api/user/v1/station editStations
  * @apiVersion 1.0.0
  * @apiName editing stations
- * @apiDescription editing stations
+ * @apiDescription editing station
  * @apiGroup user
- * @apiParam  {varchar} _id
  * @apiParam  {String} description
  * @apiParam  {Number} latitude
  * @apiParam  {Number} longitudes
  * @apiParam  {Number} code
  * @apiParam  {Number} dimeter
  * @apiSuccessExample {json} Success-Response:
- * {success:true,message:"عملیات با موفقیت انجام شد",data:{}}
- * @apiErrorExample {json} Error-Response:
- * {
+ * {    
+ *      success:true,
+ *      message:"عملیات با موفقیت انجام شد",
+ *      data:{}
  * }
  */
 router.put('/', StationController.editStations.bind(StationController));
