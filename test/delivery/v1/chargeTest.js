@@ -48,7 +48,7 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', deliveryMan.accessToken)
                 .set('idToken', deliveryMan.idToken)
                 .send();
-            res.wshould.have.status(200);
+            res.should.have.status(200);
         });
 
     });
