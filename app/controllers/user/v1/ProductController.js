@@ -12,9 +12,11 @@ module.exports = new class ProductController extends Controller {
     async addProduct(req, res) {
         try {
             req.checkBody('name', 'please enter product name').notEmpty().isString();
-            req.checkBody('typeId', 'please enter product type id').notEmpty().isString();
+            req.checkBody('typeId', 'please enter product type id').notEmpty().isMongoId();
             req.checkBody('img', 'please enter product image').notEmpty().isString();
-            req.checkBody('price', 'please enter sellingPrice').notEmpty().isFloat({min: 0});
+            req.checkBody('supply', 'please enter supply').notEmpty().isFloat({min: 0});
+            req.checkBody('price', 'please enter price').notEmpty().isFloat({min: 0});
+            req.checkBody('discount', 'please enter discount').notEmpty().isFloat({min: 0});
             req.checkBody('description', 'please enter description').optional().isString();
             if (this.showValidationErrors(req, res)) return;
 
@@ -25,7 +27,8 @@ module.exports = new class ProductController extends Controller {
             let params = {
                 name: req.body.name,
                 type: req.body.typeId,
-                size: {name: "medium", price: req.body.price, discount: 0},
+                supply: req.body.supply,
+                size: {name: "medium", price: req.body.price, discount: req.body.discount},
                 img: req.body.img,
                 description: req.body.description
             }
