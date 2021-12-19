@@ -216,7 +216,7 @@ module.exports = new class HomeController extends Controller {
             // save in mongodb
             let filter = { active: true, _id: req.decodedData.user_id }
             let user = await this.model.User.findOne(filter)
-            user.status = true
+            user.status = false
             await user.save()
 
             let message
