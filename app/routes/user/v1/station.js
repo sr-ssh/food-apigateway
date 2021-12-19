@@ -61,6 +61,28 @@ router.post('/', StationController.addStations.bind(StationController));
  */
 router.put('/', StationController.editStations.bind(StationController));
 
+/**
+ * @api {get} /api/user/v1/station get station
+ * @apiVersion 1.0.0
+ * @apiName get station
+ * @apiDescription get station info by id
+ * @apiGroup user
+ * @apiParam {Number} code station code
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success:true,
+ *      message:"عملیات با موفقیت انجام شد",
+ *      data: {
+ *          _id: '61a5e6c2ac04d597aad58601', 
+ *          code: 32, 
+ *          description: 'امامت - معلم - استقلال', 
+ *          dimeter: 2000, 
+ *          location: [59.544461, 36.334363]
+ *      }
+ * }
+ */
+ router.get('/:code', StationController.getStation.bind(StationController));
+
 
 
 module.exports = router;

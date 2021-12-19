@@ -32,6 +32,34 @@ module.exports = new (class StationController extends Controller {
     }
   }
 
+  async getStation(req, res) {
+    try {
+
+      req.checkParams("code", "please enter code").notEmpty();
+      if (this.showValidationErrors(req, res)) return;
+
+      let data = await this.model.Station.findOne(
+        {code: req.params.code},
+        "code description location dimeter"
+      );
+
+      return res.json({
+        success: true,
+        message: "عملیات با موفقیت انجام شد",
+        data,
+      });
+    } catch (err) {
+      let handelError = new this.transforms.ErrorTransform(err)
+        .parent(this.controllerTag)
+        .class(TAG)
+        .method("getStations")
+        .inputParams(req.params)
+        .call();
+
+      if (!res.headersSent) return res.status(500).json(handelError);
+    }
+  }
+
   async addStations(req, res) {
     try {
       req.checkBody("description", "please enter description").notEmpty();
