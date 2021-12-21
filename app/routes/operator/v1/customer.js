@@ -25,7 +25,7 @@ const CustomerController = require(`${operatorController}/v1/CustomerController`
  *            mobile: "09625846122",
  *            locations: [...{
  *              address: "کلاهدوز 4", 
- *              GPS: { type: "Point", coordinates: [-43.837452, 33.987689] }
+ *              station: { code: 31 }
  *            }]
  *          },
  *          orderStatus: {

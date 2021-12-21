@@ -46,8 +46,8 @@ describe(`${sectionName}`, () => {
             const res = await chai
                 .request(server)
                 .get(`${baseRoute}/${encodeURI(operatorGetCustomer.mobile)}`)
-                .set('Authorization', accessToken)
-                .set('idToken', idToken)
+                .set('Authorization', operatorLogin.accessToken)
+                .set('idToken', operatorLogin.idToken)
                 .send();
             res.should.have.status(200);
         });
