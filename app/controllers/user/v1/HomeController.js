@@ -11,40 +11,12 @@ module.exports = new (class HomeController extends Controller {
   async register(req, res) {
     req.checkBody("password", "please enter password").notEmpty();
     req.checkBody("family", "please enter family").notEmpty().isString();
-    req.checkBody("email", "please enter email").notEmpty().isEmail();
     req.checkBody("mobile", "please enter mobile").notEmpty().isNumeric();
     req.checkBody("code", "please enter code").notEmpty();
-    req
-      .checkBody("position", "please enter user position")
-      .notEmpty()
-      .isInt({ min: 1, max: 2 });
-
-    //employer
-    if (req.body.position === 1) {
-      req
-        .checkBody("companyName", "please enter company name")
-        .notEmpty()
-        .isString();
-      req
-        .checkBody("companyAddress", "please enter company address")
-        .notEmpty()
-        .isString();
-    }
-
-    //employee
-    if (req.body.position === 2) {
-      req
-        .checkBody("employerMobile", "please enter employer mobile")
-        .notEmpty()
-        .isString();
-    }
 
     if (this.showValidationErrors(req, res)) return;
 
-    const STRING_FLAG = " ";
-    const EMAIL_FLAG = "a@a.com";
-
-    let filter = { active: true, status: req.body.position };
+    let filter = { active: true };
     let type = await this.model.UserTypes.findOne(filter, "id");
 
     if (!type)
@@ -60,9 +32,8 @@ module.exports = new (class HomeController extends Controller {
       password: req.body.password,
       family: req.body.family,
       mobile: req.body.mobile,
+      hired: true
     };
-
-    if (req.body.email !== EMAIL_FLAG) params.email = req.body.email;
 
     filter = { mobile: params.mobile };
     let user = await this.model.User.findOne(filter);
@@ -72,16 +43,6 @@ module.exports = new (class HomeController extends Controller {
         success: false,
         message: "شماره موبایل قبلا برای حساب دیگری استفاده شده است",
       });
-
-    if (req.body.email !== EMAIL_FLAG) {
-      filter = { email: params.email };
-      user = await this.model.User.findOne(filter);
-      if (user)
-        return res.json({
-          success: false,
-          message: "این ایمیل قبلا برای حساب دیگری استفاده شده است",
-        });
-    }
 
     //verification code
     filter = { code: req.body.code, mobile: req.body.mobile };
@@ -111,60 +72,30 @@ module.exports = new (class HomeController extends Controller {
       });
 
     //remove the code
-    // await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
+    await this.model.VerificationCode.findOneAndRemove({ _id: veriCode._id });
 
-    //employer
-    if (req.body.position === 1) {
-      params.company = req.body.companyName;
-      params.address = req.body.companyAddress;
-      params.setting = {
-        order: {
-          preSms: { text: config.addOrderSms, status: false },
-          postDeliverySms: { text: "", status: false },
-          postCustomerSms: {
-            text: config.deliveryAcknowledgeSms,
-            status: false,
-          },
+    params.setting = {
+      order: {
+        preSms: { text: config.addOrderSms, status: false },
+        postDeliverySms: { text: "", status: false },
+        postCustomerSms: {
+          text: config.deliveryAcknowledgeSms,
+          status: false,
         },
-      };
-      params.permission = {
-        getSalesReport: true,
-        getProducts: true,
-        getCustomers: true,
-        getEmployees: true,
-        getDeliveryCharges: true,
-        getPricing: true,
-        getStations: true,
-        getOrders: true
-      };
-    }
-
-    let employer;
-    if (req.body.position === 2) {
-      filter = { active: true, mobile: req.body.employerMobile, type: 1 };
-      employer = await this.model.User.findOne(filter, { id: 1 });
-      if (!employer)
-        return res.json({
-          success: false,
-          message: " کارفرمایی با این شماره یافت نشد",
-        });
-    }
+      },
+    };
+    params.permission = {
+      getSalesReport: true,
+      getProducts: true,
+      getCustomers: true,
+      getEmployees: true,
+      getDeliveryCharges: true,
+      getPricing: true,
+      getStations: true,
+      getOrders: true,
+    };
 
     user = await this.model.User.create(params);
-
-    if (req.body.position === 1) {
-      user.employer = user._id;
-      await user.save();
-    }
-
-    if (req.body.position === 2) {
-      //make a job application for employer
-      let params = {
-        employer: employer._id,
-        employee: user._id,
-      };
-      await this.model.Application.create(params);
-    }
 
     //token
     let options = {
@@ -176,9 +107,6 @@ module.exports = new (class HomeController extends Controller {
     let payload = {
       user_id: user._id,
       user_active: user.active,
-      user_employer: user.employer,
-      user_company: user.company ? user.company : null,
-      user_type: req.body.position,
     };
     let idToken = jwt.sign(payload, config.secret, options);
 
@@ -393,22 +321,25 @@ module.exports = new (class HomeController extends Controller {
 
   async getStations(req, res) {
     try {
+      let data = await this.model.Station.find(
+        {},
+        "active code description latitude longitudes dimeter"
+      );
 
-      let data = await this.model.Station.find({}, 'active code description latitude longitudes dimeter')
-
-      return res.json({ success: true, message: "عملیات با موفقیت انجام شد", data })
-
-    }
-    catch (err) {
+      return res.json({
+        success: true,
+        message: "عملیات با موفقیت انجام شد",
+        data,
+      });
+    } catch (err) {
       let handelError = new this.transforms.ErrorTransform(err)
         .parent(this.controllerTag)
         .class(TAG)
-        .method('getStations')
+        .method("getStations")
         .inputParams(req.body)
         .call();
 
       if (!res.headersSent) return res.status(500).json(handelError);
     }
   }
-
 })();
