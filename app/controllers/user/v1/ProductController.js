@@ -142,6 +142,32 @@ module.exports = new class ProductController extends Controller {
         }
     }
 
+    async addProductType(req, res) {
+        try {
+            req.checkBody('name', 'please enter product type name').notEmpty().isString();
+            if (this.showValidationErrors(req, res)) return;
+
+            let filter = { name: req.body.name }
+            let productType = await this.model.ProductTypes.findOne(filter)
+
+            if(productType)
+                return res.json({ success : true, message : 'این نوع محصول موجود است', data: { status: false }})
+                
+            await this.model.ProductTypes.create(filter)
+
+            res.json({ success : true, message : 'نوع محصول با موفقیت ثبت شد', data: { status: true }})
+        }
+        catch (err) {
+            let handelError = new this.transforms.ErrorTransform(err)
+                .parent(this.controllerTag)
+                .class(TAG)
+                .method('addProductType')
+                .inputParams(req.body)
+                .call();
+
+            if (!res.headersSent) return res.status(500).json(handelError);
+        }
+    }
 }
 
 

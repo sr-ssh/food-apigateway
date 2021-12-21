@@ -220,7 +220,7 @@
       "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6ImRlbGl2ZXJ5TWFuIiwiaWF0IjoxNjM4MTAxMzY2LCJleHAiOjE2NjQwMjEzNjYsImF1ZCI6ImF1ZGllbmNlIiwiaXNzIjoiaXNzdWVyIn0.rh9eQ_jEI1HIbkBupzKixc4kxwroukTSL1-QVDppwMM"
     },
     "deliveryAcceptOrder": {
-      "orderId": "611b44cd83919a711a189191"
+      "orderId": "61c07a90d715eedb41e72ff0"
     },
     "customerOrder": {
       "products": [
@@ -352,6 +352,9 @@
     },
     "getStation": {
       "code": "32"
+    },
+    "productType": {
+      "name": "ساندویچ"
     }
   }
 }

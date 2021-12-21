@@ -6,7 +6,7 @@ const baseRoute = '/api/user/v1/product';
 let chaiHttp = require('chai-http');
 let server = require('../../../server');
 let appConfig = require('config');
-let product, user, editedProduct;
+let product, user, editedProduct, productType;
 const axios = require('axios').default;
 
 
@@ -17,6 +17,7 @@ describe(`${sectionName}`, () => {
 
     before((done) => {
         console.log('Waiting to ensure database connection stablished ');
+        productType = appConfig.test.productType;
         user = appConfig.test.user;
         product = appConfig.test.product;
         editedProduct = appConfig.test.editedProduct;
@@ -64,6 +65,16 @@ describe(`${sectionName}`, () => {
                 .set('Authorization', accessToken)
                 .set('idToken', idToken)
                 .send(product);
+            res.should.have.status(200);
+        });
+
+        it('check add product type', async () => {
+            const res = await chai
+                .request(server)
+                .post(`${baseRoute}/types`)
+                .set('Authorization', user.accessToken)
+                .set('idToken', user.idToken)
+                .send(productType);
             res.should.have.status(200);
         });
 

@@ -102,4 +102,28 @@ const ProductController = require(`${userController}/v1/ProductController`)
  */
   router.get('/types',ProductController.getProductTypes.bind(ProductController));
 
+
+/**
+ * @api {post} /api/user/v1/product/types add product type
+ * @apiVersion 1.0.0
+ * @apiName addProductType
+ * @apiDescription add product type
+ * @apiGroup user
+ * @apiParam  {varchar} name product type name
+ * @apiSuccessExample {json} Success-Response:
+ * {
+ *      success: true,
+ *      message: "نوع محصول شما با موفقیت ثبت شد"
+ * }
+ * @apiErrorExample {json} Error-Response:
+ * { 
+ *      success : false, 
+ *      message : "نوع وارد شده، موجود است"
+ * }
+ */
+ router.post('/types',ProductController.addProductType.bind(ProductController));
+
+
+
+
  module.exports = router;
