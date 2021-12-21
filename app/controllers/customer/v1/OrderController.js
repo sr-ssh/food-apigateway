@@ -370,7 +370,7 @@ module.exports = new class OrderController extends Controller {
 
                 // add tax
                 // total += (order.deliveryCost + tax);
-                total += order.deliveryCost;
+                total += parseFloat(order.deliveryCost);
 
                 return {
                     order,
