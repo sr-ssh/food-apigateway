@@ -2083,7 +2083,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     success: true,\n     message: \"اطلاعات مشتری با موفقیت ارسال شد\",\n     data: {\n         status: true,\n         cuatomer: {\n           family: \"مصطفایی\",\n           mobile: \"09625846122\",\n           locations: [...{\n             address: \"کلاهدوز 4\", \n             GPS: { type: \"Point\", coordinates: [-43.837452, 33.987689] }\n           }]\n         },\n         orderStatus: {\n           status: 2,\n           descriptionStatus: \"کاربر کمتر از 40 دقیقه قبل ثبت سفارش کرده است\",\n           orderInterval: 25,\n           orderState: \"در صف انتظار\"\n         }\n      }\n}",
+          "content": "{\n     success: true,\n     message: \"اطلاعات مشتری با موفقیت ارسال شد\",\n     data: {\n         status: true,\n         cuatomer: {\n           family: \"مصطفایی\",\n           mobile: \"09625846122\",\n           locations: [...{\n             address: \"کلاهدوز 4\", \n             station: { code: 31 }\n           }]\n         },\n         orderStatus: {\n           status: 2,\n           descriptionStatus: \"کاربر کمتر از 40 دقیقه قبل ثبت سفارش کرده است\",\n           orderInterval: 25,\n           orderState: \"در صف انتظار\"\n         }\n      }\n}",
           "type": "json"
         }
       ]
@@ -3941,6 +3941,39 @@ define({ "api": [
       ]
     },
     "filename": "app/routes/user/v1/account.js",
+    "groupTitle": "user"
+  },
+  {
+    "type": "get",
+    "url": "/api/user/v1/station",
+    "title": "get station",
+    "version": "1.0.0",
+    "name": "get_station",
+    "description": "<p>get station info by id</p>",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": "<p>station code</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     success:true,\n     message:\"عملیات با موفقیت انجام شد\",\n     data: {\n         _id: '61a5e6c2ac04d597aad58601', \n         code: 32, \n         description: 'امامت - معلم - استقلال', \n         dimeter: 2000, \n         location: [59.544461, 36.334363]\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/user/v1/station.js",
     "groupTitle": "user"
   },
   {
