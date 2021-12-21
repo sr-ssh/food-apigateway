@@ -72,7 +72,7 @@ module.exports = new (class ProductController extends Controller {
           type: req.body.type,
         },
       };
-      await this.model.Product.updateOne(filter, update);
+      await this.model.Product.findOneAndUpdate(filter, update);
 
       res.json({
         success: true,

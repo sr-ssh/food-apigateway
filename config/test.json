@@ -344,11 +344,11 @@
       "cardNumber": "5859 8310 9970 9258"
     },
     "productSupply": {
-      "productId": "61091b0ca9335b389819e897",
-      "supply": 100,
-      "name": "مخصوصهپی پیتزا",
-      "description": "گوشت گوساله . ژامبون . پنیر . قارچ . فلفل دلمه ای . پیازجه",
-      "type": "610916826f9446153c5e268d"
+      "productId": "61bf2dada032c0d6fc8c06eb",
+      "supply": 110,
+      "name": "سس مایونز",
+      "description": " ",
+      "type": "610916826f9446153c5e2691"
     },
     "getStation": {
       "code": "32"
