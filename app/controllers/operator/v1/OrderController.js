@@ -96,8 +96,6 @@ module.exports = new (class HomeController extends Controller {
       req.checkParams("orderId", "please enter order Id").notEmpty().isString();
       if (this.showValidationErrors(req, res)) return;
 
-      console.log(req.params)
-
       let filter = { active: true, _id: req.params.orderId };
 
       let order = await this.model.Order.findOne(filter, {
@@ -115,9 +113,6 @@ module.exports = new (class HomeController extends Controller {
         .populate({ path: "products._id", model: "Product", select: "name" })
         .populate("customer", { family: 1, mobile: 1, _id: 0 })
         .populate("status", { name: 1, status: 1, _id: 0 });
-
-
-      console.log(order, "116");
 
       filter = { userId: order.deliveryId };
       let delivery = await this.model.Location.findOne(filter, { userId: 0 })
@@ -160,7 +155,8 @@ module.exports = new (class HomeController extends Controller {
         deliveryId: order.deliveryId,
         paid: order.paid,
         paymentType: order.paymentType,
-        orderType: order.orderType
+        orderType: order.orderType,
+        description: order.description
       };
 
       if (!params.deliveryId) params.deliveryId = "";
