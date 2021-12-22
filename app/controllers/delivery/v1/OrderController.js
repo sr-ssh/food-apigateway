@@ -122,7 +122,7 @@ module.exports = new class OrderController extends Controller {
                 })
                 .populate("customer", { _id: 0, family: 1, mobile: 1 })
                 .populate("status", { status: 1, name: 1, _id: 0 })
-                .sort({ deliveryAcceptedTime: -1 })
+                .sort({ createdAt: -1 })
                 .lean();
 
 
@@ -130,7 +130,7 @@ module.exports = new class OrderController extends Controller {
 
             orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder)
 
-            // console.log(orders);
+            console.log(orders);
 
             orders = orders.map(order => {
                 if (!order.description)
