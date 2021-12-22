@@ -130,8 +130,6 @@ module.exports = new class OrderController extends Controller {
 
             orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder)
 
-            console.log(orders);
-
             orders = orders.map(order => {
                 if (!order.description)
                     order.description = ""
