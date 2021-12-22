@@ -82,7 +82,7 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('versionCode', 'please enter versionCode').notEmpty();
             req.checkBody('os', 'please enter os').notEmpty();
 
-            console.log(req.body);
+            console.log(req.decodedData.user_id);
 
             if (this.showValidationErrors(req, res)) return;
 
