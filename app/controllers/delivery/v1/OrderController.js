@@ -122,7 +122,7 @@ module.exports = new class OrderController extends Controller {
                 })
                 .populate("customer", { _id: 0, family: 1, mobile: 1 })
                 .populate("status", { status: 1, name: 1, _id: 0 })
-                .sort({ createdAt: -1 })
+                .sort({ deliveryAcceptedTime: -1 })
                 .lean();
 
 
