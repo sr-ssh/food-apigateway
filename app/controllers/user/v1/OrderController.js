@@ -142,7 +142,7 @@ module.exports = new class HomeController extends Controller {
             let orders = await this.model.Order.find(filter)
             .populate('customer')
             .populate('status', 'name')
-            // .populate('products._id')
+            .populate({path: 'products._id', model: 'Product'})
             .sort({createdAt: -1});
 
 

@@ -26,7 +26,8 @@ let User = new Schema({
             getEmployees: false,
             getDeliveryCharges: false,
             getPricing: false,
-            getStations: false
+            getStations: false,
+            getOrders: false,
         }
     },
 

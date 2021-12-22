@@ -63,8 +63,8 @@ describe(`${sectionName}`, () => {
             getOrdersOperator.value
           )}`
         )
-        .set("Authorization", accessToken)
-        .set("idToken", idToken)
+        .set("Authorization", operatorLogin.accessToken)
+        .set("idToken", operatorLogin.idToken)
         .send();
       res.should.have.status(200);
     });
@@ -73,8 +73,8 @@ describe(`${sectionName}`, () => {
       const res = await chai
         .request(server)
         .get(`${baseRoute}/${encodeURI(getOrderOperator.orderId)}`)
-        .set("Authorization", accessToken)
-        .set("idToken", idToken)
+        .set("Authorization", operatorLogin.accessToken)
+        .set("idToken", operatorLogin.idToken)
         .send();
       res.should.have.status(200);
     });

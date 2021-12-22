@@ -91,6 +91,9 @@ module.exports = new (class ChargeController extends Controller {
 
   async addCharges(req, res) {
     try {
+      req.checkBody('_id', 'please enter _id').notEmpty();
+      req.checkBody('charge', 'please enter charge').notEmpty();
+      if (this.showValidationErrors(req, res)) return;
 
       const params = {
         deliveryId: req.body._id,

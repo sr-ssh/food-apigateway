@@ -33,6 +33,7 @@ let Order = new Schema({
   payAmount: { type: Number },
   deliveryCost: { type: Number },
   deliveryId: { type: Schema.Types.ObjectId, ref: 'User' },
+  deliveryAcceptedTime: { type: Date },
   cookId: { type: Schema.Types.ObjectId, ref: 'User' },
   description: { type: String },
   finishDate: { type: Date },

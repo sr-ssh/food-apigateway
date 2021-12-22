@@ -340,7 +340,7 @@ module.exports = class MainController {
             return res.json({ success: false, message: "کد تایید منقضی شده است", data: { status: false } });
 
         //remove the code
-        // await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
+        await this.model.VerificationCode.findOneAndRemove({_id:veriCode._id})
 
         // check user
         filter = { active: true, mobile: req.body.mobile }

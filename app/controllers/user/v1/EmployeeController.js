@@ -19,7 +19,8 @@ module.exports = new class EmployeeController extends Controller {
             req.checkBody('permissions.getSalesReport', 'please enter getSalesReport status').notEmpty().isBoolean();
             req.checkBody('permissions.getPricing', 'please enter getPricing status').notEmpty().isBoolean();
             req.checkBody('permissions.getProducts', 'please enter getProducts status').notEmpty().isBoolean();
-            req.checkBody('permissions.getStations', 'please enter getStations status').notEmpty().isBoolean();
+            req.checkBody('permissions.getStations', 'please enter getStations status').notEmpty().isBoolean();getOrders
+            req.checkBody('permissions.getOrders', 'please enter getOrders status').notEmpty().isBoolean();getOrders
             req.checkBody('permissions.getCustomers', 'please enter getCustomers status').notEmpty().isBoolean();
             req.checkBody('permissions.getEmployees', 'please enter getEmployees status').notEmpty().isBoolean();
             req.checkBody('permissions.getDeliveryCharges', 'please enter getDeliveryCharges status').notEmpty().isBoolean();
@@ -245,6 +246,8 @@ module.exports = new class EmployeeController extends Controller {
             let filter = { active: true, status: 1 }
             let applications = await this.model.Application.find(filter, {__v: 0}).populate('employee', {family: 1, _id: 1, mobile: 1}).lean()
 
+            applications = applications.filter(app => app.employee)
+
             return res.json({ success: true, message: "ارسال درخواست ها با موفقیت انجام شد", data: applications})
             
         }
@@ -359,7 +362,7 @@ module.exports = new class EmployeeController extends Controller {
             application.status = req.body.status
             await application.save()
 
-            //if the employer calles this api and hires the emplyee
+            //if the employer calls this api and hires the emplyee
             if(req.body.status === 2){
                 filter = { active: true, _id: application.employee }
                 let user = await this.model.User.findOne(filter)
@@ -367,6 +370,15 @@ module.exports = new class EmployeeController extends Controller {
                     return res.json({ success: false, message: 'کاربر موجود نمی باشد'})
                 
                 user.hired = true
+                user.permission.getSalesReport = true
+                user.permission.getProducts = true
+                user.permission.getCustomers = true
+                user.permission.getEmployees = true
+                user.permission.getDeliveryCharges = true
+                user.permission.getPricing = true
+                user.permission.getStations = true
+                user.permission.getOrders = true
+                user.markModified('permission')
                 await user.save()
                 
             }
