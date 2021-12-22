@@ -104,7 +104,7 @@ module.exports = new class OrderController extends Controller {
             // let filter = { active: true, deliveryId: "610922f3e5bdcc11fd46c051" }
 
             let orders = await this.model.Order.find(filter, {
-                createdAt: 1,
+                deliveryAcceptedTime: 1,
                 customer: 1,
                 address: 1,
                 "GPS.coordinates": 1,
@@ -122,11 +122,15 @@ module.exports = new class OrderController extends Controller {
                 })
                 .populate("customer", { _id: 0, family: 1, mobile: 1 })
                 .populate("status", { status: 1, name: 1, _id: 0 })
-                .sort({ createdAt: -1 })
+                .sort({ deliveryAcceptedTime: -1 })
                 .lean();
 
 
+
+
             orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder)
+
+            // console.log(orders);
 
             orders = orders.map(order => {
                 if (!order.description)
