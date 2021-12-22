@@ -96,6 +96,8 @@ module.exports = new (class HomeController extends Controller {
       req.checkParams("orderId", "please enter order Id").notEmpty().isString();
       if (this.showValidationErrors(req, res)) return;
 
+      console.log(req.params)
+
       let filter = { active: true, _id: req.params.orderId };
 
       let order = await this.model.Order.findOne(filter, {

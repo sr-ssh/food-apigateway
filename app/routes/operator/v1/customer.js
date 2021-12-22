@@ -43,9 +43,9 @@ const CustomerController = require(`${operatorController}/v1/CustomerController`
  *      data: { status: false }
  * }
  */
- router.get('/:mobile',CustomerController.getCustomer.bind(CustomerController));
+router.get('/:mobile', CustomerController.getCustomer.bind(CustomerController));
 
 
 
-  
- module.exports = router;
+
+module.exports = router;
