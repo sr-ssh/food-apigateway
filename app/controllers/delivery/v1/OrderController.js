@@ -45,10 +45,10 @@ module.exports = new class OrderController extends Controller {
 
             let filter = { active: true, deliveryId: req.decodedData.user_id }
             let acceptedOrders = await this.model.Order.find(filter)
-            .populate(
-              "status",
-              { _id: 0, status: 1, name: 1 }
-            );
+                .populate(
+                    "status",
+                    { _id: 0, status: 1, name: 1 }
+                );
 
             acceptedOrders = acceptedOrders.filter(order =>
                 order.status.status !== config.finishedOrder &&
@@ -103,26 +103,26 @@ module.exports = new class OrderController extends Controller {
             let filter = { active: true, deliveryId: req.decodedData.user_id }
 
             let orders = await this.model.Order.find(filter, {
-              createdAt: 1,
-              customer: 1,
-              address: 1,
-              "GPS.coordinates": 1,
-              products: 1,
-              description: 1,
-              deliveryCost: 1,
-              paymentType: 1,
-              paid: 1,
-              orderType: 1,
+                createdAt: 1,
+                customer: 1,
+                address: 1,
+                "GPS.coordinates": 1,
+                products: 1,
+                description: 1,
+                deliveryCost: 1,
+                paymentType: 1,
+                paid: 1,
+                orderType: 1,
             })
-              .populate({
-                path: "products._id",
-                model: "Product",
-                select: "name",
-              })
-              .populate("customer", { _id: 0, family: 1, mobile: 1 })
-              .populate("status", { status: 1, name: 1, _id: 0 })
-              .sort({ createdAt: -1 })
-              .lean();
+                .populate({
+                    path: "products._id",
+                    model: "Product",
+                    select: "name",
+                })
+                .populate("customer", { _id: 0, family: 1, mobile: 1 })
+                .populate("status", { status: 1, name: 1, _id: 0 })
+                .sort({ createdAt: -1 })
+                .lean();
 
 
             orders = orders.filter(order => order.status.status === config.acceptDeliveryOrder)
