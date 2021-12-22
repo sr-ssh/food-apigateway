@@ -100,7 +100,8 @@ module.exports = new class OrderController extends Controller {
     async getacceptedOrders(req, res) {
         try {
 
-            let filter = { active: true, deliveryId: req.decodedData.user_id }
+            // let filter = { active: true, deliveryId: req.decodedData.user_id }
+            let filter = { active: true, deliveryId: "610922f3e5bdcc11fd46c051" }
 
             let orders = await this.model.Order.find(filter, {
                 createdAt: 1,
@@ -138,6 +139,7 @@ module.exports = new class OrderController extends Controller {
                 //calculate total
                 let total = order.products.map(product => (product.price - product.discount) * product.quantity)
                 order.total = total.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+                if (order.deliveryCost) order.total = order.total + order.deliveryCost
 
                 order.products = order.products.map(product => {
                     return {

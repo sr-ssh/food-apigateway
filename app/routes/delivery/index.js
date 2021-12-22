@@ -16,9 +16,9 @@ const corsOptions = {
     optionSuccessStatus: 200,
 }
 
-router.use(cors(corsOptions));
+// router.use(cors(corsOptions));
 
-router.use(authMiddleware, authError);
+// router.use(authMiddleware, authError);
 
 router.use('/v1', v1);
 
