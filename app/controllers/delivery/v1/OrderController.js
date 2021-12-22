@@ -100,8 +100,8 @@ module.exports = new class OrderController extends Controller {
     async getacceptedOrders(req, res) {
         try {
 
-            // let filter = { active: true, deliveryId: req.decodedData.user_id }
-            let filter = { active: true, deliveryId: "610922f3e5bdcc11fd46c051" }
+            let filter = { active: true, deliveryId: req.decodedData.user_id }
+            // let filter = { active: true, deliveryId: "610922f3e5bdcc11fd46c051" }
 
             let orders = await this.model.Order.find(filter, {
                 createdAt: 1,
