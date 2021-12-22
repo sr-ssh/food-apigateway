@@ -82,6 +82,8 @@ module.exports = new class HomeController extends Controller {
             req.checkBody('versionCode', 'please enter versionCode').notEmpty();
             req.checkBody('os', 'please enter os').notEmpty();
 
+            console.log(req.body);
+
             if (this.showValidationErrors(req, res)) return;
 
             if (!req.decodedData.user_active) return res.json({ success: false, message: "کاربر بلاک می باشد", data: {} })
