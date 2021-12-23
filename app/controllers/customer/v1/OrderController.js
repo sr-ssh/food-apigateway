@@ -41,6 +41,7 @@ module.exports = new class OrderController extends Controller {
             req.checkBody('products.*.discount', 'please enter product discount').notEmpty().isInt({min: 0});
             req.checkBody('products.*.size', 'please enter product size').notEmpty().isString();
             req.checkBody('address', 'please enter address').notEmpty().isString();
+            req.checkBody('isNewAddress', 'please enter isNewAddress').notEmpty();
             req.checkBody('lat', 'please enter lat').notEmpty().isFloat({ min: -90, max: 90});
             req.checkBody('lng', 'please enter lng').notEmpty().isFloat({ min: -180, max: 180});
             req.checkBody('deliveryCost', 'please enter deliveryCost').notEmpty().isInt({min: 0});
@@ -91,9 +92,12 @@ module.exports = new class OrderController extends Controller {
 
             // add order to customer
             let update = { $addToSet: {order: order._id, locations: { address: params.address, GPS: params.GPS }}}
+            if(req.body.isNewAddress != 0){
+                update = { $addToSet: {order: order._id}}
+            }
             await this.model.Customer.findByIdAndUpdate(req.decodedData.user_id, update)
 
-            // caculate tax 
+            // calculate tax 
             let tax = order.products.map(product => product.price * product.quantity * config.tax)
             tax = tax.reduce((a, b) => parseInt(a) + parseInt(b), 0)
 
