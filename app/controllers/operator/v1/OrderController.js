@@ -608,7 +608,7 @@ module.exports = new (class HomeController extends Controller {
 
   async getOrderProducts(req, res) {
     try {
-      let filter = { active: true };
+      let filter = { active: true, supply: { $gt: 0 } };
 
       let products = await this.model.Product.find(filter, {
         _id: 1,
