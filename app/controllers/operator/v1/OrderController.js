@@ -620,7 +620,7 @@ module.exports = new (class HomeController extends Controller {
         .populate("type", { name: 1 })
         .lean();
 
-      let types = await this.model.ProductTypes.find(filter, {
+      let types = await this.model.ProductTypes.find({active: true}, {
         name: 1,
       }).lean();
 
