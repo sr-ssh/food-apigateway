@@ -375,18 +375,37 @@ module.exports = new (class HomeController extends Controller {
       });
 
       // recalculate product supply
+      let noSupply = []
       for (let index = 0; index < userProducts.length; index++) {
         let productSupply = await this.model.Product.findOne(
           { _id: userProducts[index]._id },
-          "supply size"
+          "supply size name"
         );
         let supply = productSupply.supply - userProducts[index].quantity;
         if (supply < 0)
-          return res.json({
-            success: true,
-            message: "موجودی محصول کافی نیست",
-            data: { status: false },
-          });
+          noSupply.push(productSupply.name)
+      }
+      if(noSupply.length)
+        return res.json({
+          success: true,
+          message: "موجودی محصول کافی نیست",
+          data: { status: false, products: noSupply},
+        });
+
+
+      for (let index = 0; index < userProducts.length; index++) {
+        let productSupply = await this.model.Product.findOne(
+          { _id: userProducts[index]._id },
+          "supply size name"
+        );
+        let supply = productSupply.supply - userProducts[index].quantity;
+        if (supply < 0)
+          noSupply.push(productSupply.name)
+          // return res.json({
+          //   success: true,
+          //   message: "موجودی محصول کافی نیست",
+          //   data: { status: false },
+          // });
         productSupply.supply = supply;
         await productSupply.save();
 
@@ -396,7 +415,7 @@ module.exports = new (class HomeController extends Controller {
         ).price;
         userProducts[index].discount = productSupply.size.find(
           (s) => s.name == userProducts[index].size
-        ).discount;
+        ).discount;  
       }
 
       // //get status id
@@ -423,7 +442,7 @@ module.exports = new (class HomeController extends Controller {
         return res.json({
           success: true,
           message: "ایستگاه موجود نمی باشد",
-          data: { status: false },
+          data: { status: false,products: [] },
         });
 
       let priceDelivery = await this.calcingPricePeyk({ lat: 36.334363, lng: 59.544461 }, { lat: station.location[1], lng: station.location[0] })
@@ -474,7 +493,7 @@ module.exports = new (class HomeController extends Controller {
       res.json({
         success: true,
         message: "سفارش شما با موفقیت ثبت شد",
-        data: { status: true },
+        data: { status: true, products: [] },
       });
 
       //send smd

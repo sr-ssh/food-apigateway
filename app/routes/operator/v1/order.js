@@ -37,7 +37,7 @@ const OrderController = require(`${operatorController}/v1/OrderController`);
  * {
  *    success: true, 
  *    message: "سفارش ثبت نمی شود",
- *    data: { status: false }
+ *    data: { status: false, products: ['سبزیجات'] }
  * }
  */
 router.post("/", OrderController.addOrder.bind(OrderController));
