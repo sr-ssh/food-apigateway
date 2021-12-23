@@ -76,6 +76,7 @@ module.exports = {
         '/api/operator/v1/login',
         '/api/customer/v1/pay',
         '/api/customer/v1/order/product',
+        '/api/customer/v1/order/product/type',
         '/api/customer/v1/order/factor'
     ],
     path: {
