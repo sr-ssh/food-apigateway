@@ -126,7 +126,7 @@ module.exports = new class OrderController extends Controller {
                 .populate({ path: 'products._id', model: 'Product', select: 'name'})
                 .populate('customer', { _id: 0, family: 1})
                 .populate('status', {status: 1, name: 1, _id: 0})
-                .sort({createdAt:-1})
+                .sort({deliveryAcceptedTime:-1})
             
             orders = orders.map(order => {
                 order.products = order.products.map(product => {
